@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIS | Architectural Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;600&family=Syne:wght@700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0F1113;
+            --surface: #1A1D21;
+            --accent: #B0B9C1; /* Cool Slate */
+            --blueprint: #2A3C55;
+            --text: #F8F9FA;
+            --transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 1px 1px, #ffffff05 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 40px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            mix-blend-mode: difference;
+        }
+        .logo { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; letter-spacing: -2px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 0.7rem; font-family: 'JetBrains Mono'; letter-spacing: 2px; text-transform: uppercase; margin-left: 40px; opacity: 0.6; }
+
+        /* --- THE BLUEPRINT HERO --- */
+        .hero {
+            height: 100vh;
+            display: grid; grid-template-columns: 1fr 1fr;
+            align-items: center; padding: 0 6%;
+        }
+        .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.85; margin-bottom: 20px; }
+        .hero-title span { color: transparent; -webkit-text-stroke: 1px var(--text); opacity: 0.3; }
+
+        .image-reveal-container {
+            position: relative; width: 100%; height: 80vh; overflow: hidden;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+        .img-base, .img-overlay {
+            position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center;
+        }
+        /* Top Layer: Finished Building */
+        .img-overlay {
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80');
+            z-index: 2; width: 50%; border-right: 2px solid white;
+        }
+        /* Bottom Layer: Skeleton/Blueprint */
+        .img-base {
+            background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80');
+            filter: grayscale(1) brightness(0.5) contrast(1.2);
+        }
+
+        /* --- BENTO PROJECT CARDS --- */
+        .section { padding: 120px 6%; }
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 300px); gap: 20px;
+        }
+        .bento-card {
+            background: var(--surface); border-radius: 4px; padding: 40px;
+            border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: space-between;
+            transition: var(--transition);
+        }
+        .bento-card:hover { background: #22262b; border-color: white; transform: scale(1.02); }
+        .bento-card h3 { font-family: 'Syne'; font-size: 1.5rem; }
+        .bento-card .tech-tag { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: #666; text-transform: uppercase; }
+        
+        .card-lg { grid-column: span 2; }
+        .card-tall { grid-row: span 2; }
+
+        /* --- FORM: TECHNICAL SPEC --- */
+        .spec-form {
+            background: #fff; color: #000; padding: 100px 6%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+        }
+        .input-technical {
+            width: 100%; background: transparent; border: none; border-bottom: 2px solid #ddd;
+            padding: 20px 0; font-family: 'Space Grotesk'; font-size: 1.2rem; margin-bottom: 40px;
+            outline: none; transition: 0.3s;
+        }
+        .input-technical:focus { border-color: #000; }
+        .btn-black {
+            background: #000; color: #fff; padding: 25px 60px; border: none;
+            font-family: 'Syne'; font-weight: 800; cursor: pointer; transition: 0.3s;
+        }
+        .btn-black:hover { opacity: 0.8; letter-spacing: 2px; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .hero, .bento-grid, .spec-form { grid-template-columns: 1fr; }
+            .bento-grid { grid-template-rows: auto; }
+            .card-lg, .card-tall { grid-column: span 1; grid-row: span 1; }
+            .image-reveal-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">AXIS.ENG</div>
+        <div class="nav-links">
+            <a href="#projects">01_PROJECTS</a>
+            <a href="#about">02_METHOD</a>
+            <a href="#spec">03_ESTIMATE</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="reveal">
+            <div style="font-family: 'JetBrains Mono'; color: #666; margin-bottom: 20px;">STRUCTURAL ENGINEERING // REV 04</div>
+            <h1 class="hero-title">BEYOND<br><span>STARK</span><br>FORMS.</h1>
+            <p style="color: #888; max-width: 400px; font-weight: 300;">We bridge the gap between architectural ambition and structural reality through computational design and advanced materials.</p>
+        </div>
+        <div class="image-reveal-container reveal" id="revealContainer">
+            <div class="img-base"></div>
+            <div class="img-overlay" id="imgOverlay"></div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="bento-grid">
+            <div class="bento-card card-lg reveal">
+                <span class="tech-tag">01 // STRUCTURAL DYNAMICS</span>
+                <h3>The Vertigo Plaza</h3>
+                <p style="color: #666; font-size: 0.9rem;">Implemented a customized liquid-mass damper system for 80-story wind stability.</p>
+            </div>
+            <div class="bento-card reveal">
+                <span class="tech-tag">02 // SUSTAINABILITY</span>
+                <h3>LEED Platinum</h3>
+                <p style="color: #666; font-size: 0.9rem;">98% recycled steel framework.</p>
+            </div>
+            <div class="bento-card card-tall reveal" style="background: url('https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&w=600&q=80') center/cover;">
+                </div>
+            <div class="bento-card reveal">
+                <span class="tech-tag">03 // SEISMIC</span>
+                <h3>Fault-Line Hub</h3>
+                <p style="color: #666; font-size: 0.9rem;">Base-isolation technology.</p>
+            </div>
+            <div class="bento-card card-lg reveal">
+                <span class="tech-tag">04 // PRE-FAB</span>
+                <h3>Modular Campus</h3>
+                <p style="color: #666; font-size: 0.9rem;">Reducing on-site carbon footprint by 40% through off-site assembly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="spec" class="spec-form">
+        <div class="reveal">
+            <h2 style="font-family: 'Syne'; font-size: 3.5rem; letter-spacing: -2px; line-height: 1;">INITIATE<br>PROJECT BID</h2>
+            <p style="margin-top: 30px; font-weight: 300;">Enter project parameters to receive a preliminary structural feasibility assessment.</p>
+        </div>
+        <form class="reveal">
+            <input type="text" placeholder="Project Name / Location" class="input-technical">
+            <input type="text" placeholder="Estimated Vertical Height (m)" class="input-technical">
+            <select class="input-technical">
+                <option>Commercial Development</option>
+                <option>Infrastructure / Bridge</option>
+                <option>Luxury Residential</option>
+            </select>
+            <button type="button" class="btn-black">SUBMIT DATA</button>
+        </form>
+    </section>
+
+    <footer style="padding: 100px 6%; background: var(--bg); border-top: 1px solid #222;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div class="logo">AXIS</div>
+            <div style="font-family: 'JetBrains Mono'; color: #444; font-size: 0.7rem; text-align: right;">
+                <p>ISO 9001 CERTIFIED</p>
+                <p>© 2025 ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Structural Reveal Interaction
+        const container = document.getElementById('revealContainer');
+        const overlay = document.getElementById('imgOverlay');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = (x / rect.width) * 100;
+            overlay.style.width = percent + '%';
+        });
+
+        // Reveal Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

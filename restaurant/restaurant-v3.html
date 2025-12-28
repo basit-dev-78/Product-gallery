@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOTS | Elemental Dining</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #F2F0ED; /* Warm Stone */
+            --ink: #1A1C1A;
+            --moss: #3D4A3E;
+            --accent: #D96C4B; /* Burnt Clay */
+            --transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Syne', sans-serif; 
+            background: var(--bg); 
+            color: var(--ink); 
+            overflow-x: hidden;
+            line-height: 1.2;
+        }
+
+        /* --- MASKED SCROLL TEXT --- */
+        .scroll-text-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 20px 0;
+            background: var(--ink);
+            color: var(--bg);
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 40px;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+        .logo { font-family: 'Instrument Serif', serif; font-size: 2.5rem; line-height: 0.8; }
+        .nav-link { 
+            writing-mode: vertical-rl; 
+            text-decoration: none; 
+            color: var(--ink); 
+            font-size: 0.7rem; 
+            font-weight: 800; 
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        /* --- HERO: ASYMMETRIC --- */
+        .hero {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 10%;
+        }
+        .hero-title { font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; letter-spacing: -4px; }
+        .hero-title span { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--moss); }
+        
+        .hero-image-frame {
+            position: relative;
+            height: 70vh;
+            background: url('https://images.unsplash.com/photo-1550966841-3eeec692994e?auto=format&fit=crop&w=1000&q=80') center/cover;
+            border-radius: 200px 200px 0 0;
+            filter: sepia(0.2) contrast(1.1);
+        }
+
+        /* --- THE PROVENANCE SECTION --- */
+        .section { padding: 150px 10%; }
+        .provenance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .p-card { border-top: 1px solid var(--ink); padding-top: 20px; }
+        .p-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .p-card p { font-size: 0.9rem; color: var(--moss); line-height: 1.6; }
+
+        /* --- TACTILE MENU --- */
+        .menu-brutalist {
+            background: var(--ink);
+            color: var(--bg);
+            padding: 100px 10%;
+            margin-top: 50px;
+        }
+        .menu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 40px 0;
+            border-bottom: 1px solid #333;
+            transition: 0.4s;
+        }
+        .menu-row:hover { color: var(--accent); padding-left: 20px; }
+        .menu-row h2 { font-size: 3rem; font-family: 'Instrument Serif'; font-style: italic; }
+        .menu-row span { font-family: 'Syne'; font-size: 1rem; font-weight: 800; }
+
+        /* --- RESERVATION: THE CLAY BOX --- */
+        .reserve-box {
+            background: var(--moss);
+            color: var(--bg);
+            padding: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            margin-top: -50px;
+            z-index: 2;
+            position: relative;
+        }
+        .input-underlined {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(242, 240, 237, 0.3);
+            padding: 20px 0;
+            color: var(--bg);
+            width: 100%;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .btn-clay {
+            background: var(--accent);
+            color: white;
+            padding: 25px 50px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .reveal { opacity: 0; transform: translateY(50px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .hero, .provenance-grid, .reserve-box { grid-template-columns: 1fr; }
+            .hero-image-frame { height: 40vh; margin-top: 40px; }
+            .reserve-box { padding: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ROOTS<br>EST. 2024</div>
+        <div style="display: flex; flex-direction: column;">
+            <a href="#menu" class="nav-link">THE FARE</a>
+            <a href="#reserve" class="nav-link">GATHER</a>
+        </div>
+    </nav>
+
+    <div class="scroll-text-wrap">
+        <marquee scrollamount="10">SPRING HARVEST IN EFFECT • SOIL TO PLATE • NO SYNTHETICS • EARTHEN COOKING • SPRING HARVEST IN EFFECT • SOIL TO PLATE</marquee>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">RAW.<br><span>Refined.</span><br>Rooted.</h1>
+            <p style="max-width: 300px; margin-top: 30px; font-weight: 600;">We cook with fire, wood, and time. Ingredients sourced within 50 miles of this kitchen.</p>
+        </div>
+        <div class="hero-image-frame reveal"></div>
+    </section>
+
+    <section class="section">
+        <div class="provenance-grid">
+            <div class="p-card reveal">
+                <h3>THE SOIL</h3>
+                <p>Our greens are harvested daily from the Blackwood Permaculture farm, 12 miles North.</p>
+            </div>
+            <div class="p-card reveal">
+                <h3>THE FIRE</h3>
+                <p>We use exclusively aged White Oak to fuel our hearth, providing a deep, elemental smoke.</p>
+            </div>
+            <div class="p-card reveal">
+                <h3>THE CRAFT</h3>
+                <p>Every plate is thrown by hand in our local pottery studio, reflecting the texture of our landscape.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-brutalist">
+        <div class="menu-row reveal">
+            <h2>Smoked Beetroot & Curd</h2>
+            <span>$18</span>
+        </div>
+        <div class="menu-row reveal">
+            <h2>Wood-Fired Venison</h2>
+            <span>$42</span>
+        </div>
+        <div class="menu-row reveal">
+            <h2>Charred Leeks in Ash</h2>
+            <span>$16</span>
+        </div>
+        <div class="menu-row reveal">
+            <h2>Wild Sea Bass & Kelp</h2>
+            <span>$38</span>
+        </div>
+    </section>
+
+    <section id="reserve" class="section" style="padding-top: 0;">
+        <div class="reserve-box reveal">
+            <div>
+                <h2 style="font-size: 4rem; font-family: 'Instrument Serif'; italic;">Gather at the Table</h2>
+                <p style="margin-top: 20px; opacity: 0.8;">We accept limited reservations to maintain the intimacy of the dining experience.</p>
+            </div>
+            <div>
+                <form>
+                    <input type="text" placeholder="GUEST NAME" class="input-underlined">
+                    <input type="text" placeholder="PARTY SIZE" class="input-underlined">
+                    <input type="date" class="input-underlined">
+                    <button type="button" class="btn-clay">RESERVE SPACE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 100px 10%; text-align: left;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <h1 style="font-family: 'Instrument Serif'; font-size: 4rem;">ROOTS</h1>
+                <p>COLLECTIVE KITCHEN</p>
+            </div>
+            <div style="text-align: right; opacity: 0.5; font-size: 0.8rem;">
+                <p>OPEN TUES — SUN</p>
+                <p>17:00 — LATE</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

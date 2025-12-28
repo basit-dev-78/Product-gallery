@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARBON-GLOSS | Ultra Detailing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #CCFF00; /* Electric Lime */
+            --bg: #0A0B0E;
+            --surface: #14161B;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text: #FFFFFF;
+            --text-dim: #70757E;
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(204, 255, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        #cursor {
+            width: 20px; height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 30px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 20px 40px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+        .logo { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; }
+        .logo span { color: var(--primary); }
+        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-left: 30px; opacity: 0.6; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--primary); }
+
+        /* --- HERO: LIQUID FLOW --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+        .hero-content h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .hero-content h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--primary);
+        }
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- INTERACTIVE PACKAGE CARDS --- */
+        .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        .package-card {
+            background: var(--surface);
+            padding: 50px 40px;
+            border-radius: 40px;
+            border: 1px solid var(--glass);
+            position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .package-card:hover {
+            transform: translateY(-20px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .package-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(204, 255, 0, 0.1) 0%, transparent 70%);
+            opacity: 0; transition: 0.5s;
+        }
+        .package-card:hover::before { opacity: 1; }
+
+        .package-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.5rem; margin-bottom: 20px; }
+        .price { font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; }
+        .features { list-style: none; color: var(--text-dim); margin-bottom: 40px; }
+        .features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .features i { color: var(--primary); font-size: 0.8rem; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            padding: 20px 40px;
+            border-radius: 100px;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+        .btn-primary { background: var(--primary); color: black; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary); }
+
+        /* --- THE "TECHNOLOGY" BENTO --- */
+        .bento-box {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .bento-item {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid var(--glass);
+        }
+        .bento-big { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .grid-3, .bento-box { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 3.5rem; }
+            nav { padding: 15px 25px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <nav>
+        <div class="logo">CARBON<span>GLOSS</span></div>
+        <div class="nav-links">
+            <a href="#packages">Packages</a>
+            <a href="#tech">Technology</a>
+            <a href="#book" class="btn btn-primary" style="padding: 10px 25px;">Book Session</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="reveal">BEYOND<br><span>THE SHINE</span></h1>
+            <p class="hero-sub reveal">Aerospace-grade molecular protection for the automotive elite. We don't just wash; we preserve the soul of your machine.</p>
+            <div class="reveal">
+                <a href="#packages" class="btn btn-primary">Select Your Armor</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="section">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-family: 'Syncopate'; font-size: 2.5rem;">DETAILING SYSTEMS</h2>
+        </div>
+        <div class="grid-3">
+            <div class="package-card reveal">
+                <h3>LEVEL 01</h3>
+                <div class="price">$85</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-bolt"></i> Snow Foam Decon</li>
+                    <li><i class="fa-solid fa-bolt"></i> Hand Dry (Air Flow)</li>
+                    <li><i class="fa-solid fa-bolt"></i> Silica Spray Sealant</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Choose</a>
+            </div>
+            <div class="package-card reveal" style="border-color: var(--primary);">
+                <div style="position: absolute; top: 20px; right: 20px; background: var(--primary); color: black; padding: 5px 15px; border-radius: 50px; font-size: 0.6rem; font-weight: 900;">BEST SELLER</div>
+                <h3>LEVEL 02</h3>
+                <div class="price">$195</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-bolt"></i> Iron Fallout Removal</li>
+                    <li><i class="fa-solid fa-bolt"></i> Clay Bar Treatment</li>
+                    <li><i class="fa-solid fa-bolt"></i> 1-Year Graphene Coat</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Choose</a>
+            </div>
+            <div class="package-card reveal">
+                <h3>ULTIMATE</h3>
+                <div class="price">$450</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-bolt"></i> Full Paint Correction</li>
+                    <li><i class="fa-solid fa-bolt"></i> 9H Ceramic Shield</li>
+                    <li><i class="fa-solid fa-bolt"></i> Engine Bay Detail</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Choose</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" class="section">
+        <div class="bento-box">
+            <div class="bento-item bento-big reveal">
+                <h2 style="font-family: 'Syncopate'; font-size: 2rem; margin-bottom: 20px;">HYDROPHOBIC<br>ENGINEERING</h2>
+                <p style="color: var(--text-dim);">Our proprietary ceramic solution creates a permanent bond at the molecular level, rejecting water, dirt, and UV radiation instantly.</p>
+                <div style="margin-top: 40px; font-size: 3rem; color: var(--primary);">
+                    <i class="fa-solid fa-droplet-slash"></i>
+                </div>
+            </div>
+            <div class="bento-item reveal">
+                <h4>OZONE PURITY</h4>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 10px;">Eliminating odors and bacteria from the interior using medical-grade ozone generation.</p>
+            </div>
+            <div class="bento-item reveal">
+                <h4>LASER PRECISION</h4>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 10px;">Inspection under multi-spectrum lighting to ensure a zero-swirl finish.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 100px 5% 50px; text-align: center; border-top: 1px solid var(--glass);">
+        <div class="logo" style="margin-bottom: 30px;">CARBON<span>GLOSS</span></div>
+        <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 40px;">PRIVATE STUDIO • BY APPOINTMENT ONLY</p>
+        <div style="display: flex; justify-content: center; gap: 40px; font-size: 1.2rem;">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-tiktok"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+        <p style="margin-top: 50px; opacity: 0.3; font-size: 0.7rem;">&copy; 2025 CARBON-GLOSS LABS. ALL PAINTWORK PROTECTED.</p>
+    </footer>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover effect for cursor
+        document.querySelectorAll('a, .package-card').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(4)';
+                cursor.style.background = 'white';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.background = 'var(--primary)';
+            });
+        });
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

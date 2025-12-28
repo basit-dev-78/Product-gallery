@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAPID | Mobile Solutions On-Demand</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@400;800&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0B0E14;
+            --surface: #161B22;
+            --accent: #2F69FF; /* Neon Cobalt */
+            --accent-glow: rgba(47, 105, 255, 0.4);
+            --text: #FFFFFF;
+            --text-dim: #8B949E;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(11, 14, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-family: 'Lexend Exa', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+
+        /* --- HERO: VELOCITY --- */
+        .hero {
+            padding: 100px 5%;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero h1 { 
+            font-family: 'Lexend Exa', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem); 
+            line-height: 1; margin-bottom: 25px; letter-spacing: -2px;
+        }
+        .hero p { color: var(--text-dim); max-width: 600px; margin-bottom: 40px; font-size: 1.1rem; }
+
+        /* --- CALL TO ACTION BUTTON --- */
+        .btn-rapid {
+            background: var(--accent); color: white; padding: 22px 50px;
+            border-radius: 16px; text-decoration: none; font-weight: 800;
+            display: inline-flex; align-items: center; gap: 15px;
+            box-shadow: 0 10px 30px var(--accent-glow);
+            transition: var(--transition);
+        }
+        .btn-rapid:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--accent-glow); }
+
+        /* --- LIVE TIMELINE (UX) --- */
+        .timeline-container {
+            display: flex; justify-content: space-between; width: 100%; max-width: 900px;
+            margin: 80px auto; position: relative;
+        }
+        .timeline-line {
+            position: absolute; top: 25px; left: 0; width: 100%; height: 2px;
+            background: rgba(255,255,255,0.1); z-index: 1;
+        }
+        .timeline-progress {
+            position: absolute; top: 25px; left: 0; width: 33%; height: 2px;
+            background: var(--accent); z-index: 2; transition: 1s ease;
+        }
+        .step { position: relative; z-index: 3; text-align: center; }
+        .step-circle { 
+            width: 50px; height: 50px; background: var(--surface); border: 2px solid #333;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px; transition: 0.3s;
+        }
+        .step.active .step-circle { border-color: var(--accent); background: var(--bg); box-shadow: 0 0 15px var(--accent-glow); }
+        .step.active i { color: var(--accent); }
+        .step-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- SERVICES: THE DASHBOARD --- */
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; padding: 0 5% 100px;
+        }
+        .service-card {
+            background: var(--surface); padding: 40px; border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);
+            position: relative;
+        }
+        .service-card:hover { border-color: var(--accent); background: #1c222a; }
+        .service-card i { font-size: 2rem; color: var(--accent); margin-bottom: 25px; display: block; }
+        .price-tag { 
+            position: absolute; top: 40px; right: 40px; 
+            font-family: 'Lexend Exa'; font-size: 0.8rem; opacity: 0.5; 
+        }
+
+        /* --- MOBILE FLOATING ACTION --- */
+        .floating-booking {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: white; color: black;
+            padding: 15px 25px; border-radius: 100px; display: flex;
+            justify-content: space-between; align-items: center;
+            z-index: 2000; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .timeline-container { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">RAPID<span>.ON</span></div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="color:white; text-decoration:none; font-size: 0.9rem;">Status</a>
+            <a href="#" style="color:white; text-decoration:none; font-size: 0.9rem;">Help</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 class="reveal">WE TRAVEL.<br>WE FIX.</h1>
+        <p class="reveal">The professional mobile workshop at your doorstep. No towing, no waiting rooms, just elite service delivered to your driveway.</p>
+        <a href="#book" class="btn-rapid reveal">
+            <i class="fas fa-location-dot"></i>
+            Request Arrival
+        </a>
+
+        <div class="timeline-container reveal">
+            <div class="timeline-line"></div>
+            <div class="timeline-progress" id="progress"></div>
+            <div class="step active">
+                <div class="step-circle"><i class="fas fa-スマホ"></i></div>
+                <div class="step-label">Booking</div>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fas fa-van-shuttle"></i></div>
+                <div class="step-label">En Route</div>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fas fa-tools"></i></div>
+                <div class="step-label">Service</div>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fas fa-check-double"></i></div>
+                <div class="step-label">Complete</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="grid">
+        <div class="service-card reveal">
+            <span class="price-tag">From $49</span>
+            <i class="fas fa-screwdriver-wrench"></i>
+            <h3>Tech Repair</h3>
+            <p>On-site screen replacements, hardware diagnostics, and network setup for home or office.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="price-tag">From $89</span>
+            <i class="fas fa-car-battery"></i>
+            <h3>Auto Care</h3>
+            <p>Mobile oil changes, battery swaps, and emergency diagnostics without leaving your home.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="price-tag">Custom</span>
+            <i class="fas fa-house-laptop"></i>
+            <h3>Home Ops</h3>
+            <p>Smart home installation, mounting, and hardware integration by certified mobile techs.</p>
+        </div>
+    </div>
+
+    <div class="floating-booking">
+        <div style="font-weight: 800; font-size: 0.9rem;">READY TO GO?</div>
+        <a href="#" style="background: var(--bg); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700;">Book Now</a>
+    </div>
+
+    <script>
+        // Reveal Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Animated Timeline Demo
+        const steps = document.querySelectorAll('.step');
+        const progress = document.getElementById('progress');
+        let currentStep = 0;
+
+        setInterval(() => {
+            steps.forEach(s => s.classList.remove('active'));
+            currentStep = (currentStep + 1) % 4;
+            
+            for(let i = 0; i <= currentStep; i++) {
+                steps[i].classList.add('active');
+            }
+            progress.style.width = (currentStep * 33.3) + '%';
+        }, 3000);
+    </script>
+</body>
+</html>

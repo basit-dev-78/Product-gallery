@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINETIC | Structural Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0D0E0E;
+            --surface: #171818;
+            --neon: #C3FF00; /* Kinetic Green */
+            --text: #F0F0F0;
+            --dim: #555;
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Roboto Mono', monospace; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        /* --- BACKGROUND MESH --- */
+        .mesh {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(195, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(195, 255, 0, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px; z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 40px; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+        .logo { font-family: 'Syne'; font-size: 1.5rem; color: var(--neon); letter-spacing: -2px; }
+        .nav-status { font-size: 0.65rem; color: var(--dim); display: flex; gap: 20px; }
+        .pulse { width: 8px; height: 8px; background: var(--neon); border-radius: 50%; display: inline-block; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        /* --- HERO: THE MONOLITH --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; padding: 0 10%;
+            position: relative;
+        }
+        .hero-title {
+            font-family: 'Syne'; font-size: clamp(3rem, 12vw, 9rem);
+            line-height: 0.8; letter-spacing: -6px; z-index: 2;
+        }
+        .hero-title span { color: transparent; -webkit-text-stroke: 1px var(--neon); }
+
+        .glitch-img {
+            position: absolute; right: 10%; width: 40%; height: 60vh;
+            background: url('https://images.unsplash.com/photo-1518005020250-68a0d0d75b17?auto=format&fit=crop&w=1000&q=80') center/cover;
+            filter: grayscale(1) contrast(1.2); opacity: 0.6;
+            clip-path: polygon(0 0, 100% 15%, 100% 100%, 15% 85%);
+            z-index: 1; transition: var(--transition);
+        }
+        .glitch-img:hover { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
+
+        /* --- DATA STRIP --- */
+        .data-strip {
+            background: var(--neon); color: black; padding: 15px 0;
+            white-space: nowrap; overflow: hidden; font-weight: 800; font-size: 0.7rem;
+        }
+
+        /* --- PROJECT DASHBOARD --- */
+        .section { padding: 100px 10%; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #222; border: 1px solid #222; }
+        .dash-item { background: var(--bg); padding: 50px; transition: 0.3s; position: relative; overflow: hidden; }
+        .dash-item:hover { background: var(--surface); }
+        .dash-item h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; }
+        .metric-bar { width: 100%; height: 2px; background: #222; margin: 20px 0; position: relative; }
+        .metric-fill { position: absolute; height: 100%; background: var(--neon); transition: 1.5s ease-out; width: 0; }
+        .dash-item.active .metric-fill { width: 75%; }
+
+        /* --- THE LOGIC FORM --- */
+        .logic-form {
+            background: var(--surface); padding: 80px; border-radius: 0 100px 0 0;
+            border-left: 5px solid var(--neon);
+        }
+        .input-box {
+            border: 1px solid #333; background: transparent; padding: 20px;
+            color: white; font-family: 'Roboto Mono'; width: 100%; margin-bottom: 20px;
+        }
+        .input-box:focus { border-color: var(--neon); outline: none; }
+        .btn-neon {
+            background: var(--neon); color: black; padding: 20px 40px;
+            border: none; font-family: 'Syne'; font-weight: 800; cursor: pointer;
+            width: 100%; transition: 0.3s;
+        }
+        .btn-neon:hover { transform: skewX(-10deg); box-shadow: -10px 10px 0 white; }
+
+        .reveal { opacity: 0; transform: translateX(-30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateX(0); }
+
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; justify-content: center; }
+            .glitch-img { position: relative; width: 100%; height: 30vh; right: 0; margin-top: 40px; }
+            .dashboard { grid-template-columns: 1fr; }
+            .hero-title { font-size: 4rem; letter-spacing: -2px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh"></div>
+
+    <nav>
+        <div class="logo">KINETIC_</div>
+        <div class="nav-status">
+            <span><span class="pulse"></span> SYSTEM_ACTIVE</span>
+            <span>v3.0.42</span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="reveal">
+            <h1 class="hero-title">BORN OF<br><span>LOGIC.</span><br>BUILT BY<br>DATA.</h1>
+        </div>
+        <div class="glitch-img"></div>
+    </section>
+
+    <div class="data-strip">
+        <marquee>THERMAL_EFFICIENCY: 94% // TENSILE_STRENGTH: 450MPA // CARBON_NEUTRAL_INITIATIVE // SEISMIC_RATING: 9.0 // HARDWARE_SYNC_COMPLETE</marquee>
+    </div>
+
+    <section class="section">
+        <div class="dashboard">
+            <div class="dash-item reveal">
+                <span style="color: var(--neon)">ID: 0842</span>
+                <h3>Helios Plaza</h3>
+                <p style="color: var(--dim)">High-performance glass facade with integrated solar harvesting.</p>
+                <div class="metric-bar"><div class="metric-fill" style="width: 92%;"></div></div>
+                <div style="display:flex; justify-content:space-between; font-size: 0.7rem;">
+                    <span>ENERGY_AUTONOMY</span>
+                    <span>92%</span>
+                </div>
+            </div>
+            <div class="dash-item reveal">
+                <span style="color: var(--neon)">ID: 1092</span>
+                <h3>The Spine Bridge</h3>
+                <p style="color: var(--dim)">3D-printed steel joints utilizing generative stress-path algorithms.</p>
+                <div class="metric-bar"><div class="metric-fill" style="width: 78%;"></div></div>
+                <div style="display:flex; justify-content:space-between; font-size: 0.7rem;">
+                    <span>MATERIAL_OPTIMIZATION</span>
+                    <span>78%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="logic-form reveal" style="margin-top: 100px;">
+            <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;">INITIALIZE<br>CONSULTATION</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <p style="color: var(--dim); margin-bottom: 30px;">Input your project parameters. Our computational engine will generate a preliminary structural roadmap.</p>
+                    <input type="text" placeholder="COORD_X / PROJECT_NAME" class="input-box">
+                    <input type="text" placeholder="BUDGET_THRESHOLD" class="input-box">
+                </div>
+                <div>
+                    <textarea class="input-box" rows="5" placeholder="TECHNICAL_REQUIREMENTS"></textarea>
+                    <button class="btn-neon">EXECUTE_REQUEST</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 10%; border-top: 1px solid #222; font-size: 0.7rem; color: var(--dim);">
+        <div style="display: flex; justify-content: space-between;">
+            <p>© 2026 KINETIC STRUCTURAL INTELLIGENCE</p>
+            <p>DESIGNED FOR THE_FUTURE</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal, .dash-item').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

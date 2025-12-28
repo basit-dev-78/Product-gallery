@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECTOR | Mobile Command</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00FF94; /* Neon Mint */
+            --bg: #050608;
+            --surface: rgba(20, 24, 33, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #E0E6ED;
+            --text-dim: #64748B;
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 255, 148, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 148, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* --- RADAR HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 5%;
+        }
+
+        .radar-box {
+            position: absolute;
+            width: 600px; height: 600px;
+            border: 1px solid rgba(0, 255, 148, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .radar-box::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary) 0deg, transparent 90deg);
+            opacity: 0.1;
+            animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .hero-content { text-align: center; max-width: 800px; }
+        .hero-content h1 { 
+            font-size: clamp(3rem, 12vw, 7rem); 
+            font-weight: 900; line-height: 0.9; 
+            letter-spacing: -4px; margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(0, 255, 148, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px; border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; margin-bottom: 30px;
+        }
+
+        /* --- DASHBOARD TILES --- */
+        .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .dash-card {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 40px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .dash-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .dash-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 25px; }
+        .dash-card h3 { font-size: 1.5rem; margin-bottom: 15px; letter-spacing: -1px; }
+        .dash-card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- INTERACTIVE STATS --- */
+        .stats-strip {
+            display: flex; justify-content: space-around;
+            background: var(--surface); border: 1px solid var(--border);
+            padding: 30px; border-radius: 24px; margin-top: 50px;
+        }
+        .stat-item h4 { font-family: 'JetBrains Mono'; color: var(--primary); font-size: 1.8rem; }
+        .stat-item span { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; }
+
+        /* --- THE DEPLOYMENT FORM --- */
+        .deploy-box {
+            background: var(--surface);
+            border: 1px solid var(--primary);
+            padding: 60px; border-radius: 40px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            margin-top: 100px;
+        }
+        .input-line {
+            background: transparent; border: none;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0; color: white; width: 100%;
+            font-size: 1.1rem; margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .input-line:focus { border-color: var(--primary); outline: none; }
+
+        .btn-vector {
+            background: var(--primary); color: black;
+            padding: 25px 50px; border-radius: 100px;
+            font-weight: 900; text-transform: uppercase;
+            text-decoration: none; border: none;
+            cursor: pointer; transition: 0.3s; letter-spacing: 2px;
+        }
+        .btn-vector:hover { letter-spacing: 5px; box-shadow: 0 0 30px var(--primary); }
+
+        @media (max-width: 900px) {
+            .dash-grid, .deploy-box { grid-template-columns: 1fr; }
+            .radar-box { width: 300px; height: 300px; }
+            .hero-content h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="radar-box"></div>
+        <div class="hero-content">
+            <div class="status-badge">
+                <i class="fa-solid fa-circle-dot"></i> 14 UNITS DEPLOYED • NYC DISTRICT
+            </div>
+            <h1>VECTOR<br>MOBILE</h1>
+            <p style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px;">Professional precision, dispatched to your geo-coordinates. Mobile operations redefined for 2026.</p>
+            <a href="#book" class="btn-vector">Initialize Request</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="dash-grid">
+            <div class="dash-card">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>Hardware Ops</h3>
+                <p>Diagnostic testing and component replacement for mission-critical infrastructure.</p>
+            </div>
+            <div class="dash-card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Rapid Logistics</h3>
+                <p>Specialized courier and field support with 45-minute response times.</p>
+            </div>
+            <div class="dash-card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>Field Repair</h3>
+                <p>Mechanical and technical restoration performed on-site via our mobile laboratory.</p>
+            </div>
+        </div>
+
+        <div class="stats-strip">
+            <div class="stat-item">
+                <h4>12.4m</h4>
+                <span>Avg Response</span>
+            </div>
+            <div class="stat-item">
+                <h4>99.2%</h4>
+                <span>Fulfillment</span>
+            </div>
+            <div class="stat-item">
+                <h4>24/7</h4>
+                <span>Deployment</span>
+            </div>
+        </div>
+
+        <div id="book" class="deploy-box">
+            <div>
+                <h2 style="font-size: 3rem; margin-bottom: 20px;">DEPLOY<br>TECH-UNIT</h2>
+                <p style="color: var(--text-dim);">Enter your coordinates and service requirements to ping the nearest Vector operative.</p>
+            </div>
+            <div>
+                <form onsubmit="event.preventDefault(); alert('Target Locked. Operative En Route.');">
+                    <input type="text" class="input-line" placeholder="GEO-LOCATION / ADDRESS">
+                    <select class="input-line" style="background: var(--bg);">
+                        <option>SELECT SERVICE PROTOCOL</option>
+                        <option>EMERGENCY REPAIR</option>
+                        <option>SCHEDULED MAINTENANCE</option>
+                        <option>HARDWARE INSTALL</option>
+                    </select>
+                    <input type="text" class="input-line" placeholder="CONTACT FREQUENCY (PHONE)">
+                    <button class="btn-vector" style="width: 100%;">SIGNAL OPERATIVE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 5%; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); font-size: 0.8rem; font-family: 'JetBrains Mono';">
+        <div style="margin-bottom: 20px; color: var(--primary);">VECTOR OPERATIONAL COMMAND // 2026</div>
+        <p>&copy; ALL RIGHTS RESERVED. ENCRYPTED CONNECTION.</p>
+    </footer>
+
+</body>
+</html>

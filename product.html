@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Demo Gallery | Web Berners</title>
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e5e7eb;
+      --card:#ffffff;
+
+      --accent:#ff0066;                 /* Web Berners Pink */
+      --accentSoft: rgba(255,0,102,.10);
+
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
+      --shadow2: 0 18px 55px rgba(2, 6, 23, 0.12);
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Helvetica Neue", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:18px}
+
+    .bgGlow{
+      position:fixed;
+      inset:-140px -120px auto -120px;
+      height:380px;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        radial-gradient(600px 220px at 18% 18%, rgba(255,0,102,.13), transparent 60%),
+        radial-gradient(520px 220px at 70% 10%, rgba(37,99,235,.08), transparent 60%);
+    }
+
+    /* =========================================
+       TOP WEBSITE HEADER (Like your screenshot)
+       ========================================= */
+    .siteHeader{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background:#fff;
+      border-bottom: 1px solid rgba(229,231,235,.9);
+    }
+    .siteHeaderInner{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brandWrap{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 190px;
+    }
+    .brandMark{
+      width:44px;
+      height:34px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .brandText{
+      font-weight:900;
+      letter-spacing:-.02em;
+      font-size:18px;
+      display:flex;
+      align-items:baseline;
+      gap:4px;
+    }
+    .brandText .web{font-weight:900;}
+    .brandText .berners{font-weight:500; opacity:.85;}
+
+    .navLinks{
+      display:flex;
+      align-items:center;
+      gap:34px;
+      font-weight:800;
+      color:#0f172a;
+      justify-content:center;
+      flex: 1;
+    }
+    .navLinks a{
+      font-size:14px;
+      opacity:.95;
+      transition:.12s ease;
+    }
+    .navLinks a:hover{opacity:1}
+
+    .dd{display:inline-flex; align-items:center; gap:8px;}
+    .caret{
+      width:10px; height:10px;
+      border-right:2px solid #111827;
+      border-bottom:2px solid #111827;
+      transform: rotate(45deg);
+      margin-top:-2px;
+      opacity:.75;
+    }
+
+    .headerRight{
+      min-width: 170px;
+      display:flex;
+      justify-content:flex-end;
+    }
+    .quoteBtn{
+      background:#000;
+      color:#fff;
+      border:0;
+      padding:12px 20px;
+      border-radius:8px;
+      font-weight:900;
+      font-size:14px;
+      cursor:pointer;
+      box-shadow: 0 10px 26px rgba(2,6,23,.12);
+      transition:.15s ease;
+    }
+    .quoteBtn:hover{ transform: translateY(-1px); }
+
+    @media (max-width: 900px){
+      .navLinks{display:none;}
+      .brandWrap{min-width:auto;}
+      .headerRight{min-width:auto;}
+    }
+
+    /* ===== SUPER COMPACT FILTER HEADER ===== */
+    .filtersWrap{
+      position: sticky;
+      top: 62px; /* below the siteHeader */
+      z-index: 50;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(229,231,235,.75);
+      padding: 6px 0;
+    }
+
+    .filtersTop{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .searchBox{
+      flex: 1 1 420px;
+      display:flex; gap:8px; align-items:center;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius: 12px;
+      padding:6px 10px;
+      box-shadow: 0 10px 24px rgba(2,6,23,0.04);
+      min-width: 260px;
+    }
+    .searchBox input{
+      border:0; outline:0; width:100%;
+      font-size:12.8px;
+    }
+
+    .controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    select{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius: 12px;
+      padding:6px 9px;
+      font-weight:950;
+      font-size:12.5px;
+      outline:none;
+      cursor:pointer;
+    }
+    .miniBtn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:6px 10px;
+      border-radius:12px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.15s ease;
+      font-size:12.5px;
+      white-space:nowrap;
+    }
+    .miniBtn.primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:transparent;
+      box-shadow: 0 16px 28px rgba(255,0,102,.16);
+    }
+
+    .filtersBottom{
+      margin-top:6px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-start; /* trust pill removed so left align */
+      flex-wrap:wrap;
+    }
+
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+
+    .chip{
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111827;
+      padding:6px 9px;
+      border-radius: 999px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.12s ease;
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .chip.active{
+      background: var(--accentSoft);
+      border-color: rgba(255,0,102,.35);
+      color: var(--accent);
+    }
+    .chip .count{
+      margin-left: 7px;
+      min-width: 18px;
+      height: 16px;
+      padding: 0 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 950;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #0f172a;
+    }
+    .chip.active .count{
+      border-color: rgba(255,0,102,.35);
+      background: rgba(255,0,102,.10);
+      color: var(--accent);
+    }
+
+    /* ===== GRID ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      padding: 16px 0 30px;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      overflow:hidden;
+      transition:.15s ease;
+      box-shadow: 0 12px 28px rgba(2,6,23,0.05);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
+      border-color: rgba(15,23,42,.12);
+    }
+    .thumb{
+      height: 180px;
+      background: #f3f4f6;
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.01);
+      transition: .25s ease;
+    }
+    .card:hover .thumb img{ transform: scale(1.06); }
+
+    .badgeTag{
+      position:absolute;
+      top:12px; left:12px;
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:950;
+      color:#fff;
+      background: var(--accent);
+      box-shadow: 0 12px 26px rgba(255,0,102,.25);
+    }
+    .priceTag{
+      position:absolute;
+      top:12px; right:12px;
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:950;
+      color:#0f172a;
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(229,231,235,.8);
+      box-shadow: 0 10px 24px rgba(2,6,23,0.08);
+    }
+
+    .content{ padding:14px; }
+    .titleRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .content h3{
+      margin:0;
+      font-size:15.5px;
+      letter-spacing:-0.01em;
+      line-height:1.25;
+    }
+    .categoryPill{
+      font-size:11px;
+      font-weight:950;
+      color:#0f172a;
+      background:#f1f5f9;
+      border:1px solid #e2e8f0;
+      padding:6px 9px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .desc{
+      margin:8px 0 10px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+      min-height:40px;
+    }
+
+    .tagRow{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+    .tag{
+      font-size:12px;
+      color:#334155;
+      background:#f8fafc;
+      border:1px solid #edf2f7;
+      padding:6px 8px;
+      border-radius:999px;
+      font-weight:750;
+    }
+    .rating{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-weight:900;
+      font-size:12px;
+      color:#0f172a;
+      padding:7px 10px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #eef2f7;
+    }
+
+    .actions{ display:flex; gap:10px; }
+    .btnSmall{
+      flex:1;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius: 14px;
+      font-weight:950;
+      font-size:13px;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+    .btnSmall.primary{
+      border-color: transparent;
+      background: var(--accent);
+      color:#fff;
+      box-shadow: 0 18px 30px rgba(255,0,102,.18);
+    }
+
+    .empty{
+      border:1px dashed #cbd5e1;
+      background:#f8fafc;
+      border-radius: 18px;
+      padding:18px;
+      color:#475569;
+      display:none;
+      margin-top:16px;
+    }
+
+    /* Modal */
+    .modalOverlay{
+      position:fixed;
+      inset:0;
+      background: rgba(2,6,23,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index: 9999;
+    }
+    .modal{
+      width:min(1100px, 98vw);
+      height:min(78vh, 720px);
+      background:#fff;
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 30px 80px rgba(2,6,23,.35);
+      display:flex;
+      flex-direction:column;
+    }
+    .modalHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--border);
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(10px);
+    }
+    .modalHeader b{font-size:13px}
+    .modalHeader .modalActions{display:flex; gap:8px; flex-wrap:wrap}
+    .modalHeader .x{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius: 12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:950;
+      font-size:12.5px;
+    }
+    .modal iframe{ flex:1; width:100%; border:0; background:#fff; }
+
+    /* Floating WhatsApp */
+    .floatWa{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index: 999;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:12px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color:#fff;
+      font-weight:950;
+      box-shadow: 0 22px 55px rgba(255,0,102,.22);
+      transition:.15s ease;
+    }
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns: repeat(2,1fr)}
+      .filtersWrap{top: 58px;}
+    }
+    @media (max-width: 620px){
+      .grid{grid-template-columns: 1fr}
+      .thumb{height:170px}
+      .container{padding:14px}
+      .filtersWrap{top: 58px;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bgGlow"></div>
+
+  <!-- TOP HEADER -->
+  <header class="siteHeader">
+    <div class="siteHeaderInner">
+      <a class="brandWrap" href="#">
+        <span class="brandMark" aria-hidden="true">
+          <svg width="44" height="34" viewBox="0 0 44 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="3" width="9" height="6" rx="3" fill="#ff0066"/>
+            <rect x="6" y="14" width="20" height="6" rx="3" fill="#ff0066"/>
+            <rect x="6" y="25" width="14" height="6" rx="3" fill="#ff0066"/>
+            <rect x="18" y="3" width="20" height="6" rx="3" fill="#ff0066" opacity=".18"/>
+            <circle cx="32" cy="17" r="3" fill="#ff0066" opacity=".28"/>
+          </svg>
+        </span>
+
+        <span class="brandText">
+          <span class="web">WEB</span><span class="berners">berners</span>
+        </span>
+      </a>
+
+      <nav class="navLinks" aria-label="Main navigation">
+        <a href="#">About</a>
+        <a class="dd" href="#">Solution <span class="caret"></span></a>
+        <a class="dd" href="#">Case Studies <span class="caret"></span></a>
+        <a href="#">Blogs</a>
+      </nav>
+
+      <div class="headerRight">
+        <button class="quoteBtn" id="topGetQuote">Get Quote</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTER BAR (trust pill removed) -->
+  <div class="filtersWrap" id="demos">
+    <div class="container">
+      <div class="filtersTop">
+        <div class="searchBox">
+          🔎
+          <input id="searchInput" type="text" placeholder="Search demos (restaurant, salon, electrician)..." />
+        </div>
+
+        <div class="controls">
+          <select id="sortSelect" title="Sort demos">
+            <option value="popular">Sort: Popular</option>
+            <option value="newest">Sort: Newest</option>
+            <option value="az">Sort: A–Z</option>
+          </select>
+
+          <select id="priceSelect" title="Price filter">
+            <option value="all">Price: All</option>
+            <option value="low">Budget</option>
+            <option value="mid">Standard</option>
+            <option value="high">Premium</option>
+          </select>
+
+          <button class="miniBtn" id="resetBtn" type="button">Reset</button>
+          <button class="miniBtn primary" id="getQuoteBtn" type="button">Get Quote</button>
+        </div>
+      </div>
+
+      <div class="filtersBottom">
+        <div class="chips" id="chipBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="emptyState" class="empty">
+      <b>No demos match your filters.</b>
+      <div style="margin-top:6px;">Try clearing search or choose “All”.</div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a class="floatWa" id="floatWhatsapp" href="#" target="_blank">💬 WhatsApp</a>
+
+  <!-- Preview Modal -->
+  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modalHeader">
+        <b id="modalTitle">Preview</b>
+        <div class="modalActions">
+          <button class="x" id="modalOpenTab">Open</button>
+          <button class="x" id="modalGetSite">Get This</button>
+          <button class="x" id="modalClose">Close ✕</button>
+        </div>
+      </div>
+      <iframe id="modalFrame" src="about:blank" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- Quote Modal -->
+  <div class="modalOverlay" id="quoteOverlay" role="dialog" aria-modal="true">
+    <div class="modal" style="height:auto; max-height:78vh;">
+      <div class="modalHeader">
+        <b>Request a Quote</b>
+        <div class="modalActions">
+          <button class="x" id="quoteClose">Close ✕</button>
+        </div>
+      </div>
+
+      <div style="padding:14px; display:grid; gap:10px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="qgrid">
+          <input id="qName" placeholder="Your Name" style="padding:12px;border:1px solid var(--border);border-radius:14px;outline:none;width:100%;font:inherit;">
+          <input id="qBiz" placeholder="Business Type (e.g., Restaurant)" style="padding:12px;border:1px solid var(--border);border-radius:14px;outline:none;width:100%;font:inherit;">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="qgrid">
+          <input id="qCity" placeholder="City / Country" style="padding:12px;border:1px solid var(--border);border-radius:14px;outline:none;width:100%;font:inherit;">
+          <input id="qBudget" placeholder="Budget (optional)" style="padding:12px;border:1px solid var(--border);border-radius:14px;outline:none;width:100%;font:inherit;">
+        </div>
+        <textarea id="qMsg" rows="4" placeholder="Message (pages, booking, shop, etc.)"
+          style="padding:12px;border:1px solid var(--border);border-radius:14px;outline:none;width:100%;font:inherit;resize:vertical;"></textarea>
+
+        <button class="miniBtn primary" style="padding:10px 12px;border-radius:14px;" id="sendQuoteBtn">Send on WhatsApp</button>
+        <div style="color:var(--muted); font-size:12px; line-height:1.5;">
+          This will open WhatsApp with your message.
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ====== EDIT THESE ======
+  const WHATSAPP_NUMBER = "923000000000"; // replace with your number (no +)
+  const BRAND_NAME = "Web Berners";
+
+  // 40+ demo cards
+  const DEMOS = [
+    // Restaurant (6)
+    mk("WB-01","Modern Restaurant – White Menu","Restaurant","Menu + booking CTA + map","mid","From £149",4.9,95,"https://example.com/demo-restaurant-1",img("restaurant")),
+    mk("WB-02","Restaurant – Premium Dining","Restaurant","Elegant sections + gallery + CTA","mid","From £169",4.8,88,"https://example.com/demo-restaurant-2",img("restaurant")),
+    mk("WB-03","Restaurant – Fast Food One Page","Restaurant","Simple landing + offers + call now","low","From £119",4.7,82,"https://example.com/demo-restaurant-3",img("restaurant")),
+    mk("WB-04","Restaurant – Reservation Focus","Restaurant","Reservation hero + reviews + map","mid","From £179",4.8,86,"https://example.com/demo-restaurant-4",img("restaurant")),
+    mk("WB-05","Restaurant – Modern Bento","Restaurant","Modern UI + social proof + CTA","mid","From £159",4.7,80,"https://example.com/demo-restaurant-5",img("restaurant")),
+    mk("WB-06","Restaurant – Chef Special","Restaurant","Chef section + menu cards + CTA","high","From £249",4.9,90,"https://example.com/demo-restaurant-6",img("restaurant")),
+
+    // Salon (6)
+    mk("WB-07","Salon – Elegant White","Salon","Services + pricing + appointment CTA","mid","From £169",4.8,90,"https://example.com/demo-salon-1",img("salon")),
+    mk("WB-08","Salon – Beauty & Spa","Salon","Luxury layout + gallery + testimonials","high","From £249",4.9,92,"https://example.com/demo-salon-2",img("salon")),
+    mk("WB-09","Salon – Minimal Booking","Salon","Quick booking + service cards + CTA","low","From £129",4.7,81,"https://example.com/demo-salon-3",img("salon")),
+    mk("WB-10","Salon – Makeup Studio","Salon","Portfolio grid + WhatsApp CTA","mid","From £159",4.8,84,"https://example.com/demo-salon-4",img("salon")),
+    mk("WB-11","Salon – Barbershop","Salon","Bold sections + pricing + booking","mid","From £149",4.7,78,"https://example.com/demo-salon-5",img("salon")),
+    mk("WB-12","Salon – Bridal Studio","Salon","Hero + packages + gallery","high","From £299",4.9,89,"https://example.com/demo-salon-6",img("salon")),
+
+    // Electrician (5)
+    mk("WB-13","Electrician – Local Services","Electrician","Services + trust badges + quote form","low","From £119",4.7,88,"https://example.com/demo-electrician-1",img("electrician")),
+    mk("WB-14","Electrician – Emergency Callout","Electrician","Emergency CTA + reviews + map","mid","From £159",4.8,83,"https://example.com/demo-electrician-2",img("electrician")),
+    mk("WB-15","Electrician – Modern Company","Electrician","Team + certifications + CTA","mid","From £169",4.7,79,"https://example.com/demo-electrician-3",img("electrician")),
+    mk("WB-16","Electrician – One Page","Electrician","Fast landing + quote CTA","low","From £99",4.6,76,"https://example.com/demo-electrician-4",img("electrician")),
+    mk("WB-17","Electrician – Premium Pro","Electrician","Premium layout + testimonials","high","From £249",4.9,87,"https://example.com/demo-electrician-5",img("electrician")),
+
+    // Clinic (5)
+    mk("WB-18","Clinic – Appointment + Services","Clinic","Doctors + timings + appointment CTA","high","From £249",4.9,86,"https://example.com/demo-clinic-1",img("clinic")),
+    mk("WB-19","Clinic – Dental Practice","Clinic","Services + before/after + CTA","mid","From £179",4.8,82,"https://example.com/demo-clinic-2",img("clinic")),
+    mk("WB-20","Clinic – Physiotherapy","Clinic","Programs + booking + reviews","mid","From £169",4.7,78,"https://example.com/demo-clinic-3",img("clinic")),
+    mk("WB-21","Clinic – Family Healthcare","Clinic","Clean layout + insurance + CTA","high","From £279",4.9,83,"https://example.com/demo-clinic-4",img("clinic")),
+    mk("WB-22","Clinic – Simple Landing","Clinic","Minimal single page + contact","low","From £129",4.6,75,"https://example.com/demo-clinic-5",img("clinic")),
+
+    // Gym (5)
+    mk("WB-23","Gym – Training & Pricing","Gym","Programs + pricing + transformation CTA","mid","From £179",4.8,90,"https://example.com/demo-gym-1",img("gym")),
+    mk("WB-24","Gym – Fitness Studio","Gym","Schedule + trainers + CTA","mid","From £169",4.7,81,"https://example.com/demo-gym-2",img("gym")),
+    mk("WB-25","Gym – Crossfit Style","Gym","Bold hero + packages + CTA","high","From £249",4.8,84,"https://example.com/demo-gym-3",img("gym")),
+    mk("WB-26","Gym – Personal Trainer","Gym","Personal brand + booking CTA","low","From £119",4.6,77,"https://example.com/demo-gym-4",img("gym")),
+    mk("WB-27","Gym – Premium Club","Gym","Luxury layout + membership CTA","high","From £299",4.9,88,"https://example.com/demo-gym-5",img("gym")),
+
+    // E-commerce (5)
+    mk("WB-28","E-commerce – Minimal Shop Home","E-commerce","Product grid + promo banner","high","From £299",4.7,85,"https://example.com/demo-ecom-1",img("ecom")),
+    mk("WB-29","E-commerce – Fashion Store","E-commerce","Collections + categories + CTA","high","From £329",4.8,83,"https://example.com/demo-ecom-2",img("ecom")),
+    mk("WB-30","E-commerce – Electronics","E-commerce","Featured products + offers","high","From £349",4.7,80,"https://example.com/demo-ecom-3",img("ecom")),
+    mk("WB-31","E-commerce – Beauty Shop","E-commerce","Minimal product cards + CTA","high","From £299",4.8,82,"https://example.com/demo-ecom-4",img("ecom")),
+    mk("WB-32","E-commerce – Grocery","E-commerce","Category tiles + cart CTA","high","From £399",4.9,86,"https://example.com/demo-ecom-5",img("ecom")),
+
+    // Real Estate (4)
+    mk("WB-33","Real Estate – Listings Style","Real Estate","Property cards + gallery + CTA","high","From £249",4.8,84,"https://example.com/demo-realestate-1",img("realestate")),
+    mk("WB-34","Real Estate – Agent Portfolio","Real Estate","Agent profile + listings + CTA","mid","From £199",4.7,79,"https://example.com/demo-realestate-2",img("realestate")),
+    mk("WB-35","Real Estate – Luxury Homes","Real Estate","Luxury UI + hero + CTA","high","From £299",4.9,87,"https://example.com/demo-realestate-3",img("realestate")),
+    mk("WB-36","Real Estate – Simple Landing","Real Estate","Clean one page + contact","low","From £129",4.6,72,"https://example.com/demo-realestate-4",img("realestate")),
+
+    // One-page (4)
+    mk("WB-37","One Page Business – Clean","One-page","About + services + portfolio + contact","low","From £99",4.6,80,"https://example.com/demo-onepage-1",img("onepage")),
+    mk("WB-38","One Page – Startup Landing","One-page","Hero + features + CTA","mid","From £149",4.7,77,"https://example.com/demo-onepage-2",img("onepage")),
+    mk("WB-39","One Page – Consultant Profile","One-page","Profile + services + CTA","low","From £119",4.6,73,"https://example.com/demo-onepage-3",img("onepage")),
+    mk("WB-40","One Page – Portfolio","One-page","Portfolio grid + contact CTA","mid","From £159",4.8,78,"https://example.com/demo-onepage-4",img("onepage")),
+  ];
+
+  function mk(id,title,category,description,priceBucket,priceLabel,rating,popularScore,previewUrl,image){
+    return {
+      id, title, category, description,
+      tags: autoTags(category),
+      badge: badgeFrom(popularScore),
+      priceBucket, priceLabel, rating, popularScore,
+      createdAt: randomDate(),
+      previewUrl, image
+    };
+  }
+
+  function autoTags(category){
+    const base = ["Mobile","Fast"];
+    if(category === "Restaurant") base.push("Menu","Booking");
+    if(category === "Salon") base.push("Gallery","Appointment");
+    if(category === "Electrician") base.push("Quote","Trust");
+    if(category === "Clinic") base.push("SEO Ready","Appointment");
+    if(category === "Gym") base.push("Pricing","CTA");
+    if(category === "E-commerce") base.push("Shop","Products");
+    if(category === "Real Estate") base.push("Listings","Gallery");
+    if(category === "One-page") base.push("One Page","Quick Launch");
+    return base;
+  }
+
+  function badgeFrom(score){
+    if(score >= 90) return "Popular";
+    if(score >= 85) return "Hot";
+    if(score >= 80) return "New";
+    return "";
+  }
+
+  function randomDate(){
+    const now = new Date();
+    const daysAgo = Math.floor(Math.random() * 40) + 1;
+    const d = new Date(now.getTime() - daysAgo*24*60*60*1000);
+    return d.toISOString().slice(0,10);
+  }
+
+  function img(type){
+    const bank = {
+      restaurant: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1400&q=70",
+      salon: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1400&q=70",
+      electrician: "https://images.unsplash.com/photo-1581091870622-3b0c80a3d2c0?auto=format&fit=crop&w=1400&q=70",
+      clinic: "https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1400&q=70",
+      gym: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=70",
+      ecom: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1400&q=70",
+      realestate: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=70",
+      onepage: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1400&q=70"
+    };
+    if(type === "restaurant") return bank.restaurant;
+    if(type === "salon") return bank.salon;
+    if(type === "electrician") return bank.electrician;
+    if(type === "clinic") return bank.clinic;
+    if(type === "gym") return bank.gym;
+    if(type === "ecom") return bank.ecom;
+    if(type === "realestate") return bank.realestate;
+    return bank.onepage;
+  }
+
+  function waLinkText(text){
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  }
+  function waLinkForDemo(item){
+    const msg = `Hi ${BRAND_NAME}, I want this website demo: ${item.id} - ${item.title}. Category: ${item.category}. Please share price & delivery time.`;
+    return waLinkText(msg);
+  }
+
+  // Floating WhatsApp
+  const floatWhatsapp = document.getElementById("floatWhatsapp");
+  floatWhatsapp.href = waLinkText(`Hi ${BRAND_NAME}, I want a website. Please share packages & timeline.`);
+
+  // Quote modal wiring
+  const quoteOverlay = document.getElementById("quoteOverlay");
+  const quoteClose = document.getElementById("quoteClose");
+  const getQuoteBtn = document.getElementById("getQuoteBtn");
+  const topGetQuote = document.getElementById("topGetQuote");
+  const sendQuoteBtn = document.getElementById("sendQuoteBtn");
+
+  function openQuote(){ quoteOverlay.style.display = "flex"; }
+  function closeQuote(){ quoteOverlay.style.display = "none"; }
+
+  getQuoteBtn.addEventListener("click", openQuote);
+  topGetQuote.addEventListener("click", openQuote);
+  quoteClose.addEventListener("click", closeQuote);
+  quoteOverlay.addEventListener("click", (e)=>{ if(e.target === quoteOverlay) closeQuote(); });
+
+  sendQuoteBtn.addEventListener("click", () => {
+    const name = (document.getElementById("qName").value || "").trim() || "Customer";
+    const biz  = (document.getElementById("qBiz").value || "").trim() || "Business";
+    const city = (document.getElementById("qCity").value || "").trim() || "City";
+    const bud  = (document.getElementById("qBudget").value || "").trim() || "";
+    const msg  = (document.getElementById("qMsg").value || "").trim() || "";
+
+    const text =
+`Hi ${BRAND_NAME}, I want a website quote.
+
+Name: ${name}
+Business: ${biz}
+City/Country: ${city}
+Budget: ${bud}
+
+Requirements:
+${msg}`;
+
+    window.open(waLinkText(text), "_blank");
+  });
+
+  // State
+  const state = { activeCategory:"All", search:"", sort:"popular", price:"all" };
+
+  const grid = document.getElementById("grid");
+  const chipBar = document.getElementById("chipBar");
+  const searchInput = document.getElementById("searchInput");
+  const sortSelect = document.getElementById("sortSelect");
+  const priceSelect = document.getElementById("priceSelect");
+  const emptyState = document.getElementById("emptyState");
+  const resetBtn = document.getElementById("resetBtn");
+
+  function normalize(s){ return (s||"").toLowerCase().trim(); }
+
+  function categoryCounts(){
+    const counts = {};
+    for(const d of DEMOS) counts[d.category] = (counts[d.category]||0) + 1;
+    counts["All"] = DEMOS.length;
+    return counts;
+  }
+  function uniqCategories(){
+    const cats = Array.from(new Set(DEMOS.map(i => i.category))).sort();
+    return ["All", ...cats];
+  }
+
+  function renderChips(){
+    const counts = categoryCounts();
+    const categories = uniqCategories();
+
+    chipBar.innerHTML = categories.map(cat => {
+      const c = counts[cat] || 0;
+      return `
+        <button class="chip ${state.activeCategory===cat ? "active":""}" data-cat="${cat}">
+          <span>${cat}</span><span class="count">${c}</span>
+        </button>
+      `;
+    }).join("");
+
+    chipBar.querySelectorAll(".chip").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.activeCategory = btn.dataset.cat;
+        renderChips();
+        renderGrid();
+      });
+    });
+  }
+
+  function matchesSearch(item, query){
+    if(!query) return true;
+    const q = normalize(query);
+    const hay = [item.title,item.category,item.description,...(item.tags||[])].map(normalize).join(" ");
+    return hay.includes(q);
+  }
+  function matchesPrice(item){
+    if(state.price==="all") return true;
+    return (item.priceBucket||"mid") === state.price;
+  }
+  function filterItems(){
+    return DEMOS.filter(item => {
+      const catOk = (state.activeCategory==="All") || (item.category===state.activeCategory);
+      return catOk && matchesSearch(item,state.search) && matchesPrice(item);
+    });
+  }
+  function sortItems(items){
+    const arr = [...items];
+    if(state.sort==="popular") arr.sort((a,b)=>(b.popularScore||0)-(a.popularScore||0));
+    if(state.sort==="newest")  arr.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+    if(state.sort==="az")      arr.sort((a,b)=>a.title.localeCompare(b.title));
+    return arr;
+  }
+
+  // Preview Modal
+  const modalOverlay = document.getElementById("modalOverlay");
+  const modalFrame = document.getElementById("modalFrame");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalClose = document.getElementById("modalClose");
+  const modalOpenTab = document.getElementById("modalOpenTab");
+  const modalGetSite = document.getElementById("modalGetSite");
+
+  function openPreview(item){
+    modalTitle.textContent = `Preview: ${item.title} (${item.id})`;
+    modalFrame.src = item.previewUrl;
+    modalOverlay.style.display = "flex";
+    modalOpenTab.onclick = () => window.open(item.previewUrl, "_blank");
+    modalGetSite.onclick = () => window.open(waLinkForDemo(item), "_blank");
+  }
+  function closePreview(){
+    modalOverlay.style.display = "none";
+    modalFrame.src = "about:blank";
+  }
+  modalClose.addEventListener("click", closePreview);
+  modalOverlay.addEventListener("click", (e)=>{ if(e.target===modalOverlay) closePreview(); });
+
+  window.addEventListener("keydown", (e)=>{
+    if(e.key==="Escape"){ closePreview(); closeQuote(); }
+  });
+
+  function cardHTML(item){
+    const tags = (item.tags||[]).slice(0,6).map(t=>`<span class="tag">${t}</span>`).join("");
+    const rating = item.rating ? `<span class="rating">⭐ ${item.rating.toFixed(1)}</span>` : "";
+    return `
+      <div class="card">
+        <div class="thumb">
+          <img src="${item.image}" alt="${item.title}" loading="lazy"/>
+          ${item.badge ? `<div class="badgeTag">${item.badge}</div>` : ""}
+          ${item.priceLabel ? `<div class="priceTag">${item.priceLabel}</div>` : ""}
+        </div>
+        <div class="content">
+          <div class="titleRow">
+            <h3>${item.title}</h3>
+            <span class="categoryPill">${item.category}</span>
+          </div>
+          <div class="desc">${item.description}</div>
+
+          <div class="tagRow">
+            <div class="tags">${tags}</div>
+            ${rating}
+          </div>
+
+          <div class="actions">
+            <button class="btnSmall" data-preview="${item.id}">Preview</button>
+            <button class="btnSmall primary" data-get="${item.id}">Get This Website</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderGrid(){
+    const sorted = sortItems(filterItems());
+    if(sorted.length===0){
+      emptyState.style.display="block";
+      grid.innerHTML="";
+      return;
+    }
+    emptyState.style.display="none";
+    grid.innerHTML = sorted.map(cardHTML).join("");
+
+    grid.querySelectorAll("[data-preview]").forEach(btn=>{
+      const id = btn.getAttribute("data-preview");
+      btn.addEventListener("click", ()=>{
+        const item = DEMOS.find(d=>d.id===id);
+        if(item) openPreview(item);
+      });
+    });
+
+    grid.querySelectorAll("[data-get]").forEach(btn=>{
+      const id = btn.getAttribute("data-get");
+      btn.addEventListener("click", ()=>{
+        const item = DEMOS.find(d=>d.id===id);
+        if(item) window.open(waLinkForDemo(item), "_blank");
+      });
+    });
+  }
+
+  // Inputs
+  searchInput.addEventListener("input",(e)=>{ state.search=e.target.value; renderGrid(); });
+  sortSelect.addEventListener("change",(e)=>{ state.sort=e.target.value; renderGrid(); });
+  priceSelect.addEventListener("change",(e)=>{ state.price=e.target.value; renderGrid(); });
+
+  resetBtn.addEventListener("click",()=>{
+    state.activeCategory="All";
+    state.search="";
+    state.sort="popular";
+    state.price="all";
+    searchInput.value="";
+    sortSelect.value="popular";
+    priceSelect.value="all";
+    renderChips();
+    renderGrid();
+  });
+
+  // Init
+  renderChips();
+  renderGrid();
+</script>
+</body>
+</html>

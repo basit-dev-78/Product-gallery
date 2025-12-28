@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina Clean | Botanical Home Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --sage: #7B8E7E;
+            --bone: #F9F7F2;
+            --clay: #D4C7B0;
+            --text: #2D302E;
+            --glass: rgba(255, 255, 255, 0.7);
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bone); 
+            color: var(--text); 
+            line-height: 1.6;
+        }
+
+        h1, h2, .brand { font-family: 'DM Serif Display', serif; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 30px 0;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(249, 247, 242, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 600; }
+
+        /* --- HERO: THE BREATHING ROOM --- */
+        .hero {
+            padding: 100px 0;
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px;
+            align-items: center;
+        }
+        .hero h1 { font-size: clamp(3.5rem, 8vw, 5.5rem); line-height: 1; margin-bottom: 30px; }
+        .hero p { font-size: 1.1rem; margin-bottom: 40px; color: var(--sage); max-width: 400px; }
+
+        .img-mask {
+            border-radius: 300px 300px 0 0;
+            overflow: hidden;
+            height: 600px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .img-mask img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- INTERACTIVE SLIDER (UX) --- */
+        .slider-section { padding: 100px 0; background: #eceae4; border-radius: 60px 60px 0 0; }
+        .comparison-container {
+            position: relative; width: 100%; height: 500px;
+            border-radius: 30px; overflow: hidden;
+        }
+        .img-comp-overlay {
+            position: absolute; width: 50%; height: 100%; top: 0; left: 0;
+            background: url('https://images.unsplash.com/photo-1584622781564-1d9876a1e742?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover; border-right: 4px solid var(--bone);
+            z-index: 2;
+        }
+        .img-comp-base {
+            width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1527352733447-261891162984?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+        }
+        .slider-handle {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 50px; height: 50px; background: var(--text); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            z-index: 3; cursor: ew-resize; pointer-events: none;
+        }
+
+        /* --- SERVICE CARDS --- */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .card {
+            background: white; padding: 50px; border-radius: 40px;
+            transition: var(--transition); border: 1px solid transparent;
+        }
+        .card:hover { border-color: var(--sage); transform: translateY(-10px); }
+        .card i { font-size: 2rem; color: var(--clay); margin-bottom: 25px; }
+
+        /* --- BOOKING: THE SLIDER (UX) --- */
+        .booking-ui {
+            background: var(--text); color: var(--bone); padding: 80px;
+            border-radius: 40px; margin-top: 100px;
+        }
+        .time-slider { width: 100%; margin: 40px 0; -webkit-appearance: none; background: #444; height: 4px; border-radius: 2px; }
+        .time-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; background: var(--clay); border-radius: 50%; cursor: pointer; }
+
+        .btn {
+            padding: 20px 40px; border-radius: 100px; text-decoration: none;
+            font-weight: 600; transition: 0.3s; display: inline-block; border: none;
+        }
+        .btn-sage { background: var(--sage); color: white; }
+        .btn-sage:hover { background: #5d6d5f; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .hero, .grid { grid-template-columns: 1fr; }
+            .img-mask { display: none; }
+            .booking-ui { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="brand" style="font-size: 1.5rem;">LUMINA</div>
+            <div class="nav-links">
+                <a href="#services">The Method</a>
+                <a href="#booking" class="btn btn-sage" style="padding: 10px 25px; font-size: 0.8rem;">Book Clean</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="reveal">
+                <h1>HOME AS A <span>SANCTUARY.</span></h1>
+                <p>Non-toxic, botanical-based cleaning for the conscious home. We don't just clear dust; we restore peace.</p>
+                <a href="#booking" class="btn btn-sage">Explore Services</a>
+            </div>
+            <div class="img-mask reveal">
+                <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=800&q=80" alt="Clean Home">
+            </div>
+        </section>
+    </div>
+
+    <section class="slider-section">
+        <div class="container">
+            <h2 style="margin-bottom: 40px; text-align: center;">THE LUMINA EFFECT</h2>
+            <div class="comparison-container" id="comparison">
+                <div class="img-comp-base"></div>
+                <div class="img-comp-overlay" id="overlay"></div>
+                <div class="slider-handle" id="handle"><i class="fas fa-arrows-left-right"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="services" class="padding" style="padding: 100px 0;">
+            <div class="grid">
+                <div class="card reveal">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Botanical Clean</h3>
+                    <p>Essential oil-based products that leave your home smelling like a garden, not a lab.</p>
+                </div>
+                <div class="card reveal">
+                    <div style="color: var(--clay); font-size: 2rem; margin-bottom: 25px;"><i class="fas fa-feather"></i></div>
+                    <h3>The Light Touch</h3>
+                    <p>Daily maintenance to keep the atmosphere airy and the surfaces pristine.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-moon"></i>
+                    <h3>Deep Rest</h3>
+                    <p>Our signature heavy clean. Sanitizing every corner while you focus on life.</p>
+                </div>
+            </div>
+
+            <div id="booking" class="booking-ui reveal">
+                <div style="max-width: 600px;">
+                    <h2 style="font-size: 3rem; margin-bottom: 20px;">INVEST IN TIME</h2>
+                    <p style="opacity: 0.7;">Slide to select the duration of focus. Our experts prioritize based on your needs.</p>
+                    
+                    <input type="range" min="2" max="8" value="3" class="time-slider" id="hourSlider">
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="font-size: 4rem; font-weight: 300;" id="hourDisplay">3</span>
+                            <span style="font-family: 'DM Serif Display'; font-size: 1.5rem;">HOURS</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="opacity: 0.5;">Estimated Total</p>
+                            <h3 id="priceDisplay" style="color: var(--clay); font-size: 2rem;">$105</h3>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-sage" style="width: 100%; margin-top: 40px;">Request Appointment</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer style="padding: 80px 0; text-align: center; border-top: 1px solid #ddd;">
+        <p style="font-family: 'DM Serif Display'; font-size: 1.5rem; margin-bottom: 20px;">LUMINA</p>
+        <p style="color: var(--sage); font-size: 0.9rem;">&copy; 2025 LUMINA BOTANICAL CARE. NATURALLY PURE.</p>
+    </footer>
+
+    <script>
+        // Reveal Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Comparison Slider Logic
+        const comparison = document.getElementById('comparison');
+        const overlay = document.getElementById('overlay');
+        const handle = document.getElementById('handle');
+
+        comparison.addEventListener('mousemove', (e) => {
+            let rect = comparison.getBoundingClientRect();
+            let x = e.pageX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            
+            let percent = (x / rect.width) * 100;
+            overlay.style.width = percent + '%';
+            handle.style.left = percent + '%';
+        });
+
+        // Hour/Price Logic
+        const hourSlider = document.getElementById('hourSlider');
+        const hourDisplay = document.getElementById('hourDisplay');
+        const priceDisplay = document.getElementById('priceDisplay');
+
+        hourSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            hourDisplay.innerText = val;
+            priceDisplay.innerText = `$${val * 35}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR | Modern Culinary Art</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0D0D0D;
+            --surface: #161616;
+            --accent: #C5A059; /* Champagne Gold */
+            --text: #FFFFFF;
+            --text-dim: #A0A0A0;
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 40px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: 0.4s;
+        }
+        nav.scrolled { background: var(--bg); padding: 20px 6%; border-bottom: 1px solid #222; }
+        .logo { font-size: 1.8rem; letter-spacing: 4px; font-weight: 700; }
+        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-left: 40px; opacity: 0.6; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--accent); }
+
+        /* --- HERO: IMMERSIVE --- */
+        .hero {
+            height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&q=80') center/cover;
+            background-attachment: fixed;
+        }
+        .hero-content h1 { font-size: clamp(4rem, 12vw, 8rem); margin-bottom: 10px; }
+        .hero-content p { font-style: italic; color: var(--accent); font-size: 1.2rem; }
+
+        /* --- MENU SECTION: INTERACTIVE --- */
+        .section { padding: 120px 10%; }
+        .menu-container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        
+        .menu-category { margin-bottom: 60px; }
+        .menu-category h2 { font-size: 2.5rem; color: var(--accent); margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        
+        .menu-item { 
+            display: flex; justify-content: space-between; align-items: baseline; 
+            margin-bottom: 25px; cursor: pointer; transition: 0.3s;
+            position: relative;
+        }
+        .menu-item:hover { transform: translateX(10px); color: var(--accent); }
+        .menu-item h3 { font-size: 1.2rem; font-weight: 300; }
+        .menu-item .dots { flex: 1; border-bottom: 1px dotted #333; margin: 0 15px; }
+        
+        .menu-image-preview {
+            position: sticky; top: 150px;
+            width: 100%; height: 500px;
+            border-radius: 10px; overflow: hidden;
+            border: 1px solid #222;
+        }
+        .menu-image-preview img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+
+        /* --- RESERVATIONS BENTO --- */
+        .bento-reserve {
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;
+            background: var(--surface); padding: 60px; border-radius: 30px;
+        }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.7rem; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; }
+        input, select { 
+            width: 100%; background: transparent; border: 1px solid #333; 
+            padding: 15px; color: white; border-radius: 5px; 
+        }
+        .btn-reserve {
+            background: var(--accent); color: black; padding: 20px 40px;
+            border: none; width: 100%; font-weight: 700; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+        }
+        .btn-reserve:hover { background: #E5C07B; letter-spacing: 4px; }
+
+        /* --- REVEAL ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .menu-container { grid-template-columns: 1fr; }
+            .menu-image-preview { display: none; }
+            .bento-reserve { grid-template-columns: 1fr; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="logo">NOIR</div>
+        <div class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#about">Story</a>
+            <a href="#reserve">Reservations</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p>Elegance in every bite</p>
+            <h1>THE ART OF<span> FLAVOR</span></h1>
+            <div style="margin-top: 30px;">
+                <i class="fa-solid fa-chevron-down" style="color: var(--accent); font-size: 2rem;"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section">
+        <div class="menu-container">
+            <div class="menu-list">
+                <div class="menu-category reveal">
+                    <h2>Entrées</h2>
+                    <div class="menu-item" onmouseover="changeImage('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80')">
+                        <h3>Hand-Dived Scallops</h3>
+                        <div class="dots"></div>
+                        <span>$24</span>
+                    </div>
+                    <div class="menu-item" onmouseover="changeImage('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80')">
+                        <h3>Wild Salmon Crudo</h3>
+                        <div class="dots"></div>
+                        <span>$21</span>
+                    </div>
+                    <div class="menu-item" onmouseover="changeImage('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80')">
+                        <h3>Truffle Wagyu Carpaccio</h3>
+                        <div class="dots"></div>
+                        <span>$28</span>
+                    </div>
+                </div>
+
+                <div class="menu-category reveal">
+                    <h2>Main Courses</h2>
+                    <div class="menu-item" onmouseover="changeImage('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80')">
+                        <h3>Prime Ribeye 45 Day</h3>
+                        <div class="dots"></div>
+                        <span>$52</span>
+                    </div>
+                    <div class="menu-item" onmouseover="changeImage('https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80')">
+                        <h3>Roasted Black Cod</h3>
+                        <div class="dots"></div>
+                        <span>$46</span>
+                    </div>
+                    <div class="menu-item" onmouseover="changeImage('https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=800&q=80')">
+                        <h3>Saffron Lobster Pasta</h3>
+                        <div class="dots"></div>
+                        <span>$39</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-image-preview reveal">
+                <img id="main-preview" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Dish Preview">
+            </div>
+        </div>
+    </section>
+
+    <section id="reserve" class="section">
+        <div class="bento-reserve reveal">
+            <div>
+                <h2 style="font-size: 3rem; margin-bottom: 20px;">Reserve a Table</h2>
+                <p style="color: var(--text-dim); margin-bottom: 40px;">Join us for an unforgettable evening. For parties larger than 6, please contact us directly.</p>
+                <form>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="input-group">
+                            <label>DATE</label>
+                            <input type="date">
+                        </div>
+                        <div class="input-group">
+                            <label>TIME</label>
+                            <select>
+                                <option>18:30</option>
+                                <option>19:00</option>
+                                <option>20:30</option>
+                                <option>21:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>GUESTS</label>
+                        <select>
+                            <option>2 People</option>
+                            <option>4 People</option>
+                            <option>6 People</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn-reserve">Confirm Availability</button>
+                </form>
+            </div>
+            <div style="background: url('https://images.unsplash.com/photo-1550966841-3eeec692994e?auto=format&fit=crop&w=800&q=80') center/cover; border-radius: 20px;"></div>
+        </div>
+    </section>
+
+    <footer style="padding: 100px 10% 50px; text-align: center; border-top: 1px solid #111;">
+        <div class="logo" style="margin-bottom: 30px;">NOIR</div>
+        <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 40px;">1245 AV. MONTAIGNE, PARIS • +33 1 23 45 67 89</p>
+        <div style="display: flex; justify-content: center; gap: 40px; font-size: 1.2rem; color: var(--accent);">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-yelp"></i>
+        </div>
+        <p style="margin-top: 50px; opacity: 0.3; font-size: 0.7rem;">© 2025 NOIR CULINARY GROUP. EXCELLENCE DEFINED.</p>
+    </footer>
+
+    <script>
+        // Change menu preview image
+        function changeImage(src) {
+            const img = document.getElementById('main-preview');
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = src;
+                img.style.opacity = '1';
+            }, 200);
+        }
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+    </script>
+</body>
+</html>
