@@ -1,286 +1,909 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARBON-GLOSS | Ultra Detailing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #CCFF00; /* Electric Lime */
-            --bg: #0A0B0E;
-            --surface: #14161B;
-            --glass: rgba(255, 255, 255, 0.05);
-            --text: #FFFFFF;
-            --text-dim: #70757E;
-            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARBON-GLOSS | Ultra Detailing</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(204, 255, 0, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* --- CUSTOM CURSOR --- */
-        #cursor {
-            width: 20px; height: 20px;
-            background: var(--primary);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            mix-blend-mode: difference;
-        }
+  <style>
+    :root {
+      --primary: #CCFF00; /* Electric Lime */
+      --aqua: #00F2FF;
+      --bg: #0A0B0E;
+      --surface: #14161B;
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass2: rgba(255, 255, 255, 0.08);
+      --text: #FFFFFF;
+      --text-dim: #70757E;
+      --stroke: rgba(255,255,255,0.12);
+      --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      --shadow: 0 22px 55px rgba(0,0,0,.55);
+      --radius: 30px;
+      --radius2: 40px;
+      --max: 1200px;
+    }
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 30px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1200px;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            padding: 20px 40px;
-            border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-        }
-        .logo { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; }
-        .logo span { color: var(--primary); }
-        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-left: 30px; opacity: 0.6; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; color: var(--primary); }
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(204, 255, 0, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+    }
 
-        /* --- HERO: LIQUID FLOW --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 5%;
-        }
-        .hero-content h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(3rem, 12vw, 8rem);
-            line-height: 0.9;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        .hero-content h1 span {
-            color: transparent;
-            -webkit-text-stroke: 1px var(--primary);
-        }
-        .hero-sub {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
+    /* --- CUSTOM CURSOR --- */
+    #cursor {
+      width: 20px; height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease, background .15s ease;
+      mix-blend-mode: difference;
+    }
 
-        /* --- INTERACTIVE PACKAGE CARDS --- */
-        .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed;
+      top: 26px; left: 50%; transform: translateX(-50%);
+      width: 92%; max-width: var(--max);
+      background: rgba(255,255,255,0.045);
+      backdrop-filter: blur(20px);
+      padding: 18px 32px;
+      border-radius: 100px;
+      border: 1px solid var(--stroke);
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+    .logo { font-family: 'Syncopate', sans-serif; font-size: 1.1rem; letter-spacing: 2px; display:flex; align-items:center; gap:14px; }
+    .logo .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 8px rgba(204,255,0,.10);
+      transform: translateY(-1px);
+    }
+    .logo span { color: var(--primary); }
+    .nav-links { display:flex; align-items:center; gap:26px; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      opacity: 0.62;
+      transition: 0.3s;
+      letter-spacing: 1px;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--primary); }
 
-        .package-card {
-            background: var(--surface);
-            padding: 50px 40px;
-            border-radius: 40px;
-            border: 1px solid var(--glass);
-            position: relative;
-            transition: var(--transition);
-            overflow: hidden;
-        }
-        .package-card:hover {
-            transform: translateY(-20px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        .package-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(204, 255, 0, 0.1) 0%, transparent 70%);
-            opacity: 0; transition: 0.5s;
-        }
-        .package-card:hover::before { opacity: 1; }
+    /* --- BUTTONS --- */
+    .btn {
+      padding: 18px 34px;
+      border-radius: 100px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      transition: var(--transition);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.26); }
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+      border-color: rgba(204,255,0,.55);
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 34px rgba(204,255,0,.25); }
+    .btn-ghost:hover { box-shadow: 0 0 26px rgba(255,255,255,.08); }
 
-        .package-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.5rem; margin-bottom: 20px; }
-        .price { font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; }
-        .features { list-style: none; color: var(--text-dim); margin-bottom: 40px; }
-        .features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .features i { color: var(--primary); font-size: 0.8rem; }
+    /* --- HERO (IMPROVED + LENGTHY) --- */
+    .hero {
+      min-height: 100vh;
+      padding: 130px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* --- BUTTONS --- */
-        .btn {
-            padding: 20px 40px;
-            border-radius: 100px;
-            font-weight: 800;
-            text-transform: uppercase;
-            text-decoration: none;
-            display: inline-block;
-            transition: var(--transition);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-        }
-        .btn-primary { background: var(--primary); color: black; }
-        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary); }
+    /* Hero cinematic background */
+    .hero::before{
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(1000px 600px at 10% 10%, rgba(204,255,0,.10), transparent 55%),
+        radial-gradient(900px 650px at 92% 20%, rgba(0,242,255,.08), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
+      z-index:0;
+    }
+    .hero-bg{
+      position:absolute; inset:-40px;
+      background-image:
+        url("https://images.unsplash.com/photo-1542365887-8d7ef8a4f4f2?auto=format&fit=crop&w=2200&q=80");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05);
+      opacity: .18;
+      transform: scale(1.06);
+      z-index:-1;
+    }
 
-        /* --- THE "TECHNOLOGY" BENTO --- */
-        .bento-box {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 20px;
-            margin-top: 50px;
-        }
-        .bento-item {
-            background: var(--glass);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid var(--glass);
-        }
-        .bento-big { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+    .hero-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 34px;
+      align-items: center;
+    }
 
-        /* --- ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(50px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: .72rem;
+      color: rgba(255,255,255,0.86);
+      width: fit-content;
+      backdrop-filter: blur(14px);
+    }
+    .kicker i{
+      width: 26px; height: 26px;
+      border-radius: 10px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(204,255,0,.10);
+      border: 1px solid rgba(204,255,0,.22);
+      color: var(--primary);
+      font-style: normal;
+      font-size:.9rem;
+    }
 
-        @media (max-width: 900px) {
-            .grid-3, .bento-box { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 3.5rem; }
-            nav { padding: 15px 25px; }
-            .nav-links { display: none; }
-        }
-    </style>
+    .hero-title{
+      margin-top: 14px;
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(3rem, 6.7vw, 6.9rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .hero-title span{
+      color: transparent;
+      -webkit-text-stroke: 1px var(--primary);
+      text-shadow: 0 0 30px rgba(204,255,0,.08);
+    }
+    .hero-sub{
+      margin-top: 18px;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.66);
+      max-width: 62ch;
+      line-height: 1.75;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap: 14px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+
+    .hero-chips{
+      margin-top: 22px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.78);
+      font-weight: 800;
+      font-size: .78rem;
+      backdrop-filter: blur(14px);
+    }
+    .chip b{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 0 7px rgba(255,255,255,.10);
+    }
+    .chip.primary b{ background: var(--primary); box-shadow: 0 0 0 7px rgba(204,255,0,.12); }
+    .chip.aqua b{ background: var(--aqua); box-shadow: 0 0 0 7px rgba(0,242,255,.10); }
+
+    /* Right hero card */
+    .hero-card{
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius2);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      overflow:hidden;
+      position: relative;
+    }
+    .hero-card::before{
+      content:'';
+      position:absolute; inset:-50%;
+      background: radial-gradient(circle, rgba(204,255,0,.12), transparent 65%);
+      opacity: .45;
+      transform: rotate(12deg);
+    }
+    .hero-card-inner{ position:relative; z-index:2; }
+
+    .card-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .badge{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.30);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 900;
+      font-size: .72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.86);
+    }
+    .badge .spark{
+      width: 24px; height: 24px;
+      border-radius: 10px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(204,255,0,.12);
+      border: 1px solid rgba(204,255,0,.22);
+      color: var(--primary);
+      font-size:.9rem;
+    }
+
+    .mini-metric{
+      text-align:right;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+    }
+    .mini-metric small{ display:block; margin-top:4px; color: rgba(255,255,255,0.55); font-weight:800; letter-spacing:.6px; }
+
+    .preview{
+      border-radius: 28px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.20);
+      position: relative;
+      height: 260px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+    .preview .img{
+      position:absolute; inset:0;
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.06) contrast(1.06);
+      transform: scale(1.02);
+    }
+    .preview::after{
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.62));
+      pointer-events:none;
+    }
+    .preview-bar{
+      position:absolute;
+      left: 12px; right: 12px; bottom: 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap: 10px;
+      z-index:2;
+    }
+    .preview-bar strong{
+      font-size: .95rem;
+      letter-spacing:.8px;
+    }
+    .preview-bar small{
+      display:block;
+      margin-top: 4px;
+      color: rgba(255,255,255,0.60);
+      font-weight: 800;
+      font-size: .78rem;
+      line-height: 1.4;
+    }
+
+    .stats{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .stat{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      padding: 12px;
+      backdrop-filter: blur(16px);
+    }
+    .stat .n{
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing:-.2px;
+    }
+    .stat .t{
+      margin-top: 4px;
+      font-size: .78rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.62);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* scroll indicator */
+    .scroll-indicator{
+      position:absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 22px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 10px;
+      z-index: 3;
+      opacity: .85;
+    }
+    .scroll-indicator span{
+      font-size: .72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      font-weight: 900;
+    }
+    .mouse{
+      width: 26px; height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(255,255,255,0.04);
+      position: relative;
+      backdrop-filter: blur(16px);
+    }
+    .mouse::after{
+      content:'';
+      position:absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 10px;
+      width: 4px; height: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+      animation: wheel 1.2s infinite;
+      opacity: .9;
+    }
+    @keyframes wheel{
+      0%{transform: translateX(-50%) translateY(0); opacity:.9;}
+      70%{transform: translateX(-50%) translateY(10px); opacity:.25;}
+      100%{transform: translateX(-50%) translateY(0); opacity:.9;}
+    }
+
+    /* --- SECTION + CARDS --- */
+    .section { padding: 95px 5%; max-width: 1400px; margin: 0 auto; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+    .package-card {
+      background: var(--surface);
+      padding: 48px 40px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      transition: var(--transition);
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+    }
+    .package-card:hover {
+      transform: translateY(-18px);
+      border-color: rgba(204,255,0,.55);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.50);
+    }
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(204, 255, 0, 0.10) 0%, transparent 70%);
+      opacity: 0; transition: 0.5s;
+    }
+    .package-card:hover::before { opacity: 1; }
+
+    .package-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.5rem; margin-bottom: 16px; }
+    .price { font-size: 3rem; font-weight: 900; color: var(--primary); margin-bottom: 22px; }
+    .features { list-style: none; color: var(--text-dim); margin-bottom: 34px; }
+    .features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .features i { color: var(--primary); font-size: 0.8rem; }
+
+    /* --- THE "TECHNOLOGY" BENTO --- */
+    .bento-box {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+      margin-top: 50px;
+    }
+    .bento-item {
+      background: rgba(255,255,255,0.04);
+      padding: 40px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 45px rgba(0,0,0,.22);
+    }
+    .bento-big { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+
+    /* --- FOOTER (PROFESSIONAL) --- */
+    footer{
+      margin-top: 40px;
+      padding: 80px 5% 26px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(900px 520px at 10% 10%, rgba(204,255,0,.06), transparent 60%),
+        radial-gradient(900px 520px at 90% 30%, rgba(0,242,255,.05), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+    }
+    .footer-wrap{ max-width: var(--max); margin: 0 auto; }
+    .footer-top{
+      display:grid;
+      grid-template-columns: 1.2fr .9fr .9fr 1.1fr;
+      gap: 22px;
+      align-items:start;
+    }
+    .footer-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.035);
+      padding: 20px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 55px rgba(0,0,0,.30);
+    }
+    .footer-brand{
+      display:flex; align-items:center; gap:14px;
+      font-family:'Syncopate',sans-serif;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+    .footer-brand .mark{
+      width: 36px; height: 36px;
+      border-radius: 14px;
+      background: rgba(204,255,0,.12);
+      border: 1px solid rgba(204,255,0,.22);
+      display:flex; align-items:center; justify-content:center;
+      color: var(--primary);
+      box-shadow: 0 0 0 10px rgba(204,255,0,.06);
+    }
+    .footer-brand span{ color: var(--primary); }
+    .footer-p{
+      color: rgba(255,255,255,.58);
+      font-size: .92rem;
+      line-height: 1.75;
+      font-weight: 650;
+    }
+    .footer-title{
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-size: .78rem;
+      color: rgba(255,255,255,.82);
+      margin-bottom: 12px;
+    }
+    .footer-links{
+      display:grid;
+      gap: 10px;
+    }
+    .footer-links a{
+      color: rgba(255,255,255,.62);
+      font-weight: 800;
+      text-decoration:none;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      transition: .25s;
+      font-size: .92rem;
+    }
+    .footer-links a i{
+      color: rgba(204,255,0,.75);
+      font-size:.8rem;
+      width: 18px;
+      text-align:center;
+    }
+    .footer-links a:hover{ color: var(--primary); transform: translateX(2px); }
+
+    .contact-list{ display:grid; gap: 10px; color: rgba(255,255,255,.62); font-weight: 750; }
+    .contact-item{ display:flex; gap:10px; align-items:flex-start; }
+    .contact-item i{ color: rgba(204,255,0,.80); margin-top:2px; width: 18px; text-align:center; }
+
+    .newsletter{
+      display:flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .newsletter input{
+      flex: 1 1 220px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
+      outline:none;
+      font-weight: 800;
+      cursor: none;
+    }
+    .newsletter input::placeholder{ color: rgba(255,255,255,.35); }
+    .socials{
+      display:flex;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .socials a{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      display:flex; align-items:center; justify-content:center;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.86);
+      transition:.25s;
+      text-decoration:none;
+    }
+    .socials a:hover{
+      transform: translateY(-2px);
+      border-color: rgba(204,255,0,.45);
+      box-shadow: 0 0 30px rgba(204,255,0,.10);
+      color: var(--primary);
+    }
+
+    .footer-bottom{
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display:flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,.42);
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing:.6px;
+    }
+    .footer-bottom a{ color: rgba(255,255,255,.50); text-decoration:none; }
+    .footer-bottom a:hover{ color: var(--primary); }
+
+    /* --- REVEAL --- */
+    .reveal { opacity: 0; transform: translateY(50px); transition: var(--transition); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1020px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .stats{ grid-template-columns: repeat(3, 1fr); }
+      .footer-top{ grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .grid-3, .bento-box { grid-template-columns: 1fr; }
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .stats{ grid-template-columns: 1fr; }
+      .footer-top{ grid-template-columns: 1fr; }
+      .preview{ height: 230px; }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div id="cursor"></div>
+  <div id="cursor"></div>
 
-    <nav>
-        <div class="logo">CARBON<span>GLOSS</span></div>
-        <div class="nav-links">
-            <a href="#packages">Packages</a>
-            <a href="#tech">Technology</a>
-            <a href="#book" class="btn btn-primary" style="padding: 10px 25px;">Book Session</a>
+  <nav>
+    <div class="logo">
+      CARBON<span>GLOSS</span>
+      <span class="dot" aria-hidden="true"></span>
+    </div>
+    <div class="nav-links">
+      <a href="#packages">Packages</a>
+      <a href="#tech">Technology</a>
+      <a href="#book" class="btn btn-primary" style="padding: 11px 24px;">Book Session</a>
+    </div>
+  </nav>
+
+  <!-- IMPROVED HERO (LENGTHY + PROFESSIONAL) -->
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="kicker reveal"><i>⚡</i> Private Studio • Appointment Only • Elite Finish</div>
+
+        <h1 class="hero-title reveal">BEYOND<br><span>THE SHINE</span></h1>
+
+        <p class="hero-sub reveal">
+          Aerospace-grade molecular protection for the automotive elite. We don’t just wash — we engineer a surface
+          that rejects contamination, resists UV fatigue, and keeps gloss locked in. Every touch is controlled,
+          every step is measured, every finish is intentional.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="#packages" class="btn btn-primary"><i class="fa-solid fa-shield-halved"></i> Select Your Armor</a>
+          <a href="#tech" class="btn btn-ghost"><i class="fa-solid fa-microscope"></i> Explore Technology</a>
         </div>
-    </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="reveal">BEYOND<br><span>THE SHINE</span></h1>
-            <p class="hero-sub reveal">Aerospace-grade molecular protection for the automotive elite. We don't just wash; we preserve the soul of your machine.</p>
-            <div class="reveal">
-                <a href="#packages" class="btn btn-primary">Select Your Armor</a>
-            </div>
+        <div class="hero-chips reveal">
+          <span class="chip primary"><b></b> Graphene / Ceramic</span>
+          <span class="chip"><b></b> Zero-Swirl Protocol</span>
+          <span class="chip aqua"><b></b> UV + Chemical Resistance</span>
+          <span class="chip"><b></b> Interior Ozone Purity</span>
         </div>
-    </section>
+      </div>
 
-    <section id="packages" class="section">
-        <div style="text-align: center; margin-bottom: 60px;">
-            <h2 style="font-family: 'Syncopate'; font-size: 2.5rem;">DETAILING SYSTEMS</h2>
+      <div class="hero-card reveal" id="book">
+        <div class="hero-card-inner">
+          <div class="card-top">
+            <div class="badge"><span class="spark">★</span> Most Booked: LEVEL 02</div>
+            <div class="mini-metric">
+              4.9/5
+              <small>Customer Rating</small>
+            </div>
+          </div>
+
+          <div class="preview">
+            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80');"></div>
+            <div class="preview-bar">
+              <div>
+                <strong>Carbon Finish</strong>
+                <small>Graphene coat + paint decon + correction-ready prep.</small>
+              </div>
+              <a href="#packages" class="btn btn-primary" style="padding:12px 18px; font-size:.72rem;">Book</a>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="n">1–2h</div>
+              <div class="t">Express Detail</div>
+            </div>
+            <div class="stat">
+              <div class="n">12m+</div>
+              <div class="t">Protection</div>
+            </div>
+            <div class="stat">
+              <div class="n">0%</div>
+              <div class="t">Brushes Used</div>
+            </div>
+          </div>
         </div>
-        <div class="grid-3">
-            <div class="package-card reveal">
-                <h3>LEVEL 01</h3>
-                <div class="price">$85</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-bolt"></i> Snow Foam Decon</li>
-                    <li><i class="fa-solid fa-bolt"></i> Hand Dry (Air Flow)</li>
-                    <li><i class="fa-solid fa-bolt"></i> Silica Spray Sealant</li>
-                </ul>
-                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Choose</a>
-            </div>
-            <div class="package-card reveal" style="border-color: var(--primary);">
-                <div style="position: absolute; top: 20px; right: 20px; background: var(--primary); color: black; padding: 5px 15px; border-radius: 50px; font-size: 0.6rem; font-weight: 900;">BEST SELLER</div>
-                <h3>LEVEL 02</h3>
-                <div class="price">$195</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-bolt"></i> Iron Fallout Removal</li>
-                    <li><i class="fa-solid fa-bolt"></i> Clay Bar Treatment</li>
-                    <li><i class="fa-solid fa-bolt"></i> 1-Year Graphene Coat</li>
-                </ul>
-                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Choose</a>
-            </div>
-            <div class="package-card reveal">
-                <h3>ULTIMATE</h3>
-                <div class="price">$450</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-bolt"></i> Full Paint Correction</li>
-                    <li><i class="fa-solid fa-bolt"></i> 9H Ceramic Shield</li>
-                    <li><i class="fa-solid fa-bolt"></i> Engine Bay Detail</li>
-                </ul>
-                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Choose</a>
-            </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>SCROLL</span>
+      <div class="mouse"></div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages" class="section">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-family: 'Syncopate'; font-size: 2.5rem;">DETAILING SYSTEMS</h2>
+      <p style="margin-top:12px; color: rgba(255,255,255,.52); max-width: 70ch; margin-inline:auto; line-height:1.7;">
+        Choose your level of protection — from fast enhancement to full correction + ceramic shielding.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <div class="package-card reveal">
+        <h3>LEVEL 01</h3>
+        <div class="price">$85</div>
+        <ul class="features">
+          <li><i class="fa-solid fa-bolt"></i> Snow Foam Decon</li>
+          <li><i class="fa-solid fa-bolt"></i> Hand Dry (Air Flow)</li>
+          <li><i class="fa-solid fa-bolt"></i> Silica Spray Sealant</li>
+          <li><i class="fa-solid fa-bolt"></i> Tire + Trim Dressing</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%; text-align:center;">Choose</a>
+      </div>
+
+      <div class="package-card reveal" style="border-color: rgba(204,255,0,.55);">
+        <div style="position:absolute; top:20px; right:20px; background: var(--primary); color:black; padding:6px 14px; border-radius:50px; font-size:0.62rem; font-weight:950; letter-spacing:1px;">
+          BEST SELLER
         </div>
-    </section>
+        <h3>LEVEL 02</h3>
+        <div class="price">$195</div>
+        <ul class="features">
+          <li><i class="fa-solid fa-bolt"></i> Iron Fallout Removal</li>
+          <li><i class="fa-solid fa-bolt"></i> Clay Bar Treatment</li>
+          <li><i class="fa-solid fa-bolt"></i> 1-Year Graphene Coat</li>
+          <li><i class="fa-solid fa-bolt"></i> Multi-light Inspection</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%; text-align:center;">Choose</a>
+      </div>
 
-    <section id="tech" class="section">
-        <div class="bento-box">
-            <div class="bento-item bento-big reveal">
-                <h2 style="font-family: 'Syncopate'; font-size: 2rem; margin-bottom: 20px;">HYDROPHOBIC<br>ENGINEERING</h2>
-                <p style="color: var(--text-dim);">Our proprietary ceramic solution creates a permanent bond at the molecular level, rejecting water, dirt, and UV radiation instantly.</p>
-                <div style="margin-top: 40px; font-size: 3rem; color: var(--primary);">
-                    <i class="fa-solid fa-droplet-slash"></i>
-                </div>
-            </div>
-            <div class="bento-item reveal">
-                <h4>OZONE PURITY</h4>
-                <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 10px;">Eliminating odors and bacteria from the interior using medical-grade ozone generation.</p>
-            </div>
-            <div class="bento-item reveal">
-                <h4>LASER PRECISION</h4>
-                <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 10px;">Inspection under multi-spectrum lighting to ensure a zero-swirl finish.</p>
-            </div>
+      <div class="package-card reveal">
+        <h3>ULTIMATE</h3>
+        <div class="price">$450</div>
+        <ul class="features">
+          <li><i class="fa-solid fa-bolt"></i> Full Paint Correction</li>
+          <li><i class="fa-solid fa-bolt"></i> 9H Ceramic Shield</li>
+          <li><i class="fa-solid fa-bolt"></i> Engine Bay Detail</li>
+          <li><i class="fa-solid fa-bolt"></i> Interior Ozone Purity</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%; text-align:center;">Choose</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section id="tech" class="section">
+    <div class="bento-box">
+      <div class="bento-item bento-big reveal">
+        <h2 style="font-family:'Syncopate'; font-size:2rem; margin-bottom: 18px;">HYDROPHOBIC<br>ENGINEERING</h2>
+        <p style="color: rgba(255,255,255,.56); line-height: 1.75;">
+          Our proprietary ceramic / graphene solutions create a permanent molecular bond with the clear coat,
+          reducing friction and preventing contamination adhesion. Water, dust, and road film release instantly —
+          your vehicle stays cleaner longer and looks sharper under any light.
+        </p>
+        <div style="margin-top: 34px; font-size: 3rem; color: var(--primary);">
+          <i class="fa-solid fa-droplet-slash"></i>
         </div>
-    </section>
+      </div>
 
-    <footer style="padding: 100px 5% 50px; text-align: center; border-top: 1px solid var(--glass);">
-        <div class="logo" style="margin-bottom: 30px;">CARBON<span>GLOSS</span></div>
-        <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 40px;">PRIVATE STUDIO • BY APPOINTMENT ONLY</p>
-        <div style="display: flex; justify-content: center; gap: 40px; font-size: 1.2rem;">
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-tiktok"></i>
-            <i class="fab fa-youtube"></i>
+      <div class="bento-item reveal">
+        <h4 style="letter-spacing:1.5px; text-transform:uppercase;">OZONE PURITY</h4>
+        <p style="color: rgba(255,255,255,.56); font-size:0.95rem; margin-top: 10px; line-height:1.7;">
+          Eliminates odors and bacteria deep inside the cabin using medical-grade ozone generation.
+        </p>
+      </div>
+
+      <div class="bento-item reveal">
+        <h4 style="letter-spacing:1.5px; text-transform:uppercase;">LASER PRECISION</h4>
+        <p style="color: rgba(255,255,255,.56); font-size:0.95rem; margin-top: 10px; line-height:1.7;">
+          Multi-spectrum lighting ensures a true zero-swirl finish and consistent gloss across every panel.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (NEW + PROFESSIONAL) -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-top">
+
+        <div class="footer-card">
+          <div class="footer-brand">
+            <div class="mark"><i class="fa-solid fa-shield"></i></div>
+            CARBON<span>GLOSS</span>
+          </div>
+          <p class="footer-p">
+            Private detailing studio delivering controlled, high-gloss finishes with modern surface science.
+            Designed for owners who want perfection — not “good enough”.
+          </p>
+
+          <div class="socials" aria-label="Social links">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" aria-label="Google"><i class="fa-brands fa-google"></i></a>
+          </div>
         </div>
-        <p style="margin-top: 50px; opacity: 0.3; font-size: 0.7rem;">&copy; 2025 CARBON-GLOSS LABS. ALL PAINTWORK PROTECTED.</p>
-    </footer>
 
-    <script>
-        // Custom Cursor Logic
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        <div class="footer-card">
+          <div class="footer-title">Quick Links</div>
+          <div class="footer-links">
+            <a href="#top"><i class="fa-solid fa-angle-right"></i> Home</a>
+            <a href="#packages"><i class="fa-solid fa-angle-right"></i> Packages</a>
+            <a href="#tech"><i class="fa-solid fa-angle-right"></i> Technology</a>
+            <a href="#book"><i class="fa-solid fa-angle-right"></i> Book Session</a>
+          </div>
+        </div>
 
-        // Hover effect for cursor
-        document.querySelectorAll('a, .package-card').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(4)';
-                cursor.style.background = 'white';
-            });
-            item.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.background = 'var(--primary)';
-            });
-        });
+        <div class="footer-card">
+          <div class="footer-title">Studio Hours</div>
+          <div class="contact-list">
+            <div class="contact-item"><i class="fa-regular fa-clock"></i> Mon–Sat: 11:00 AM – 10:00 PM</div>
+            <div class="contact-item"><i class="fa-regular fa-calendar"></i> Sunday: By Appointment</div>
+            <div class="contact-item"><i class="fa-solid fa-lock"></i> Private Studio • Limited Slots</div>
+          </div>
 
-        // Reveal Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
+          <div style="margin-top:14px;" class="footer-title">Policies</div>
+          <div class="footer-links">
+            <a href="#"><i class="fa-solid fa-angle-right"></i> Terms & Conditions</a>
+            <a href="#"><i class="fa-solid fa-angle-right"></i> Privacy Policy</a>
+          </div>
+        </div>
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+        <div class="footer-card">
+          <div class="footer-title">Contact</div>
+          <div class="contact-list">
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Karachi • Pakistan (Update Address)</div>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i> +92 3XX XXXXXXX</div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i> booking@carbongloss.com</div>
+          </div>
+
+          <div style="margin-top:16px;" class="footer-title">Get Offers</div>
+          <p class="footer-p" style="margin-bottom:10px;">
+            Subscribe to receive limited-slot drops and protection upgrades.
+          </p>
+          <div class="newsletter">
+            <input type="email" placeholder="Enter your email" />
+            <a class="btn btn-primary" href="#" style="padding:14px 18px; font-size:.72rem;">Subscribe</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="year"></span> CARBON-GLOSS LABS • ALL PAINTWORK PROTECTED.</div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="#">Support</a>
+          <a href="#">Bookings</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Custom Cursor Logic
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // Hover effect for cursor
+    document.querySelectorAll('a, button, .package-card, .footer-card').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(4)';
+        cursor.style.background = 'white';
+      });
+      item.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        cursor.style.background = 'var(--primary)';
+      });
+    });
+
+    // Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>

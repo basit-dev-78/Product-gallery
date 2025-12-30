@@ -6,11 +6,11 @@
     <title>HYPERWASH | Elite Auto Detailing</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
             --primary: #00F2FF; /* Cyber Cyan */
-            --accent: #FFD700; /* Gold/Yellow */
+            --accent: #FFD700;  /* Gold */
             --bg-deep: #0A0A0B;
             --bg-card: #161618;
             --text-main: #FFFFFF;
@@ -21,7 +21,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-deep);
@@ -30,7 +30,7 @@
             overflow-x: hidden;
         }
 
-        h1, h2, .logo { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        h1, h2, .logo { text-decoration: none; font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
 
         /* --- NAVIGATION --- */
         nav {
@@ -59,7 +59,7 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
                         url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -73,6 +73,7 @@
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             padding: 18px 40px;
             border-radius: 4px;
             font-weight: 800;
@@ -82,21 +83,26 @@
             font-size: 0.8rem;
             transition: var(--transition);
             cursor: pointer;
+            border: none;
         }
         .btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 30px rgba(0, 242, 255, 0.3); }
         .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 242, 255, 0.5); }
 
-        /* --- SERVICES (THE GRID) --- */
+        /* --- SECTIONS --- */
         .section-padding { padding: 120px 0; }
         .section-header { margin-bottom: 80px; text-align: center; }
         .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
         .accent-line { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; }
 
+        /* --- SERVICES GRID --- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
+
+        .service-card, .price-card { width: 100%; min-width: 0; }
+
         .service-card {
             background: var(--bg-card);
             border: 1px solid rgba(255,255,255,0.05);
@@ -106,17 +112,22 @@
             transition: var(--transition);
         }
         .service-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 0;
-            background: var(--primary); transition: var(--transition); z-index: 0; opacity: 0.1;
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 0;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: 0; opacity: 0.1;
         }
         .service-card:hover::before { height: 100%; }
         .service-card:hover { border-color: var(--primary); transform: translateY(-10px); }
 
-        .icon-box { font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; position: relative; }
-        .service-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; margin-bottom: 20px; position: relative; }
-        .service-card p { color: var(--text-dim); position: relative; margin-bottom: 25px; }
+        .icon-box { font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; position: relative; z-index: 1; }
+        .service-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; margin-bottom: 20px; position: relative; z-index: 1; }
+        .service-card p { color: var(--text-dim); position: relative; margin-bottom: 25px; z-index: 1; }
+        .service-card a { position: relative; z-index: 1; }
 
-        /* --- BEFORE/AFTER SLIDER CONCEPT --- */
+        /* --- BEFORE/AFTER SHOWCASE --- */
         .shine-showcase {
             background: var(--bg-card);
             border-radius: 20px;
@@ -124,24 +135,58 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin-top: 50px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
-        .showcase-side { position: relative; height: 400px; }
-        .showcase-side img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 1s; }
-        .showcase-side.after img { filter: grayscale(0%) brightness(1.2); }
-        .label { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 5px 15px; font-size: 0.7rem; font-weight: 800; border: 1px solid var(--primary); }
+        .showcase-side { position: relative; height: 420px; }
+        .showcase-side img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.8s; }
+        .showcase-side.after img { filter: grayscale(0%) brightness(1.15) contrast(1.05); }
+
+        /* --- NEW BUTTONS --- */
+        .ba-btn{
+            position:absolute;
+            bottom: 18px;
+            left: 18px;
+            z-index: 5;
+            border: 1px solid rgba(0,242,255,0.40);
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        .ba-btn.after{
+            left: auto;
+            right: 18px;
+            border-color: rgba(255,215,0,0.45);
+        }
+        .ba-btn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0,242,255,0.20);
+        }
+        .ba-btn.after:hover{
+            box-shadow: 0 0 30px rgba(255,215,0,0.20);
+        }
 
         /* --- PRICING --- */
         .pricing-section { background: #000; }
         .price-card {
             background: var(--bg-deep);
             padding: 40px;
-            border-radius: 12px;
+            border-radius: 14px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
         }
-        .price-card.featured { border: 2px solid var(--primary); transform: scale(1.05); }
+        .price-card:hover { transform: translateY(-10px); border-color: rgba(0,242,255,0.55); }
+        .price-card.featured { border: 2px solid var(--primary); transform: translateY(-6px); }
         .price-amount { font-size: 3rem; font-weight: 800; margin: 20px 0; color: var(--primary); }
-        .price-card ul { margin: 30px 0; color: var(--text-dim); list-style: none; }
+        .price-card ul { margin: 30px 0; color: var(--text-dim); list-style: none; padding: 0; }
         .price-card li { margin-bottom: 15px; }
         .price-card li i { color: var(--primary); margin-right: 10px; }
 
@@ -149,34 +194,210 @@
         .booking-box {
             background: var(--bg-card);
             padding: 60px;
-            border-radius: 4px;
+            border-radius: 10px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.06);
         }
         .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
         input, select {
-            width: 100%; background: #222; border: 1px solid #333; padding: 15px; 
-            color: #fff; outline: none; transition: 0.3s;
+            width: 100%;
+            background: #222;
+            border: 1px solid #333;
+            padding: 15px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+            border-radius: 8px;
         }
-        input:focus { border-color: var(--primary); }
+        input:focus, select:focus { border-color: var(--primary); }
 
         /* --- FOOTER --- */
-        footer { padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.05); }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; }
-        .social-links a { color: var(--text-dim); margin-left: 20px; font-size: 1.2rem; }
-        .social-links a:hover { color: var(--primary); }
+        footer.hyper-footer{
+            padding: 90px 0 26px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            background:
+              radial-gradient(circle at 15% 15%, rgba(0,242,255,0.10), transparent 45%),
+              radial-gradient(circle at 85% 20%, rgba(255,215,0,0.08), transparent 50%),
+              linear-gradient(180deg, rgba(0,0,0,0.2), rgba(10,10,11,1));
+        }
+        .footer-grid{
+            display:grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 30px;
+            padding-bottom: 30px;
+        }
+        .footer-brand{
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 22px;
+        }
+        .brand-top{
+            display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
+            margin-bottom: 10px;
+        }
+        .brand-badge{
+            border: 1px solid rgba(0,242,255,0.35);
+            background: rgba(0,242,255,0.08);
+            color: var(--primary);
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        .brand-desc{
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+        .trust-row{
+            display:flex; gap:10px; flex-wrap:wrap;
+            margin-top: 16px;
+        }
+        .trust-pill{
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.75);
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+        }
+        .footer-title{
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+        .footer-links{
+            display:grid; gap: 10px;
+        }
+        .footer-links a{
+            color: var(--text-dim);
+            text-decoration:none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display:flex; align-items:center; gap:10px;
+            transition: var(--transition);
+        }
+        .footer-links a i{
+            color: rgba(0,242,255,0.7);
+            width: 16px;
+        }
+        .footer-links a:hover{
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+        .footer-contact{
+            display:grid; gap: 10px;
+            color: var(--text-dim);
+            font-size: 0.92rem;
+        }
+        .footer-contact div{
+            display:flex; gap:10px; align-items:flex-start;
+        }
+        .footer-contact i{
+            color: rgba(255,215,0,0.85);
+            margin-top: 3px;
+            width: 16px;
+        }
+        .subscribe{
+            margin-top: 14px;
+            display:flex;
+            gap: 10px;
+        }
+        .subscribe input{
+            flex: 1;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.10);
+            padding: 14px;
+            border-radius: 10px;
+            color: #fff;
+            outline:none;
+        }
+        .subscribe button{
+            background: var(--primary);
+            color: #000;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border:none;
+            transition: var(--transition);
+            min-width: 132px;
+        }
+        .subscribe button:hover{ transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,242,255,0.25); }
+        .footer-note{
+            color: rgba(255,255,255,0.45);
+            font-size: 0.82rem;
+            margin-top: 10px;
+        }
+        .footer-bottom{
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 18px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .footer-copy{
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+        }
+        .social-row{
+            display:flex; gap:10px; flex-wrap:wrap;
+        }
+        .social-btn{
+            width: 42px; height: 42px;
+            display:inline-flex;
+            justify-content:center;
+            align-items:center;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.75);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .social-btn:hover{
+            transform: translateY(-2px);
+            border-color: rgba(0,242,255,0.35);
+            color: var(--primary);
+        }
+        .mini-links{
+            display:flex; gap: 16px; flex-wrap:wrap;
+        }
+        .mini-links a{
+            color: rgba(255,255,255,0.4);
+            text-decoration:none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        .mini-links a:hover{ color: var(--primary); }
 
         /* --- ANIMATIONS --- */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        @media (max-width: 900px){
+            .footer-grid{ grid-template-columns: 1fr; }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .input-row { grid-template-columns: 1fr; }
             .shine-showcase { grid-template-columns: 1fr; }
             .hero h1 { font-size: 3rem; }
+            .service-card{ padding: 36px; }
+            .booking-box{ padding: 36px; }
         }
     </style>
 </head>
+
 <body>
 
     <nav id="navbar">
@@ -186,7 +407,7 @@
                 <a href="#services">Services</a>
                 <a href="#showcase">Results</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#booking" class="btn btn-primary" style="padding: 10px 20px;">Book Now</a>
+                <a style="color: #000;" href="#booking" class="btn btn-primary" style="padding: 10px 20px;">Book Now</a>
             </div>
         </div>
     </nav>
@@ -209,38 +430,43 @@
                 <h2>Our Detailing Lab</h2>
                 <div class="accent-line"></div>
             </div>
-            
+
             <div class="services-grid">
                 <div class="service-card reveal">
                     <div class="icon-box"><i class="fas fa-hand-sparkles"></i></div>
                     <h3>Signature Wash</h3>
                     <p>PH-neutral foam bath, two-bucket hand wash, and non-acidic wheel decontamination.</p>
-                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase;">Explore Service</a>
+                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
                 </div>
+
                 <div class="service-card reveal">
                     <div class="icon-box"><i class="fas fa-shield-virus"></i></div>
                     <h3>Ceramic Pro</h3>
                     <p>9H Nano-ceramic coating providing permanent paint protection and extreme hydrophobicity.</p>
-                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase;">Explore Service</a>
+                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
                 </div>
+
                 <div class="service-card reveal">
                     <div class="icon-box"><i class="fas fa-couch"></i></div>
                     <h3>Interior Spa</h3>
                     <p>Steam sanitization, leather conditioning, and deep extraction carpet cleaning.</p>
-                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase;">Explore Service</a>
+                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
                 </div>
             </div>
 
+            <!-- ✅ BEFORE / AFTER WITH BUTTONS -->
             <div id="showcase" class="shine-showcase reveal">
-                <div class="showcase-side">
-                    <div class="label">BEFORE</div>
-                    <img src="https://images.unsplash.com/photo-1507133351264-39817f3480cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dirty Car">
+                <div class="showcase-side" id="beforeSide">
+                    <button type="button" class="ba-btn" id="btnBefore">BEFORE DETAILING</button>
+                    <img src="https://images.unsplash.com/photo-1536796423601-e9733a86d257?w=1200&auto=format&fit=crop&q=60" alt="Before detailing">
                 </div>
-                <div class="showcase-side after">
-                    <div class="label">AFTER HYPERWASH</div>
-                    <img src="https://images.unsplash.com/photo-1507133351264-39817f3480cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Clean Car">
+
+                <div class="showcase-side after" id="afterSide">
+                    <button type="button" class="ba-btn after" id="btnAfter">AFTER DETAILING</button>
+                    <img  style="margin-top: -57px; height: 600px;" src="/assets/Gemini_Generated_Image_na1v2lna1v2lna1v.png" alt="After detailing">
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -250,6 +476,7 @@
                 <h2>Choose Your Level</h2>
                 <div class="accent-line"></div>
             </div>
+
             <div class="services-grid">
                 <div class="price-card reveal">
                     <h3>EXPRESS</h3>
@@ -259,8 +486,9 @@
                         <li><i class="fas fa-check"></i> Tire Shine</li>
                         <li><i class="fas fa-check"></i> Interior Vacuum</li>
                     </ul>
-                    <a href="#booking" class="btn" style="border:1px solid #333; width:100%;">Select</a>
+                    <a href="#booking" class="btn" style="border:1px solid #333; background:transparent; color:#fff; width:100%;">Select</a>
                 </div>
+
                 <div class="price-card featured reveal">
                     <h3>ULTIMATE</h3>
                     <div class="price-amount">$120</div>
@@ -272,6 +500,7 @@
                     </ul>
                     <a href="#booking" class="btn btn-primary" style="width:100%;">Most Popular</a>
                 </div>
+
                 <div class="price-card reveal">
                     <h3>EXOTIC</h3>
                     <div class="price-amount">$350</div>
@@ -280,7 +509,7 @@
                         <li><i class="fas fa-check"></i> Full Interior Detail</li>
                         <li><i class="fas fa-check"></i> Ceramic Coating</li>
                     </ul>
-                    <a href="#booking" class="btn" style="border:1px solid #333; width:100%;">Select</a>
+                    <a href="#booking" class="btn" style="border:1px solid #333; background:transparent; color:#fff; width:100%;">Select</a>
                 </div>
             </div>
         </div>
@@ -313,53 +542,140 @@
                         <input type="date" required>
                         <input type="tel" placeholder="Phone Number" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Confirm Booking Request</button>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Confirm Booking Request</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="logo">HYPER<span>WASH</span></div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+    <!-- ✅ FOOTER -->
+    <footer class="hyper-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <div class="brand-top">
+                        <div class="logo" style="font-size:1.25rem;">HYPER<span>WASH</span></div>
+                        <div class="brand-badge">ELITE DETAILING</div>
+                    </div>
+                    <div class="brand-desc">
+                        A high-performance detailing studio built for people who want their car to look unreal — every day.
+                        Ceramic protection, interior spa, and paint correction with lab-grade precision.
+                    </div>
+
+                    <div class="trust-row">
+                        <div class="trust-pill"><i class="fa-solid fa-bolt" style="color:var(--primary); margin-right:6px;"></i> Fast Turnaround</div>
+                        <div class="trust-pill"><i class="fa-solid fa-shield" style="color:var(--primary); margin-right:6px;"></i> Safe Products</div>
+                        <div class="trust-pill"><i class="fa-solid fa-star" style="color:var(--accent); margin-right:6px;"></i> Premium Finish</div>
+                    </div>
+
+                    <div class="subscribe">
+                        <input type="email" placeholder="Get offers & reminders (email)">
+                        <button type="button" id="joinBtn">Join</button>
+                    </div>
+                    <div class="footer-note">No spam — only discounts, new packages & VIP slots.</div>
+                </div>
+
+                <!-- Explore -->
+                <div>
+                    <div class="footer-title">Explore</div>
+                    <div class="footer-links">
+                        <a href="#services"><i class="fa-solid fa-grid-2"></i> Services</a>
+                        <a href="#showcase"><i class="fa-solid fa-wand-magic-sparkles"></i> Results</a>
+                        <a href="#pricing"><i class="fa-solid fa-tag"></i> Pricing</a>
+                        <a  style="color: #000;" href="#booking"><i class="fa-solid fa-calendar-check"></i> Book Now</a>
+                        <a href="#"><i class="fa-solid fa-gift"></i> Gift Cards</a>
+                    </div>
+                </div>
+
+                <!-- Packages -->
+                <div>
+                    <div class="footer-title">Packages</div>
+                    <div class="footer-links">
+                        <a href="#pricing"><i class="fa-solid fa-car"></i> Express Wash</a>
+                        <a href="#pricing"><i class="fa-solid fa-droplet"></i> Ultimate Detail</a>
+                        <a href="#pricing"><i class="fa-solid fa-shield-halved"></i> Ceramic Pro</a>
+                        <a href="#pricing"><i class="fa-solid fa-screwdriver-wrench"></i> Paint Correction</a>
+                        <a href="#pricing"><i class="fa-solid fa-sparkles"></i> Interior Spa</a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <div class="footer-title">Contact</div>
+                    <div class="footer-contact">
+                        <div><i class="fa-solid fa-location-dot"></i> 21 Detailing Ave, Downtown</div>
+                        <div><i class="fa-solid fa-phone"></i> (555) 888-0099</div>
+                        <div><i class="fa-solid fa-envelope"></i> bookings@hyperwash.com</div>
+                        <div><i class="fa-solid fa-clock"></i> Mon–Sat: 10AM–9PM</div>
+                    </div>
+                </div>
             </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2025 HYPERWASH ELITE DETAILING. ALL RIGHTS RESERVED.</div>
+
+                <div class="mini-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cancellation</a>
+                    <a href="#">Careers</a>
+                </div>
+
+                <div class="social-row">
+                    <a class="social-btn" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a class="social-btn" href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a class="social-btn" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a class="social-btn" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
         </div>
-        <p style="text-align:center; margin-top:40px; color:var(--text-dim); font-size:0.7rem;">&copy; 2025 HYPERWASH ELITE DETAILING. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        // 1. Scroll Reveal Animation
+        // Scroll Reveal
         const reveal = () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
+            document.querySelectorAll('.reveal').forEach(el => {
                 const windowHeight = window.innerHeight;
                 const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    el.classList.add('active');
-                }
+                if (elementTop < windowHeight - 100) el.classList.add('active');
             });
         };
         window.addEventListener('scroll', reveal);
         window.addEventListener('load', reveal);
 
-        // 2. Navbar Scroll Toggle
+        // Navbar Scroll Toggle
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
         });
 
-        // 3. Simple Image Hover Result Interaction
-        const afterSide = document.querySelector('.showcase-side.after');
-        afterSide.addEventListener('mouseover', () => {
-            afterSide.style.flex = "1.5";
-        });
-        afterSide.addEventListener('mouseout', () => {
-            afterSide.style.flex = "1";
+        // ✅ Before/After Buttons highlight
+        const beforeSide = document.getElementById("beforeSide");
+        const afterSide  = document.getElementById("afterSide");
+        const btnBefore  = document.getElementById("btnBefore");
+        const btnAfter   = document.getElementById("btnAfter");
+
+        function activateBefore(){
+            beforeSide.style.outline = "2px solid rgba(0,242,255,0.45)";
+            beforeSide.style.outlineOffset = "-2px";
+            afterSide.style.outline = "none";
+        }
+        function activateAfter(){
+            afterSide.style.outline = "2px solid rgba(255,215,0,0.35)";
+            afterSide.style.outlineOffset = "-2px";
+            beforeSide.style.outline = "none";
+        }
+        btnBefore.addEventListener("click", activateBefore);
+        btnAfter.addEventListener("click", activateAfter);
+        activateAfter();
+
+        // Footer subscribe demo
+        document.getElementById("joinBtn").addEventListener("click", () => {
+            alert("Thanks! You are subscribed for offers & VIP slots.");
         });
     </script>
 </body>
