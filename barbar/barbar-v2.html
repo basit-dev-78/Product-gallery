@@ -23,7 +23,12 @@
       --ring: 0 0 0 1px rgba(255,255,255,.08) inset;
     }
 
+    /* ✅ FIX: prevent mobile overflow / "scrollbar line" */
     *{margin:0;padding:0;box-sizing:border-box}
+    *::before,*::after{box-sizing:border-box}
+    html, body{width:100%; max-width:100%; overflow-x:hidden;}
+    body{position:relative;}
+
     html{scroll-behavior:smooth}
     body{
       font-family:'Inter',sans-serif;
@@ -34,8 +39,10 @@
         linear-gradient(180deg, #0b0b0c, var(--primary) 40%, #0b0b0c);
       color:var(--accent);
       line-height:1.6;
-      overflow-x:hidden;
+      overflow-x:hidden; /* extra safety */
     }
+
+    img, video, canvas, svg{max-width:100%; height:auto; display:block;}
 
     h1,h2,h3,h4{font-family:'Syne',sans-serif;text-transform:uppercase}
     a{color:inherit}
@@ -54,7 +61,8 @@
 
     /* --- NAVIGATION --- */
     nav{
-      position:fixed; top:0; left:0; width:100%;
+      position:fixed;
+      top:0; left:0; right:0; /* ✅ safer than width:100% on some mobiles */
       padding:28px 0;
       z-index:1000;
       transition:var(--transition);
@@ -66,7 +74,14 @@
       border-bottom:1px solid rgba(255,255,255,.08);
     }
 
-    .nav-content{display:flex;justify-content:space-between;align-items:center;gap:18px}
+    .nav-content{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      min-width:0; /* ✅ prevents flex overflow */
+    }
+
     .logo{
       font-size:1.75rem;
       font-weight:800;
@@ -75,6 +90,8 @@
       display:flex;
       align-items:center;
       gap:10px;
+      min-width:0;
+      white-space:nowrap;
     }
     .logo-badge{
       width:36px;height:36px;border-radius:10px;
@@ -84,6 +101,7 @@
       border:1px solid rgba(255,255,255,.08);
       position:relative;
       overflow:hidden;
+      flex: 0 0 auto;
     }
     .logo-badge:after{
       content:"";
@@ -105,6 +123,7 @@
       text-transform:uppercase;
       position:relative;
       padding:10px 2px;
+      white-space:nowrap;
     }
     .nav-links a:after{
       content:"";
@@ -119,6 +138,7 @@
 
     .nav-right{
       display:flex; align-items:center; gap:14px;
+      min-width:0;
     }
     .pill{
       display:flex; align-items:center; gap:10px;
@@ -135,6 +155,7 @@
       transition:var(--transition);
       text-decoration:none;
       white-space:nowrap;
+      max-width: 100%;
     }
     .pill:hover{transform:translateY(-2px); border-color: rgba(197,160,89,.35); color:#fff}
     .pill i{color:var(--gold)}
@@ -188,6 +209,7 @@
       width:100%;
       min-height: 82vh;
       align-items:stretch;
+      min-width:0;
     }
 
     .hero-text-side{
@@ -195,6 +217,7 @@
       flex-direction:column;
       justify-content:center;
       padding-right: 10px;
+      min-width:0;
     }
 
     .kicker{
@@ -205,18 +228,21 @@
       font-weight: 700;
       font-size: .75rem;
       margin-bottom: 18px;
+      flex-wrap:wrap;
     }
     .kicker .dot{
       width:10px;height:10px;border-radius:99px;
       background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold));
       box-shadow: 0 0 0 6px rgba(197,160,89,.12);
+      flex:0 0 auto;
     }
 
     .hero-text-side h1{
-      font-size: clamp(3.2rem, 9vw, 7rem);
+      font-size: clamp(3.0rem, 9vw, 7rem);
       line-height: .86;
       margin-bottom: 22px;
       letter-spacing: -4px;
+      word-break: normal;
     }
     .hero-text-side h1 em{
       font-style:normal;
@@ -239,7 +265,7 @@
 
     .hero-stats{
       display:grid;
-      grid-template-columns: repeat(3, minmax(160px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ removes min-width overflow */
       gap: 14px;
       max-width: 680px;
     }
@@ -249,6 +275,7 @@
       border:1px solid rgba(255,255,255,.10);
       box-shadow: var(--ring);
       backdrop-filter: blur(12px);
+      min-width:0;
     }
     .stat .num{
       font-family:'Syne',sans-serif;
@@ -273,6 +300,7 @@
       background:
         linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.65)),
         url('https://images.unsplash.com/photo-1503951914875-befbb7135952?q=80&w=2070&auto=format&fit=crop') center/cover;
+      min-width:0;
     }
     .hero-img-side:before{
       content:"";
@@ -294,6 +322,7 @@
       left:22px; top:22px;
       display:flex; gap:10px; flex-wrap:wrap;
       z-index:2;
+      max-width: calc(100% - 44px);
     }
     .chip{
       padding:10px 12px;
@@ -306,6 +335,7 @@
       box-shadow: var(--ring);
       color: rgba(229,229,229,.85);
       display:flex; align-items:center; gap:8px;
+      white-space:nowrap;
     }
     .chip i{color:var(--gold)}
     .hero-floating-card{
@@ -340,6 +370,7 @@
       letter-spacing:1.5px;
       text-transform:uppercase;
       color: rgba(229,229,229,.78);
+      max-width:100%;
     }
     .mini b{color:#fff}
 
@@ -352,6 +383,7 @@
       justify-content:space-between;
       gap:20px;
       flex-wrap:wrap;
+      min-width:0;
     }
     .section-title h2{
       font-size: 3.3rem;
@@ -370,6 +402,7 @@
       border-top:1px solid rgba(255,255,255,.08);
       border-bottom:1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.02);
+      overflow:hidden; /* ✅ prevents tiny overflow from borders */
     }
     .trust-inner{
       display:flex;
@@ -387,6 +420,7 @@
       font-weight:700;
       font-size:.72rem;
       opacity:.95;
+      flex-wrap:wrap;
     }
     .trust-item i{color:var(--gold)}
     .trust-item span{opacity:.9}
@@ -399,6 +433,7 @@
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.08);
       box-shadow: var(--shadow);
+      overflow:hidden; /* ✅ prevents grid/border rounding overflow */
     }
     .service-item{
       background: rgba(14,14,15,.92);
@@ -407,6 +442,7 @@
       border: 1px solid rgba(255,255,255,.06);
       position:relative;
       overflow:hidden;
+      min-width:0;
     }
     .service-item:before{
       content:"";
@@ -449,7 +485,7 @@
     /* --- PRICING --- */
     .pricing-grid{
       display:grid;
-      grid-template-columns: repeat(3, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ prevents overflow */
       gap: 16px;
       margin-top: 22px;
     }
@@ -461,6 +497,7 @@
       transition: var(--transition);
       position:relative;
       overflow:hidden;
+      min-width:0;
     }
     .price-card:before{
       content:"";
@@ -479,6 +516,7 @@
       margin-bottom: 14px;
       position:relative;
       z-index:1;
+      flex-wrap:wrap;
     }
     .price-card h3{font-size:1.2rem;letter-spacing:1px}
     .tag{
@@ -531,6 +569,7 @@
       display:flex;
       gap: 18px;
       height: 520px;
+      min-width:0;
     }
     .barber-card{
       flex: 1;
@@ -541,6 +580,7 @@
       cursor:pointer;
       border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
+      min-width:0;
     }
     .barber-card img{
       width:100%;
@@ -577,7 +617,7 @@
     /* --- TESTIMONIALS --- */
     .testimonials{
       display:grid;
-      grid-template-columns: repeat(3, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ */
       gap: 16px;
       margin-top: 18px;
     }
@@ -589,6 +629,7 @@
       transition: var(--transition);
       position:relative;
       overflow:hidden;
+      min-width:0;
     }
     .quote:hover{transform: translateY(-7px); border-color: rgba(197,160,89,.22)}
     .quote .stars{color: var(--gold2); letter-spacing: 3px; margin-bottom: 14px}
@@ -603,6 +644,7 @@
       text-transform:uppercase;
       letter-spacing:2px;
       font-size:.75rem;
+      flex-wrap:wrap;
     }
 
     /* --- GALLERY --- */
@@ -611,6 +653,7 @@
       grid-template-columns: 1.2fr .8fr;
       gap: 16px;
       margin-top: 22px;
+      min-width:0;
     }
     .g-main, .g-side{
       border-radius: 18px;
@@ -621,6 +664,7 @@
       min-height: 420px;
       background-size: cover;
       background-position:center;
+      min-width:0;
     }
     .g-main{
       background-image:
@@ -670,6 +714,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-top: 18px;
+      min-width:0;
     }
     details{
       background: rgba(255,255,255,.03);
@@ -677,6 +722,7 @@
       box-shadow: var(--ring);
       padding: 20px 20px;
       transition: var(--transition);
+      min-width:0;
     }
     details:hover{border-color: rgba(197,160,89,.22)}
     summary{
@@ -733,6 +779,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 44px;
       align-items:start;
+      min-width:0;
     }
     .booking-left h2{font-size: 3rem; margin-bottom: 10px}
     .booking-left p{color: rgba(229,229,229,.60); margin-bottom: 18px}
@@ -748,6 +795,7 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.18);
       box-shadow: var(--ring);
+      min-width:0;
     }
     .highlight i{color: var(--gold); margin-top: 3px}
     .highlight b{color:#fff}
@@ -766,6 +814,7 @@
       border:1px solid rgba(255,255,255,.10);
       box-shadow: var(--ring);
       padding: 26px;
+      min-width:0;
     }
     .form-row{
       display:grid;
@@ -790,6 +839,7 @@
       outline:none;
       font-size: 1rem;
       transition: var(--transition);
+      max-width:100%;
     }
     textarea{min-height:120px; resize:vertical}
     input:focus, select:focus, textarea:focus{
@@ -809,6 +859,7 @@
       border-top: 1px solid rgba(255,255,255,.08);
       position:relative;
       z-index:1;
+      overflow:hidden;
     }
     .footer-flex{
       display:flex;
@@ -874,6 +925,18 @@
 
     /* --- MOBILE --- */
     @media (max-width: 1000px){
+      .container{padding:0 16px} /* ✅ tighter to avoid overflow */
+      nav{padding:16px 0}
+      nav.scrolled{padding:12px 0}
+
+      .nav-links{display:none}
+
+      /* ✅ Key fix: membership pill often causes tiny overflow on narrow screens */
+      .nav-right{gap:10px}
+      .nav-right .pill{display:none}
+      .btn.small{padding:12px 16px; font-size:.7rem}
+
+      .hero{padding-top: 86px}
       .hero-split{grid-template-columns:1fr; min-height: auto}
       .hero-img-side{min-height: 360px}
       .hero-stats{grid-template-columns: 1fr}
@@ -882,13 +945,18 @@
       .g-side{grid-template-rows: auto; gap: 16px; min-height:auto}
       .g1,.g2{min-height:240px}
       .booking-grid{grid-template-columns:1fr}
-      .booking-container{padding: 34px}
-      .nav-links{display:none}
-      .container{padding:0 20px}
+      .booking-container{padding: 26px}
       .form-row{grid-template-columns:1fr}
       .barber-grid{height:auto; flex-direction:column}
       .barber-card{height:320px; flex:none}
       .barber-card:hover{flex:none}
+      .section-title h2{font-size: 2.6rem}
+    }
+
+    @media (max-width: 420px){
+      .hero-text-side h1{letter-spacing:-2px}
+      .btn{padding:16px 26px}
+      .chip{font-size:.68rem}
     }
   </style>
 </head>
