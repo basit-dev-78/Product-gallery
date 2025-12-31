@@ -23,12 +23,7 @@
       --ring: 0 0 0 1px rgba(255,255,255,.08) inset;
     }
 
-    /* ✅ FIX: prevent mobile overflow / "scrollbar line" */
     *{margin:0;padding:0;box-sizing:border-box}
-    *::before,*::after{box-sizing:border-box}
-    html, body{width:100%; max-width:100%; overflow-x:hidden;}
-    body{position:relative;}
-
     html{scroll-behavior:smooth}
     body{
       font-family:'Inter',sans-serif;
@@ -39,16 +34,15 @@
         linear-gradient(180deg, #0b0b0c, var(--primary) 40%, #0b0b0c);
       color:var(--accent);
       line-height:1.6;
-      overflow-x:hidden; /* extra safety */
+      overflow-x:hidden;
     }
 
-    img, video, canvas, svg{max-width:100%; height:auto; display:block;}
+    img, video, canvas, svg { max-width:100%; height:auto; }
+    .container{max-width:1300px;margin:0 auto;padding:0 40px; width:100%;}
 
     h1,h2,h3,h4{font-family:'Syne',sans-serif;text-transform:uppercase}
     a{color:inherit}
-    .container{max-width:1300px;margin:0 auto;padding:0 40px}
 
-    /* subtle grain */
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -61,36 +55,27 @@
 
     /* --- NAVIGATION --- */
     nav{
-      position:fixed;
-      top:0; left:0; right:0; /* ✅ safer than width:100% on some mobiles */
-      padding:28px 0;
+      position:fixed; top:0; left:0; width:100%;
+      padding:22px 0;
       z-index:1000;
       transition:var(--transition);
     }
     nav.scrolled{
-      padding:14px 0;
+      padding:12px 0;
       background:rgba(12,12,13,.70);
       backdrop-filter: blur(20px);
       border-bottom:1px solid rgba(255,255,255,.08);
     }
 
-    .nav-content{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:18px;
-      min-width:0; /* ✅ prevents flex overflow */
-    }
-
+    .nav-content{display:flex;justify-content:space-between;align-items:center;gap:18px}
     .logo{
-      font-size:1.75rem;
+      font-size:1.65rem;
       font-weight:800;
       letter-spacing:-1px;
       text-decoration:none;
       display:flex;
       align-items:center;
       gap:10px;
-      min-width:0;
       white-space:nowrap;
     }
     .logo-badge{
@@ -101,7 +86,7 @@
       border:1px solid rgba(255,255,255,.08);
       position:relative;
       overflow:hidden;
-      flex: 0 0 auto;
+      flex:0 0 auto;
     }
     .logo-badge:after{
       content:"";
@@ -112,7 +97,7 @@
     .logo-badge i{position:relative; z-index:1; color:var(--gold2); font-size:14px}
     .logo span{color:var(--gold)}
 
-    .nav-links{display:flex;gap:34px;align-items:center}
+    .nav-links{display:flex;gap:28px;align-items:center}
     .nav-links a{
       text-decoration:none;
       font-weight:700;
@@ -137,8 +122,8 @@
     .nav-links a:hover:after{width:100%}
 
     .nav-right{
-      display:flex; align-items:center; gap:14px;
-      min-width:0;
+      display:flex; align-items:center; gap:12px;
+      flex:0 0 auto;
     }
     .pill{
       display:flex; align-items:center; gap:10px;
@@ -159,6 +144,7 @@
     }
     .pill:hover{transform:translateY(-2px); border-color: rgba(197,160,89,.35); color:#fff}
     .pill i{color:var(--gold)}
+
     .btn{
       display:inline-block;
       padding:18px 44px;
@@ -173,6 +159,7 @@
       transition:var(--transition);
       border:none;
       cursor:pointer;
+      white-space:nowrap;
     }
     .btn:hover{
       background: var(--gold);
@@ -193,100 +180,98 @@
     }
     .btn.small{padding:12px 22px; font-size:.7rem}
 
-    /* --- HERO --- */
+    /* =========================
+       HERO (Cleaner / Professional)
+       ========================= */
     .hero{
-      min-height: 100vh;
+      min-height: 92vh;
       display:flex;
       align-items:center;
-      padding-top: 95px;
+      padding-top: 92px;
+      padding-bottom: 40px;
       position:relative;
       z-index:1;
     }
     .hero-split{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: 22px;
+      gap: 26px;
       width:100%;
-      min-height: 82vh;
-      align-items:stretch;
+      align-items:center;
       min-width:0;
     }
 
-    .hero-text-side{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      padding-right: 10px;
-      min-width:0;
-    }
+    .hero-text-side{min-width:0}
 
     .kicker{
-      display:flex; align-items:center; gap:10px;
-      color: rgba(229,229,229,.75);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(229,229,229,.78);
       letter-spacing: 3px;
       text-transform: uppercase;
       font-weight: 700;
       font-size: .75rem;
       margin-bottom: 18px;
-      flex-wrap:wrap;
     }
     .kicker .dot{
       width:10px;height:10px;border-radius:99px;
       background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold));
       box-shadow: 0 0 0 6px rgba(197,160,89,.12);
-      flex:0 0 auto;
     }
 
     .hero-text-side h1{
-      font-size: clamp(3.0rem, 9vw, 7rem);
-      line-height: .86;
-      margin-bottom: 22px;
-      letter-spacing: -4px;
-      word-break: normal;
+      font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+      line-height: .95;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
     }
     .hero-text-side h1 em{
       font-style:normal;
       color: var(--gold2);
-      text-shadow: 0 25px 80px rgba(197,160,89,.18);
-    }
-    .hero-text-side p{
-      font-size: 1.1rem;
-      max-width: 560px;
-      margin-bottom: 32px;
-      color: rgba(229,229,229,.60);
-    }
-    .hero-actions{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-bottom: 28px;
+      text-shadow: 0 22px 70px rgba(197,160,89,.14);
     }
 
+    .hero-text-side p{
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 22px;
+      color: rgba(229,229,229,.60);
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom: 18px;
+    }
+
+    /* keep only 2 simple stats (clean look) */
     .hero-stats{
       display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ removes min-width overflow */
-      gap: 14px;
-      max-width: 680px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 520px;
     }
     .stat{
-      padding:16px 16px 14px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.10);
+      padding:14px 14px 12px;
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.09);
       box-shadow: var(--ring);
       backdrop-filter: blur(12px);
       min-width:0;
     }
     .stat .num{
       font-family:'Syne',sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       letter-spacing:-1px;
       color:#fff;
     }
     .stat .label{
-      font-size:.8rem;
-      color: rgba(229,229,229,.60);
-      letter-spacing:1.5px;
+      font-size:.76rem;
+      color: rgba(229,229,229,.56);
+      letter-spacing:1.6px;
       text-transform:uppercase;
       margin-top:4px;
     }
@@ -297,82 +282,40 @@
       overflow:hidden;
       box-shadow: var(--shadow);
       border: 1px solid rgba(255,255,255,.10);
+      min-height: 560px;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.65)),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.78)),
         url('https://images.unsplash.com/photo-1503951914875-befbb7135952?q=80&w=2070&auto=format&fit=crop') center/cover;
-      min-width:0;
     }
     .hero-img-side:before{
       content:"";
       position:absolute; inset:0;
       background:
-        radial-gradient(600px 450px at 65% 25%, rgba(197,160,89,.18), transparent 60%),
-        radial-gradient(800px 500px at 30% 80%, rgba(255,255,255,.07), transparent 60%);
+        radial-gradient(620px 460px at 70% 18%, rgba(197,160,89,.16), transparent 60%),
+        radial-gradient(820px 520px at 25% 86%, rgba(255,255,255,.06), transparent 60%);
       pointer-events:none;
     }
-    .hero-img-side:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(14,14,15,.95), transparent 60%);
-      pointer-events:none;
-    }
-
-    .hero-badges{
+    /* single clean overlay text */
+    .hero-overlay{
       position:absolute;
-      left:22px; top:22px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      z-index:2;
-      max-width: calc(100% - 44px);
-    }
-    .chip{
-      padding:10px 12px;
-      font-size:.72rem;
-      letter-spacing:1.8px;
-      text-transform:uppercase;
-      background: rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--ring);
-      color: rgba(229,229,229,.85);
-      display:flex; align-items:center; gap:8px;
-      white-space:nowrap;
-    }
-    .chip i{color:var(--gold)}
-    .hero-floating-card{
-      position:absolute;
-      right:18px; bottom:18px;
-      width:min(360px, calc(100% - 36px));
-      padding:18px;
-      background: rgba(18,18,19,.55);
-      border: 1px solid rgba(255,255,255,.12);
+      left:18px; right:18px; bottom:18px;
+      padding:16px 16px 14px;
+      background: rgba(16,16,17,.45);
+      border: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
+      box-shadow: 0 28px 85px rgba(0,0,0,.55);
       z-index:2;
+      max-width: 520px;
     }
-    .hero-floating-card h3{
-      font-size: 1.05rem;
-      margin-bottom:8px;
+    .hero-overlay h3{
+      font-size: 1.02rem;
+      margin-bottom:6px;
       letter-spacing: 1px;
     }
-    .hero-floating-card p{
+    .hero-overlay p{
       color: rgba(229,229,229,.60);
       font-size: .92rem;
-      margin-bottom: 14px;
     }
-    .hero-floating-row{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-    }
-    .mini{
-      padding:10px 12px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      font-size:.72rem;
-      letter-spacing:1.5px;
-      text-transform:uppercase;
-      color: rgba(229,229,229,.78);
-      max-width:100%;
-    }
-    .mini b{color:#fff}
 
     /* --- SECTION BASE --- */
     .section-padding{padding: 120px 0; position:relative; z-index:1}
@@ -383,7 +326,6 @@
       justify-content:space-between;
       gap:20px;
       flex-wrap:wrap;
-      min-width:0;
     }
     .section-title h2{
       font-size: 3.3rem;
@@ -396,53 +338,27 @@
       font-size: 1rem;
     }
 
-    /* --- TRUST STRIP --- */
-    .trust-strip{
-      margin-top: 22px;
-      border-top:1px solid rgba(255,255,255,.08);
-      border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      overflow:hidden; /* ✅ prevents tiny overflow from borders */
-    }
-    .trust-inner{
-      display:flex;
-      gap:18px;
-      padding: 18px 0;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .trust-item{
-      display:flex; gap:10px; align-items:center;
-      color: rgba(229,229,229,.70);
-      text-transform:uppercase;
-      letter-spacing:2px;
-      font-weight:700;
-      font-size:.72rem;
-      opacity:.95;
-      flex-wrap:wrap;
-    }
-    .trust-item i{color:var(--gold)}
-    .trust-item span{opacity:.9}
-
-    /* --- SERVICES --- */
+    /* =========================
+       SERVICES (Cards Center)
+       ========================= */
     .service-list{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 2px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow: var(--shadow);
-      overflow:hidden; /* ✅ prevents grid/border rounding overflow */
+      gap: 14px; /* nicer spacing */
+      max-width: 1180px;     /* keeps grid centered and premium */
+      margin: 0 auto;        /* center the whole grid */
     }
     .service-item{
       background: rgba(14,14,15,.92);
-      padding: 56px 38px;
+      padding: 52px 34px;
       transition: var(--transition);
-      border: 1px solid rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
       position:relative;
       overflow:hidden;
       min-width:0;
+
+      text-align:center; /* ✅ center content */
+      box-shadow: var(--ring);
     }
     .service-item:before{
       content:"";
@@ -454,38 +370,54 @@
     .service-item:hover{
       background: rgba(24,24,25,.92);
       transform: translateY(-6px);
+      border-color: rgba(197,160,89,.25);
     }
     .service-item:hover:before{opacity:1}
+
     .service-num{
       font-family:'Syne',sans-serif;
       font-size:.82rem;
       color: var(--gold2);
-      margin-bottom: 16px;
-      display:flex;
+      margin-bottom: 14px;
+      letter-spacing:2px;
+      display:inline-flex;
       align-items:center;
       gap:10px;
-      letter-spacing:2px;
+      justify-content:center;
     }
-    .service-num:after{
-      content:"";
-      height:1px;
-      flex:1;
-      background: linear-gradient(90deg, rgba(197,160,89,.55), transparent);
-      opacity:.9;
+    .service-item h3{font-size:1.42rem;margin-bottom:10px}
+    .service-item p{
+      color: rgba(229,229,229,.58);
+      font-size:.96rem;
+      max-width: 420px;
+      margin: 0 auto;
     }
-    .service-item h3{font-size:1.4rem;margin-bottom:12px}
-    .service-item p{color: rgba(229,229,229,.55); font-size:.96rem; max-width: 520px}
     .service-meta{
       margin-top: 18px;
-      display:flex; gap:10px; flex-wrap:wrap;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center; /* ✅ center chips */
       position:relative;
       z-index:1;
     }
 
+    .mini{
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-size:.72rem;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      color: rgba(229,229,229,.78);
+      max-width:100%;
+    }
+    .mini b{color:#fff}
+
     /* --- PRICING --- */
     .pricing-grid{
       display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ prevents overflow */
+      grid-template-columns: repeat(3, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 22px;
     }
@@ -569,7 +501,6 @@
       display:flex;
       gap: 18px;
       height: 520px;
-      min-width:0;
     }
     .barber-card{
       flex: 1;
@@ -617,7 +548,7 @@
     /* --- TESTIMONIALS --- */
     .testimonials{
       display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ */
+      grid-template-columns: repeat(3, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 18px;
     }
@@ -653,7 +584,6 @@
       grid-template-columns: 1.2fr .8fr;
       gap: 16px;
       margin-top: 22px;
-      min-width:0;
     }
     .g-main, .g-side{
       border-radius: 18px;
@@ -679,6 +609,7 @@
       border:none;
       box-shadow:none;
       min-height: 420px;
+      min-width:0;
     }
     .g1,.g2{
       border-radius: 18px;
@@ -689,6 +620,7 @@
       background-size: cover;
       background-position:center;
       position:relative;
+      min-width:0;
     }
     .g1{
       background-image:
@@ -714,7 +646,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-top: 18px;
-      min-width:0;
     }
     details{
       background: rgba(255,255,255,.03);
@@ -859,7 +790,6 @@
       border-top: 1px solid rgba(255,255,255,.08);
       position:relative;
       z-index:1;
-      overflow:hidden;
     }
     .footer-flex{
       display:flex;
@@ -925,38 +855,35 @@
 
     /* --- MOBILE --- */
     @media (max-width: 1000px){
-      .container{padding:0 16px} /* ✅ tighter to avoid overflow */
-      nav{padding:16px 0}
-      nav.scrolled{padding:12px 0}
-
+      .container{padding:0 18px}
       .nav-links{display:none}
 
-      /* ✅ Key fix: membership pill often causes tiny overflow on narrow screens */
-      .nav-right{gap:10px}
-      .nav-right .pill{display:none}
-      .btn.small{padding:12px 16px; font-size:.7rem}
-
-      .hero{padding-top: 86px}
-      .hero-split{grid-template-columns:1fr; min-height: auto}
+      .hero{padding-top: 86px; padding-bottom: 20px; min-height:auto}
+      .hero-split{grid-template-columns:1fr; gap:18px}
       .hero-img-side{min-height: 360px}
       .hero-stats{grid-template-columns: 1fr}
+
       .pricing-grid, .testimonials{grid-template-columns: 1fr}
       .gallery{grid-template-columns: 1fr}
       .g-side{grid-template-rows: auto; gap: 16px; min-height:auto}
       .g1,.g2{min-height:240px}
+
       .booking-grid{grid-template-columns:1fr}
-      .booking-container{padding: 26px}
+      .booking-container{padding: 34px}
       .form-row{grid-template-columns:1fr}
+
       .barber-grid{height:auto; flex-direction:column}
       .barber-card{height:320px; flex:none}
       .barber-card:hover{flex:none}
-      .section-title h2{font-size: 2.6rem}
-    }
 
-    @media (max-width: 420px){
-      .hero-text-side h1{letter-spacing:-2px}
       .btn{padding:16px 26px}
-      .chip{font-size:.68rem}
+      .pill{padding:10px 12px}
+    }
+    @media (max-width: 420px){
+      .logo{font-size:1.45rem}
+      .btn.small{padding:11px 16px}
+      .pill{font-size:.72rem; letter-spacing:1px}
+      .hero-text-side h1{letter-spacing:-1px}
     }
   </style>
 </head>
@@ -989,72 +916,46 @@
 
   <div id="top" class="container">
 
-    <!-- HERO -->
+    <!-- HERO (clean + professional) -->
     <section class="hero">
+ 
       <div class="hero-split">
-
         <div class="hero-text-side reveal">
           <div class="kicker"><span class="dot"></span> Premium Grooming Studio</div>
 
           <h1>
-            REDEFINE<br>
-            YOUR<br>
-            <em>EDGE.</em>
+            ELEVATE YOUR<br>
+            <em>STYLE</em>
           </h1>
 
           <p>
-            Experience grooming as an art form. From heritage techniques to modern precision, we craft styles that speak
-            before you do — tailored to your face shape, lifestyle, and confidence.
+            Premium cuts, sharp beard architecture, and modern rituals — crafted with precision for a clean,
+            confident look.
           </p>
 
           <div class="hero-actions">
-            <a href="#booking" class="btn">Start Your Session</a>
-            <a href="#services" class="btn btn-ghost">Explore Services</a>
-            <a href="#gallery" class="pill"><i class="fa-solid fa-location-dot"></i> View Studio</a>
+            <a href="#booking" class="btn">Book Appointment</a>
+            <a href="#services" class="btn btn-ghost">View Services</a>
           </div>
 
           <div class="hero-stats">
             <div class="stat">
-              <div class="num">12+ yrs</div>
-              <div class="label">Master Barbers</div>
-            </div>
-            <div class="stat">
-              <div class="num">1,500+</div>
-              <div class="label">Monthly Clients</div>
-            </div>
-            <div class="stat">
               <div class="num">4.9★</div>
-              <div class="label">Average Rating</div>
+              <div class="label">Client Rating</div>
             </div>
-          </div>
-
-          <div class="trust-strip">
-            <div class="trust-inner">
-              <div class="trust-item"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Luxury Treatments</span></div>
-              <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Hygiene First</span></div>
-              <div class="trust-item"><i class="fa-solid fa-user-tie"></i><span>Executive Finish</span></div>
-              <div class="trust-item"><i class="fa-solid fa-clock"></i><span>On-Time Appointments</span></div>
+            <div class="stat">
+              <div class="num">10AM–9PM</div>
+              <div class="label">Mon–Sat</div>
             </div>
           </div>
         </div>
 
         <div class="hero-img-side reveal" aria-label="Studio Visual">
-          <div class="hero-badges">
-            <div class="chip"><i class="fa-solid fa-fire"></i> Hot Towel Ritual</div>
-            <div class="chip"><i class="fa-solid fa-droplet"></i> Premium Oils</div>
-            <div class="chip"><i class="fa-solid fa-star"></i> Signature Finish</div>
-          </div>
+               <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFyYmVyfGVufDB8fDB8fHww" alt="">
 
-          <div class="hero-floating-card">
+          <div class="hero-overlay">
             <h3>Signature Experience</h3>
-            <p>
-              45–60 mins. Consultation → Precision → Finish. Your style, refined with detail.
-            </p>
-            <div class="hero-floating-row">
-              <div class="mini"><b>Walk-in</b> Limited</div>
-              <div class="mini"><b>Booking</b> Recommended</div>
-              <div class="mini"><b>Wait</b> Minimal</div>
-            </div>
+            <p>Consultation → Precision → Finish. A premium session designed for clean detail.</p>
           </div>
         </div>
 
@@ -1225,7 +1126,7 @@
 
       <div class="barber-grid reveal">
         <div class="barber-card">
-          <img src="https://plus.unsplash.com/premium_photo-1661420297394-a8a9590e93a8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJhcmJlcnxlbnwwfHwwfHx8MA%3D%3D" alt="Barber">
+          <img src="https://plus.unsplash.com/premium_photo-1661420297394-a8a9590e93a8?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJhcmJlcnxlbnwwfHwwfHx8MA%3D%3D" alt="Barber">
           <div class="barber-info">
             <h3>Marcus Vane</h3>
             <p>Senior Stylist • 12yrs Exp • Executive Looks</p>
@@ -1238,7 +1139,7 @@
         </div>
 
         <div class="barber-card">
-          <img src="https://plus.unsplash.com/premium_photo-1661645788141-8196a45fb483?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFyYmVyfGVufDB8fDB8fHww" alt="Barber">
+          <img src="https://plus.unsplash.com/premium_photo-1661645788141-8196a45fb483?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFyYmVyfGVufDB8fDB8fHww" alt="Barber">
           <div class="barber-info">
             <h3>Julian Rossi</h3>
             <p>Beard Specialist • Line-ups • Texture Control</p>
@@ -1251,7 +1152,7 @@
         </div>
 
         <div class="barber-card">
-          <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFyYmVyfGVufDB8fDB8fHww" alt="Barber">
+          <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFyYmVyfGVufDB8fDB8fHww" alt="Barber">
           <div class="barber-info">
             <h3>Leo Thorne</h3>
             <p>Creative Director • Modern Styles • Signature Shapes</p>
@@ -1290,12 +1191,14 @@
         </div>
         <div class="g-side">
           <div class="g1">
+            <img src="https://images.unsplash.com/photo-1666622833860-562f3a5caa59?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJhcmJlciUyMGRldGFpbCUyMHdvcmt8ZW58MHx8MHx8fDA%3D" alt="">
             <div class="g-caption">
               <h3>Detail Work</h3>
               <p>Edges, lines, and shaping done with patience.</p>
             </div>
           </div>
           <div class="g2">
+            <img src="https://images.unsplash.com/photo-1643837832861-ba85d3b046d9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFyYmVyJTIwc2lnbmF0dXJlJTIwZmluaXNofGVufDB8fDB8fHww" alt="">
             <div class="g-caption">
               <h3>Signature Finish</h3>
               <p>Matte or shine — your look, your choice.</p>
@@ -1535,7 +1438,7 @@
 
     toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Booking form demo submit (replace with your backend later)
+    // Booking form demo submit
     document.getElementById('bookingForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(e.target).entries());
