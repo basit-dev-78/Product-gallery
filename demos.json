@@ -1,0 +1,133 @@
+{
+    "demos": [
+        {
+            "id": "WB-01",
+            "title": "BLADE & BRISTLE",
+            "category": "Barber",
+            "description": "Services + pricing + booking CTA",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/barbar/barbar-v1.html",
+            "image": "/assets/barber_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Booking"
+            ]
+        },
+        {
+            "id": "WB-02",
+            "title": "THE CUT",
+            "category": "Barber",
+            "description": "Services + pricing + booking CTA",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 90,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/barbar/barbar-v2.html",
+            "image": "/assets/barber_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Booking"
+            ]
+        },
+        {
+            "id": "WB-03",
+            "title": "AXIS",
+            "category": "Barber",
+            "description": "Services + pricing + booking CTA",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 70,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/barbar/barbar-v3.html",
+            "image": "/assets/barber_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Booking"
+            ]
+        },
+        {
+            "id": "WB-04",
+            "title": "HYPER WASH",
+            "category": "Car Wash",
+            "description": "Services + results + pricing",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/carwash/car_wash-v1.html",
+            "image": "/assets/car-wash_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+            ]
+        },
+        {
+            "id": "WB-06",
+            "title": "SHINE PRO",
+            "category": "Car Wash",
+            "description": "Services + About + pricing + Booking",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 5,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/carwash/car_wash-v2.html",
+            "image": "/assets/car-wash_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+            ]
+        },
+        {
+            "id": "WB-07",
+            "title": "CARBON GLOSS",
+            "category": "Car Wash",
+            "description": "Packages +Technology",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/carwash/car_wash-v3.html#packages",
+            "image": "/assets/car-wash_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive",
+                "Eye Catching"
+            ]
+        }
+        ,
+        {
+            "id": "WB-08",
+            "title": "SPRKLEFLOW",
+            "category": "Cleaner",
+            "description": "Services + Why Us + Pricing",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/cleaner/cleaner-v1.html",
+            "image": "/assets/cleaner_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive",
+                "Eye Catching"
+            ]
+        }
+    ]
+}
