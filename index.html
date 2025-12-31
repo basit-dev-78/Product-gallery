@@ -28,11 +28,11 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Helvetica Neue", sans-serif;
       background:var(--bg);
       color:var(--text);
-      overflow-x:hidden; /* avoid horizontal scroll */
+      overflow-x:hidden;
     }
     a{color:inherit; text-decoration:none}
 
-    /* ✅ IMPORTANT FIX: container must never exceed viewport on mobile */
+    /* ✅ Prevent container overflow on mobile */
     .container{
       max-width:var(--max);
       margin:0 auto;
@@ -78,14 +78,9 @@
       display:flex;
       align-items:center;
       gap:10px;
-      min-width: 210px;
       min-width:0;
     }
-    .brandMark{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
+    .brandMark{display:inline-flex; align-items:center; justify-content:center;}
 
     .navLinks{
       display:flex;
@@ -116,10 +111,9 @@
     }
 
     .headerRight{
-      min-width: 170px;
+      min-width:0;
       display:flex;
       justify-content:flex-end;
-      min-width:0;
     }
     .quoteBtn{
       background:#000;
@@ -138,8 +132,6 @@
 
     @media (max-width: 900px){
       .navLinks{display:none;}
-      .brandWrap{min-width:auto;}
-      .headerRight{min-width:auto;}
     }
 
     /* ===== SUPER COMPACT FILTER HEADER ===== */
@@ -162,7 +154,7 @@
       min-width:0;
     }
 
-    /* ✅ IMPORTANT FIX: allow search box to shrink on mobile (min-width:0) */
+    /* ✅ IMPORTANT: allow shrink on mobile */
     .searchBox{
       flex: 1 1 420px;
       display:flex; gap:8px; align-items:center;
@@ -171,7 +163,7 @@
       border-radius: 12px;
       padding:6px 10px;
       box-shadow: 0 10px 24px rgba(2,6,23,0.04);
-      min-width:0;           /* ✅ was 260px -> caused overflow on some mobiles */
+      min-width:0;      /* was causing overflow */
       width:100%;
       max-width:100%;
     }
@@ -190,7 +182,6 @@
       min-width:0;
       max-width:100%;
     }
-
     select{
       border:1px solid var(--border);
       background:#fff;
@@ -202,7 +193,6 @@
       cursor:pointer;
       max-width:100%;
     }
-
     .miniBtn{
       border:1px solid var(--border);
       background:#fff;
@@ -291,14 +281,17 @@
       transition:.15s ease;
       box-shadow: 0 12px 28px rgba(2,6,23,0.05);
       width:100%;
-      min-width:0; /* ✅ */
+      min-width:0;
     }
     .card:hover{
       transform: translateY(-2px);
       box-shadow: var(--shadow2);
       border-color: rgba(15,23,42,.12);
     }
+
+    /* ✅ IMAGE AREA */
     .thumb{
+      /* fixed height works, but we will improve mobile below */
       height: 180px;
       background: #f3f4f6;
       position:relative;
@@ -308,8 +301,9 @@
     .thumb img{
       width:100%;
       height:100%;
-      object-fit:cover;
       display:block;
+      object-fit:cover;         /* desktop = cover */
+      object-position:center;   /* center */
       transform: scale(1.01);
       transition: .25s ease;
     }
@@ -326,6 +320,7 @@
       color:#fff;
       background: var(--accent);
       box-shadow: 0 12px 26px rgba(255,0,102,.25);
+      z-index:2;
     }
     .priceTag{
       position:absolute;
@@ -339,6 +334,7 @@
       background: rgba(255,255,255,.92);
       border:1px solid rgba(229,231,235,.8);
       box-shadow: 0 10px 24px rgba(2,6,23,0.08);
+      z-index:2;
     }
 
     .content{ padding:14px; }
@@ -449,16 +445,25 @@
       padding:16px;
       z-index: 9999;
     }
+     .modal{
+    width: min(1280px, 96vw);   /* ✅ increased width */
+    height: min(92vh, 920px);   /* (optional) a bit taller */
+    background:#fff;
+    border-radius: 22px;
+    overflow:hidden;
+    box-shadow: 0 30px 80px rgba(2,6,23,.35);
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* optional: on very small screens keep it full width */
+  @media (max-width: 620px){
     .modal{
-      width: min(1000px, 85vw);
-      height: min(90vh, 900px);
-      background:#fff;
-      border-radius: 22px;
-      overflow:hidden;
-      box-shadow: 0 30px 80px rgba(2,6,23,.35);
-      display:flex;
-      flex-direction:column;
+      width: min(100vw, 100vw);
+      height: min(94vh, 94vh);
+      border-radius: 18px;
     }
+  }
     .modalHeader{
       display:flex;
       align-items:center;
@@ -482,7 +487,6 @@
       white-space:nowrap;
     }
 
-    /* ===== MODAL LOADER (EXACT) ✅ ===== */
     .modalBody{ position:relative; flex:1; background:#fff; }
     #modalFrame{
       width:100%;
@@ -568,25 +572,37 @@
       .filtersWrap{top: 56px;}
     }
 
-    /* ✅ MOBILE FIXES (prevents horizontal overflow => card images stop cutting) */
+    /* ✅ MAIN FIX: MOBILE THUMB IMAGE MUST NOT CROP */
     @media (max-width: 620px){
-      .container{ padding: 12px; } /* smaller padding so card fits */
+      .container{ padding: 12px; }
       .grid{ grid-template-columns: 1fr; }
-      .thumb{ height: 170px; }
+
+      /* 🔥 This is the exact fix:
+         - set aspect ratio so height adapts nicely
+         - object-fit: contain (no cut)
+         - add small padding so edges never touch
+      */
+      .thumb{
+        height:auto;
+        aspect-ratio: 16 / 9;
+        background: #ffffff;
+        padding: 8px;
+      }
+      .thumb img{
+        object-fit: contain;     /* ✅ no cut */
+        object-position: center; /* ✅ centered */
+        background: #ffffff;
+        transform: none !important; /* avoid zoom crop on mobile */
+      }
+      .card:hover .thumb img{ transform:none !important; }
+
       .filtersWrap{ top: 56px; }
     }
 
-    /* ✅ EXTRA SMALL phones: stack controls full width */
     @media (max-width: 420px){
       .searchBox{ flex: 1 1 100%; width:100%; }
-      .controls{
-        width:100%;
-        justify-content:space-between;
-      }
-      .controls select,
-      .controls .miniBtn{
-        flex:1 1 auto;
-      }
+      .controls{ width:100%; justify-content:space-between; }
+      .controls select, .controls .miniBtn{ flex:1 1 auto; }
     }
 
     @media (max-width: 680px){
