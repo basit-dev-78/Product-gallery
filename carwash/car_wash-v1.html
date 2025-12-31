@@ -1,682 +1,903 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYPERWASH | Elite Auto Detailing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HYPERWASH | Elite Auto Detailing</title>
 
-    <style>
-        :root {
-            --primary: #00F2FF; /* Cyber Cyan */
-            --accent: #FFD700;  /* Gold */
-            --bg-deep: #0A0A0B;
-            --bg-card: #161618;
-            --text-main: #FFFFFF;
-            --text-dim: #A0A0A5;
-            --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+  <style>
+    :root {
+      --primary: #00F2FF; /* Cyber Cyan */
+      --accent: #FFD700;  /* Gold */
+      --bg-deep: #0A0A0B;
+      --bg-card: #161618;
+      --text-main: #FFFFFF;
+      --text-dim: #A0A0A5;
+      --glass: rgba(255, 255, 255, 0.03);
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    /* ✅ MOBILE VERTICAL SCROLLBAR FIX (causes: 100vw, negative margins, wide shadows, overflow) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; width: 100%; }
 
-        h1, h2, .logo { text-decoration: none; font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+    /* Make media never exceed container width */
+    img, video, svg, canvas { max-width: 100%; height: auto; display: block; }
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 25px 0;
-            z-index: 1000;
-            transition: var(--transition);
-        }
-        nav.scrolled {
-            background: rgba(10, 10, 11, 0.8);
-            backdrop-filter: blur(20px);
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; letter-spacing: 2px; color: var(--text-main); }
-        .logo span { color: var(--primary); }
-        .nav-links { display: flex; gap: 40px; align-items: center; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; transition: var(--transition); }
-        .nav-links a:hover { color: var(--primary); }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .hero-content { max-width: 700px; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 0.9; margin-bottom: 20px; }
-        .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--primary); }
-        .hero p { color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; }
+    h1, h2, .logo {
+      text-decoration: none;
+      font-family: 'Syncopate', sans-serif;
+      text-transform: uppercase;
+    }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px 40px;
-            border-radius: 4px;
-            font-weight: 800;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-        }
-        .btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 30px rgba(0, 242, 255, 0.3); }
-        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 242, 255, 0.5); }
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 25px 0;
+      z-index: 1000;
+      transition: var(--transition);
+      /* avoid accidental overflow on small screens */
+      overflow: hidden;
+    }
+    nav.scrolled {
+      background: rgba(10, 10, 11, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
 
-        /* --- SECTIONS --- */
-        .section-padding { padding: 120px 0; }
-        .section-header { margin-bottom: 80px; text-align: center; }
-        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
-        .accent-line { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 25px;
+      width: 100%;
+    }
 
-        /* --- SERVICES GRID --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+    .logo { font-size: 1.4rem; letter-spacing: 2px; color: var(--text-main); text-decoration: none; }
+    .logo span { color: var(--primary); }
 
-        .service-card, .price-card { width: 100%; min-width: 0; }
+    .nav-links { display: flex; gap: 40px; align-items: center; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--primary); }
 
-        .service-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 50px;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-        .service-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 0;
-            background: var(--primary);
-            transition: var(--transition);
-            z-index: 0; opacity: 0.1;
-        }
-        .service-card:hover::before { height: 100%; }
-        .service-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+    /* ✅ Mobile menu button */
+    .menu-btn{
+      display:none;
+      width:44px; height:44px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      color: #fff;
+      cursor:pointer;
+      transition: var(--transition);
+      align-items:center;
+      justify-content:center;
+    }
+    .menu-btn:hover{ border-color: rgba(0,242,255,0.35); color: var(--primary); transform: translateY(-1px); }
 
-        .icon-box { font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; position: relative; z-index: 1; }
-        .service-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; margin-bottom: 20px; position: relative; z-index: 1; }
-        .service-card p { color: var(--text-dim); position: relative; margin-bottom: 25px; z-index: 1; }
-        .service-card a { position: relative; z-index: 1; }
+    /* Mobile drawer */
+    .drawer-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+    .drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100dvh;
+      width: min(92vw, 360px);
+      background: rgba(10,10,11,0.92);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      z-index: 1200;
+      transform: translateX(110%);
+      transition: var(--transition);
+      padding: 18px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .drawer.open{ transform: translateX(0); }
+    .drawer-backdrop.open{ opacity: 1; pointer-events: auto; }
 
-        /* --- BEFORE/AFTER SHOWCASE --- */
-        .shine-showcase {
-            background: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            margin-top: 50px;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .showcase-side { position: relative; height: 420px; }
-        .showcase-side img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.8s; }
-        .showcase-side.after img { filter: grayscale(0%) brightness(1.15) contrast(1.05); }
+    .drawer-top{
+      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .drawer-close{
+      width:44px; height:44px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      color:#fff;
+      cursor:pointer;
+      transition: var(--transition);
+    }
+    .drawer-close:hover{ border-color: rgba(0,242,255,0.35); color: var(--primary); transform: translateY(-1px); }
 
-        /* --- NEW BUTTONS --- */
-        .ba-btn{
-            position:absolute;
-            bottom: 18px;
-            left: 18px;
-            z-index: 5;
-            border: 1px solid rgba(0,242,255,0.40);
-            background: rgba(0,0,0,0.55);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-        }
-        .ba-btn.after{
-            left: auto;
-            right: 18px;
-            border-color: rgba(255,215,0,0.45);
-        }
-        .ba-btn:hover{
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(0,242,255,0.20);
-        }
-        .ba-btn.after:hover{
-            box-shadow: 0 0 30px rgba(255,215,0,0.20);
-        }
+    .drawer-links{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .drawer-links a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: var(--transition);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .drawer-links a:hover{
+      border-color: rgba(0,242,255,0.35);
+      color: var(--primary);
+      transform: translateX(2px);
+    }
 
-        /* --- PRICING --- */
-        .pricing-section { background: #000; }
-        .price-card {
-            background: var(--bg-deep);
-            padding: 40px;
-            border-radius: 14px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: var(--transition);
-        }
-        .price-card:hover { transform: translateY(-10px); border-color: rgba(0,242,255,0.55); }
-        .price-card.featured { border: 2px solid var(--primary); transform: translateY(-6px); }
-        .price-amount { font-size: 3rem; font-weight: 800; margin: 20px 0; color: var(--primary); }
-        .price-card ul { margin: 30px 0; color: var(--text-dim); list-style: none; padding: 0; }
-        .price-card li { margin-bottom: 15px; }
-        .price-card li i { color: var(--primary); margin-right: 10px; }
+    /* --- HERO SECTION --- */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh; /* ✅ avoids mobile address-bar jump */
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden; /* ✅ prevents hero glow causing horizontal overflow */
+    }
+    .hero-content { max-width: 700px; }
+    .hero h1 { font-size: clamp(2.2rem, 8vw, 5rem); line-height: 0.9; margin-bottom: 20px; }
+    .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--primary); }
+    .hero p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 34px; max-width: 58ch; }
 
-        /* --- BOOKING UI --- */
-        .booking-box {
-            background: var(--bg-card);
-            padding: 60px;
-            border-radius: 10px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        input, select {
-            width: 100%;
-            background: #222;
-            border: 1px solid #333;
-            padding: 15px;
-            color: #fff;
-            outline: none;
-            transition: 0.3s;
-            border-radius: 8px;
-        }
-        input:focus, select:focus { border-color: var(--primary); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 40px;
+      border-radius: 4px;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 30px rgba(0, 242, 255, 0.3); }
+    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 242, 255, 0.5); }
 
-        /* --- FOOTER --- */
-        footer.hyper-footer{
-            padding: 90px 0 26px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            background:
-              radial-gradient(circle at 15% 15%, rgba(0,242,255,0.10), transparent 45%),
-              radial-gradient(circle at 85% 20%, rgba(255,215,0,0.08), transparent 50%),
-              linear-gradient(180deg, rgba(0,0,0,0.2), rgba(10,10,11,1));
-        }
-        .footer-grid{
-            display:grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-            gap: 30px;
-            padding-bottom: 30px;
-        }
-        .footer-brand{
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 22px;
-        }
-        .brand-top{
-            display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
-            margin-bottom: 10px;
-        }
-        .brand-badge{
-            border: 1px solid rgba(0,242,255,0.35);
-            background: rgba(0,242,255,0.08);
-            color: var(--primary);
-            padding: 8px 12px;
-            border-radius: 999px;
-            font-size: 0.72rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            white-space: nowrap;
-            text-transform: uppercase;
-        }
-        .brand-desc{
-            color: var(--text-dim);
-            font-size: 0.95rem;
-            margin-top: 10px;
-        }
-        .trust-row{
-            display:flex; gap:10px; flex-wrap:wrap;
-            margin-top: 16px;
-        }
-        .trust-pill{
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.02);
-            color: rgba(255,255,255,0.75);
-            padding: 8px 10px;
-            border-radius: 999px;
-            font-size: 0.78rem;
-        }
-        .footer-title{
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.95rem;
-            letter-spacing: 2px;
-            margin-bottom: 14px;
-        }
-        .footer-links{
-            display:grid; gap: 10px;
-        }
-        .footer-links a{
-            color: var(--text-dim);
-            text-decoration:none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display:flex; align-items:center; gap:10px;
-            transition: var(--transition);
-        }
-        .footer-links a i{
-            color: rgba(0,242,255,0.7);
-            width: 16px;
-        }
-        .footer-links a:hover{
-            color: var(--primary);
-            transform: translateX(3px);
-        }
-        .footer-contact{
-            display:grid; gap: 10px;
-            color: var(--text-dim);
-            font-size: 0.92rem;
-        }
-        .footer-contact div{
-            display:flex; gap:10px; align-items:flex-start;
-        }
-        .footer-contact i{
-            color: rgba(255,215,0,0.85);
-            margin-top: 3px;
-            width: 16px;
-        }
-        .subscribe{
-            margin-top: 14px;
-            display:flex;
-            gap: 10px;
-        }
-        .subscribe input{
-            flex: 1;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.10);
-            padding: 14px;
-            border-radius: 10px;
-            color: #fff;
-            outline:none;
-        }
-        .subscribe button{
-            background: var(--primary);
-            color: #000;
-            padding: 14px 16px;
-            border-radius: 10px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            border:none;
-            transition: var(--transition);
-            min-width: 132px;
-        }
-        .subscribe button:hover{ transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,242,255,0.25); }
-        .footer-note{
-            color: rgba(255,255,255,0.45);
-            font-size: 0.82rem;
-            margin-top: 10px;
-        }
-        .footer-bottom{
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding-top: 18px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .footer-copy{
-            color: rgba(255,255,255,0.45);
-            font-size: 0.85rem;
-        }
-        .social-row{
-            display:flex; gap:10px; flex-wrap:wrap;
-        }
-        .social-btn{
-            width: 42px; height: 42px;
-            display:inline-flex;
-            justify-content:center;
-            align-items:center;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.02);
-            color: rgba(255,255,255,0.75);
-            transition: var(--transition);
-            text-decoration: none;
-        }
-        .social-btn:hover{
-            transform: translateY(-2px);
-            border-color: rgba(0,242,255,0.35);
-            color: var(--primary);
-        }
-        .mini-links{
-            display:flex; gap: 16px; flex-wrap:wrap;
-        }
-        .mini-links a{
-            color: rgba(255,255,255,0.4);
-            text-decoration:none;
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-        .mini-links a:hover{ color: var(--primary); }
+    /* --- SECTIONS --- */
+    .section-padding { padding: 120px 0; }
+    .section-header { margin-bottom: 80px; text-align: center; }
+    .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+    .accent-line { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; }
 
-        /* --- ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+    /* --- SERVICES GRID --- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+    .service-card, .price-card { width: 100%; min-width: 0; }
 
-        @media (max-width: 900px){
-            .footer-grid{ grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .input-row { grid-template-columns: 1fr; }
-            .shine-showcase { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 3rem; }
-            .service-card{ padding: 36px; }
-            .booking-box{ padding: 36px; }
-        }
-    </style>
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 0;
+      background: var(--primary);
+      transition: var(--transition);
+      z-index: 0; opacity: 0.1;
+    }
+    .service-card:hover::before { height: 100%; }
+    .service-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+
+    .icon-box { font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; position: relative; z-index: 1; }
+    .service-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; margin-bottom: 20px; position: relative; z-index: 1; }
+    .service-card p { color: var(--text-dim); position: relative; margin-bottom: 25px; z-index: 1; }
+    .service-card a { position: relative; z-index: 1; }
+
+    /* --- BEFORE/AFTER SHOWCASE --- */
+    .shine-showcase {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 50px;
+      border: 1px solid rgba(255,255,255,0.06);
+      width: 100%;
+      min-width: 0;
+    }
+    .showcase-side { position: relative; height: 420px; overflow: hidden; }
+    .showcase-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: 0.8s;
+    }
+    .showcase-side.after img { filter: grayscale(0%) brightness(1.15) contrast(1.05); }
+
+    /* ✅ REMOVE NEGATIVE MARGIN (it causes mobile overflow / scrollbar) */
+    .after-img{
+      margin-top: 0 !important;
+      height: 100% !important;
+    }
+
+    .ba-btn{
+      position:absolute;
+      bottom: 18px;
+      left: 18px;
+      z-index: 5;
+      border: 1px solid rgba(0,242,255,0.40);
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+    .ba-btn.after{
+      left: auto;
+      right: 18px;
+      border-color: rgba(255,215,0,0.45);
+    }
+    .ba-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0,242,255,0.20);
+    }
+    .ba-btn.after:hover{
+      box-shadow: 0 0 30px rgba(255,215,0,0.20);
+    }
+
+    /* --- PRICING --- */
+    .pricing-section { background: #000; }
+    .price-card {
+      background: var(--bg-deep);
+      padding: 40px;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: var(--transition);
+    }
+    .price-card:hover { transform: translateY(-10px); border-color: rgba(0,242,255,0.55); }
+    .price-card.featured { border: 2px solid var(--primary); transform: translateY(-6px); }
+    .price-amount { font-size: 3rem; font-weight: 800; margin: 20px 0; color: var(--primary); }
+    .price-card ul { margin: 30px 0; color: var(--text-dim); list-style: none; padding: 0; }
+    .price-card li { margin-bottom: 15px; }
+    .price-card li i { color: var(--primary); margin-right: 10px; }
+
+    /* --- BOOKING UI --- */
+    .booking-box {
+      background: var(--bg-card);
+      padding: 60px;
+      border-radius: 10px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden; /* ✅ ensures inner fields don't push width */
+    }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    input, select {
+      width: 100%;
+      background: #222;
+      border: 1px solid #333;
+      padding: 15px;
+      color: #fff;
+      outline: none;
+      transition: 0.3s;
+      border-radius: 8px;
+      min-width: 0;
+    }
+    input:focus, select:focus { border-color: var(--primary); }
+
+    /* --- FOOTER --- */
+    footer.hyper-footer{
+      padding: 90px 0 26px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(0,242,255,0.10), transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(255,215,0,0.08), transparent 50%),
+        linear-gradient(180deg, rgba(0,0,0,0.2), rgba(10,10,11,1));
+      overflow: hidden; /* ✅ footer glows shouldn't create overflow */
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      gap: 30px;
+      padding-bottom: 30px;
+      min-width: 0;
+    }
+    .footer-brand{
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 22px;
+      min-width: 0;
+    }
+    .brand-top{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .brand-badge{
+      border: 1px solid rgba(0,242,255,0.35);
+      background: rgba(0,242,255,0.08);
+      color: var(--primary);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .brand-desc{
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
+    .trust-row{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 16px;
+    }
+    .trust-pill{
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.75);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+    }
+    .footer-title{
+      font-family: 'Syncopate', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+    .footer-links{
+      display:grid; gap: 10px;
+    }
+    .footer-links a{
+      color: var(--text-dim);
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display:flex; align-items:center; gap:10px;
+      transition: var(--transition);
+      min-width: 0;
+    }
+    .footer-links a i{
+      color: rgba(0,242,255,0.7);
+      width: 16px;
+      flex: 0 0 16px;
+    }
+    .footer-links a:hover{
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+    .footer-contact{
+      display:grid; gap: 10px;
+      color: var(--text-dim);
+      font-size: 0.92rem;
+    }
+    .footer-contact div{
+      display:flex; gap:10px; align-items:flex-start;
+      min-width: 0;
+    }
+    .footer-contact i{
+      color: rgba(255,215,0,0.85);
+      margin-top: 3px;
+      width: 16px;
+      flex: 0 0 16px;
+    }
+    .subscribe{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .subscribe input{
+      flex: 1 1 180px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 14px;
+      border-radius: 10px;
+      color: #fff;
+      outline:none;
+      min-width: 0;
+    }
+    .subscribe button{
+      background: var(--primary);
+      color: #000;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border:none;
+      transition: var(--transition);
+      min-width: 132px;
+      flex: 0 0 auto;
+    }
+    .subscribe button:hover{ transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,242,255,0.25); }
+
+    .footer-note{
+      color: rgba(255,255,255,0.45);
+      font-size: 0.82rem;
+      margin-top: 10px;
+    }
+    .footer-bottom{
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-copy{
+      color: rgba(255,255,255,0.45);
+      font-size: 0.85rem;
+    }
+    .social-row{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .social-btn{
+      width: 42px; height: 42px;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.75);
+      transition: var(--transition);
+      text-decoration: none;
+      flex: 0 0 auto;
+    }
+    .social-btn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(0,242,255,0.35);
+      color: var(--primary);
+    }
+    .mini-links{
+      display:flex; gap: 16px; flex-wrap:wrap;
+    }
+    .mini-links a{
+      color: rgba(255,255,255,0.4);
+      text-decoration:none;
+      font-size: 0.85rem;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .mini-links a:hover{ color: var(--primary); }
+
+    /* --- ANIMATIONS --- */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px){
+      .footer-grid{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-btn { display: inline-flex; }
+
+      .input-row { grid-template-columns: 1fr; }
+
+      .shine-showcase { grid-template-columns: 1fr; }
+      .showcase-side { height: 340px; }
+
+      .hero h1 { font-size: 2.7rem; }
+      .hero p { font-size: 1rem; }
+
+      .service-card{ padding: 34px; }
+      .booking-box{ padding: 34px; }
+
+      .section-padding { padding: 90px 0; }
+      .container { padding: 0 18px; }
+
+      .ba-btn{ font-size: 0.7rem; padding: 9px 12px; }
+    }
+
+    @media (max-width: 420px){
+      .hero h1{ font-size: 2.35rem; }
+      .btn{ padding: 16px 28px; }
+      .services-grid{ grid-template-columns: 1fr; }
+      .service-card{ padding: 28px; }
+    }
+  </style>
 </head>
 
 <body>
 
-    <nav id="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo">HYPER<span>WASH</span></a>
-            <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#showcase">Results</a>
-                <a href="#pricing">Pricing</a>
-                <a style="color: #000;" href="#booking" class="btn btn-primary" style="padding: 10px 20px;">Book Now</a>
-            </div>
+  <nav id="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo">HYPER<span>WASH</span></a>
+
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#showcase">Results</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#booking" class="btn btn-primary" style="padding: 10px 20px; color:#000;">Book Now</a>
+      </div>
+
+      <!-- ✅ Mobile toggle -->
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ✅ Drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-label="Mobile menu">
+    <div class="drawer-top">
+      <div class="logo" style="font-size:1.1rem;">HYPER<span>WASH</span></div>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="drawer-links">
+      <a href="#services"><span>Services</span><i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#showcase"><span>Results</span><i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#pricing"><span>Pricing</span><i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#booking" style="background: rgba(0,242,255,0.10); border-color: rgba(0,242,255,0.35); color: var(--primary);">
+        <span>Book Now</span><i class="fa-solid fa-calendar-check"></i>
+      </a>
+    </div>
+  </aside>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content reveal">
+        <h1>UNLEASH THE <span>GLOSS.</span></h1>
+        <p>Precision detailing and ceramic protection for those who demand perfection. We don't just wash; we restore showroom brilliance.</p>
+        <div class="hero-btns">
+          <a href="#booking" class="btn btn-primary">Reserve Your Slot</a>
         </div>
-    </nav>
+      </div>
+    </div>
+  </section>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content reveal">
-                <h1>UNLEASH THE <span>GLOSS.</span></h1>
-                <p>Precision detailing and ceramic protection for those who demand perfection. We don't just wash; we restore showroom brilliance.</p>
-                <div class="hero-btns">
-                    <a href="#booking" class="btn btn-primary">Reserve Your Slot</a>
-                </div>
-            </div>
+  <section id="services" class="section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our Detailing Lab</h2>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="icon-box"><i class="fas fa-hand-sparkles"></i></div>
+          <h3>Signature Wash</h3>
+          <p>PH-neutral foam bath, two-bucket hand wash, and non-acidic wheel decontamination.</p>
+          <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
         </div>
-    </section>
 
-    <section id="services" class="section-padding">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Our Detailing Lab</h2>
-                <div class="accent-line"></div>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-hand-sparkles"></i></div>
-                    <h3>Signature Wash</h3>
-                    <p>PH-neutral foam bath, two-bucket hand wash, and non-acidic wheel decontamination.</p>
-                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
-                </div>
-
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-shield-virus"></i></div>
-                    <h3>Ceramic Pro</h3>
-                    <p>9H Nano-ceramic coating providing permanent paint protection and extreme hydrophobicity.</p>
-                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
-                </div>
-
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-couch"></i></div>
-                    <h3>Interior Spa</h3>
-                    <p>Steam sanitization, leather conditioning, and deep extraction carpet cleaning.</p>
-                    <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
-                </div>
-            </div>
-
-            <!-- ✅ BEFORE / AFTER WITH BUTTONS -->
-            <div id="showcase" class="shine-showcase reveal">
-                <div class="showcase-side" id="beforeSide">
-                    <button type="button" class="ba-btn" id="btnBefore">BEFORE DETAILING</button>
-                    <img src="https://images.unsplash.com/photo-1536796423601-e9733a86d257?w=1200&auto=format&fit=crop&q=60" alt="Before detailing">
-                </div>
-
-                <div class="showcase-side after" id="afterSide">
-                    <button type="button" class="ba-btn after" id="btnAfter">AFTER DETAILING</button>
-                    <img  style="margin-top: -57px; height: 600px;" src="/assets/Gemini_Generated_Image_na1v2lna1v2lna1v.png" alt="After detailing">
-                </div>
-            </div>
-
+        <div class="service-card reveal">
+          <div class="icon-box"><i class="fas fa-shield-virus"></i></div>
+          <h3>Ceramic Pro</h3>
+          <p>9H Nano-ceramic coating providing permanent paint protection and extreme hydrophobicity.</p>
+          <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
         </div>
-    </section>
 
-    <section id="pricing" class="section-padding pricing-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Choose Your Level</h2>
-                <div class="accent-line"></div>
-            </div>
-
-            <div class="services-grid">
-                <div class="price-card reveal">
-                    <h3>EXPRESS</h3>
-                    <div class="price-amount">$45</div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Hand Wash & Dry</li>
-                        <li><i class="fas fa-check"></i> Tire Shine</li>
-                        <li><i class="fas fa-check"></i> Interior Vacuum</li>
-                    </ul>
-                    <a href="#booking" class="btn" style="border:1px solid #333; background:transparent; color:#fff; width:100%;">Select</a>
-                </div>
-
-                <div class="price-card featured reveal">
-                    <h3>ULTIMATE</h3>
-                    <div class="price-amount">$120</div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Clay Bar Treatment</li>
-                        <li><i class="fas fa-check"></i> Iron Decontamination</li>
-                        <li><i class="fas fa-check"></i> Ceramic Sealant (6mo)</li>
-                        <li><i class="fas fa-check"></i> Engine Bay Clean</li>
-                    </ul>
-                    <a href="#booking" class="btn btn-primary" style="width:100%;">Most Popular</a>
-                </div>
-
-                <div class="price-card reveal">
-                    <h3>EXOTIC</h3>
-                    <div class="price-amount">$350</div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> 1-Step Paint Correction</li>
-                        <li><i class="fas fa-check"></i> Full Interior Detail</li>
-                        <li><i class="fas fa-check"></i> Ceramic Coating</li>
-                    </ul>
-                    <a href="#booking" class="btn" style="border:1px solid #333; background:transparent; color:#fff; width:100%;">Select</a>
-                </div>
-            </div>
+        <div class="service-card reveal">
+          <div class="icon-box"><i class="fas fa-couch"></i></div>
+          <h3>Interior Spa</h3>
+          <p>Steam sanitization, leather conditioning, and deep extraction carpet cleaning.</p>
+          <a href="#" style="color:var(--primary); font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Explore Service</a>
         </div>
-    </section>
+      </div>
 
-    <section id="booking" class="section-padding">
-        <div class="container">
-            <div class="booking-box reveal">
-                <h2 style="margin-bottom:40px;">Secure Your Detailing Session</h2>
-                <form onsubmit="event.preventDefault(); alert('Booking Requested! Our team will call you to confirm.');">
-                    <div class="input-row">
-                        <input type="text" placeholder="Full Name" required>
-                        <input type="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-row">
-                        <select required>
-                            <option value="">Vehicle Type</option>
-                            <option>Sedan / Coupe</option>
-                            <option>SUV / Truck</option>
-                            <option>Exotic / Sports</option>
-                        </select>
-                        <select required>
-                            <option value="">Select Package</option>
-                            <option>Express Wash</option>
-                            <option>Ultimate Detail</option>
-                            <option>Exotic Restoration</option>
-                        </select>
-                    </div>
-                    <div class="input-row">
-                        <input type="date" required>
-                        <input type="tel" placeholder="Phone Number" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;">Confirm Booking Request</button>
-                </form>
-            </div>
+      <div id="showcase" class="shine-showcase reveal">
+        <div class="showcase-side" id="beforeSide">
+          <button type="button" class="ba-btn" id="btnBefore">BEFORE DETAILING</button>
+          <img src="https://images.unsplash.com/photo-1536796423601-e9733a86d257?w=1200&auto=format&fit=crop&q=60" alt="Before detailing">
         </div>
-    </section>
 
-    <!-- ✅ FOOTER -->
-    <footer class="hyper-footer">
-        <div class="container">
-
-            <div class="footer-grid">
-                <!-- Brand -->
-                <div class="footer-brand">
-                    <div class="brand-top">
-                        <div class="logo" style="font-size:1.25rem;">HYPER<span>WASH</span></div>
-                        <div class="brand-badge">ELITE DETAILING</div>
-                    </div>
-                    <div class="brand-desc">
-                        A high-performance detailing studio built for people who want their car to look unreal — every day.
-                        Ceramic protection, interior spa, and paint correction with lab-grade precision.
-                    </div>
-
-                    <div class="trust-row">
-                        <div class="trust-pill"><i class="fa-solid fa-bolt" style="color:var(--primary); margin-right:6px;"></i> Fast Turnaround</div>
-                        <div class="trust-pill"><i class="fa-solid fa-shield" style="color:var(--primary); margin-right:6px;"></i> Safe Products</div>
-                        <div class="trust-pill"><i class="fa-solid fa-star" style="color:var(--accent); margin-right:6px;"></i> Premium Finish</div>
-                    </div>
-
-                    <div class="subscribe">
-                        <input type="email" placeholder="Get offers & reminders (email)">
-                        <button type="button" id="joinBtn">Join</button>
-                    </div>
-                    <div class="footer-note">No spam — only discounts, new packages & VIP slots.</div>
-                </div>
-
-                <!-- Explore -->
-                <div>
-                    <div class="footer-title">Explore</div>
-                    <div class="footer-links">
-                        <a href="#services"><i class="fa-solid fa-grid-2"></i> Services</a>
-                        <a href="#showcase"><i class="fa-solid fa-wand-magic-sparkles"></i> Results</a>
-                        <a href="#pricing"><i class="fa-solid fa-tag"></i> Pricing</a>
-                        <a  style="color: #000;" href="#booking"><i class="fa-solid fa-calendar-check"></i> Book Now</a>
-                        <a href="#"><i class="fa-solid fa-gift"></i> Gift Cards</a>
-                    </div>
-                </div>
-
-                <!-- Packages -->
-                <div>
-                    <div class="footer-title">Packages</div>
-                    <div class="footer-links">
-                        <a href="#pricing"><i class="fa-solid fa-car"></i> Express Wash</a>
-                        <a href="#pricing"><i class="fa-solid fa-droplet"></i> Ultimate Detail</a>
-                        <a href="#pricing"><i class="fa-solid fa-shield-halved"></i> Ceramic Pro</a>
-                        <a href="#pricing"><i class="fa-solid fa-screwdriver-wrench"></i> Paint Correction</a>
-                        <a href="#pricing"><i class="fa-solid fa-sparkles"></i> Interior Spa</a>
-                    </div>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                    <div class="footer-title">Contact</div>
-                    <div class="footer-contact">
-                        <div><i class="fa-solid fa-location-dot"></i> 21 Detailing Ave, Downtown</div>
-                        <div><i class="fa-solid fa-phone"></i> (555) 888-0099</div>
-                        <div><i class="fa-solid fa-envelope"></i> bookings@hyperwash.com</div>
-                        <div><i class="fa-solid fa-clock"></i> Mon–Sat: 10AM–9PM</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-copy">© 2025 HYPERWASH ELITE DETAILING. ALL RIGHTS RESERVED.</div>
-
-                <div class="mini-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Cancellation</a>
-                    <a href="#">Careers</a>
-                </div>
-
-                <div class="social-row">
-                    <a class="social-btn" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a class="social-btn" href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a class="social-btn" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a class="social-btn" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-
+        <div class="showcase-side after" id="afterSide">
+          <button type="button" class="ba-btn after" id="btnAfter">AFTER DETAILING</button>
+          <!-- ✅ fixed (no negative margin / no forced 600px height) -->
+          <img class="after-img" src="/assets/Gemini_Generated_Image_na1v2lna1v2lna1v.png" alt="After detailing">
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Scroll Reveal
-        const reveal = () => {
-            document.querySelectorAll('.reveal').forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) el.classList.add('active');
-            });
-        };
-        window.addEventListener('scroll', reveal);
-        window.addEventListener('load', reveal);
+  <section id="pricing" class="section-padding pricing-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Choose Your Level</h2>
+        <div class="accent-line"></div>
+      </div>
 
-        // Navbar Scroll Toggle
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
+      <div class="services-grid">
+        <div class="price-card reveal">
+          <h3>EXPRESS</h3>
+          <div class="price-amount">$45</div>
+          <ul>
+            <li><i class="fas fa-check"></i> Hand Wash & Dry</li>
+            <li><i class="fas fa-check"></i> Tire Shine</li>
+            <li><i class="fas fa-check"></i> Interior Vacuum</li>
+          </ul>
+          <a href="#booking" class="btn" style="border:1px solid #333; background:transparent; color:#fff; width:100%;">Select</a>
+        </div>
 
-        // ✅ Before/After Buttons highlight
-        const beforeSide = document.getElementById("beforeSide");
-        const afterSide  = document.getElementById("afterSide");
-        const btnBefore  = document.getElementById("btnBefore");
-        const btnAfter   = document.getElementById("btnAfter");
+        <div class="price-card featured reveal">
+          <h3>ULTIMATE</h3>
+          <div class="price-amount">$120</div>
+          <ul>
+            <li><i class="fas fa-check"></i> Clay Bar Treatment</li>
+            <li><i class="fas fa-check"></i> Iron Decontamination</li>
+            <li><i class="fas fa-check"></i> Ceramic Sealant (6mo)</li>
+            <li><i class="fas fa-check"></i> Engine Bay Clean</li>
+          </ul>
+          <a href="#booking" class="btn btn-primary" style="width:100%;">Most Popular</a>
+        </div>
 
-        function activateBefore(){
-            beforeSide.style.outline = "2px solid rgba(0,242,255,0.45)";
-            beforeSide.style.outlineOffset = "-2px";
-            afterSide.style.outline = "none";
-        }
-        function activateAfter(){
-            afterSide.style.outline = "2px solid rgba(255,215,0,0.35)";
-            afterSide.style.outlineOffset = "-2px";
-            beforeSide.style.outline = "none";
-        }
-        btnBefore.addEventListener("click", activateBefore);
-        btnAfter.addEventListener("click", activateAfter);
-        activateAfter();
+        <div class="price-card reveal">
+          <h3>EXOTIC</h3>
+          <div class="price-amount">$350</div>
+          <ul>
+            <li><i class="fas fa-check"></i> 1-Step Paint Correction</li>
+            <li><i class="fas fa-check"></i> Full Interior Detail</li>
+            <li><i class="fas fa-check"></i> Ceramic Coating</li>
+          </ul>
+          <a href="#booking" class="btn" style="border:1px solid #333; background:transparent; color:#fff; width:100%;">Select</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Footer subscribe demo
-        document.getElementById("joinBtn").addEventListener("click", () => {
-            alert("Thanks! You are subscribed for offers & VIP slots.");
-        });
-    </script>
+  <section id="booking" class="section-padding">
+    <div class="container">
+      <div class="booking-box reveal">
+        <h2 style="margin-bottom:40px;">Secure Your Detailing Session</h2>
+        <form onsubmit="event.preventDefault(); alert('Booking Requested! Our team will call you to confirm.');">
+          <div class="input-row">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+          </div>
+          <div class="input-row">
+            <select required>
+              <option value="">Vehicle Type</option>
+              <option>Sedan / Coupe</option>
+              <option>SUV / Truck</option>
+              <option>Exotic / Sports</option>
+            </select>
+            <select required>
+              <option value="">Select Package</option>
+              <option>Express Wash</option>
+              <option>Ultimate Detail</option>
+              <option>Exotic Restoration</option>
+            </select>
+          </div>
+          <div class="input-row">
+            <input type="date" required>
+            <input type="tel" placeholder="Phone Number" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Confirm Booking Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="hyper-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-top">
+            <div class="logo" style="font-size:1.25rem;">HYPER<span>WASH</span></div>
+            <div class="brand-badge">ELITE DETAILING</div>
+          </div>
+          <div class="brand-desc">
+            A high-performance detailing studio built for people who want their car to look unreal — every day.
+            Ceramic protection, interior spa, and paint correction with lab-grade precision.
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-pill"><i class="fa-solid fa-bolt" style="color:var(--primary); margin-right:6px;"></i> Fast Turnaround</div>
+            <div class="trust-pill"><i class="fa-solid fa-shield" style="color:var(--primary); margin-right:6px;"></i> Safe Products</div>
+            <div class="trust-pill"><i class="fa-solid fa-star" style="color:var(--accent); margin-right:6px;"></i> Premium Finish</div>
+          </div>
+
+          <div class="subscribe">
+            <input type="email" placeholder="Get offers & reminders (email)">
+            <button type="button" id="joinBtn">Join</button>
+          </div>
+          <div class="footer-note">No spam — only discounts, new packages & VIP slots.</div>
+        </div>
+
+        <div>
+          <div class="footer-title">Explore</div>
+          <div class="footer-links">
+            <a href="#services"><i class="fa-solid fa-grid-2"></i> Services</a>
+            <a href="#showcase"><i class="fa-solid fa-wand-magic-sparkles"></i> Results</a>
+            <a href="#pricing"><i class="fa-solid fa-tag"></i> Pricing</a>
+            <a href="#booking"><i class="fa-solid fa-calendar-check"></i> Book Now</a>
+            <a href="#"><i class="fa-solid fa-gift"></i> Gift Cards</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Packages</div>
+          <div class="footer-links">
+            <a href="#pricing"><i class="fa-solid fa-car"></i> Express Wash</a>
+            <a href="#pricing"><i class="fa-solid fa-droplet"></i> Ultimate Detail</a>
+            <a href="#pricing"><i class="fa-solid fa-shield-halved"></i> Ceramic Pro</a>
+            <a href="#pricing"><i class="fa-solid fa-screwdriver-wrench"></i> Paint Correction</a>
+            <a href="#pricing"><i class="fa-solid fa-sparkles"></i> Interior Spa</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Contact</div>
+          <div class="footer-contact">
+            <div><i class="fa-solid fa-location-dot"></i> 21 Detailing Ave, Downtown</div>
+            <div><i class="fa-solid fa-phone"></i> (555) 888-0099</div>
+            <div><i class="fa-solid fa-envelope"></i> bookings@hyperwash.com</div>
+            <div><i class="fa-solid fa-clock"></i> Mon–Sat: 10AM–9PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 HYPERWASH ELITE DETAILING. ALL RIGHTS RESERVED.</div>
+
+        <div class="mini-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cancellation</a>
+          <a href="#">Careers</a>
+        </div>
+
+        <div class="social-row">
+          <a class="social-btn" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a class="social-btn" href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a class="social-btn" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a class="social-btn" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll Reveal
+    const reveal = () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) el.classList.add('active');
+      });
+    };
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+
+    // Navbar Scroll Toggle
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Before/After Buttons highlight
+    const beforeSide = document.getElementById("beforeSide");
+    const afterSide  = document.getElementById("afterSide");
+    const btnBefore  = document.getElementById("btnBefore");
+    const btnAfter   = document.getElementById("btnAfter");
+
+    function activateBefore(){
+      beforeSide.style.outline = "2px solid rgba(0,242,255,0.45)";
+      beforeSide.style.outlineOffset = "-2px";
+      afterSide.style.outline = "none";
+    }
+    function activateAfter(){
+      afterSide.style.outline = "2px solid rgba(255,215,0,0.35)";
+      afterSide.style.outlineOffset = "-2px";
+      beforeSide.style.outline = "none";
+    }
+    btnBefore.addEventListener("click", activateBefore);
+    btnAfter.addEventListener("click", activateAfter);
+    activateAfter();
+
+    // Footer subscribe demo
+    document.getElementById("joinBtn").addEventListener("click", () => {
+      alert("Thanks! You are subscribed for offers & VIP slots.");
+    });
+
+    // ✅ Mobile drawer logic (prevents body scroll + fixes overflow issues)
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const closeBtn = document.getElementById('drawerClose');
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      backdrop.classList.add('open');
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      backdrop.classList.remove('open');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+
+    // close on link click
+    drawer.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', closeDrawer);
+    });
+
+    // close on ESC
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') closeDrawer();
+    });
+  </script>
 </body>
 </html>

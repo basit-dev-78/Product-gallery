@@ -32,7 +32,6 @@
     }
     a{color:inherit; text-decoration:none}
 
-    /* ✅ Prevent container overflow on mobile */
     .container{
       max-width:var(--max);
       margin:0 auto;
@@ -154,7 +153,6 @@
       min-width:0;
     }
 
-    /* ✅ IMPORTANT: allow shrink on mobile */
     .searchBox{
       flex: 1 1 420px;
       display:flex; gap:8px; align-items:center;
@@ -163,7 +161,7 @@
       border-radius: 12px;
       padding:6px 10px;
       box-shadow: 0 10px 24px rgba(2,6,23,0.04);
-      min-width:0;      /* was causing overflow */
+      min-width:0;
       width:100%;
       max-width:100%;
     }
@@ -291,7 +289,6 @@
 
     /* ✅ IMAGE AREA */
     .thumb{
-      /* fixed height works, but we will improve mobile below */
       height: 180px;
       background: #f3f4f6;
       position:relative;
@@ -302,39 +299,60 @@
       width:100%;
       height:100%;
       display:block;
-      object-fit:cover;         /* desktop = cover */
-      object-position:center;   /* center */
+      object-fit:cover;
+      object-position:center;
       transform: scale(1.01);
       transition: .25s ease;
     }
     .card:hover .thumb img{ transform: scale(1.06); }
 
-    .badgeTag{
+    /* ✅ FIX: badges INSIDE IMAGE at BOTTOM (left/right) */
+    .thumbMeta{
       position:absolute;
-      top:12px; left:12px;
+      left:10px;
+      right:10px;
+      bottom:10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      z-index:3;
+      pointer-events:none; /* clicks go to card buttons, not pills */
+    }
+    .badgeTag{
+      pointer-events:none;
       display:inline-flex;
-      padding:7px 10px;
+      padding:8px 12px;
       border-radius:999px;
       font-size:12px;
       font-weight:950;
       color:#fff;
       background: var(--accent);
       box-shadow: 0 12px 26px rgba(255,0,102,.25);
-      z-index:2;
+      white-space:nowrap;
     }
     .priceTag{
-      position:absolute;
-      top:12px; right:12px;
+      pointer-events:none;
       display:inline-flex;
-      padding:7px 10px;
+      padding:8px 12px;
       border-radius:999px;
       font-size:12px;
       font-weight:950;
       color:#0f172a;
       background: rgba(255,255,255,.92);
-      border:1px solid rgba(229,231,235,.8);
-      box-shadow: 0 10px 24px rgba(2,6,23,0.08);
+      border:1px solid rgba(229,231,235,.85);
+      box-shadow: 0 10px 24px rgba(2,6,23,0.10);
+      white-space:nowrap;
+    }
+
+    /* optional: subtle dark fade for readability */
+    .thumbShade{
+      position:absolute;
+      inset:auto 0 0 0;
+      height:78px;
+      background: linear-gradient(to top, rgba(2,6,23,.55), rgba(2,6,23,0));
       z-index:2;
+      pointer-events:none;
     }
 
     .content{ padding:14px; }
@@ -445,25 +463,23 @@
       padding:16px;
       z-index: 9999;
     }
-     .modal{
-    width: min(1280px, 96vw);   /* ✅ increased width */
-    height: min(92vh, 920px);   /* (optional) a bit taller */
-    background:#fff;
-    border-radius: 22px;
-    overflow:hidden;
-    box-shadow: 0 30px 80px rgba(2,6,23,.35);
-    display:flex;
-    flex-direction:column;
-  }
-
-  /* optional: on very small screens keep it full width */
-  @media (max-width: 620px){
     .modal{
-      width: min(100vw, 100vw);
-      height: min(94vh, 94vh);
-      border-radius: 18px;
+      width: min(1280px, 96vw);
+      height: min(92vh, 920px);
+      background:#fff;
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 30px 80px rgba(2,6,23,.35);
+      display:flex;
+      flex-direction:column;
     }
-  }
+    @media (max-width: 620px){
+      .modal{
+        width: min(100vw, 100vw);
+        height: min(94vh, 94vh);
+        border-radius: 18px;
+      }
+    }
     .modalHeader{
       display:flex;
       align-items:center;
@@ -572,16 +588,11 @@
       .filtersWrap{top: 56px;}
     }
 
-    /* ✅ MAIN FIX: MOBILE THUMB IMAGE MUST NOT CROP */
+    /* ✅ MOBILE thumb no crop */
     @media (max-width: 620px){
       .container{ padding: 12px; }
       .grid{ grid-template-columns: 1fr; }
 
-      /* 🔥 This is the exact fix:
-         - set aspect ratio so height adapts nicely
-         - object-fit: contain (no cut)
-         - add small padding so edges never touch
-      */
       .thumb{
         height:auto;
         aspect-ratio: 16 / 9;
@@ -589,14 +600,16 @@
         padding: 8px;
       }
       .thumb img{
-        object-fit: contain;     /* ✅ no cut */
-        object-position: center; /* ✅ centered */
+        object-fit: contain;
+        object-position: center;
         background: #ffffff;
-        transform: none !important; /* avoid zoom crop on mobile */
+        transform: none !important;
       }
       .card:hover .thumb img{ transform:none !important; }
 
-      .filtersWrap{ top: 56px; }
+      /* keep bottom pills visible even when contain */
+      .thumbShade{ height:72px; }
+      .thumbMeta{ left:8px; right:8px; bottom:8px; }
     }
 
     @media (max-width: 420px){
@@ -746,7 +759,6 @@
   </footer>
 
 <script>
-const USE_EXTERNAL_JSON = true;
 const JSON_URL = "./demos.json";
 
 const WHATSAPP_NUMBER = "923000000000"; // replace with your number (no +)
@@ -826,8 +838,6 @@ const modalLoader = document.getElementById("modalLoader");
 const loaderText = document.getElementById("loaderText");
 
 let DEMOS = [];
-
-/* ✅ Loader exact */
 let currentPreviewUrl = "";
 let slowHintTimer = null;
 
@@ -848,7 +858,6 @@ function hideLoader(){
 
 function openPreview(item){
   currentPreviewUrl = item.previewUrl;
-
   modalTitle.textContent = `Preview: ${item.title} (${item.id})`;
 
   modalFrame.classList.remove("ready");
@@ -860,7 +869,6 @@ function openPreview(item){
   modalOpenTab.onclick = () => window.open(item.previewUrl, "_blank");
   modalGetSite.onclick = () => window.open(waLinkForDemo(item), "_blank");
 }
-
 function closePreview(){
   modalOverlay.style.display = "none";
   currentPreviewUrl = "";
@@ -869,13 +877,11 @@ function closePreview(){
   hideLoader();
   loaderText.textContent = "Loading preview…";
 }
-
 modalClose.addEventListener("click", closePreview);
 modalOverlay.addEventListener("click", (e)=>{ if(e.target===modalOverlay) closePreview(); });
 
 modalFrame.addEventListener("load", () => {
   if (modalOverlay.style.display !== "flex") return;
-
   const src = modalFrame.getAttribute("src") || "";
   if (!src || src === "about:blank") return;
   if (src !== currentPreviewUrl) return;
@@ -890,7 +896,6 @@ window.addEventListener("keydown", (e)=>{
   if(e.key==="Escape"){ closePreview(); closeQuote(); }
 });
 
-// Load JSON
 (async function init(){
   try{
     const res = await fetch(JSON_URL, { cache: "no-store" });
@@ -913,9 +918,9 @@ function normalizeJsonToDemos(json){
     category: item.category || "Other",
     description: item.description || "",
     tags: Array.isArray(item.tags) ? item.tags : autoTags(item.category || "Other"),
-    badge: item.badge || badgeFrom(item.popularScore || 0),
+    badge: item.badge || badgeFrom(item.popularScore || 0),   // ✅ "Popular"
     priceBucket: item.priceBucket || "mid",
-    priceLabel: item.priceLabel || "",
+    priceLabel: item.priceLabel || "From £149",               // ✅ "From £149" (fallback)
     rating: typeof item.rating === "number" ? item.rating : null,
     popularScore: typeof item.popularScore === "number" ? item.popularScore : 0,
     createdAt: item.createdAt || new Date().toISOString().slice(0,10),
@@ -1006,13 +1011,19 @@ function sortItems(items){
 function cardHTML(item){
   const tags = (item.tags||[]).slice(0,6).map(t=>`<span class="tag">${t}</span>`).join("");
   const rating = (typeof item.rating === "number") ? `<span class="rating">⭐ ${item.rating.toFixed(1)}</span>` : "";
+  const price = item.priceLabel || "";
+
   return `
     <div class="card">
       <div class="thumb">
         <img src="${item.image}" alt="${item.title}" loading="lazy"/>
-        <div class="badgeTag">${item.badge}</div>
-        ${item.priceLabel ? `<div class="priceTag">${item.priceLabel}</div>` : ""}
+        <div class="thumbShade"></div>
+        <div class="thumbMeta">
+          <span class="badgeTag">${item.badge}</span>
+          ${price ? `<span class="priceTag">${price}</span>` : ``}
+        </div>
       </div>
+
       <div class="content">
         <div class="titleRow">
           <h3>${item.title}</h3>

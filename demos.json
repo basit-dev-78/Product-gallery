@@ -128,6 +128,25 @@
                 "Attractive",
                 "Eye Catching"
             ]
+        },
+        {
+            "id": "WB-09",
+            "title": "LUMINA (not final)",
+            "category": "Cleaner",
+            "description": "The Effect + The Method + booking",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/cleaner/cleaner-v2.html",
+            "image": "/assets/cleaner_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
         }
     ]
 }
