@@ -24,7 +24,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* ✅ STOP HORIZONTAL OVERFLOW (the "vertical line" issue on mobile is usually X overflow) */
+    /* ✅ Stop horizontal overflow line on mobile */
     html, body { width: 100%; max-width: 100%; overflow-x: clip; }
     @supports not (overflow-x: clip) {
       html, body { overflow-x: hidden; }
@@ -83,9 +83,29 @@
     .nav-content { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
     .logo { font-size: 1.6rem; font-weight: 800; color: var(--secondary); text-decoration: none; }
     .logo span { color: var(--primary); }
+
     .nav-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
     .nav-links a { font-weight: 600; color: var(--text-main); font-size: 0.95rem; text-decoration: none; }
     .nav-links a:hover { color: var(--primary); }
+
+    /* ✅ Mobile Toggle Button */
+    .nav-toggle{
+      display:none;
+      background:none;
+      border:none;
+      cursor:pointer;
+      padding:8px;
+      border-radius:10px;
+    }
+    .nav-toggle span{
+      display:block;
+      width:26px;
+      height:3px;
+      background: var(--secondary);
+      margin:5px 0;
+      border-radius:3px;
+      transition: var(--transition);
+    }
 
     /* --- HERO SECTION --- */
     .hero {
@@ -125,10 +145,10 @@
       border-radius: 30px;
       box-shadow: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 30px) 0px var(--accent);
       object-fit: cover;
-      aspect-ratio: 4 / 3; /* ✅ keeps it clean on all screens */
+      aspect-ratio: 4 / 3;
     }
 
-    /* --- SERVICES CARDS --- */
+    /* --- SERVICES --- */
     .section-header { text-align: center; margin-bottom: 60px; }
     .section-header h2 { font-size: 2.5rem; color: var(--secondary); }
     .section-header p { color: var(--text-light); margin-top: 10px; }
@@ -165,7 +185,7 @@
     .service-card h3 { margin-bottom: 12px; color: var(--text-main); }
     .service-card p { color: var(--text-light); }
 
-    /* --- BOOKING / CALCULATOR --- */
+    /* --- BOOKING --- */
     .booking-section {
       background: var(--white);
       border-radius: 40px;
@@ -261,12 +281,40 @@
       .hero-content, .calculator { grid-template-columns: 1fr; }
       .hero { padding-top: 86px; }
       .hero-text h1 { font-size: 2.8rem; }
-
-      /* ✅ IMPORTANT: show image on mobile (remove display:none) */
-      .hero-image { display: block; }
       .hero-image img { border-radius: 22px; aspect-ratio: 16 / 10; }
 
-      .nav-links { display: none; } /* demo simplified */
+      /* ✅ Show toggle button, hide desktop links initially */
+      .nav-toggle { display: block; }
+
+      /* ✅ Mobile menu (drawer from top) */
+      .nav-links {
+        position: fixed;
+        left: 0;
+        top: 74px;               /* keep below navbar */
+        width: 100%;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(10px);
+        padding: 18px 24px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transform: translateY(-130%);
+        transition: var(--transition);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        z-index: 999;
+        max-height: calc(100vh - 74px);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .nav-links.active { transform: translateY(0); }
+
+      /* ✅ STOP VERTICAL SCROLLBAR WHEN MENU OPEN */
+      body.menu-open {
+        overflow: hidden;
+        height: 100vh;
+        touch-action: none;
+      }
+
       .booking-section { padding: 28px; border-radius: 28px; }
       .section-padding { padding: 70px 0; }
       .price-display { min-height: auto; }
@@ -282,9 +330,11 @@
       .ba-container { grid-template-columns: 1fr; }
       .ba-item { height: 230px; }
       .price-tag { font-size: 3rem; }
+
+      .nav-links { padding: 16px 16px 20px; }
     }
 
-    /* ✅ Extra safety: stop any accidental overflow from long words/icons */
+    /* ✅ Extra safety */
     .service-card, .booking-section, .footer-grid, .hero-content { min-width: 0; }
   </style>
 </head>
@@ -293,12 +343,19 @@
   <nav id="navbar">
     <div class="container nav-content">
       <a href="#" class="logo">Sparkle<span>Flow</span></a>
-      <div class="nav-links">
+
+      <!-- ✅ MENU LINKS -->
+      <div class="nav-links" id="navMenu">
         <a href="#services">Services</a>
         <a href="#about">Why Us</a>
         <a href="#booking">Pricing</a>
         <a href="#booking" class="btn btn-primary">Book Now</a>
       </div>
+
+      <!-- ✅ TOGGLE BUTTON (MOBILE) -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -483,8 +540,38 @@
       item.addEventListener('change', calculatePrice);
       item.addEventListener('keyup', calculatePrice);
     });
-
     window.addEventListener('load', calculatePrice);
+
+    // 4) ✅ Mobile Menu Toggle + NO vertical scrollbar
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    const closeMenu = () => {
+      navMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close on link click
+    document.querySelectorAll('#navMenu a').forEach(a => {
+      a.addEventListener('click', closeMenu);
+    });
+
+    // Close on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 968) closeMenu();
+    });
+
+    // Close if user scrolls a bit while open (optional safety)
+    window.addEventListener('scroll', () => {
+      if (document.body.classList.contains('menu-open') && window.scrollY > 10) closeMenu();
+    }, { passive: true });
   </script>
 </body>
 </html>
