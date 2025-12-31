@@ -131,7 +131,7 @@
     /* ===== SUPER COMPACT FILTER HEADER ===== */
     .filtersWrap{
       position: sticky;
-      top: 58px; /* below the siteHeader */
+      top: 58px;
       z-index: 50;
       background: rgba(255,255,255,.94);
       backdrop-filter: blur(8px);
@@ -401,7 +401,9 @@
       margin-top:16px;
     }
 
-    /* Modal */
+    /* =========================
+       MODAL
+       ========================= */
     .modalOverlay{
       position:fixed;
       inset:0;
@@ -412,25 +414,16 @@
       padding:16px;
       z-index: 9999;
     }
-.modal{
-  width: min(1000px, 85vw);   /* ⬅ wider */
-  height: min(90vh, 900px);   /* ⬅ taller */
-  background:#fff;
-  border-radius: 22px;
-  overflow:hidden;
-  box-shadow: 0 30px 80px rgba(2,6,23,.35);
-  display:flex;
-  flex-direction:column;
-}
-
-.modalHeader{
-  padding: 8px 12px;
-}
-.modalHeader b{
-  font-size: 12.5px;
-}
-
-
+    .modal{
+      width: min(1000px, 85vw);
+      height: min(90vh, 900px);
+      background:#fff;
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 30px 80px rgba(2,6,23,.35);
+      display:flex;
+      flex-direction:column;
+    }
     .modalHeader{
       display:flex;
       align-items:center;
@@ -452,7 +445,58 @@
       font-weight:950;
       font-size:12.5px;
     }
-    .modal iframe{ flex:1; width:100%; border:0; background:#fff; }
+
+    /* ===== MODAL LOADER (EXACT: hides only when preview is visible) ✅ ===== */
+    .modalBody{
+      position:relative;
+      flex:1;
+      background:#fff;
+    }
+    #modalFrame{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+      display:block;
+      opacity:0;                 /* hidden until loaded */
+      transition: opacity .16s ease;
+    }
+    #modalFrame.ready{
+      opacity:1;                 /* show only when loaded */
+    }
+
+    .modalLoader{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(6px);
+      z-index: 5;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .15s ease;
+    }
+    .modalLoader.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .spinner{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      border:3px solid rgba(15,23,42,.14);
+      border-top-color: var(--accent);
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+    .loaderText{
+      font-size:13px;
+      font-weight:900;
+      color:#0f172a;
+    }
 
     /* Floating WhatsApp */
     .floatWa{
@@ -595,7 +639,15 @@
           <button class="x" id="modalClose">Close ✕</button>
         </div>
       </div>
-      <iframe id="modalFrame" src="about:blank" loading="lazy"></iframe>
+
+      <!-- ✅ Loader + iframe -->
+      <div class="modalBody">
+        <div class="modalLoader" id="modalLoader">
+          <div class="spinner"></div>
+          <div class="loaderText" id="loaderText">Loading preview…</div>
+        </div>
+        <iframe id="modalFrame" src="about:blank" loading="eager"></iframe>
+      </div>
     </div>
   </div>
 
@@ -724,8 +776,102 @@ const modalClose = document.getElementById("modalClose");
 const modalOpenTab = document.getElementById("modalOpenTab");
 const modalGetSite = document.getElementById("modalGetSite");
 
+// Loader refs
+const modalLoader = document.getElementById("modalLoader");
+const loaderText = document.getElementById("loaderText");
+
 // Data store loaded from JSON
 let DEMOS = [];
+
+/* =======================================================
+   ✅ EXACT LOADER RULE:
+   - show loader immediately
+   - keep iframe hidden (opacity 0)
+   - hide loader ONLY after iframe loads the REAL preview URL
+   - ignore about:blank load events
+======================================================= */
+let currentPreviewUrl = "";
+let previewToken = 0;
+let slowHintTimer = null;
+
+function showLoader(text="Loading preview…"){
+  loaderText.textContent = text;
+  modalLoader.classList.add("show");
+  clearTimeout(slowHintTimer);
+  slowHintTimer = setTimeout(() => {
+    // if still loading, show hint (loader still visible)
+    if (modalOverlay.style.display === "flex" && !modalFrame.classList.contains("ready")) {
+      loaderText.textContent = "Still loading… (Try Open button)";
+    }
+  }, 3500);
+}
+function hideLoader(){
+  modalLoader.classList.remove("show");
+  clearTimeout(slowHintTimer);
+}
+
+function openPreview(item){
+  previewToken++;
+  const myToken = previewToken;
+
+  currentPreviewUrl = item.previewUrl;
+
+  modalTitle.textContent = `Preview: ${item.title} (${item.id})`;
+
+  // start loading state
+  modalFrame.classList.remove("ready"); // hide iframe content
+  showLoader("Loading preview…");
+
+  // open modal now (so loader shows instantly)
+  modalOverlay.style.display = "flex";
+
+  // set iframe to REAL preview url (no blank flash)
+  modalFrame.src = item.previewUrl;
+
+  modalOpenTab.onclick = () => window.open(item.previewUrl, "_blank");
+  modalGetSite.onclick = () => window.open(waLinkForDemo(item), "_blank");
+
+  // if user quickly switches previews, old load events are ignored by token check
+  modalFrame.dataset.token = String(myToken);
+}
+
+function closePreview(){
+  modalOverlay.style.display = "none";
+  currentPreviewUrl = "";
+  modalFrame.src = "about:blank";
+  modalFrame.classList.remove("ready");
+  hideLoader();
+  loaderText.textContent = "Loading preview…";
+}
+
+modalClose.addEventListener("click", closePreview);
+modalOverlay.addEventListener("click", (e)=>{ if(e.target===modalOverlay) closePreview(); });
+
+// ✅ Hide loader EXACTLY when preview is shown
+modalFrame.addEventListener("load", () => {
+  if (modalOverlay.style.display !== "flex") return;
+
+  const src = modalFrame.getAttribute("src") || "";
+
+  // ignore about:blank load
+  if (!src || src === "about:blank") return;
+
+  // only if this is the current preview
+  if (src !== currentPreviewUrl) return;
+
+  // show preview first, then hide loader
+  requestAnimationFrame(() => {
+    modalFrame.classList.add("ready");  // iframe becomes visible
+    // second frame ensures it is actually painted on screen
+    requestAnimationFrame(() => {
+      hideLoader();                     // loader hides AFTER preview is visible
+    });
+  });
+});
+
+window.addEventListener("keydown", (e)=>{
+  if(e.key==="Escape"){ closePreview(); closeQuote(); }
+});
 
 // =============================
 // LOAD JSON
@@ -761,7 +907,6 @@ function normalizeJsonToDemos(json){
     category: item.category || "Other",
     description: item.description || "",
     tags: Array.isArray(item.tags) ? item.tags : autoTags(item.category || "Other"),
-    // ✅ Always set a badge so it never disappears:
     badge: item.badge || badgeFrom(item.popularScore || 0),
     priceBucket: item.priceBucket || "mid",
     priceLabel: item.priceLabel || "",
@@ -788,12 +933,11 @@ function autoTags(category){
   return base;
 }
 
-// ✅ FIXED: badge never disappears now
 function badgeFrom(score){
   if(score >= 90) return "Popular";
   if(score >= 85) return "Hot";
   if(score >= 80) return "New";
-  return "Standard"; // fallback
+  return "Standard";
 }
 
 function categoryCounts(){
@@ -852,24 +996,6 @@ function sortItems(items){
   if(state.sort==="az")      arr.sort((a,b)=>a.title.localeCompare(b.title));
   return arr;
 }
-
-function openPreview(item){
-  modalTitle.textContent = `Preview: ${item.title} (${item.id})`;
-  modalFrame.src = item.previewUrl;
-  modalOverlay.style.display = "flex";
-  modalOpenTab.onclick = () => window.open(item.previewUrl, "_blank");
-  modalGetSite.onclick = () => window.open(waLinkForDemo(item), "_blank");
-}
-function closePreview(){
-  modalOverlay.style.display = "none";
-  modalFrame.src = "about:blank";
-}
-modalClose.addEventListener("click", closePreview);
-modalOverlay.addEventListener("click", (e)=>{ if(e.target===modalOverlay) closePreview(); });
-
-window.addEventListener("keydown", (e)=>{
-  if(e.key==="Escape"){ closePreview(); closeQuote(); }
-});
 
 function cardHTML(item){
   const tags = (item.tags||[]).slice(0,6).map(t=>`<span class="tag">${t}</span>`).join("");
