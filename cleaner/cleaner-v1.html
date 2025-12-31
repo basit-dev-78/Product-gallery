@@ -24,8 +24,12 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* ✅ MOBILE VERTICAL SCROLLBAR FIX (common causes: 100vw, shadows, wide images, overflow) */
-    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    /* ✅ STOP HORIZONTAL OVERFLOW (the "vertical line" issue on mobile is usually X overflow) */
+    html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+    @supports not (overflow-x: clip) {
+      html, body { overflow-x: hidden; }
+    }
+
     img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
     a, button { -webkit-tap-highlight-color: transparent; }
 
@@ -85,20 +89,21 @@
 
     /* --- HERO SECTION --- */
     .hero {
-      min-height: 100vh; /* ✅ better than height:100vh on mobile */
+      min-height: 100vh;
       display: flex;
       align-items: center;
       background: radial-gradient(circle at top right, var(--accent), var(--bg-light) 55%);
       position: relative;
-      overflow: hidden; /* ✅ prevents shadow/gradient overflow */
-      padding-top: 90px; /* ✅ room for fixed navbar */
-      padding-bottom: 30px;
+      overflow: hidden;
+      padding-top: 90px;
+      padding-bottom: 40px;
     }
     .hero-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
       align-items: center;
+      min-width: 0;
     }
     .hero-text h1 {
       font-size: 4rem;
@@ -114,12 +119,13 @@
       max-width: 520px;
     }
 
-    .hero-image { position: relative; }
+    .hero-image { position: relative; min-width: 0; }
     .hero-image img {
       width: 100%;
       border-radius: 30px;
-      /* ✅ the "30px 30px 0px" shadow can overflow on small screens; keep it but clamp */
       box-shadow: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 30px) 0px var(--accent);
+      object-fit: cover;
+      aspect-ratio: 4 / 3; /* ✅ keeps it clean on all screens */
     }
 
     /* --- SERVICES CARDS --- */
@@ -139,7 +145,8 @@
       transition: var(--transition);
       border: 1px solid #f0f0f0;
       position: relative;
-      overflow: hidden; /* ✅ prevent icon/glow overflow */
+      overflow: hidden;
+      min-width: 0;
     }
     .service-card:hover {
       transform: translateY(-8px);
@@ -164,13 +171,15 @@
       border-radius: 40px;
       padding: 60px;
       box-shadow: var(--shadow);
-      overflow: hidden; /* ✅ stop internal overflow from causing horizontal scroll */
+      overflow: hidden;
+      min-width: 0;
     }
     .calculator {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 50px;
       align-items: start;
+      min-width: 0;
     }
     .calc-form h2 { margin-bottom: 18px; color: var(--secondary); }
 
@@ -199,21 +208,24 @@
       flex-direction: column;
       justify-content: center;
       min-height: 280px;
+      min-width: 0;
     }
     .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
 
     /* --- BEFORE/AFTER --- */
     .ba-container {
-      display: grid; /* ✅ better on mobile than flex row */
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-top: 34px;
+      min-width: 0;
     }
     .ba-item {
       position: relative;
       border-radius: 20px;
       overflow: hidden;
       height: 300px;
+      min-width: 0;
     }
     .ba-item img { width: 100%; height: 100%; object-fit: cover; }
     .ba-label {
@@ -232,6 +244,7 @@
       grid-template-columns: 1.5fr 1fr 1fr;
       gap: 40px;
       margin-bottom: 50px;
+      min-width: 0;
     }
     .footer-logo { font-size: 1.8rem; font-weight: 800; margin-bottom: 16px; }
     .footer-links h4 { margin-bottom: 16px; font-size: 1.2rem; }
@@ -248,7 +261,11 @@
       .hero-content, .calculator { grid-template-columns: 1fr; }
       .hero { padding-top: 86px; }
       .hero-text h1 { font-size: 2.8rem; }
-      .hero-image { display: none; }
+
+      /* ✅ IMPORTANT: show image on mobile (remove display:none) */
+      .hero-image { display: block; }
+      .hero-image img { border-radius: 22px; aspect-ratio: 16 / 10; }
+
       .nav-links { display: none; } /* demo simplified */
       .booking-section { padding: 28px; border-radius: 28px; }
       .section-padding { padding: 70px 0; }
@@ -258,6 +275,7 @@
 
     @media (max-width: 560px) {
       .container { padding: 0 16px; }
+      .hero { padding-bottom: 28px; }
       .hero-text h1 { font-size: 2.35rem; }
       .hero-text p { font-size: 1.05rem; }
       .service-card { padding: 26px; }
@@ -293,9 +311,10 @@
           <a href="#booking" class="btn btn-primary">Get Instant Quote</a>
         </div>
       </div>
+
       <div class="hero-image reveal">
         <img
-          src="https://images.unsplash.com/flagged/photo-1573168710465-7f7da9a23a15?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xlYW4lMjBob21lfGVufDB8fDB8fHww"
+          src="https://images.unsplash.com/flagged/photo-1573168710465-7f7da9a23a15?w=1200&auto=format&fit=crop&q=70&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xlYW4lMjBob21lfGVufDB8fDB8fHww"
           alt="Clean Home"
           loading="lazy"
         >
@@ -375,7 +394,7 @@
           <div class="ba-item">
             <div class="ba-label">BEFORE</div>
             <img
-              src="https://plus.unsplash.com/premium_photo-1664303821751-fcd1d58df139?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlydHklMjBob21lfGVufDB8fDB8fHww"
+              src="https://plus.unsplash.com/premium_photo-1664303821751-fcd1d58df139?w=1200&auto=format&fit=crop&q=70&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlydHklMjBob21lfGVufDB8fDB8fHww"
               alt="Dirty"
               loading="lazy"
             >
@@ -383,7 +402,7 @@
           <div class="ba-item">
             <div class="ba-label">AFTER</div>
             <img
-              src="https://images.unsplash.com/photo-1649083048381-520a5b3d91ff?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNsZWFuJTIwaG9tZXxlbnwwfHwwfHx8MA%3D%3D"
+              src="https://images.unsplash.com/photo-1649083048381-520a5b3d91ff?w=1200&auto=format&fit=crop&q=70&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNsZWFuJTIwaG9tZXxlbnwwfHwwfHx8MA%3D%3D"
               alt="Clean"
               loading="lazy"
             >
@@ -465,7 +484,6 @@
       item.addEventListener('keyup', calculatePrice);
     });
 
-    // ✅ ensure correct initial price on load
     window.addEventListener('load', calculatePrice);
   </script>
 </body>
