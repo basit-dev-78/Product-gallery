@@ -1,214 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPID | Mobile Solutions On-Demand</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@400;800&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg: #0B0E14;
-            --surface: #161B22;
-            --accent: #2F69FF; /* Neon Cobalt */
-            --accent-glow: rgba(47, 105, 255, 0.4);
-            --text: #FFFFFF;
-            --text-dim: #8B949E;
-            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFix | Premium Mobile Repair</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+<style>
+/* --- VARIABLES & RESET --- */
+:root {
+  --primary: #0cf5f5; 
+  --secondary: #ff7a18; 
+  --bg-dark: #0d0f1a;
+  --bg-card: #1a1d2b;
+  --text-light: #e0e6f2;
+  --text-gray: #9ca3af;
+  --glass: rgba(26,29,43,0.75);
+  --gradient: linear-gradient(135deg, #0cf5f5 0%, #ff7a18 100%);
+}
+* {margin:0; padding:0; box-sizing:border-box;}
+html {scroll-behavior:smooth;}
+body {font-family:'Outfit',sans-serif; background-color:var(--bg-dark); color:var(--text-light); line-height:1.6; overflow-x:hidden;}
+a {text-decoration:none; color:inherit; transition:0.3s;}
+ul {list-style:none;}
+img {max-width:100%; display:block;}
 
-        /* --- NAVIGATION --- */
-        nav {
-            padding: 25px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000;
-            background: rgba(11, 14, 20, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .logo { font-family: 'Lexend Exa', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
-        .logo span { color: var(--accent); }
+/* --- LAYOUT --- */
+.container {max-width:1200px; margin:0 auto; padding:0 20px;}
+.flex {display:flex; align-items:center;}
+.grid {display:grid; gap:30px;}
+.section-padding {padding:80px 0;}
+.text-center{text-align:center;}
+.text-gradient {background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+.btn {display:inline-block; padding:12px 32px; border-radius:50px; font-weight:600; cursor:pointer; transition:0.3s; border:none;}
+.btn-primary {background: var(--gradient); color:white; box-shadow:0 4px 15px rgba(12,245,245,0.3);}
+.btn-primary:hover {transform:translateY(-2px); box-shadow:0 8px 25px rgba(12,245,245,0.5);}
+.btn-glass {background:rgba(255,255,255,0.05); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.2); color:white;}
+.btn-glass:hover {background:rgba(255,255,255,0.15);}
 
-        /* --- HERO: VELOCITY --- */
-        .hero {
-            padding: 100px 5%;
-            display: flex; flex-direction: column; align-items: center;
-            text-align: center; position: relative;
-        }
-        .hero h1 { 
-            font-family: 'Lexend Exa', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem); 
-            line-height: 1; margin-bottom: 25px; letter-spacing: -2px;
-        }
-        .hero p { color: var(--text-dim); max-width: 600px; margin-bottom: 40px; font-size: 1.1rem; }
+/* --- NAVBAR --- */
+.navbar {position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:0.3s;}
+.navbar.scrolled {background:var(--glass); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.05); padding:15px 0;}
+.nav-wrapper {justify-content:space-between; display:flex; align-items:center;}
+.logo {font-size:1.5rem; font-weight:700; letter-spacing:-1px;}
+.logo i {color:var(--secondary); margin-right:8px;}
+.nav-menu {display:flex; gap:40px;}
+.nav-link {font-weight:500; color:var(--text-gray);}
+.nav-link:hover, .nav-link.active {color:white;}
+.mobile-toggle {display:none; font-size:1.5rem; cursor:pointer;}
 
-        /* --- CALL TO ACTION BUTTON --- */
-        .btn-rapid {
-            background: var(--accent); color: white; padding: 22px 50px;
-            border-radius: 16px; text-decoration: none; font-weight: 800;
-            display: inline-flex; align-items: center; gap: 15px;
-            box-shadow: 0 10px 30px var(--accent-glow);
-            transition: var(--transition);
-        }
-        .btn-rapid:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--accent-glow); }
+/* --- HERO --- */
+.hero {min-height:100vh; display:flex; align-items:center; position:relative; background:radial-gradient(circle at top left, #0d0f1a 0%, #1a1d2b 80%); overflow:hidden; padding-top:80px;}
+.glow-blob {position:absolute; width:500px; height:500px; background:var(--primary); filter:blur(180px); opacity:0.2; border-radius:50%; z-index:0;}
+.blob-1 {top:-150px; right:-150px;}
+.blob-2 {bottom:-150px; left:-150px; background:var(--secondary);}
+.hero-content {display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; z-index:1;}
+.hero-text h1 {font-size:4rem; line-height:1.1; margin-bottom:20px;}
+.hero-text p {font-size:1.1rem; color:var(--text-gray); margin-bottom:30px; max-width:500px;}
+.hero-stats {display:flex; gap:40px; margin-top:40px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);}
+.stat h3 {font-size:1.5rem; color:white;}
+.stat p {font-size:0.9rem; color:var(--text-gray);}
+.hero-image {position:relative; animation:float 6s ease-in-out infinite;}
+.hero-image img {border-radius:30px; box-shadow:0 25px 60px rgba(12,245,245,0.3); border:6px solid #222;}
+@keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
 
-        /* --- LIVE TIMELINE (UX) --- */
-        .timeline-container {
-            display: flex; justify-content: space-between; width: 100%; max-width: 900px;
-            margin: 80px auto; position: relative;
-        }
-        .timeline-line {
-            position: absolute; top: 25px; left: 0; width: 100%; height: 2px;
-            background: rgba(255,255,255,0.1); z-index: 1;
-        }
-        .timeline-progress {
-            position: absolute; top: 25px; left: 0; width: 33%; height: 2px;
-            background: var(--accent); z-index: 2; transition: 1s ease;
-        }
-        .step { position: relative; z-index: 3; text-align: center; }
-        .step-circle { 
-            width: 50px; height: 50px; background: var(--surface); border: 2px solid #333;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 15px; transition: 0.3s;
-        }
-        .step.active .step-circle { border-color: var(--accent); background: var(--bg); box-shadow: 0 0 15px var(--accent-glow); }
-        .step.active i { color: var(--accent); }
-        .step-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+/* --- SERVICES --- */
+.section-header h2 {font-size:2.5rem; margin-bottom:15px; color:var(--primary);}
+.section-header p {color:var(--text-gray); max-width:600px; margin:0 auto;}
+.services-grid {grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); margin-top:50px;}
+.service-card {background:var(--bg-card); padding:30px; border-radius:20px; border:1px solid rgba(255,255,255,0.05); transition:0.3s; position:relative; overflow:hidden;}
+.service-card:hover {transform:translateY(-10px); border-color:var(--secondary); box-shadow:0 10px 30px rgba(255,122,24,0.2);}
+.icon-box {width:60px; height:60px; background:rgba(255,122,24,0.1); border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:var(--secondary); margin-bottom:20px; transition:0.3s;}
+.service-card:hover .icon-box {background:var(--secondary); color:white;}
+.service-card h3 {margin-bottom:10px; font-size:1.25rem;}
+.service-card p {font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;}
+.service-link {color:var(--secondary); font-weight:600; font-size:0.9rem;}
+.service-link i {margin-left:5px; transition:0.3s;}
+.service-card:hover .service-link i {margin-left:10px;}
 
-        /* --- SERVICES: THE DASHBOARD --- */
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; padding: 0 5% 100px;
-        }
-        .service-card {
-            background: var(--surface); padding: 40px; border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);
-            position: relative;
-        }
-        .service-card:hover { border-color: var(--accent); background: #1c222a; }
-        .service-card i { font-size: 2rem; color: var(--accent); margin-bottom: 25px; display: block; }
-        .price-tag { 
-            position: absolute; top: 40px; right: 40px; 
-            font-family: 'Lexend Exa'; font-size: 0.8rem; opacity: 0.5; 
-        }
+/* --- CONTACT --- */
+#contact {background:var(--bg-dark); padding:80px 20px;}
+#contact h2 {font-size:2.5rem; margin-bottom:15px; color:var(--primary);}
+#contact p {color:var(--text-gray); margin-bottom:30px;}
+.contact-btn {margin-top:20px;}
 
-        /* --- MOBILE FLOATING ACTION --- */
-        .floating-booking {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: white; color: black;
-            padding: 15px 25px; border-radius: 100px; display: flex;
-            justify-content: space-between; align-items: center;
-            z-index: 2000; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
+/* --- FOOTER --- */
+footer {background:#0b0f1d; padding-top:60px; border-top:1px solid #1a1d2b;}
+.footer-grid {display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px;}
+.footer-col h4 {color:white; margin-bottom:20px; font-size:1.1rem;}
+.footer-col ul li {margin-bottom:10px;}
+.footer-col a {color:var(--text-gray); font-size:0.9rem;}
+.footer-col a:hover {color:var(--secondary);}
+.socials {display:flex; gap:15px; margin-top:20px;}
+.socials a {width:35px; height:35px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; border-radius:50%;}
+.footer-bottom {text-align:center; border-top:1px solid #1a1d2b; padding:20px; color:#64748b; font-size:0.8rem;}
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+/* --- FLOATING BOOK BUTTON --- */
+#book-now {position:fixed; bottom:25px; right:25px; background:var(--secondary); color:white; padding:15px 25px; border-radius:50px; box-shadow:0 5px 20px rgba(255,122,24,0.4); font-weight:600; z-index:1000; cursor:pointer; transition:0.3s; display:flex; align-items:center; gap:10px;}
+#book-now:hover {transform:translateY(-3px); box-shadow:0 10px 25px rgba(255,122,24,0.5);}
+#book-now i {font-size:1.2rem;}
 
-        @media (max-width: 768px) {
-            .timeline-container { display: none; }
-            .hero h1 { font-size: 2.8rem; }
-        }
-    </style>
+/* --- RESPONSIVE --- */
+@media(max-width:900px){.hero-content{grid-template-columns:1fr;text-align:center;}.hero-image{display:none;}.hero-stats{justify-content:center;}}
+@media(max-width:768px){.nav-menu{position:fixed;top:0;right:-100%;width:75%;height:100vh;background:#1a1d2b;flex-direction:column;justify-content:center;transition:0.3s;box-shadow:-10px 0 30px rgba(0,0,0,0.5);}.nav-menu.active{right:0;}.mobile-toggle{display:block; z-index:1001;}}
+</style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">RAPID<span>.ON</span></div>
-        <div style="display: flex; gap: 20px;">
-            <a href="#" style="color:white; text-decoration:none; font-size: 0.9rem;">Status</a>
-            <a href="#" style="color:white; text-decoration:none; font-size: 0.9rem;">Help</a>
-        </div>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+<div class="container flex nav-wrapper">
+<a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix</a>
+<ul class="flex nav-menu">
+<li><a href="#home" class="nav-link active">Home</a></li>
+<li><a href="#services" class="nav-link">Services</a></li>
+<li><a href="#contact" class="nav-link">Contact</a></li>
+</ul>
+<div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+</div>
+</nav>
 
-    <section class="hero">
-        <h1 class="reveal">WE TRAVEL.<br>WE FIX.</h1>
-        <p class="reveal">The professional mobile workshop at your doorstep. No towing, no waiting rooms, just elite service delivered to your driveway.</p>
-        <a href="#book" class="btn-rapid reveal">
-            <i class="fas fa-location-dot"></i>
-            Request Arrival
-        </a>
+<!-- HERO -->
+<section id="home" class="hero">
+<div class="glow-blob blob-1"></div>
+<div class="glow-blob blob-2"></div>
+<div class="container hero-content">
+<div class="hero-text reveal">
+<h1>Revive Your <span class="text-gradient">Devices Fast</span></h1>
+<p>Expert mobile repairs, battery replacements, water damage recovery, and more. Quick, reliable, professional.</p>
+<a href="#contact" class="btn btn-primary">Book Repair</a>
+</div>
+<div class="hero-image reveal">
+<img src="https://images.unsplash.com/photo-1592899677712-a1118dd63682?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Device Repair">
+</div>
+</div>
+</section>
 
-        <div class="timeline-container reveal">
-            <div class="timeline-line"></div>
-            <div class="timeline-progress" id="progress"></div>
-            <div class="step active">
-                <div class="step-circle"><i class="fas fa-スマホ"></i></div>
-                <div class="step-label">Booking</div>
-            </div>
-            <div class="step">
-                <div class="step-circle"><i class="fas fa-van-shuttle"></i></div>
-                <div class="step-label">En Route</div>
-            </div>
-            <div class="step">
-                <div class="step-circle"><i class="fas fa-tools"></i></div>
-                <div class="step-label">Service</div>
-            </div>
-            <div class="step">
-                <div class="step-circle"><i class="fas fa-check-double"></i></div>
-                <div class="step-label">Complete</div>
-            </div>
-        </div>
-    </section>
+<!-- SERVICES -->
+<section id="services" class="section-padding">
+<div class="container">
+<div class="section-header text-center reveal">
+<h2>Our Services</h2>
+<p>From cracked screens to complex repairs, we’ve got your devices covered.</p>
+</div>
+<div class="grid services-grid">
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+<h3>Screen Replacement</h3>
+<p>Premium screens installed fast. Original touch sensitivity restored.</p>
+<a href="#contact" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
+</div>
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-battery-full"></i></div>
+<h3>Battery Replacement</h3>
+<p>Quick battery swaps for long-lasting performance.</p>
+<a href="#contact" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
+</div>
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-water"></i></div>
+<h3>Water Damage</h3>
+<p>Recovery services using advanced ultrasonic cleaning techniques.</p>
+<a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</section>
 
-    <div class="grid">
-        <div class="service-card reveal">
-            <span class="price-tag">From $49</span>
-            <i class="fas fa-screwdriver-wrench"></i>
-            <h3>Tech Repair</h3>
-            <p>On-site screen replacements, hardware diagnostics, and network setup for home or office.</p>
-        </div>
-        <div class="service-card reveal">
-            <span class="price-tag">From $89</span>
-            <i class="fas fa-car-battery"></i>
-            <h3>Auto Care</h3>
-            <p>Mobile oil changes, battery swaps, and emergency diagnostics without leaving your home.</p>
-        </div>
-        <div class="service-card reveal">
-            <span class="price-tag">Custom</span>
-            <i class="fas fa-house-laptop"></i>
-            <h3>Home Ops</h3>
-            <p>Smart home installation, mounting, and hardware integration by certified mobile techs.</p>
-        </div>
-    </div>
+<!-- CONTACT -->
+<section id="contact" class="section-padding">
+<div class="container text-center reveal">
+<h2>Book Your Repair</h2>
+<p style="color:var(--text-gray); margin-top:15px;">Call us now or click the floating button to schedule an appointment.</p>
+<a href="tel:+15551234567" class="btn btn-primary contact-btn">Call Now</a>
+</div>
+</section>
 
-    <div class="floating-booking">
-        <div style="font-weight: 800; font-size: 0.9rem;">READY TO GO?</div>
-        <a href="#" style="background: var(--bg); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700;">Book Now</a>
-    </div>
+<!-- FOOTER -->
+<footer>
+<div class="container footer-grid">
+<div class="footer-col">
+<a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix</a>
+<p style="color:var(--text-gray); margin-top:15px; font-size:0.9rem;">Trusted mobile repair center with fast, reliable services.</p>
+<div class="socials">
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Services</h4>
+<ul>
+<li><a href="#">Screen Repair</a></li>
+<li><a href="#">Battery Replacement</a></li>
+<li><a href="#">Water Damage</a></li>
+<li><a href="#">Data Recovery</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Careers</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Support</h4>
+<ul>
+<li><a href="#">FAQs</a></li>
+<li><a href="#">Contact Support</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<ul>
+<li><a href="mailto:help@techfix.com">help@techfix.com</a></li>
+<li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+<li><span style="color:var(--text-gray); font-size:0.9rem;">123 Tech Avenue</span></li>
+</ul>
+</div>
+<div class="footer-bottom">&copy; 2026 TechFix. All rights reserved.</div>
+</div>
+</footer>
 
-    <script>
-        // Reveal Logic
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
+<!-- FLOATING BUTTON -->
+<a href="tel:+15551234567" id="book-now"><i class="fas fa-phone"></i> Book Now</a>
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<script>
+// Navbar Scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', ()=>{ navbar.classList.toggle('scrolled', window.scrollY>50); });
 
-        // Animated Timeline Demo
-        const steps = document.querySelectorAll('.step');
-        const progress = document.getElementById('progress');
-        let currentStep = 0;
+// Mobile Menu
+const mobileToggle = document.querySelector('.mobile-toggle');
+const navMenu = document.querySelector('.nav-menu');
+mobileToggle.addEventListener('click', ()=>{
+navMenu.classList.toggle('active');
+const icon = mobileToggle.querySelector('i');
+icon.classList.toggle('fa-bars');
+icon.classList.toggle('fa-times');
+});
+document.querySelectorAll('.nav-link').forEach(link=>{
+link.addEventListener('click', ()=>{
+navMenu.classList.remove('active');
+mobileToggle.querySelector('i').classList.remove('fa-times');
+mobileToggle.querySelector('i').classList.add('fa-bars');
+});
+});
 
-        setInterval(() => {
-            steps.forEach(s => s.classList.remove('active'));
-            currentStep = (currentStep + 1) % 4;
-            
-            for(let i = 0; i <= currentStep; i++) {
-                steps[i].classList.add('active');
-            }
-            progress.style.width = (currentStep * 33.3) + '%';
-        }, 3000);
-    </script>
+// Scroll Reveal
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{ if(entry.isIntersecting){entry.target.classList.add('active');}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
 </body>
 </html>

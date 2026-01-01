@@ -1,307 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAIZEN | The Art of Order</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@200;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg: #0A0A0A;
-            --surface: #141414;
-            --accent: #D1C7BD; /* Warm Sand */
-            --text-main: #FFFFFF;
-            --text-dim: #666666;
-            --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PureCare Cleaning Services</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            background: var(--bg); 
-            color: var(--text-main); 
-            line-height: 1.4;
-            overflow-x: hidden;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 40px;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            mix-blend-mode: difference;
-        }
-        .logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; letter-spacing: 5px; font-weight: 800; }
-        .nav-links a { color: white; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-left: 40px; opacity: 0.6; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; }
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Inter',sans-serif;
+    }
 
-        /* --- HERO: MONOLITHIC --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            position: relative;
-        }
-        .hero-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(4rem, 15vw, 12rem);
-            line-height: 0.8;
-            letter-spacing: -5px;
-            z-index: 2;
-        }
-        .hero-title span { color: transparent; -webkit-text-stroke: 1px var(--accent); }
-        
-        .hero-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 40px;
-        }
-        .hero-desc { max-width: 400px; color: var(--text-dim); font-size: 1.1rem; }
+    body{
+      background:#f8fbff;
+      color:#1f2937;
+      line-height:1.6;
+    }
 
-        .hero-img {
-            position: absolute;
-            right: 10%; top: 50%;
-            transform: translateY(-50%);
-            width: 35%; height: 70vh;
-            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80') center/cover;
-            border-radius: 400px 400px 0 0;
-            filter: grayscale(1);
-            z-index: 1;
-            transition: var(--transition);
-        }
-        .hero-img:hover { filter: grayscale(0); }
+    /* ===== HEADER ===== */
+    header{
+      min-height:100vh;
+      background:
+        linear-gradient(135deg, rgba(56,189,248,.9), rgba(14,165,233,.9)),
+        url("https://images.unsplash.com/photo-1581578731548-c64695cc6952");
+      background-size:cover;
+      background-position:center;
+      color:#fff;
+    }
 
-        /* --- BENTO SERVICE GRID --- */
-        .section { padding: 150px 10%; }
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 350px);
-            gap: 20px;
-        }
-        .bento-card {
-            background: var(--surface);
-            border-radius: 30px;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid var(--glass);
-            transition: var(--transition);
-        }
-        .bento-card:hover { background: #1a1a1a; transform: scale(0.98); }
-        .bento-card i { font-size: 1.5rem; color: var(--accent); }
-        .bento-card h3 { font-family: 'Syne'; font-size: 1.8rem; margin: 20px 0; }
-        .bento-card p { color: var(--text-dim); font-weight: 200; }
-        
-        .wide { grid-column: span 2; }
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 8%;
+    }
 
-        /* --- THE CONFIGURATOR (UX) --- */
-        .configurator {
-            background: var(--accent);
-            color: var(--bg);
-            border-radius: 50px;
-            padding: 100px;
-            margin-top: 100px;
-        }
-        .config-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 50px 0;
-        }
-        .room-node {
-            border: 1px solid rgba(0,0,0,0.1);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .room-node.active { background: var(--bg); color: var(--accent); border-color: var(--bg); }
-        .room-node i { display: block; font-size: 2rem; margin-bottom: 15px; }
+    nav h1{
+      font-size:26px;
+      font-weight:800;
+      letter-spacing:1px;
+    }
 
-        .price-sticky {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 50px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:28px;
+    }
 
-        /* --- BUTTONS --- */
-        .btn-circle {
-            width: 150px; height: 150px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: var(--bg);
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-            border: none;
-        }
-        .btn-circle:hover { transform: scale(1.1) rotate(10deg); background: white; }
+    nav ul li a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:500;
+      transition:.3s;
+    }
 
-        /* --- ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+    nav ul li a:hover{
+      opacity:.8;
+    }
 
-        @media (max-width: 900px) {
-            .hero-img { display: none; }
-            .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .wide { grid-column: span 1; }
-            .hero-title { font-size: 5rem; }
-            .configurator { padding: 40px 20px; }
-        }
-    </style>
+    /* ===== HERO ===== */
+    .hero{
+      padding:0 8%;
+      min-height:85vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      max-width:700px;
+    }
+
+    .hero h2{
+      font-size:52px;
+      font-weight:800;
+      line-height:1.15;
+      margin-bottom:20px;
+    }
+
+    .hero span{
+      color:#e0f2fe;
+    }
+
+    .hero p{
+      font-size:18px;
+      margin-bottom:35px;
+      opacity:.95;
+    }
+
+    .btn{
+      background:#fff;
+      color:#0284c7;
+      padding:15px 38px;
+      border-radius:40px;
+      font-weight:700;
+      text-decoration:none;
+      width:max-content;
+      transition:.3s;
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+      background:#e0f2fe;
+    }
+
+    /* ===== SECTIONS ===== */
+    section{
+      padding:100px 8%;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .title h3{
+      font-size:38px;
+      margin-bottom:10px;
+    }
+
+    .title p{
+      color:#6b7280;
+    }
+
+    /* ===== ABOUT ===== */
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .about img{
+      width:100%;
+      border-radius:26px;
+      box-shadow:0 30px 60px rgba(0,0,0,.15);
+    }
+
+    /* ===== SERVICES ===== */
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:35px;
+    }
+
+    .service{
+      background:#fff;
+      padding:45px 30px;
+      border-radius:26px;
+      box-shadow:0 15px 40px rgba(0,0,0,.08);
+      transition:.35s;
+    }
+
+    .service:hover{
+      transform:translateY(-12px);
+    }
+
+    .service h4{
+      font-size:22px;
+      margin-bottom:14px;
+      color:#0284c7;
+    }
+
+    /* ===== WHY US ===== */
+    .why{
+      background:#e0f2fe;
+      border-radius:40px;
+      padding:80px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:40px;
+      text-align:center;
+    }
+
+    .why h4{
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .testimonial{
+      background:#fff;
+      padding:30px;
+      border-radius:24px;
+      box-shadow:0 15px 35px rgba(0,0,0,.08);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact{
+      background:#0284c7;
+      color:#fff;
+      border-radius:40px;
+      padding:80px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+    }
+
+    .contact input,
+    .contact textarea{
+      width:100%;
+      padding:16px;
+      margin-bottom:16px;
+      border-radius:14px;
+      border:none;
+      outline:none;
+    }
+
+    /* ===== FOOTER ===== */
+    footer{
+      background:#0f172a;
+      color:#cbd5f5;
+      padding:70px 8% 30px;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:40px;
+      margin-bottom:30px;
+    }
+
+    footer h4{
+      color:#fff;
+      margin-bottom:15px;
+    }
+
+    footer a{
+      color:#cbd5f5;
+      text-decoration:none;
+      display:block;
+      margin-bottom:10px;
+    }
+
+    footer a:hover{
+      color:#7dd3fc;
+    }
+
+    .footer-bottom{
+      text-align:center;
+      border-top:1px solid #1e293b;
+      padding-top:20px;
+      font-size:14px;
+      color:#94a3b8;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:900px){
+      .about,
+      .contact{
+        grid-template-columns:1fr;
+      }
+
+      .hero h2{
+        font-size:42px;
+      }
+    }
+
+    @media(max-width:600px){
+      nav ul{
+        display:none;
+      }
+
+      .hero h2{
+        font-size:34px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <nav>
-        <div class="logo">KAIZEN</div>
-        <div class="nav-links">
-            <a href="#about">Philosophy</a>
-            <a href="#services">Services</a>
-            <a href="#book">Reserve</a>
-        </div>
-    </nav>
+<header>
+  <nav>
+    <h1>PureCare</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <section class="hero">
-        <h1 class="hero-title">PURE<br><span>SPACE</span></h1>
-        <div class="hero-meta reveal">
-            <p class="hero-desc">Elevating residential maintenance to a sensory experience. We define the standard of absolute cleanliness.</p>
-            <a href="#book" class="btn-circle">Book Now</a>
-        </div>
-        <div class="hero-img"></div>
-    </section>
+  <div class="hero">
+    <h2>Professional <span>Cleaning</span><br>For Healthier Living</h2>
+    <p>Reliable, eco-friendly and affordable cleaning services for homes and offices.</p>
+    <a href="#contact" class="btn">Book a Cleaning</a>
+  </div>
+</header>
 
-    <section id="services" class="section">
-        <div class="bento-grid">
-            <div class="bento-card wide reveal">
-                <i class="fa-solid fa-wind"></i>
-                <div>
-                    <h3>Deep Air Purification</h3>
-                    <p>HEPA-certified air scrubbing included in every deep-clean session to remove 99.9% of particulates.</p>
-                </div>
-            </div>
-            <div class="bento-card reveal">
-                <i class="fa-solid fa-gem"></i>
-                <div>
-                    <h3>Textile Care</h3>
-                    <p>Silk, wool, and velvet specialists.</p>
-                </div>
-            </div>
-            <div class="bento-card reveal">
-                <i class="fa-solid fa-leaf"></i>
-                <div>
-                    <h3>Mist Tech</h3>
-                    <p>Sanitization through dry-vapor technology.</p>
-                </div>
-            </div>
-            <div class="bento-card wide reveal">
-                <i class="fa-solid fa-shield-heart"></i>
-                <div>
-                    <h3>The Concierge Guarantee</h3>
-                    <p>Fully insured, background-checked, and vetted artisans of order. Consistency is our signature.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section>
+  <div class="about">
+    <div>
+      <h3>About PureCare</h3>
+      <p>PureCare Cleaning Services delivers professional, hygienic and detail-focused cleaning solutions designed to give you peace of mind and a healthier space.</p>
+    </div>
+    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427">
+  </div>
+</section>
 
-    <section id="book" class="section">
-        <div class="configurator reveal">
-            <h2 style="font-family: 'Syne'; font-size: 3rem; letter-spacing: -2px;">BUILD YOUR ORDER</h2>
-            <p style="opacity: 0.6; margin-top: 10px;">Select the zones requiring our attention.</p>
-            
-            <div class="config-grid">
-                <div class="room-node" onclick="toggleRoom(this, 40)">
-                    <i class="fa-solid fa-bed"></i>
-                    <span>Bedroom</span>
-                </div>
-                <div class="room-node" onclick="toggleRoom(this, 60)">
-                    <i class="fa-solid fa-utensils"></i>
-                    <span>Kitchen</span>
-                </div>
-                <div class="room-node active" onclick="toggleRoom(this, 50)">
-                    <i class="fa-solid fa-bath"></i>
-                    <span>Bathroom</span>
-                </div>
-                <div class="room-node" onclick="toggleRoom(this, 45)">
-                    <i class="fa-solid fa-couch"></i>
-                    <span>Living</span>
-                </div>
-                <div class="room-node" onclick="toggleRoom(this, 30)">
-                    <i class="fa-solid fa-laptop-code"></i>
-                    <span>Studio</span>
-                </div>
-            </div>
+<section id="services">
+  <div class="title">
+    <h3>Our Cleaning Services</h3>
+    <p>Fresh spaces start here</p>
+  </div>
 
-            <div class="price-sticky">
-                <div>
-                    <span style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Investment</span>
-                    <div style="font-family: 'Syne'; font-size: 4rem;" id="totalPrice">$50</div>
-                </div>
-                <button class="btn-circle" style="background: var(--bg); color: var(--accent);">Finalize</button>
-            </div>
-        </div>
-    </section>
+  <div class="services">
+    <div class="service">
+      <h4>Home Cleaning</h4>
+      <p>Deep and regular cleaning for a spotless home.</p>
+    </div>
+    <div class="service">
+      <h4>Office Cleaning</h4>
+      <p>Clean workspaces that boost productivity.</p>
+    </div>
+    <div class="service">
+      <h4>Move In / Move Out</h4>
+      <p>Perfect cleaning for a fresh start.</p>
+    </div>
+  </div>
+</section>
 
-    <footer style="padding: 100px 10%; border-top: 1px solid var(--glass); display: flex; justify-content: space-between; align-items: center;">
-        <div class="logo" style="font-size: 1rem; opacity: 0.5;">KAIZEN STUDIO</div>
-        <div style="display: flex; gap: 40px; color: var(--text-dim); font-size: 0.8rem;">
-            <span>INSTAGRAM</span>
-            <span>PRIVACY</span>
-            <span>CAREERS</span>
-        </div>
-    </footer>
+<section>
+  <div class="why">
+    <div>
+      <h4>Eco-Friendly</h4>
+      <p>Safe products for your family</p>
+    </div>
+    <div>
+      <h4>Trusted Staff</h4>
+      <p>Verified & trained professionals</p>
+    </div>
+    <div>
+      <h4>Affordable</h4>
+      <p>Quality cleaning at fair prices</p>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Reveal Logic
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
+<section>
+  <div class="title">
+    <h3>What Clients Say</h3>
+    <p>Real words from happy customers</p>
+  </div>
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  <div class="testimonials">
+    <div class="testimonial">
+      <p>“My home has never felt this clean. Highly recommended!”</p>
+      <strong>— Sarah M.</strong>
+    </div>
+    <div class="testimonial">
+      <p>“Professional staff and excellent service.”</p>
+      <strong>— Ahmed R.</strong>
+    </div>
+    <div class="testimonial">
+      <p>“Affordable, reliable and very detailed cleaning.”</p>
+      <strong>— Lisa K.</strong>
+    </div>
+  </div>
+</section>
 
-        // Interactive Price Logic
-        let currentTotal = 50;
-        function toggleRoom(el, price) {
-            el.classList.toggle('active');
-            if(el.classList.contains('active')) {
-                currentTotal += price;
-            } else {
-                currentTotal -= price;
-            }
-            
-            // Animate price change
-            const priceDisplay = document.getElementById('totalPrice');
-            priceDisplay.style.opacity = '0';
-            setTimeout(() => {
-                priceDisplay.innerText = `$${currentTotal}`;
-                priceDisplay.style.opacity = '1';
-            }, 200);
-        }
+<section id="contact">
+  <div class="contact">
+    <div>
+      <h3>Book Your Cleaning</h3>
+      <p>Let us handle the mess while you relax.</p>
+    </div>
+    <form>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <textarea rows="5" placeholder="Cleaning Requirements"></textarea>
+      <button class="btn">Submit Request</button>
+    </form>
+  </div>
+</section>
 
-        // Parallax Effect for Hero Title
-        window.addEventListener('scroll', () => {
-            const title = document.querySelector('.hero-title');
-            const scroll = window.pageYOffset;
-            title.style.transform = `translateX(${scroll * 0.2}px)`;
-        });
-    </script>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>PureCare</h4>
+      <p>Clean spaces. Healthy living.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#">Home</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Email: info@purecare.com</p>
+      <p>Phone: +92 300 1234567</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 PureCare Cleaning Services. All Rights Reserved.
+  </div>
+</footer>
+
 </body>
 </html>

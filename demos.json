@@ -346,45 +346,6 @@
                 
             ]
         }
-        ,
-        {
-            "id": "WB-16",
-            "title": "VECTOR MOBILE",
-            "category": "Mobile Service",
-            "description": "Services + Process + Track Device",
-            "priceBucket": "mid",
-            "priceLabel": "From £149",
-            "rating": 4.9,
-            "popularScore": 80,
-            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v3.html",
-            "image": "/assets/mobile-service_v-3.png",
-            "createdAt": "2025-12-31",
-            "tags": [
-                "Mobile",
-                "Fast",
-                "Attractive"
-                
-            ]
-        }
-        ,
-        {
-            "id": "WB-16",
-            "title": "VECTOR MOBILE",
-            "category": "Mobile Service",
-            "description": "Services + Process + Track Device",
-            "priceBucket": "mid",
-            "priceLabel": "From £149",
-            "rating": 4.9,
-            "popularScore": 80,
-            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v3.html",
-            "image": "/assets/mobile-service_v-3.png",
-            "createdAt": "2025-12-31",
-            "tags": [
-                "Mobile",
-                "Fast",
-                "Attractive"
-                
-            ]
-        }
+        
     ]
 }

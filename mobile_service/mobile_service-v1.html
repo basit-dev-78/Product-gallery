@@ -1,688 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechFix | Premium Mobile Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFix | Premium Mobile Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --primary: #3B82F6; /* Electric Blue */
-            --primary-dark: #2563EB;
-            --secondary: #10B981; /* Success Green */
-            --bg-dark: #0f172a; /* Deep Slate */
-            --bg-card: #1e293b;
-            --text-light: #f8fafc;
-            --text-gray: #94a3b8;
-            --glass: rgba(30, 41, 59, 0.7);
-            --gradient: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
-        }
+<style>
+/* --- CSS VARIABLES & RESET --- */
+:root {
+    --primary: #3B82F6;
+    --primary-dark: #2563EB;
+    --secondary: #10B981;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --text-light: #f8fafc;
+    --text-gray: #94a3b8;
+    --glass: rgba(30,41,59,0.7);
+    --gradient: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+* {margin:0; padding:0; box-sizing:border-box;}
+html {scroll-behavior: smooth;}
+body {font-family:'Outfit',sans-serif; background-color: var(--bg-dark); color: var(--text-light); line-height:1.6; overflow-x:hidden;}
+a {text-decoration:none; color:inherit; transition:0.3s;}
+ul {list-style:none;}
+img {max-width:100%; display:block;}
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
-        img { max-width: 100%; display: block; }
+/* --- LAYOUT UTILITIES --- */
+.container {max-width: 1200px; margin:0 auto; padding:0 20px;}
+.flex {display:flex; align-items:center;}
+.grid {display:grid; gap:30px;}
+.section-padding {padding:80px 0;}
+.text-center{text-align:center;}
+.text-gradient {background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
 
-        /* --- LAYOUT UTILITIES --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .flex { display: flex; align-items: center; }
-        .grid { display: grid; gap: 30px; }
-        .section-padding { padding: 80px 0; }
-        
-        .text-center { text-align: center; }
-        .text-gradient {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* --- BUTTONS --- */
+.btn {display:inline-block; padding:12px 32px; border-radius:50px; font-weight:600; cursor:pointer; transition:0.3s; border:none;}
+.btn-primary {background: var(--gradient); color:white; box-shadow:0 4px 15px rgba(59,130,246,0.4);}
+.btn-primary:hover {transform:translateY(-2px); box-shadow:0 8px 25px rgba(59,130,246,0.6);}
+.btn-glass {background:rgba(255,255,255,0.1); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.2); color:white;}
+.btn-glass:hover {background:rgba(255,255,255,0.2);}
 
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-block;
-            padding: 12px 32px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-        }
+/* --- NAVBAR --- */
+.navbar {position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:0.3s;}
+.navbar.scrolled {background:var(--glass); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.05); padding:15px 0;}
+.nav-wrapper {justify-content:space-between; display:flex; align-items:center;}
+.logo {font-size:1.5rem; font-weight:700; letter-spacing:-1px;}
+.logo i {color:var(--primary); margin-right:8px;}
+.nav-menu {display:flex; gap:40px;}
+.nav-link {font-weight:500; color:var(--text-gray);}
+.nav-link:hover, .nav-link.active {color:white;}
+.mobile-toggle {display:none; font-size:1.5rem; cursor:pointer;}
 
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-        }
+/* --- HERO SECTION --- */
+.hero {min-height:100vh; display:flex; align-items:center; position:relative; background:radial-gradient(circle at top right, #1e293b 0%, #0f172a 60%); overflow:hidden; padding-top:80px;}
+.glow-blob {position:absolute; width:500px; height:500px; background:var(--primary); filter:blur(150px); opacity:0.2; border-radius:50%; z-index:0;}
+.blob-1 {top:-100px; right:-100px;}
+.blob-2 {bottom:-100px; left:-100px; background:#8B5CF6;}
+.hero-content {display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; z-index:1;}
+.hero-text h1 {font-size:4rem; line-height:1.1; margin-bottom:20px;}
+.hero-text p {font-size:1.1rem; color:var(--text-gray); margin-bottom:30px; max-width:500px;}
+.hero-stats {display:flex; gap:40px; margin-top:40px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);}
+.stat h3 {font-size:1.5rem; color:white;}
+.stat p {font-size:0.9rem; color:var(--text-gray);}
+.hero-image {position:relative; animation:float 6s ease-in-out infinite;}
+.hero-image img {border-radius:30px; box-shadow:0 20px 50px rgba(0,0,0,0.5); border:8px solid #333;}
+@keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
-        }
+/* --- SERVICES GRID --- */
+.section-header h2 {font-size:2.5rem; margin-bottom:15px;}
+.section-header p {color:var(--text-gray); max-width:600px; margin:0 auto;}
+.services-grid {grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); margin-top:50px;}
+.service-card {background:var(--bg-card); padding:30px; border-radius:20px; border:1px solid rgba(255,255,255,0.05); transition:0.3s; position:relative; overflow:hidden;}
+.service-card:hover {transform:translateY(-10px); border-color:var(--primary); box-shadow:0 10px 30px rgba(59,130,246,0.1);}
+.icon-box {width:60px; height:60px; background:rgba(59,130,246,0.1); border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:var(--primary); margin-bottom:20px; transition:0.3s;}
+.service-card:hover .icon-box {background:var(--primary); color:white;}
+.service-card h3 {margin-bottom:10px; font-size:1.25rem;}
+.service-card p {font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;}
+.service-link {color:var(--primary); font-weight:600; font-size:0.9rem;}
+.service-link i {margin-left:5px; transition:0.3s;}
+.service-card:hover .service-link i {margin-left:10px;}
 
-        .btn-glass {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-        }
+/* --- PROCESS STEPS --- */
+.process-bg {background:#162032;}
+.steps-container {display:flex; justify-content:space-between; position:relative; margin-top:60px;}
+.steps-container::before {content:''; position:absolute; top:40px; left:0; width:100%; height:2px; background:#334155; z-index:0;}
+.step {position:relative; z-index:1; text-align:center; flex:1;}
+.step-number {width:80px; height:80px; background:var(--bg-card); border:2px solid var(--primary); border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:700; color:var(--primary); box-shadow:0 0 0 10px var(--bg-dark);}
+.step:hover .step-number {background:var(--primary); color:white; box-shadow:0 0 20px var(--primary);}
 
-        .btn-glass:hover { background: rgba(255,255,255,0.2); }
+/* --- ESTIMATOR --- */
+.estimator-ui {background:var(--bg-card); border-radius:24px; padding:40px; margin-top:40px; border:1px solid rgba(255,255,255,0.05);}
+.device-selector {display:flex; gap:15px; flex-wrap:wrap; margin-bottom:30px;}
+.device-btn {padding:10px 20px; background:rgba(255,255,255,0.05); border-radius:10px; cursor:pointer; transition:0.2s; border:1px solid transparent;}
+.device-btn.active, .device-btn:hover {background:rgba(59,130,246,0.1); border-color:var(--primary); color:var(--primary);}
+.form-row {display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+input, select {width:100%; padding:15px; background:#0f172a; border:1px solid #334155; border-radius:10px; color:white; outline:none; font-family:inherit;}
+input:focus {border-color:var(--primary);}
 
-        /* --- NAVBAR --- */
-        .navbar {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            transition: 0.3s;
-        }
+/* --- TESTIMONIALS --- */
+.testimonials {background: #1e293b; padding:80px 0;}
+.testimonials h2 {text-align:center; color:var(--primary); margin-bottom:50px; font-size:2.5rem;}
+.testimonial-cards {display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:30px;}
+.testimonial-card {background:var(--bg-dark); padding:30px; border-radius:20px; border:1px solid rgba(255,255,255,0.05);}
+.testimonial-card p {font-size:0.95rem; color:var(--text-gray); margin-bottom:15px;}
+.testimonial-card h4 {color:white; font-weight:600;}
+.testimonial-card span {font-size:0.8rem; color:var(--text-gray);}
 
-        .navbar.scrolled {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 15px 0;
-        }
+/* --- FOOTER --- */
+footer {background:#0b1120; padding-top:60px; border-top:1px solid #1e293b;}
+.footer-grid {display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px;}
+.footer-col h4 {color:white; margin-bottom:20px; font-size:1.1rem;}
+.footer-col ul li {margin-bottom:10px;}
+.footer-col a {color:var(--text-gray); font-size:0.9rem;}
+.footer-col a:hover {color:var(--primary);}
+.socials {display:flex; gap:15px; margin-top:20px;}
+.socials a {width:35px; height:35px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; border-radius:50%;}
+.footer-bottom {text-align:center; border-top:1px solid #1e293b; padding:20px; color:#64748b; font-size:0.8rem;}
 
-        .nav-wrapper { justify-content: space-between; }
+/* --- ANIMATION CLASS --- */
+.reveal {opacity:0; transform:translateY(30px); transition:all 0.8s ease;}
+.reveal.active {opacity:1; transform:translateY(0);}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-        .logo i { color: var(--primary); margin-right: 8px; }
-
-        .nav-menu { gap: 40px; }
-        .nav-link { font-weight: 500; color: var(--text-gray); }
-        .nav-link:hover, .nav-link.active { color: white; }
-
-        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 60%);
-            overflow: hidden;
-            padding-top: 80px;
-        }
-
-        /* Ambient Glow Background */
-        .glow-blob {
-            position: absolute;
-            width: 500px; height: 500px;
-            background: var(--primary);
-            filter: blur(150px);
-            opacity: 0.2;
-            border-radius: 50%;
-            z-index: 0;
-        }
-        .blob-1 { top: -100px; right: -100px; }
-        .blob-2 { bottom: -100px; left: -100px; background: #8B5CF6; }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            margin-bottom: 30px;
-            max-width: 500px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .stat h3 { font-size: 1.5rem; color: white; }
-        .stat p { font-size: 0.9rem; color: var(--text-gray); }
-
-        /* Floating Phone Animation */
-        .hero-image {
-            position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-        .hero-image img {
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 8px solid #333;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* --- SERVICES GRID --- */
-        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
-        .section-header p { color: var(--text-gray); max-width: 600px; margin: 0 auto; }
-
-        .services-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            margin-top: 50px;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
-        }
-
-        .icon-box {
-            width: 60px; height: 60px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
-
-        .service-card:hover .icon-box {
-            background: var(--primary);
-            color: white;
-        }
-
-        .service-card h3 { margin-bottom: 10px; font-size: 1.25rem; }
-        .service-card p { font-size: 0.95rem; color: var(--text-gray); margin-bottom: 20px; }
-        .service-link { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
-        .service-link i { margin-left: 5px; transition: 0.3s; }
-        .service-card:hover .service-link i { margin-left: 10px; }
-
-        /* --- PROCESS STEPS --- */
-        .process-bg { background: #162032; }
-        .steps-container {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-top: 60px;
-        }
-
-        /* Connecting Line */
-        .steps-container::before {
-            content: '';
-            position: absolute;
-            top: 40px; left: 0; width: 100%; height: 2px;
-            background: #334155;
-            z-index: 0;
-        }
-
-        .step {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            flex: 1;
-        }
-
-        .step-number {
-            width: 80px; height: 80px;
-            background: var(--bg-card);
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            box-shadow: 0 0 0 10px var(--bg-dark); /* Fake spacing */
-        }
-
-        .step:hover .step-number {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        /* --- DEVICE ESTIMATOR UI --- */
-        .estimator-ui {
-            background: var(--bg-card);
-            border-radius: 24px;
-            padding: 40px;
-            margin-top: 40px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .device-selector {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .device-btn {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .device-btn.active, .device-btn:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 15px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            color: white;
-            outline: none;
-            font-family: inherit;
-        }
-
-        input:focus { border-color: var(--primary); }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #0b1120;
-            padding-top: 60px;
-            border-top: 1px solid #1e293b;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 40px;
-        }
-
-        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col a { color: var(--text-gray); font-size: 0.9rem; }
-        .footer-col a:hover { color: var(--primary); }
-        .socials { display: flex; gap: 15px; margin-top: 20px; }
-        .socials a {
-            width: 35px; height: 35px;
-            background: rgba(255,255,255,0.1);
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%;
-        }
-
-        /* --- ANIMATION CLASS --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .hero-content { grid-template-columns: 1fr; text-align: center; }
-            .hero-image { display: none; } /* Hide 3D element on mobile to save space */
-            .hero-stats { justify-content: center; }
-            .steps-container { flex-direction: column; gap: 30px; }
-            .steps-container::before { width: 2px; height: 100%; left: 50%; top: 0; }
-            .step-number { box-shadow: 0 0 0 10px var(--bg-dark); } /* Fix line overlap */
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 75%; height: 100vh;
-                background: #1e293b;
-                flex-direction: column;
-                justify-content: center;
-                transition: 0.3s;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-            }
-            .nav-menu.active { right: 0; }
-            .mobile-toggle { display: block; z-index: 1001; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            .hero-text h1 { font-size: 2.8rem; }
-        }
-    </style>
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+.hero-content {grid-template-columns:1fr; text-align:center;}
+.hero-image {display:none;}
+.hero-stats {justify-content:center;}
+.steps-container {flex-direction:column; gap:30px;}
+.steps-container::before {width:2px; height:100%; left:50%; top:0;}
+.step-number {box-shadow:0 0 0 10px var(--bg-dark);}
+}
+@media (max-width: 768px) {
+.nav-menu {position:fixed; top:0; right:-100%; width:75%; height:100vh; background:#1e293b; flex-direction:column; justify-content:center; transition:0.3s; box-shadow:-10px 0 30px rgba(0,0,0,0.5);}
+.nav-menu.active {right:0;}
+.mobile-toggle {display:block; z-index:1001;}
+.form-row {grid-template-columns:1fr;}
+.footer-grid {grid-template-columns:1fr 1fr;}
+.hero-text h1 {font-size:2.8rem;}
+}
+</style>
 </head>
 <body>
 
-    <nav class="navbar" id="navbar">
-        <div class="container flex nav-wrapper">
-            <a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix.</a>
-            
-            <ul class="flex nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#process" class="nav-link">Process</a></li>
-                <li><a href="#contact" class="nav-link">Track Device</a></li>
-                <li><a href="#contact" class="btn btn-primary">Book Repair</a></li>
-            </ul>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+<div class="container flex nav-wrapper">
+<a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix.</a>
+<ul class="flex nav-menu">
+<li><a href="#home" class="nav-link active">Home</a></li>
+<li><a href="#services" class="nav-link">Services</a></li>
+<li><a href="#process" class="nav-link">Process</a></li>
+<li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+<li><a href="#contact" class="btn btn-primary">Book Repair</a></li>
+</ul>
+<div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+</div>
+</nav>
 
-            <div class="mobile-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </nav>
+<!-- HERO -->
+<section id="home" class="hero">
+<div class="glow-blob blob-1"></div>
+<div class="glow-blob blob-2"></div>
+<div class="container hero-content">
+<div class="hero-text reveal">
+<span style="color:var(--primary); font-weight:600; letter-spacing:1px;">#1 RATED REPAIR SERVICE</span>
+<h1>Revive Your <br><span class="text-gradient">Digital Life</span></h1>
+<p>Expert mobile repair, data recovery, and unlocking services. We fix what others can't, usually within 60 minutes.</p>
+<div class="flex" style="gap:15px; justify-content: flex-start; margin-top:20px;">
+<a href="#contact" class="btn btn-primary">Start Repair</a>
+<a href="#services" class="btn btn-glass">Our Services</a>
+</div>
+<div class="hero-stats">
+<div class="stat"><h3>10k+</h3><p>Devices Fixed</p></div>
+<div class="stat"><h3>60m</h3><p>Avg Repair Time</p></div>
+<div class="stat"><h3>Lifetime</h3><p>Warranty</p></div>
+</div>
+</div>
+<div class="hero-image reveal">
+<img src="https://plus.unsplash.com/premium_photo-1663045633178-69156beda8d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9iaWxlJTIwcmVwYWlyfGVufDB8fDB8fHww" alt="Iphone Repair">
+</div>
+</div>
+</section>
 
-    <section id="home" class="hero">
-        <div class="glow-blob blob-1"></div>
-        <div class="glow-blob blob-2"></div>
-        
-        <div class="container hero-content">
-            <div class="hero-text reveal">
-                <span style="color:var(--primary); font-weight:600; letter-spacing:1px;">#1 RATED REPAIR SERVICE</span>
-                <h1>Revive Your <br><span class="text-gradient">Digital Life</span></h1>
-                <p>Expert mobile repair, data recovery, and unlocking services. We fix what others can't, usually within 60 minutes.</p>
-                
-                <div class="flex" style="gap:15px; justify-content: flex-start; margin-top:20px;">
-                    <a href="#contact" class="btn btn-primary">Start Repair</a>
-                    <a href="#services" class="btn btn-glass">Our Services</a>
-                </div>
+<!-- SERVICES -->
+<section id="services" class="section-padding">
+<div class="container">
+<div class="section-header text-center reveal">
+<h2>Expert Solutions</h2>
+<p>From cracked screens to complex motherboard soldering, our certified technicians handle it all.</p>
+</div>
+<div class="grid services-grid">
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+<h3>Screen Replacement</h3>
+<p>High-quality OLED and LCD replacements. Restoring original touch sensitivity and brightness.</p>
+<a href="#" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
+</div>
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-battery-full"></i></div>
+<h3>Battery Replacement</h3>
+<p>Phone dying fast? Get a new premium battery installed in under 30 minutes.</p>
+<a href="#" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
+</div>
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-water"></i></div>
+<h3>Water Damage</h3>
+<p>Advanced ultrasonic cleaning and micro-soldering to rescue dead devices.</p>
+<a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+</div>
+<div class="service-card reveal">
+<div class="icon-box"><i class="fas fa-unlock-alt"></i></div>
+<h3>Network Unlocking</h3>
+<p>Switch carriers easily. Safe, legal, and permanent unlocking for all major brands.</p>
+<a href="#" class="service-link">Unlock Now <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="hero-stats">
-                    <div class="stat">
-                        <h3>10k+</h3>
-                        <p>Devices Fixed</p>
-                    </div>
-                    <div class="stat">
-                        <h3>60m</h3>
-                        <p>Avg Repair Time</p>
-                    </div>
-                    <div class="stat">
-                        <h3>Lifetime</h3>
-                        <p>Warranty</p>
-                    </div>
-                </div>
-            </div>
+<!-- PROCESS -->
+<section id="process" class="section-padding process-bg">
+<div class="container">
+<div class="section-header text-center reveal">
+<h2>How It Works</h2>
+</div>
+<div class="steps-container reveal">
+<div class="step"><div class="step-number">1</div><h3>Diagnose</h3><p style="color:#94a3b8; padding:0 20px;">Bring it in or mail it. We run a free full diagnostic scan.</p></div>
+<div class="step"><div class="step-number">2</div><h3>Repair</h3><p style="color:#94a3b8; padding:0 20px;">Expert fix using Grade A parts while you wait with coffee.</p></div>
+<div class="step"><div class="step-number">3</div><h3>Enjoy</h3><p style="color:#94a3b8; padding:0 20px;">Walk out with a device that feels brand new + warranty.</p></div>
+</div>
+</div>
+</section>
 
-            <div class="hero-image reveal">
-                <img src="https://images.unsplash.com/photo-1592899677712-a1118dd63682?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Iphone Repair">
-            </div>
-        </div>
-    </section>
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials">
+<div class="container">
+<h2>Customer Testimonials</h2>
+<div class="testimonial-cards">
+<div class="testimonial-card reveal"><p>"TechFix saved my iPhone after I dropped it in water. Super fast and reliable!"</p><h4>Sarah L.</h4><span>iPhone 13 User</span></div>
+<div class="testimonial-card reveal"><p>"Battery replacement was done in 20 minutes. Amazing service and friendly staff."</p><h4>David M.</h4><span>Galaxy S22 User</span></div>
+<div class="testimonial-card reveal"><p>"Network unlocking was safe and quick. Highly recommend TechFix."</p><h4>Alex P.</h4><span>Pixel 7 User</span></div>
+</div>
+</div>
+</section>
 
-    <section id="services" class="section-padding">
-        <div class="container">
-            <div class="section-header text-center reveal">
-                <h2>Expert Solutions</h2>
-                <p>From cracked screens to complex motherboard soldering, our certified technicians handle it all.</p>
-            </div>
+<!-- CONTACT -->
+<section id="contact" class="section-padding">
+<div class="container">
+<div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:50px;">
+<div class="reveal">
+<h2 style="font-size:2.5rem; line-height:1.2;">Ready to fix <br> your device?</h2>
+<p style="color:var(--text-gray); margin-top:20px; margin-bottom:30px;">
+Use our quick estimator to get a quote, or simply book an appointment to skip the line.
+</p>
+<ul style="color:var(--text-gray);">
+<li style="margin-bottom:15px;"><i class="fas fa-check-circle" style="color:var(--secondary); margin-right:10px;"></i> No Fix, No Fee Policy</li>
+<li style="margin-bottom:15px;"><i class="fas fa-check-circle" style="color:var(--secondary); margin-right:10px;"></i> 90-Day Warranty on parts</li>
+<li style="margin-bottom:15px;"><i class="fas fa-check-circle" style="color:var(--secondary); margin-right:10px;"></i> Data Privacy Guaranteed</li>
+</ul>
+</div>
+<div class="estimator-ui reveal">
+<h3 style="margin-bottom:20px;">Quick Quote</h3>
+<div class="device-selector">
+<div class="device-btn active" onclick="selectDevice(this)">Apple</div>
+<div class="device-btn" onclick="selectDevice(this)">Samsung</div>
+<div class="device-btn" onclick="selectDevice(this)">Google</div>
+<div class="device-btn" onclick="selectDevice(this)">Tablet</div>
+</div>
+<form onsubmit="event.preventDefault(); alert('Quote request sent!');">
+<div class="form-row">
+<select>
+<option>iPhone 14 Pro</option>
+<option>iPhone 13</option>
+<option>iPhone 12</option>
+<option>Other Model</option>
+</select>
+<select>
+<option>Broken Screen</option>
+<option>Battery Issue</option>
+<option>Charging Port</option>
+<option>Water Damage</option>
+</select>
+</div>
+<div class="form-row" style="margin-top:20px;">
+<input type="text" placeholder="Your Name" required>
+<input type="tel" placeholder="Phone Number" required>
+</div>
+<button type="submit" class="btn btn-primary" style="width:100%; margin-top:20px;">Get Estimated Price</button>
+</form>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="grid services-grid">
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Screen Replacement</h3>
-                    <p>High-quality OLED and LCD replacements. Restoring original touch sensitivity and brightness.</p>
-                    <a href="#" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
-                </div>
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-col">
+<a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix.</a>
+<p style="color:var(--text-gray); margin-top:15px; font-size:0.9rem;">The most trusted mobile repair center in the city. Dedicated to keeping you connected.</p>
+<div class="socials">
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Services</h4>
+<ul>
+<li><a href="#">Screen Repair</a></li>
+<li><a href="#">Battery Replacement</a></li>
+<li><a href="#">Water Damage</a></li>
+<li><a href="#">Data Recovery</a></li>
+<li><a href="#">Network Unlock</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Careers</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Terms & Conditions</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Support</h4>
+<ul>
+<li><a href="#">FAQs</a></li>
+<li><a href="#">Contact Support</a></li>
+<li><a href="#">Service Status</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<ul>
+<li><a href="mailto:help@techfix.com">help@techfix.com</a></li>
+<li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+<li><span style="color:var(--text-gray); font-size:0.9rem;">123 Tech Avenue, Silicon City</span></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">&copy; 2023 TechFix Mobile Services. All rights reserved.</div>
+</div>
+</footer>
 
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-battery-full"></i></div>
-                    <h3>Battery Replacement</h3>
-                    <p>Phone dying fast? Get a new premium battery installed in under 30 minutes.</p>
-                    <a href="#" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
-                </div>
+<script>
+// Navbar Scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', ()=>{ navbar.classList.toggle('scrolled', window.scrollY>50); });
 
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-water"></i></div>
-                    <h3>Water Damage</h3>
-                    <p>Advanced ultrasonic cleaning and micro-soldering to rescue dead devices.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
+// Mobile Menu
+const mobileToggle = document.querySelector('.mobile-toggle');
+const navMenu = document.querySelector('.nav-menu');
+mobileToggle.addEventListener('click', ()=>{
+navMenu.classList.toggle('active');
+const icon = mobileToggle.querySelector('i');
+icon.classList.toggle('fa-bars');
+icon.classList.toggle('fa-times');
+});
+document.querySelectorAll('.nav-link').forEach(link=>{
+link.addEventListener('click', ()=>{
+navMenu.classList.remove('active');
+mobileToggle.querySelector('i').classList.remove('fa-times');
+mobileToggle.querySelector('i').classList.add('fa-bars');
+});
+});
 
-                <div class="service-card reveal">
-                    <div class="icon-box"><i class="fas fa-unlock-alt"></i></div>
-                    <h3>Network Unlocking</h3>
-                    <p>Switch carriers easily. Safe, legal, and permanent unlocking for all major brands.</p>
-                    <a href="#" class="service-link">Unlock Now <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+// Scroll Reveal
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{ if(entry.isIntersecting){entry.target.classList.add('active');}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-    <section id="process" class="section-padding process-bg">
-        <div class="container">
-            <div class="section-header text-center reveal">
-                <h2>How It Works</h2>
-            </div>
+// Device Selector
+function selectDevice(element){
+document.querySelectorAll('.device-btn').forEach(btn=>btn.classList.remove('active'));
+element.classList.add('active');
+const modelSelect = document.querySelector('select');
+const brand = element.innerText;
+if(brand==='Apple'){modelSelect.innerHTML='<option>iPhone 14 Pro</option><option>iPhone 13</option><option>iPhone 12</option>';}
+else if(brand==='Samsung'){modelSelect.innerHTML='<option>Galaxy S23</option><option>Galaxy S22</option><option>Note 20</option>';}
+else if(brand==='Google'){modelSelect.innerHTML='<option>Pixel 7</option><option>Pixel 6</option><option>Pixel 6a</option>';}
+else{modelSelect.innerHTML='<option>iPad Air</option><option>Galaxy Tab</option><option>Surface Go</option>';}
+}
+</script>
 
-            <div class="steps-container reveal">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Diagnose</h3>
-                    <p style="color:#94a3b8; padding:0 20px;">Bring it in or mail it. We run a free full diagnostic scan.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Repair</h3>
-                    <p style="color:#94a3b8; padding:0 20px;">Expert fix using Grade A parts while you wait with coffee.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Enjoy</h3>
-                    <p style="color:#94a3b8; padding:0 20px;">Walk out with a device that feels brand new + warranty.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section-padding">
-        <div class="container">
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:50px;">
-                
-                <div class="reveal">
-                    <h2 style="font-size:2.5rem; line-height:1.2;">Ready to fix <br> your device?</h2>
-                    <p style="color:var(--text-gray); margin-top:20px; margin-bottom:30px;">
-                        Use our quick estimator to get a quote, or simply book an appointment to skip the line.
-                    </p>
-                    <ul style="color:var(--text-gray);">
-                        <li style="margin-bottom:15px;"><i class="fas fa-check-circle" style="color:var(--secondary); margin-right:10px;"></i> No Fix, No Fee Policy</li>
-                        <li style="margin-bottom:15px;"><i class="fas fa-check-circle" style="color:var(--secondary); margin-right:10px;"></i> 90-Day Warranty on parts</li>
-                        <li style="margin-bottom:15px;"><i class="fas fa-check-circle" style="color:var(--secondary); margin-right:10px;"></i> Data Privacy Guaranteed</li>
-                    </ul>
-                </div>
-
-                <div class="estimator-ui reveal">
-                    <h3 style="margin-bottom:20px;">Quick Quote</h3>
-                    
-                    <div class="device-selector">
-                        <div class="device-btn active" onclick="selectDevice(this)">Apple</div>
-                        <div class="device-btn" onclick="selectDevice(this)">Samsung</div>
-                        <div class="device-btn" onclick="selectDevice(this)">Google</div>
-                        <div class="device-btn" onclick="selectDevice(this)">Tablet</div>
-                    </div>
-
-                    <form onsubmit="event.preventDefault(); alert('Quote request sent!');">
-                        <div class="form-row">
-                            <select>
-                                <option>iPhone 14 Pro</option>
-                                <option>iPhone 13</option>
-                                <option>iPhone 12</option>
-                                <option>Other Model</option>
-                            </select>
-                            <select>
-                                <option>Broken Screen</option>
-                                <option>Battery Issue</option>
-                                <option>Charging Port</option>
-                                <option>Water Damage</option>
-                            </select>
-                        </div>
-                        <div class="form-row" style="margin-top:20px;">
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="tel" placeholder="Phone Number" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:20px;">Get Estimated Price</button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix.</a>
-                    <p style="color:var(--text-gray); margin-top:15px; font-size:0.9rem;">
-                        The most trusted mobile repair center in the city. Dedicated to keeping you connected.
-                    </p>
-                    <div class="socials">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#">Screen Repair</a></li>
-                        <li><a href="#">Battery Replacement</a></li>
-                        <li><a href="#">Water Damage</a></li>
-                        <li><a href="#">Data Recovery</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="#">help@techfix.com</a></li>
-                        <li><a href="#">+1 (555) 123-4567</a></li>
-                        <li><span style="color:var(--text-gray); font-size:0.9rem;">123 Tech Avenue, Silicon City</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center" style="border-top:1px solid #1e293b; padding:20px; color:#64748b; font-size:0.8rem;">
-                &copy; 2023 TechFix Mobile Services. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // 1. Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // 2. Mobile Menu Toggle
-        const mobileToggle = document.querySelector('.mobile-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = mobileToggle.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-        // Close menu on link click
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileToggle.querySelector('i').classList.remove('fa-times');
-                mobileToggle.querySelector('i').classList.add('fa-bars');
-            });
-        });
-
-        // 3. Scroll Reveal Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-        // 4. Device Selector Logic (Visual only)
-        function selectDevice(element) {
-            document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-            
-            // Simulating dynamic dropdown change based on brand
-            const modelSelect = document.querySelector('select');
-            const brand = element.innerText;
-            
-            if(brand === 'Apple') {
-                modelSelect.innerHTML = '<option>iPhone 14 Pro</option><option>iPhone 13</option><option>iPhone 12</option>';
-            } else if (brand === 'Samsung') {
-                modelSelect.innerHTML = '<option>Galaxy S23</option><option>Galaxy S22</option><option>Note 20</option>';
-            } else if (brand === 'Google') {
-                modelSelect.innerHTML = '<option>Pixel 7</option><option>Pixel 6</option><option>Pixel 6a</option>';
-            } else {
-                modelSelect.innerHTML = '<option>iPad Air</option><option>Galaxy Tab</option><option>Surface Go</option>';
-            }
-        }
-    </script>
 </body>
 </html>
