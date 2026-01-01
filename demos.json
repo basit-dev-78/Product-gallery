@@ -26,7 +26,7 @@
             "priceBucket": "mid",
             "priceLabel": "From £149",
             "rating": 4.9,
-            "popularScore": 90,
+            "popularScore": 95,
             "previewUrl": "https://product-gallery-seven-topaz.vercel.app/barbar/barbar-v2.html",
             "image": "/assets/barber_v-2.png",
             "createdAt": "2025-12-31",
@@ -44,7 +44,7 @@
             "priceBucket": "mid",
             "priceLabel": "From £149",
             "rating": 4.9,
-            "popularScore": 70,
+            "popularScore": 95,
             "previewUrl": "https://product-gallery-seven-topaz.vercel.app/barbar/barbar-v3.html",
             "image": "/assets/barber_v-3.png",
             "createdAt": "2025-12-31",
@@ -74,13 +74,13 @@
         },
         {
             "id": "WB-06",
-            "title": "SHINE PRO",
+            "title": "SHINE PRO(error)",
             "category": "Car Wash",
             "description": "Services + About + pricing + Booking",
             "priceBucket": "mid",
             "priceLabel": "From £149",
             "rating": 4.9,
-            "popularScore": 5,
+            "popularScore": 80,
             "previewUrl": "https://product-gallery-seven-topaz.vercel.app/carwash/car_wash-v2.html",
             "image": "/assets/car-wash_v-2.png",
             "createdAt": "2025-12-31",
@@ -92,7 +92,7 @@
         },
         {
             "id": "WB-07",
-            "title": "CARBON GLOSS",
+            "title": "CARBON GLOSS (error)",
             "category": "Car Wash",
             "description": "Packages +Technology",
             "priceBucket": "mid",
@@ -118,7 +118,7 @@
             "priceBucket": "mid",
             "priceLabel": "From £149",
             "rating": 4.9,
-            "popularScore": 80,
+            "popularScore": 95,
             "previewUrl": "https://product-gallery-seven-topaz.vercel.app/cleaner/cleaner-v1.html",
             "image": "/assets/cleaner_v-1.png",
             "createdAt": "2025-12-31",
@@ -131,15 +131,253 @@
         },
         {
             "id": "WB-09",
-            "title": "LUMINA (not final)",
+            "title": "LUMINA",
             "category": "Cleaner",
             "description": "The Effect + The Method + booking",
             "priceBucket": "mid",
             "priceLabel": "From £149",
             "rating": 4.9,
             "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/cleaner/cleaner-v3.html",
+            "image": "/assets/cleaner_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        },
+        {
+            "id": "WB-10",
+            "title": "KAIZEN",
+            "category": "Cleaner",
+            "description": "Philosophy  + Services  + Reserve",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
             "previewUrl": "https://product-gallery-seven-topaz.vercel.app/cleaner/cleaner-v2.html",
             "image": "/assets/cleaner_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        },
+        {
+            "id": "WB-11",
+            "title": "IRONCLAD",
+            "category": "Construction",
+            "description": "Projects + Capabilities ",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/construction/construction-v1.html",
+            "image": "/assets/construction_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [ 
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-12",
+            "title": "AXIS.ENG",
+            "category": "Construction",
+            "description": "Projects + METHOD + ESTIMATE",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/construction/construction-v2.html",
+            "image": "/assets/construction_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-13",
+            "title": "KINETIC",
+            "category": "Construction",
+            "description": "Projects + METHOD + contact",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/construction/construction-v3.html",
+            "image": "/assets/construction_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-14",
+            "title": "TechFix",
+            "category": "Mobile Service",
+            "description": "Services + Process + Track Device",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v1.html",
+            "image": "/assets/mobile-service_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-15",
+            "title": "RAPID.ON",
+            "category": "Mobile Service",
+            "description": "Services + Process + Track Device",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v2.html",
+            "image": "/assets/mobile-service_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-16",
+            "title": "VECTOR MOBILE",
+            "category": "Mobile Service",
+            "description": "Services + Process + Track Device",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v3.html",
+            "image": "/assets/mobile-service_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-17",
+            "title": "NOIR",
+            "category": "Restaurant",
+            "description": "Menu + Story  + Reservations",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/restaurant/restaurant-v2.html",
+            "image": "/assets/restaurant_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-18",
+            "title": "Savor",
+            "category": "Restaurant",
+            "description": "Menu + Story  + Contact",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/restaurant/restaurant-v1.html",
+            "image": "/assets/restaurant_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"    
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-19",
+            "title": "RAW",
+            "category": "Restaurant",
+            "description": "Menu + Contact",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/restaurant/restaurant-v3.html",
+            "image": "/assets/restaurant_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-16",
+            "title": "VECTOR MOBILE",
+            "category": "Mobile Service",
+            "description": "Services + Process + Track Device",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v3.html",
+            "image": "/assets/mobile-service_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-16",
+            "title": "VECTOR MOBILE",
+            "category": "Mobile Service",
+            "description": "Services + Process + Track Device",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 80,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/mobile_service/mobile_service-v3.html",
+            "image": "/assets/mobile-service_v-3.png",
             "createdAt": "2025-12-31",
             "tags": [
                 "Mobile",
