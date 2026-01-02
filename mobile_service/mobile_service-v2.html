@@ -1,261 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechFix | Premium Mobile Repair</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MobileCare | Premium Mobile Services</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset & base */
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: 'Outfit', sans-serif; line-height: 1.6; color: #333;}
+    a {text-decoration: none; color: inherit;}
+    img {max-width: 100%; display: block;}
+    button {cursor: pointer; border: none; outline: none;}
 
-<style>
-/* --- VARIABLES & RESET --- */
-:root {
-  --primary: #0cf5f5; 
-  --secondary: #ff7a18; 
-  --bg-dark: #0d0f1a;
-  --bg-card: #1a1d2b;
-  --text-light: #e0e6f2;
-  --text-gray: #9ca3af;
-  --glass: rgba(26,29,43,0.75);
-  --gradient: linear-gradient(135deg, #0cf5f5 0%, #ff7a18 100%);
-}
-* {margin:0; padding:0; box-sizing:border-box;}
-html {scroll-behavior:smooth;}
-body {font-family:'Outfit',sans-serif; background-color:var(--bg-dark); color:var(--text-light); line-height:1.6; overflow-x:hidden;}
-a {text-decoration:none; color:inherit; transition:0.3s;}
-ul {list-style:none;}
-img {max-width:100%; display:block;}
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: #0D1117;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo {font-size: 1.7rem; font-weight: 700; color: #00BFFF;}
+    nav ul {display: flex; gap: 2rem;}
+    nav ul li {list-style: none;}
+    nav ul li a {color: #fff; font-weight: 500; transition: 0.3s;}
+    nav ul li a:hover {color: #00BFFF;}
+    .menu-toggle {display: none; font-size: 1.8rem; cursor: pointer;}
 
-/* --- LAYOUT --- */
-.container {max-width:1200px; margin:0 auto; padding:0 20px;}
-.flex {display:flex; align-items:center;}
-.grid {display:grid; gap:30px;}
-.section-padding {padding:80px 0;}
-.text-center{text-align:center;}
-.text-gradient {background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
-.btn {display:inline-block; padding:12px 32px; border-radius:50px; font-weight:600; cursor:pointer; transition:0.3s; border:none;}
-.btn-primary {background: var(--gradient); color:white; box-shadow:0 4px 15px rgba(12,245,245,0.3);}
-.btn-primary:hover {transform:translateY(-2px); box-shadow:0 8px 25px rgba(12,245,245,0.5);}
-.btn-glass {background:rgba(255,255,255,0.05); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.2); color:white;}
-.btn-glass:hover {background:rgba(255,255,255,0.15);}
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581092795365-2b049e3c65e2?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      background-image: url(https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHRlY2hub2xvZ3l8ZW58MHx8MHx8fDA%3D);
+      background-size: cover;
+      padding: 0 2rem;
+    }
+    .hero h1 {font-size: 3.2rem; margin-bottom: 1rem;}
+    .hero p {font-size: 1.2rem; margin-bottom: 2rem; max-width: 650px;}
+    .hero button {background: #00BFFF; color: #fff; padding: 0.9rem 2.5rem; border-radius: 5px; font-weight: 600; transition: 0.3s;}
+    .hero button:hover {background: #009ACD;}
 
-/* --- NAVBAR --- */
-.navbar {position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:0.3s;}
-.navbar.scrolled {background:var(--glass); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.05); padding:15px 0;}
-.nav-wrapper {justify-content:space-between; display:flex; align-items:center;}
-.logo {font-size:1.5rem; font-weight:700; letter-spacing:-1px;}
-.logo i {color:var(--secondary); margin-right:8px;}
-.nav-menu {display:flex; gap:40px;}
-.nav-link {font-weight:500; color:var(--text-gray);}
-.nav-link:hover, .nav-link.active {color:white;}
-.mobile-toggle {display:none; font-size:1.5rem; cursor:pointer;}
+    /* About Section */
+    .about {
+      padding: 5rem 5%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+    }
+    .about img {flex: 1; border-radius: 15px; min-width: 300px;}
+    .about-content {flex: 1; min-width: 300px;}
+    .about-content h2 {font-size: 2.5rem; margin-bottom: 1rem; color: #0D1117;}
+    .about-content p {margin-bottom: 1rem; color: #555; line-height: 1.8;}
+    .about-content button {background: #00BFFF; color: #fff; padding: 0.8rem 2rem; border-radius: 5px; font-weight: 600;}
+    .about-content button:hover {background: #009ACD;}
 
-/* --- HERO --- */
-.hero {min-height:100vh; display:flex; align-items:center; position:relative; background:radial-gradient(circle at top left, #0d0f1a 0%, #1a1d2b 80%); overflow:hidden; padding-top:80px;}
-.glow-blob {position:absolute; width:500px; height:500px; background:var(--primary); filter:blur(180px); opacity:0.2; border-radius:50%; z-index:0;}
-.blob-1 {top:-150px; right:-150px;}
-.blob-2 {bottom:-150px; left:-150px; background:var(--secondary);}
-.hero-content {display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; z-index:1;}
-.hero-text h1 {font-size:4rem; line-height:1.1; margin-bottom:20px;}
-.hero-text p {font-size:1.1rem; color:var(--text-gray); margin-bottom:30px; max-width:500px;}
-.hero-stats {display:flex; gap:40px; margin-top:40px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);}
-.stat h3 {font-size:1.5rem; color:white;}
-.stat p {font-size:0.9rem; color:var(--text-gray);}
-.hero-image {position:relative; animation:float 6s ease-in-out infinite;}
-.hero-image img {border-radius:30px; box-shadow:0 25px 60px rgba(12,245,245,0.3); border:6px solid #222;}
-@keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+    /* Services Section */
+    .services {
+      padding: 5rem 5%;
+      background: #f9f9f9;
+      text-align: center;
+    }
+    .services h2 {font-size: 2.5rem; margin-bottom: 2rem; color: #0D1117;}
+    .services-container {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;}
+    .service-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .service-card:hover {transform: translateY(-10px);}
+    .service-card i {font-size: 3rem; color: #00BFFF; margin-bottom: 1rem;}
+    .service-card h3 {font-size: 1.5rem; margin-bottom: 1rem;}
+    .service-card p {font-size: 1rem; color: #555;}
 
-/* --- SERVICES --- */
-.section-header h2 {font-size:2.5rem; margin-bottom:15px; color:var(--primary);}
-.section-header p {color:var(--text-gray); max-width:600px; margin:0 auto;}
-.services-grid {grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); margin-top:50px;}
-.service-card {background:var(--bg-card); padding:30px; border-radius:20px; border:1px solid rgba(255,255,255,0.05); transition:0.3s; position:relative; overflow:hidden;}
-.service-card:hover {transform:translateY(-10px); border-color:var(--secondary); box-shadow:0 10px 30px rgba(255,122,24,0.2);}
-.icon-box {width:60px; height:60px; background:rgba(255,122,24,0.1); border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:var(--secondary); margin-bottom:20px; transition:0.3s;}
-.service-card:hover .icon-box {background:var(--secondary); color:white;}
-.service-card h3 {margin-bottom:10px; font-size:1.25rem;}
-.service-card p {font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;}
-.service-link {color:var(--secondary); font-weight:600; font-size:0.9rem;}
-.service-link i {margin-left:5px; transition:0.3s;}
-.service-card:hover .service-link i {margin-left:10px;}
+    /* Why Choose Us */
+    .why-choose {
+      padding: 5rem 5%;
+      text-align: center;
+    }
+    .why-choose h2 {font-size: 2.5rem; margin-bottom: 2rem; color: #0D1117;}
+    .features {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;}
+    .feature-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .feature-card:hover {transform: translateY(-10px);}
+    .feature-card i {font-size: 3rem; color: #00BFFF; margin-bottom: 1rem;}
+    .feature-card h3 {font-size: 1.5rem; margin-bottom: 1rem;}
+    .feature-card p {color: #555;}
 
-/* --- CONTACT --- */
-#contact {background:var(--bg-dark); padding:80px 20px;}
-#contact h2 {font-size:2.5rem; margin-bottom:15px; color:var(--primary);}
-#contact p {color:var(--text-gray); margin-bottom:30px;}
-.contact-btn {margin-top:20px;}
+    /* Testimonials */
+    .testimonials {
+      padding: 5rem 5%;
+      background: #0D1117;
+      color: #fff;
+      text-align: center;
+    }
+    .testimonials h2 {font-size: 2.5rem; margin-bottom: 2rem; color: #00BFFF;}
+    .testimonial-container {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;}
+    .testimonial-card {
+      background: #111827;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .testimonial-card p {font-style: italic; margin-bottom: 1rem;}
+    .testimonial-card h4 {font-weight: 600; color: #00BFFF;}
 
-/* --- FOOTER --- */
-footer {background:#0b0f1d; padding-top:60px; border-top:1px solid #1a1d2b;}
-.footer-grid {display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px;}
-.footer-col h4 {color:white; margin-bottom:20px; font-size:1.1rem;}
-.footer-col ul li {margin-bottom:10px;}
-.footer-col a {color:var(--text-gray); font-size:0.9rem;}
-.footer-col a:hover {color:var(--secondary);}
-.socials {display:flex; gap:15px; margin-top:20px;}
-.socials a {width:35px; height:35px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; border-radius:50%;}
-.footer-bottom {text-align:center; border-top:1px solid #1a1d2b; padding:20px; color:#64748b; font-size:0.8rem;}
+    /* FAQ Section */
+    .faq {
+      padding: 5rem 5%;
+    }
+    .faq h2 {font-size: 2.5rem; margin-bottom: 2rem; color: #0D1117; text-align: center;}
+    .faq-item {margin-bottom: 1rem; border-bottom: 1px solid #ccc; padding-bottom: 1rem;}
+    .faq-item h3 {cursor: pointer; padding: 0.5rem 0; color: #00BFFF;}
+    .faq-item p {display: none; color: #555; margin-top: 0.5rem;}
+    .faq-item.active p {display: block;}
 
-/* --- FLOATING BOOK BUTTON --- */
-#book-now {position:fixed; bottom:25px; right:25px; background:var(--secondary); color:white; padding:15px 25px; border-radius:50px; box-shadow:0 5px 20px rgba(255,122,24,0.4); font-weight:600; z-index:1000; cursor:pointer; transition:0.3s; display:flex; align-items:center; gap:10px;}
-#book-now:hover {transform:translateY(-3px); box-shadow:0 10px 25px rgba(255,122,24,0.5);}
-#book-now i {font-size:1.2rem;}
+    /* Contact Section */
+    .contact {
+      padding: 5rem 5%;
+      text-align: center;
+    }
+    .contact h2 {font-size: 2.5rem; margin-bottom: 2rem; color: #0D1117;}
+    .contact form {max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem;}
+    .contact input, .contact textarea {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .contact button {
+      padding: 1rem;
+      background: #00BFFF;
+      color: #fff;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .contact button:hover {background: #009ACD;}
 
-/* --- RESPONSIVE --- */
-@media(max-width:900px){.hero-content{grid-template-columns:1fr;text-align:center;}.hero-image{display:none;}.hero-stats{justify-content:center;}}
-@media(max-width:768px){.nav-menu{position:fixed;top:0;right:-100%;width:75%;height:100vh;background:#1a1d2b;flex-direction:column;justify-content:center;transition:0.3s;box-shadow:-10px 0 30px rgba(0,0,0,0.5);}.nav-menu.active{right:0;}.mobile-toggle{display:block; z-index:1001;}}
-</style>
+    /* Footer */
+    footer {
+      background: #111827;
+      color: #fff;
+      padding: 3rem 5%;
+    }
+    footer .footer-container {display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;}
+    footer h3 {color: #00BFFF; margin-bottom: 1rem;}
+    footer ul {list-style: none;}
+    footer ul li {margin-bottom: 0.5rem;}
+    footer a {color: #fff; transition: 0.3s;}
+    footer a:hover {color: #00BFFF;}
+    footer p {margin-top: 2rem; text-align: center; font-size: 0.9rem; color: #aaa;}
+
+    /* Responsive Navbar & Sections */
+    @media (max-width: 768px) {
+      nav ul {display: none; flex-direction: column; gap: 1rem; background: #0D1117; position: absolute; top: 100%; right: 0; width: 200px; padding: 1rem; border-radius: 0 0 10px 10px;}
+      nav ul.show {display: flex;}
+      .menu-toggle {display: block; color: #fff;}
+      .about {flex-direction: column;}
+      .features {grid-template-columns: 1fr;}
+      .services-container {grid-template-columns: 1fr;}
+      .testimonial-container {grid-template-columns: 1fr;}
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-<div class="container flex nav-wrapper">
-<a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix</a>
-<ul class="flex nav-menu">
-<li><a href="#home" class="nav-link active">Home</a></li>
-<li><a href="#services" class="nav-link">Services</a></li>
-<li><a href="#contact" class="nav-link">Contact</a></li>
-</ul>
-<div class="mobile-toggle"><i class="fas fa-bars"></i></div>
-</div>
-</nav>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">MobileCare</div>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Choose Us</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section id="home" class="hero">
-<div class="glow-blob blob-1"></div>
-<div class="glow-blob blob-2"></div>
-<div class="container hero-content">
-<div class="hero-text reveal">
-<h1>Revive Your <span class="text-gradient">Devices Fast</span></h1>
-<p>Expert mobile repairs, battery replacements, water damage recovery, and more. Quick, reliable, professional.</p>
-<a href="#contact" class="btn btn-primary">Book Repair</a>
-</div>
-<div class="hero-image reveal">
-<img src="https://images.unsplash.com/photo-1592899677712-a1118dd63682?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Device Repair">
-</div>
-</div>
-</section>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <h1 style="color: white;">Premium Mobile Repair & Services</h1>
+    <p  style="color: white;">Fast, reliable, and professional solutions for all your mobile device problems. Screen repairs, battery replacement, software troubleshooting, and more.</p>
+    <button>Book a Service</button>
+  </section>
 
-<!-- SERVICES -->
-<section id="services" class="section-padding">
-<div class="container">
-<div class="section-header text-center reveal">
-<h2>Our Services</h2>
-<p>From cracked screens to complex repairs, we’ve got your devices covered.</p>
-</div>
-<div class="grid services-grid">
-<div class="service-card reveal">
-<div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
-<h3>Screen Replacement</h3>
-<p>Premium screens installed fast. Original touch sensitivity restored.</p>
-<a href="#contact" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
-</div>
-<div class="service-card reveal">
-<div class="icon-box"><i class="fas fa-battery-full"></i></div>
-<h3>Battery Replacement</h3>
-<p>Quick battery swaps for long-lasting performance.</p>
-<a href="#contact" class="service-link">Get Price <i class="fas fa-arrow-right"></i></a>
-</div>
-<div class="service-card reveal">
-<div class="icon-box"><i class="fas fa-water"></i></div>
-<h3>Water Damage</h3>
-<p>Recovery services using advanced ultrasonic cleaning techniques.</p>
-<a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-</div>
-</div>
-</div>
-</section>
+  <!-- About Section -->
+  <section class="about" id="about">
+    <img src="https://media.istockphoto.com/id/1183921783/photo/smartphone-repairman-man-securing-a-screw.webp?a=1&b=1&s=612x612&w=0&k=20&c=TR2oKcINc4z7-0n4HDZGHEeLijDnddaRuus-vPyzDCU=" alt="About MobileCare">
+    <div class="about-content">
+      <h2>About MobileCare</h2>
+      <p>MobileCare is your trusted mobile service center providing high-quality repairs, accessories, and software solutions for all major brands.</p>
+      <p>Our certified technicians ensure your devices are handled with care, delivering fast turnaround times and guaranteed customer satisfaction.</p>
+      <button>Learn More</button>
+    </div>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section-padding">
-<div class="container text-center reveal">
-<h2>Book Your Repair</h2>
-<p style="color:var(--text-gray); margin-top:15px;">Call us now or click the floating button to schedule an appointment.</p>
-<a href="tel:+15551234567" class="btn btn-primary contact-btn">Call Now</a>
-</div>
-</section>
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <div class="services-container">
+      <div class="service-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Screen Repair</h3>
+        <p>Cracked screens replaced with high-quality parts for all major brands.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-battery-full"></i>
+        <h3>Battery Replacement</h3>
+        <p>Fast battery replacements to keep your device running all day long.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-tools"></i>
+        <h3>Software Fix</h3>
+        <p>OS updates, virus removal, and software troubleshooting for smooth performance.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-headset"></i>
+        <h3>Accessory Sales</h3>
+        <p>Chargers, cases, earphones, and more to enhance your mobile experience.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-<div class="container footer-grid">
-<div class="footer-col">
-<a href="#" class="logo"><i class="fas fa-microchip"></i>TechFix</a>
-<p style="color:var(--text-gray); margin-top:15px; font-size:0.9rem;">Trusted mobile repair center with fast, reliable services.</p>
-<div class="socials">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-twitter"></i></a>
-<a href="#"><i class="fab fa-instagram"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-</div>
-</div>
-<div class="footer-col">
-<h4>Services</h4>
-<ul>
-<li><a href="#">Screen Repair</a></li>
-<li><a href="#">Battery Replacement</a></li>
-<li><a href="#">Water Damage</a></li>
-<li><a href="#">Data Recovery</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Company</h4>
-<ul>
-<li><a href="#">About Us</a></li>
-<li><a href="#">Blog</a></li>
-<li><a href="#">Careers</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Support</h4>
-<ul>
-<li><a href="#">FAQs</a></li>
-<li><a href="#">Contact Support</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Contact</h4>
-<ul>
-<li><a href="mailto:help@techfix.com">help@techfix.com</a></li>
-<li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-<li><span style="color:var(--text-gray); font-size:0.9rem;">123 Tech Avenue</span></li>
-</ul>
-</div>
-<div class="footer-bottom">&copy; 2026 TechFix. All rights reserved.</div>
-</div>
-</footer>
+  <!-- Why Choose Us -->
+  <section class="why-choose" id="why">
+    <h2>Why Choose MobileCare</h2>
+    <div class="features">
+      <div class="feature-card">
+        <i class="fas fa-clock"></i>
+        <h3>Quick Service</h3>
+        <p>Fast turnaround times without compromising quality.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Trusted & Certified</h3>
+        <p>All repairs are done by certified technicians.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-thumbs-up"></i>
+        <h3>Customer Satisfaction</h3>
+        <p>We ensure our customers leave happy every time.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- FLOATING BUTTON -->
-<a href="tel:+15551234567" id="book-now"><i class="fas fa-phone"></i> Book Now</a>
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-container">
+      <div class="testimonial-card">
+        <p>"MobileCare saved my phone! Quick service and super professional."</p>
+        <h4>Ali R.</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"Amazing team! Replaced my battery in under 30 minutes. Highly recommend."</p>
+        <h4>Sara K.</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"Fast, reliable, and affordable. I always trust MobileCare with my devices."</p>
+        <h4>Ahmed Z.</h4>
+      </div>
+    </div>
+  </section>
 
-<script>
-// Navbar Scroll
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', ()=>{ navbar.classList.toggle('scrolled', window.scrollY>50); });
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>How long does a screen repair take?</h3>
+      <p>Typically 30-60 minutes depending on the device and model.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do you provide warranty on repairs?</h3>
+      <p>Yes, we provide 3-6 months warranty depending on the service.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can you repair all brands?</h3>
+      <p>Yes, we repair all major mobile brands including Apple, Samsung, Xiaomi, and more.</p>
+    </div>
+  </section>
 
-// Mobile Menu
-const mobileToggle = document.querySelector('.mobile-toggle');
-const navMenu = document.querySelector('.nav-menu');
-mobileToggle.addEventListener('click', ()=>{
-navMenu.classList.toggle('active');
-const icon = mobileToggle.querySelector('i');
-icon.classList.toggle('fa-bars');
-icon.classList.toggle('fa-times');
-});
-document.querySelectorAll('.nav-link').forEach(link=>{
-link.addEventListener('click', ()=>{
-navMenu.classList.remove('active');
-mobileToggle.querySelector('i').classList.remove('fa-times');
-mobileToggle.querySelector('i').classList.add('fa-bars');
-});
-});
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <input type="text" placeholder="Subject" required>
+      <textarea rows="5" placeholder="Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-// Scroll Reveal
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{ if(entry.isIntersecting){entry.target.classList.add('active');}});
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-</script>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>MobileCare</h3>
+        <p>Providing premium mobile repair and services with trusted technicians and high-quality parts.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <p>&copy; 2026 MobileCare. All rights reserved.</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Navbar toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl = document.querySelector('nav ul');
+    menuToggle.addEventListener('click', () => {
+      navUl.classList.toggle('show');
+    });
+
+    // FAQ toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.querySelector('h3').addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
 
 </body>
 </html>

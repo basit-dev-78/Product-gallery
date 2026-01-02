@@ -1,246 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROOTS | Elemental Dining</title>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg: #F2F0ED; /* Warm Stone */
-            --ink: #1A1C1A;
-            --moss: #3D4A3E;
-            --accent: #D96C4B; /* Burnt Clay */
-            --transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delizia | Modern Restaurant</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: 'Montserrat', sans-serif; color:#333;}
+    a {text-decoration:none; color:inherit;}
+    img {width:100%; display:block;}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Syne', sans-serif; 
-            background: var(--bg); 
-            color: var(--ink); 
-            overflow-x: hidden;
-            line-height: 1.2;
-        }
+    /* Navbar */
+    nav {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 50px; background:#111; color:white; position:sticky; top:0; z-index:1000;
+    }
+    nav .logo {font-family:'Playfair Display', serif; font-size:28px; font-weight:700;}
+    nav ul {display:flex; list-style:none; gap:30px;}
+    nav ul li {transition:0.3s;}
+    nav ul li:hover {color:#f4b400;}
+    nav .menu-toggle {display:none; font-size:24px; cursor:pointer;}
 
-        /* --- MASKED SCROLL TEXT --- */
-        .scroll-text-wrap {
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 20px 0;
-            background: var(--ink);
-            color: var(--bg);
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
+    /* Hero Section */
+    .hero {
+      background:url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+      height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-align:center;
+    }
+    .hero h1 {font-size:60px; margin-bottom:20px; text-shadow:2px 2px 10px rgba(0,0,0,0.6);}
+    .hero p {font-size:20px; margin-bottom:30px; text-shadow:1px 1px 6px rgba(0,0,0,0.5);}
+    .hero button {
+      background:#f4b400; border:none; padding:15px 30px; font-size:18px; font-weight:600; border-radius:5px;
+      cursor:pointer; transition:0.3s;
+    }
+    .hero button:hover {background:#e5a300;}
 
-        /* --- NAVIGATION --- */
-        nav {
-            padding: 40px;
-            display: flex; justify-content: space-between; align-items: flex-start;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-        }
-        .logo { font-family: 'Instrument Serif', serif; font-size: 2.5rem; line-height: 0.8; }
-        .nav-link { 
-            writing-mode: vertical-rl; 
-            text-decoration: none; 
-            color: var(--ink); 
-            font-size: 0.7rem; 
-            font-weight: 800; 
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-        }
+    /* Sections */
+    section {padding:80px 50px;}
+    section h2 {text-align:center; font-family:'Playfair Display', serif; font-size:40px; margin-bottom:50px; color:#111;}
 
-        /* --- HERO: ASYMMETRIC --- */
-        .hero {
-            height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 0 10%;
-        }
-        .hero-title { font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; letter-spacing: -4px; }
-        .hero-title span { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--moss); }
-        
-        .hero-image-frame {
-            position: relative;
-            height: 70vh;
-            background: url('https://images.unsplash.com/photo-1550966841-3eeec692994e?auto=format&fit=crop&w=1000&q=80') center/cover;
-            border-radius: 200px 200px 0 0;
-            filter: sepia(0.2) contrast(1.1);
-        }
+    /* About */
+    .about {display:flex; flex-wrap:wrap; gap:50px; align-items:center;}
+    .about img {flex:1; border-radius:10px;}
+    .about .content {flex:1;}
+    .about .content p {font-size:18px; line-height:1.6; margin-bottom:20px;}
+    .about .content button {background:#111; color:white; border:none; padding:12px 25px; border-radius:5px; cursor:pointer;}
+    .about .content button:hover {background:#333;}
 
-        /* --- THE PROVENANCE SECTION --- */
-        .section { padding: 150px 10%; }
-        .provenance-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-        }
-        .p-card { border-top: 1px solid var(--ink); padding-top: 20px; }
-        .p-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .p-card p { font-size: 0.9rem; color: var(--moss); line-height: 1.6; }
+    /* Menu */
+    .menu {display:flex; flex-wrap:wrap; gap:30px; justify-content:center;}
+    .menu .item {flex:1 1 250px; background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+    .menu .item img {height:200px; object-fit:cover;}
+    .menu .item .details {padding:15px;}
+    .menu .item .details h3 {font-family:'Playfair Display', serif; margin-bottom:10px;}
+    .menu .item .details p {font-size:14px; margin-bottom:10px; color:#555;}
+    .menu .item .details span {font-weight:600; color:#f4b400;}
 
-        /* --- TACTILE MENU --- */
-        .menu-brutalist {
-            background: var(--ink);
-            color: var(--bg);
-            padding: 100px 10%;
-            margin-top: 50px;
-        }
-        .menu-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 40px 0;
-            border-bottom: 1px solid #333;
-            transition: 0.4s;
-        }
-        .menu-row:hover { color: var(--accent); padding-left: 20px; }
-        .menu-row h2 { font-size: 3rem; font-family: 'Instrument Serif'; font-style: italic; }
-        .menu-row span { font-family: 'Syne'; font-size: 1rem; font-weight: 800; }
+    /* Gallery */
+    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px;}
+    .gallery img {border-radius:10px; transition:0.3s;}
+    .gallery img:hover {transform:scale(1.05);}
 
-        /* --- RESERVATION: THE CLAY BOX --- */
-        .reserve-box {
-            background: var(--moss);
-            color: var(--bg);
-            padding: 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            margin-top: -50px;
-            z-index: 2;
-            position: relative;
-        }
-        .input-underlined {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(242, 240, 237, 0.3);
-            padding: 20px 0;
-            color: var(--bg);
-            width: 100%;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        .btn-clay {
-            background: var(--accent);
-            color: white;
-            padding: 25px 50px;
-            border: none;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+    /* Contact */
+    .contact form {max-width:600px; margin:0 auto; display:flex; flex-direction:column; gap:20px;}
+    .contact input, .contact textarea {padding:15px; border-radius:5px; border:1px solid #ccc; font-size:16px; width:100%;}
+    .contact button {background:#f4b400; border:none; padding:15px; font-size:18px; font-weight:600; border-radius:5px; cursor:pointer;}
+    .contact button:hover {background:#e5a300;}
 
-        .reveal { opacity: 0; transform: translateY(50px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+    /* Footer */
+    footer {background:#111; color:white; text-align:center; padding:30px; margin-top:50px;}
+    footer p {margin-bottom:10px;}
+    footer .socials a {color:white; margin:0 10px; font-size:20px; transition:0.3s;}
+    footer .socials a:hover {color:#f4b400;}
 
-        @media (max-width: 900px) {
-            .hero, .provenance-grid, .reserve-box { grid-template-columns: 1fr; }
-            .hero-image-frame { height: 40vh; margin-top: 40px; }
-            .reserve-box { padding: 40px; }
-        }
-    </style>
+    /* Responsive */
+    @media(max-width:900px){
+      .about {flex-direction:column;}
+      nav ul {display:none; flex-direction:column; gap:15px; background:#111; position:absolute; top:70px; right:50px; padding:20px; border-radius:10px;}
+      nav ul.active {display:flex;}
+      nav .menu-toggle {display:block;}
+    }
+  </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Delizia</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+  </nav>
 
-    <nav>
-        <div class="logo">ROOTS<br>EST. 2024</div>
-        <div style="display: flex; flex-direction: column;">
-            <a href="#menu" class="nav-link">THE FARE</a>
-            <a href="#reserve" class="nav-link">GATHER</a>
-        </div>
-    </nav>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1>Delizia Restaurant</h1>
+    <p>Where taste meets elegance</p>
+    <button>Book a Table</button>
+  </section>
 
-    <div class="scroll-text-wrap">
-        <marquee scrollamount="10">SPRING HARVEST IN EFFECT • SOIL TO PLATE • NO SYNTHETICS • EARTHEN COOKING • SPRING HARVEST IN EFFECT • SOIL TO PLATE</marquee>
+  <!-- About Section -->
+  <section class="about" id="about">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80" alt="About us">
+    <div class="content">
+      <h2>About Us</h2>
+      <p>At Delizia, we serve the finest dishes crafted with passion and fresh ingredients. Our mission is to deliver a dining experience that delights every sense. Come and taste the love in every bite.</p>
+      <button>Learn More</button>
     </div>
+  </section>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">RAW.<br><span>Refined.</span><br>Rooted.</h1>
-            <p style="max-width: 300px; margin-top: 30px; font-weight: 600;">We cook with fire, wood, and time. Ingredients sourced within 50 miles of this kitchen.</p>
+  <!-- Menu Section -->
+  <section id="menu">
+    <h2>Our Menu</h2>
+    <div class="menu">
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=500&q=60" alt="Dish">
+        <div class="details">
+          <h3>Grilled Salmon</h3>
+          <p>Freshly grilled salmon with herbs and lemon.</p>
+          <span>PKR 1200</span>
         </div>
-        <div class="hero-image-frame reveal"></div>
-    </section>
+      </div>
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1700481932999-4bba65731015?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8b24lMjBkaXNoJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="Dish">
+        <div class="details">
+          <h3>Spaghetti Carbonara</h3>
+          <p>Creamy pasta with parmesan and crispy bacon.</p>
+          <span>PKR 900</span>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=500&q=60" alt="Dish">
+        <div class="details">
+          <h3>Caesar Salad</h3>
+          <p>Fresh romaine lettuce with Caesar dressing and croutons.</p>
+          <span>PKR 700</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="section">
-        <div class="provenance-grid">
-            <div class="p-card reveal">
-                <h3>THE SOIL</h3>
-                <p>Our greens are harvested daily from the Blackwood Permaculture farm, 12 miles North.</p>
-            </div>
-            <div class="p-card reveal">
-                <h3>THE FIRE</h3>
-                <p>We use exclusively aged White Oak to fuel our hearth, providing a deep, elemental smoke.</p>
-            </div>
-            <div class="p-card reveal">
-                <h3>THE CRAFT</h3>
-                <p>Every plate is thrown by hand in our local pottery studio, reflecting the texture of our landscape.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Gallery Section -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=500&q=60" alt="Gallery">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=60" alt="Gallery">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=60" alt="Gallery">
+      <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=500&q=60" alt="Gallery">
+    </div>
+  </section>
 
-    <section id="menu" class="menu-brutalist">
-        <div class="menu-row reveal">
-            <h2>Smoked Beetroot & Curd</h2>
-            <span>$18</span>
-        </div>
-        <div class="menu-row reveal">
-            <h2>Wood-Fired Venison</h2>
-            <span>$42</span>
-        </div>
-        <div class="menu-row reveal">
-            <h2>Charred Leeks in Ash</h2>
-            <span>$16</span>
-        </div>
-        <div class="menu-row reveal">
-            <h2>Wild Sea Bass & Kelp</h2>
-            <span>$38</span>
-        </div>
-    </section>
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <input type="text" placeholder="Subject" required>
+      <textarea rows="5" placeholder="Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-    <section id="reserve" class="section" style="padding-top: 0;">
-        <div class="reserve-box reveal">
-            <div>
-                <h2 style="font-size: 4rem; font-family: 'Instrument Serif'; italic;">Gather at the Table</h2>
-                <p style="margin-top: 20px; opacity: 0.8;">We accept limited reservations to maintain the intimacy of the dining experience.</p>
-            </div>
-            <div>
-                <form>
-                    <input type="text" placeholder="GUEST NAME" class="input-underlined">
-                    <input type="text" placeholder="PARTY SIZE" class="input-underlined">
-                    <input type="date" class="input-underlined">
-                    <button type="button" class="btn-clay">RESERVE SPACE</button>
-                </form>
-            </div>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Delizia Restaurant. All rights reserved.</p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
 
-    <footer style="padding: 100px 10%; text-align: left;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-            <div>
-                <h1 style="font-family: 'Instrument Serif'; font-size: 4rem;">ROOTS</h1>
-                <p>COLLECTIVE KITCHEN</p>
-            </div>
-            <div style="text-align: right; opacity: 0.5; font-size: 0.8rem;">
-                <p>OPEN TUES — SUN</p>
-                <p>17:00 — LATE</p>
-            </div>
-        </div>
-    </footer>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl = document.querySelector('nav ul');
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    menuToggle.addEventListener('click', () => {
+      navUl.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>

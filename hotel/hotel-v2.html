@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Horizon Hotel | Luxury Accommodation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #c19a6b;
+            --secondary-color: #1a2c42;
+            --light-color: #f8f5f0;
+            --dark-color: #333;
+            --text-color: #555;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #b08858;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #0f1e2e;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 44, 66, 0.7), rgba(26, 44, 66, 0.7)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .booking-form .btn {
+            align-self: flex-end;
+        }
+
+        /* Rooms Section */
+        .rooms-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .room-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .room-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .room-card:hover .room-img img {
+            transform: scale(1.05);
+        }
+
+        .room-info {
+            padding: 25px;
+        }
+
+        .room-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .room-price {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .room-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .room-features span {
+            margin-right: 15px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .room-features i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        /* Amenities Section */
+        .amenities {
+            background-color: var(--light-color);
+        }
+
+        .amenities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .amenity-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .amenity-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .amenity-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .amenity-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials */
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.8s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .testimonial-text::before, .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .testimonial-text::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .testimonial-text::after {
+            bottom: -30px;
+            right: -10px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: #bbb;
+            padding: 70px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0 0 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            .rooms-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .testimonial {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Grand <span>Horizon</span></a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rooms">Rooms & Suites</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="btn">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experience Luxury & Comfort</h1>
+                <p>Welcome to Grand Horizon Hotel, where luxury meets comfort. Enjoy breathtaking views, world-class amenities, and impeccable service in the heart of the city.</p>
+                <a href="#rooms" class="btn">Explore Rooms</a>
+            </div>
+            
+            <!-- Booking Form -->
+            <div class="booking-form">
+                <div class="form-group">
+                    <label for="checkin">Check-in</label>
+                    <input type="date" id="checkin">
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Check-out</label>
+                    <input type="date" id="checkout">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select id="guests">
+                        <option value="1">1 Guest</option>
+                        <option value="2" selected>2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5+">5+ Guests</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="room-type">Room Type</label>
+                    <select id="room-type">
+                        <option value="standard">Standard Room</option>
+                        <option value="deluxe">Deluxe Room</option>
+                        <option value="suite">Suite</option>
+                        <option value="presidential">Presidential Suite</option>
+                    </select>
+                </div>
+                <button class="btn">Check Availability</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms & Suites Section -->
+    <section id="rooms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rooms & Suites</h2>
+                <p>Choose from our selection of beautifully appointed rooms and suites, each designed with your comfort and relaxation in mind.</p>
+            </div>
+            
+            <div class="rooms-container">
+                <!-- Room 1 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Deluxe Room">
+                    </div>
+                    <div class="room-info">
+                        <h3>Deluxe Room</h3>
+                        <div class="room-price">$249 <span>/ per night</span></div>
+                        <div class="room-features">
+                            <span><i class="fas fa-user-friends"></i> 2 Guests</span>
+                            <span><i class="fas fa-bed"></i> King Bed</span>
+                            <span><i class="fas fa-ruler-combined"></i> 450 sq ft</span>
+                        </div>
+                        <p>Spacious room with panoramic city views, plush king bed, and modern amenities for a comfortable stay.</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" alt="Executive Suite">
+                    </div>
+                    <div class="room-info">
+                        <h3>Executive Suite</h3>
+                        <div class="room-price">$399 <span>/ per night</span></div>
+                        <div class="room-features">
+                            <span><i class="fas fa-user-friends"></i> 3 Guests</span>
+                            <span><i class="fas fa-bed"></i> King Bed + Sofa Bed</span>
+                            <span><i class="fas fa-ruler-combined"></i> 650 sq ft</span>
+                        </div>
+                        <p>Luxurious suite with separate living area, premium furnishings, and exclusive access to executive lounge.</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2025&q=80" alt="Presidential Suite">
+                    </div>
+                    <div class="room-info">
+                        <h3>Presidential Suite</h3>
+                        <div class="room-price">$799 <span>/ per night</span></div>
+                        <div class="room-features">
+                            <span><i class="fas fa-user-friends"></i> 4 Guests</span>
+                            <span><i class="fas fa-bed"></i> 2 King Beds</span>
+                            <span><i class="fas fa-ruler-combined"></i> 1200 sq ft</span>
+                        </div>
+                        <p>Our most luxurious offering with expansive living spaces, private balcony, and personalized butler service.</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section class="amenities" id="amenities">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hotel Amenities</h2>
+                <p>Enjoy our world-class facilities and services designed to make your stay unforgettable.</p>
+            </div>
+            
+            <div class="amenities-container">
+                <!-- Amenity 1 -->
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Infinity Pool</h3>
+                    <p>Relax in our stunning rooftop infinity pool with panoramic city views and poolside service.</p>
+                </div>
+                
+                <!-- Amenity 2 -->
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Fitness Center</h3>
+                    <p>State-of-the-art gym with modern equipment, personal trainers, and yoga classes available.</p>
+                </div>
+                
+                <!-- Amenity 3 -->
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Fine Dining</h3>
+                    <p>Multiple dining options including our award-winning restaurant and 24/7 room service.</p>
+                </div>
+                
+                <!-- Amenity 4 -->
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa & Wellness</h3>
+                    <p>Rejuvenate with our luxury spa treatments, sauna, steam room, and massage therapies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Guest Reviews</h2>
+                <p>See what our guests have to say about their experience at Grand Horizon Hotel.</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <!-- Testimonial 1 -->
+                <div class="testimonial active">
+                    <div class="testimonial-text">
+                        <p>The Grand Horizon exceeded all our expectations. The service was impeccable, the room was stunning, and the amenities were top-notch. We'll definitely be returning!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Business Traveler</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>Our anniversary stay was magical thanks to the Grand Horizon team. They surprised us with champagne and rose petals. The presidential suite was absolutely breathtaking!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael & Elena Chen</h4>
+                            <p>Anniversary Celebration</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>As a frequent traveler, I've stayed in many luxury hotels, but Grand Horizon stands out for its attention to detail. The executive lounge and spa facilities are exceptional.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Olivia Williams">
+                        </div>
+                        <div class="author-info">
+                            <h4>Olivia Williams</h4>
+                            <p>Frequent Traveler</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <div class="slider-dot active" data-index="0"></div>
+                <div class="slider-dot" data-index="1"></div>
+                <div class="slider-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <!-- Column 1 -->
+                <div class="footer-column">
+                    <h3>Grand Horizon</h3>
+                    <p>Experience luxury redefined at Grand Horizon Hotel. We offer world-class accommodations, fine dining, and exceptional service in the heart of the city.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#rooms">Rooms & Suites</a></li>
+                        <li><a href="#amenities">Amenities</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>123 Luxury Avenue<br>Downtown, City 10001</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>+1 (555) 123-4567</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>info@grandhorizon.com</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for exclusive offers and updates.</p>
+                    <form id="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Grand Horizon Hotel. All rights reserved. | Designed with <i class="fas fa-heart" style="color:#c19a6b;"></i> for luxury hospitality.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Testimonial slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentTestimonial = 0;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => {
+                testimonial.classList.remove('active');
+            });
+            
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showTestimonial(index);
+            });
+        });
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Form submission handling
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`Thank you for subscribing with email: ${email}`);
+            this.reset();
+        });
+        
+        // Booking form handling
+        document.querySelector('.booking-form .btn').addEventListener('click', function() {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const roomType = document.getElementById('room-type').value;
+            
+            if(!checkin || !checkout) {
+                alert('Please select check-in and check-out dates');
+                return;
+            }
+            
+            alert(`Thank you for your booking request!\n\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nRoom Type: ${roomType}\n\nWe'll check availability and contact you shortly.`);
+        });
+        
+        // Set min date for booking form (today)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = today;
+        
+        // Update checkout min date when checkin changes
+        document.getElementById('checkin').addEventListener('change', function() {
+            document.getElementById('checkout').min = this.value;
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

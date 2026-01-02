@@ -346,6 +346,46 @@
                 
             ]
         }
+          ,
+        {
+            "id": "WB-20",
+            "title": "Grand Horizon",
+            "category": "Hotel",
+            "description": "Rooms + Services + Gallery",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/hotel/hotel-v2.html",
+            "image": "/assets/hotel_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+         ,
+        {
+            "id": "WB-21",
+            "title": "Grand Horizon",
+            "category": "Hotel",
+            "description": "Rooms & Suites + Amenities + Testimonials",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/hotel/hotel-v1.html",
+            "image": "/assets/hotel_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
         
     ]
 }
