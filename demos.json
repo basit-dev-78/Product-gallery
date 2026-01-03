@@ -386,6 +386,66 @@
                 
             ]
         }
+        ,
+        {
+            "id": "WB-22",
+            "title": "GreenNest",
+            "category": "Plants",
+            "description": "About  + Plants + Reviews ",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/plants/plants-v1.html",
+            "image": "/assets/plants_v-1.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-23",
+            "title": "GreenLeaf Haven",
+            "category": "Plants",
+            "description": "About  + Plants + Reviews ",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/plants/plants-v2.html",
+            "image": "/assets/plants_v-2.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
+        ,
+        {
+            "id": "WB-24",
+            "title": "EvergreenHaven",
+            "category": "Plants",
+            "description": "About  + Why Us + Plants + Reviews ",
+            "priceBucket": "mid",
+            "priceLabel": "From £149",
+            "rating": 4.9,
+            "popularScore": 95,
+            "previewUrl": "https://product-gallery-seven-topaz.vercel.app/plants/plants-v3.html",
+            "image": "/assets/plants_v-3.png",
+            "createdAt": "2025-12-31",
+            "tags": [
+                "Mobile",
+                "Fast",
+                "Attractive"
+                
+            ]
+        }
         
     ]
 }

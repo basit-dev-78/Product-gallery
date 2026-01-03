@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aurelia Grand Hotel | Timeless Luxury</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --dark: #1c1c1c;
+      --light: #f8f6f3;
+      --gold: #c7a14a;
+      --gray: #666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* ================= NAV ================= */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(28,28,28,0.9);
+      z-index: 999;
+    }
+
+    nav {
+      max-width: 1300px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h2 {
+      color: var(--gold);
+      font-size: 1.6rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav ul a:hover {
+      color: var(--gold);
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      height: 100vh;
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: #ddd;
+    }
+
+    .hero a {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 36px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+
+    .hero a:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* ================= SECTIONS ================= */
+    section {
+      padding: 100px 20px;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-head h2 {
+      font-size: 2.8rem;
+    }
+
+    .section-head p {
+      max-width: 700px;
+      margin: 15px auto 0;
+      color: var(--gray);
+    }
+
+    /* ================= ABOUT ================= */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    /* ================= ROOMS ================= */
+    .rooms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+    }
+
+    .room {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
+
+    .room img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .room div {
+      padding: 25px;
+    }
+
+    .room h3 {
+      margin-bottom: 10px;
+    }
+
+    .room span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ================= AMENITIES ================= */
+    .amenities {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .amenity {
+      background: #fff;
+      padding: 35px 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .amenity i {
+      font-size: 34px;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    /* ================= TESTIMONIALS ================= */
+    .testimonials {
+      background: #111;
+      color: #fff;
+      max-width: none;
+    }
+
+    .quotes {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .quotes p {
+      font-style: italic;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    /* ================= CONTACT ================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-info p {
+      margin-bottom: 10px;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #0f0f0f;
+      color: #aaa;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media(max-width: 900px) {
+      .about, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <h2>Aurelia</h2>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#rooms">Suites</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Aurelia Grand Hotel</h1>
+    <p>
+      A sanctuary of elegance where classical hospitality meets modern refinement.
+      Every stay is curated. Every moment intentional.
+    </p>
+    <a href="#rooms">View Our Suites</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <h2>Our Philosophy</h2>
+    <p>Hospitality rooted in tradition, perfected for the present.</p>
+  </div>
+
+  <div class="about">
+    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb">
+    <p>
+      For decades, Aurelia Grand Hotel has welcomed travelers who value discretion,
+      comfort, and timeless luxury. Our spaces are designed not to impress loudly,
+      but to stay with you quietly.
+    </p>
+  </div>
+</section>
+
+<section id="rooms">
+  <div class="section-head">
+    <h2>Suites & Residences</h2>
+    <p>Thoughtfully designed spaces for rest, work, and reflection.</p>
+  </div>
+
+  <div class="rooms">
+    <div class="room">
+      <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39">
+      <div>
+        <h3>Classic Suite</h3>
+        <span>From $180 / night</span>
+      </div>
+    </div>
+
+    <div class="room">
+      <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427">
+      <div>
+        <h3>Executive Residence</h3>
+        <span>From $260 / night</span>
+      </div>
+    </div>
+
+    <div class="room">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+      <div>
+        <h3>Presidential Suite</h3>
+        <span>From $520 / night</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="amenities">
+  <div class="section-head">
+    <h2>Hotel Amenities</h2>
+  </div>
+
+  <div class="amenities">
+    <div class="amenity"><i class="fa-solid fa-spa"></i><h4>Spa & Wellness</h4></div>
+    <div class="amenity"><i class="fa-solid fa-utensils"></i><h4>Fine Dining</h4></div>
+    <div class="amenity"><i class="fa-solid fa-water-ladder"></i><h4>Infinity Pool</h4></div>
+    <div class="amenity"><i class="fa-solid fa-wifi"></i><h4>High-Speed Wi-Fi</h4></div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="quotes">
+    <p>“A hotel that understands silence, comfort, and grace.”</p>
+    <strong>— International Guest Review</strong>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <h2>Contact & Reservations</h2>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p><strong>Location:</strong> City Center, Pakistan</p>
+      <p><strong>Email:</strong> reservations@aureliahotel.com</p>
+      <p><strong>Phone:</strong> +92 300 0000000</p>
+    </div>
+    <p>
+      For private bookings, corporate stays, or extended residences,
+      our concierge team is available around the clock.
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Aurelia Grand Hotel — Crafted with restraint, not noise.
+</footer>
+
+</body>
+</html>
