@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyVoyage - Premium Air & Travel Agency</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #007bff;
+        }
+        .destination-card, .package-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .destination-card:hover, .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .testimonial-carousel .carousel-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        footer {
+            background: #222;
+            color: #ddd;
+        }
+        .navbar-scrolled {
+            background-color: rgba(0,0,0,0.9) !important;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-transparent">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">SkyVoyage</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold">Discover Your Next Adventure</h1>
+            <p class="lead mb-4">Premium Flights, Tours & Personalized Travel Experiences Worldwide</p>
+            <a href="#packages" class="btn btn-primary btn-lg px-5 py-3">Explore Packages</a>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Popular Destinations</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card border-0 shadow">
+                        <img src="https://plus.unsplash.com/premium_photo-1661919210043-fd847a58522d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGFyaXN8ZW58MHx8MHx8fDA%3D" class="card-img-top" alt="Paris">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Paris, France</h5>
+                            <p class="card-text">City of Lights & Romance</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card border-0 shadow">
+                        <img src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFsaXxlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="Bali">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Bali, Indonesia</h5>
+                            <p class="card-text">Tropical Paradise</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card destination-card border-0 shadow">
+                        <img src="https://plus.unsplash.com/premium_photo-1714051660720-888e8454a021?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIweW9ya3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="New York">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">New York, USA</h5>
+                            <p class="card-text">The Big Apple</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more destinations as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Exclusive Travel Packages</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card package-card border-0 shadow">
+                        <img src="https://plus.unsplash.com/premium_photo-1673240367277-e1d394465b56?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2VlfGVufDB8fDB8fHww" class="card-img-top" alt="Luxury">
+                        <div class="card-body">
+                            <h5 class="card-title">Luxury Escape</h5>
+                            <p class="card-text">5-Star Hotels, Private Tours & Premium Flights</p>
+                            <h4 class="text-primary">$2,999</h4>
+                            <a href="#" class="btn btn-outline-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card package-card border-0 shadow">
+                        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Adventure">
+                        <div class="card-body">
+                            <h5 class="card-title">Adventure Tour</h5>
+                            <p class="card-text">Hiking, Safari & Extreme Sports</p>
+                            <h4 class="text-primary">$1,799</h4>
+                            <a href="#" class="btn btn-outline-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card package-card border-0 shadow">
+                        <img src="https://plus.unsplash.com/premium_photo-1664366737730-3d5ff4666e82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFtaWx5JTIwb24lMjB0cmlwfGVufDB8fDB8fHww" class="card-img-top" alt="Family">
+                        <div class="card-body">
+                            <h5 class="card-title">Family Vacation</h5>
+                            <p class="card-text">Kid-Friendly Resorts & Activities</p>
+                            <h4 class="text-primary">$1,299</h4>
+                            <a href="#" class="btn btn-outline-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Our Services</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-plane fa-4x text-primary mb-3"></i>
+                    <h4>Flight Booking</h4>
+                    <p>Best deals on international & domestic flights</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-hotel fa-4x text-primary mb-3"></i>
+                    <h4>Hotel Reservations</h4>
+                    <p>Luxury to budget accommodations worldwide</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-map-marked-alt fa-4x text-primary mb-3"></i>
+                    <h4>Custom Tours</h4>
+                    <p>Personalized itineraries for unique experiences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid rounded shadow" alt="About Us">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="section-title">Why Choose SkyVoyage?</h2>
+                    <p>We are a premium air and travel agency with over 15 years of experience crafting unforgettable journeys. Our team of experts ensures seamless travel from booking to return.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary me-2"></i>24/7 Customer Support</li>
+                        <li><i class="fas fa-check text-primary me-2"></i>Best Price Guarantee</li>
+                        <li><i class="fas fa-check text-primary me-2"></i>Trusted by 50,000+ Travelers</li>
+                        <li><i class="fas fa-check text-primary me-2"></i>Secure & Easy Booking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">What Our Customers Say</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p class="lead">"Best travel experience ever! SkyVoyage handled everything perfectly."</p>
+                        <h5>- Sarah Johnson</h5>
+                    </div>
+                    <div class="carousel-item">
+                        <p class="lead">"Amazing deals and superb customer service. Highly recommend!"</p>
+                        <h5>- Michael Chen</h5>
+                    </div>
+                    <div class="carousel-item">
+                        <p class="lead">"Our family vacation was unforgettable thanks to their expert planning."</p>
+                        <h5>- Emma Rodriguez</h5>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Get in Touch</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Your Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <p><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@skyvoyage.com</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> 123 Travel Street, World City</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 text-center">
+        <div class="container">
+            <p>&copy; 2026 SkyVoyage. All Rights Reserved.</p>
+            <div>
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Navbar Scroll Effect -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

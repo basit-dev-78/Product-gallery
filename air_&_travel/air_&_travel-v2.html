@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AirNova | Premium Air & Travel Experience</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --primary: #0a2540;
+      --secondary: #1f6ae1;
+      --accent: #f4c430;
+      --light: #f8f9fb;
+      --dark: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+    }
+
+    section {
+      padding: 80px 10%;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 10%;
+      z-index: 999;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    header h2 {
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(10,37,64,0.65), rgba(10,37,64,0.65)),
+      url('https://plus.unsplash.com/premium_photo-1679917737872-1ad9402cf39f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWlyJTIwbGluZXxlbnwwfHwwfHx8MA%3D%3D') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      color: #fff;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      background-image: url();
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+      opacity: 0.95;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--secondary);
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: var(--dark);
+    }
+
+    /* ================= DESTINATIONS ================= */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 25px;
+    }
+
+    .card-body h3 {
+      margin-bottom: 10px;
+    }
+
+    /* ================= SERVICES ================= */
+    .services {
+      background: var(--light);
+    }
+
+    .service-box {
+      text-align: center;
+      padding: 35px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    .service-box i {
+      font-size: 40px;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    /* ================= WHY US ================= */
+    .why {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 50px;
+      align-items: center;
+    }
+
+    .why img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    /* ================= TESTIMONIALS ================= */
+    .testimonial {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+    }
+
+    .testimonial p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* ================= CTA ================= */
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #fff;
+    }
+
+    .cta h2 {
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #0a2540;
+      color: #ccc;
+      padding: 40px 10%;
+      text-align: center;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media(max-width:768px) {
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      header {
+        flex-direction: column;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>AirNova</h2>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Fly Beyond Destinations</h1>
+    <p>Luxury air travel, curated journeys, and unforgettable experiences — because travel should feel timeless, not tiring.</p>
+    <a href="#contact" class="btn">Book Your Journey</a>
+  </div>
+</section>
+
+<section id="destinations">
+  <h2>Top Destinations</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" alt="">
+      <div class="card-body">
+        <h3>Paris</h3>
+        <p>The city where elegance meets romance.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" alt="">
+      <div class="card-body">
+        <h3>Dubai</h3>
+        <p>Luxury, innovation, and golden horizons.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff" alt="">
+      <div class="card-body">
+        <h3>Tokyo</h3>
+        <p>Where tradition dances with the future.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <h2>Our Services</h2>
+  <div class="cards">
+    <div class="service-box">
+      <i class="fa-solid fa-plane"></i>
+      <h3>First-Class Flights</h3>
+      <p>Comfort that respects tradition and innovation.</p>
+    </div>
+
+    <div class="service-box">
+      <i class="fa-solid fa-hotel"></i>
+      <h3>Luxury Hotels</h3>
+      <p>Hand-picked stays with timeless hospitality.</p>
+    </div>
+
+    <div class="service-box">
+      <i class="fa-solid fa-headset"></i>
+      <h3>24/7 Support</h3>
+      <p>Because journeys don’t follow office hours.</p>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="why">
+    <div>
+      <h2>Why Choose AirNova</h2>
+      <p>
+        We believe travel is an art. A balance of legacy, comfort, and future-forward service.
+        No shortcuts. No chaos. Just journeys done right.
+      </p>
+      <a href="#contact" class="btn">Start Exploring</a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="">
+  </div>
+</section>
+
+<section class="testimonial">
+  <h2>What Travelers Say</h2>
+  <p>
+    “AirNova didn’t just take me places — it reminded me why travel used to feel magical.”
+  </p>
+</section>
+
+<section id="contact" class="cta">
+  <h2>Your Journey Starts Here</h2>
+  <p>One click away from the skies.</p>
+  <a href="#" class="btn">Get Started</a>
+</section>
+
+<footer>
+  <p>© 2026 AirNova. All rights reserved.</p>
+</footer>
+
+<script>
+  // Simple fade-in on scroll
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = "translateY(0)";
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(sec => {
+    sec.style.opacity = 0;
+    sec.style.transform = "translateY(40px)";
+    sec.style.transition = "1s ease";
+    observer.observe(sec);
+  });
+</script>
+
+</body>
+</html>

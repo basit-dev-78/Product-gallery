@@ -15,7 +15,6 @@ bags
 mobile 
 leather item
 hardware
-plants
 fans
 cerimics
 
