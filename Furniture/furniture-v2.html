@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timber & Grain | Rustic Furniture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-brown: #8B4513;
+            --secondary-brown: #A0522D;
+            --light-brown: #D2B48C;
+            --cream: #F5F5DC;
+            --dark-cream: #F0EAD6;
+            --text-dark: #3E2723;
+            --text-medium: #5D4037;
+            --text-light: #8D6E63;
+            --accent-green: #556B2F;
+            --transition: all 0.4s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-medium);
+            background-color: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-brown);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 30px auto 0;
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(245, 245, 220, 0.95);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        header.scrolled {
+            background-color: var(--cream);
+            box-shadow: var(--shadow);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+        }
+
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-brown);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-brown);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-brown);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-brown);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1627226325480-f46163bc38c2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGZ1cm5pdHVyZSUyMHRodW1ibmFpbHxlbnwwfHwwfHx8MA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            color: var(--cream);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-brown);
+            color: var(--cream);
+            padding: 16px 35px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.05rem;
+            border: 2px solid var(--primary-brown);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--cream);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--cream);
+            margin-left: 20px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--cream);
+            color: var(--primary-brown);
+        }
+
+        /* Collections */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .collection-card {
+            background-color: var(--dark-cream);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .collection-img {
+            height: 280px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .collection-content {
+            padding: 30px;
+        }
+
+        .collection-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .collection-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* Rustic Products */
+        .products-section {
+            background-color: var(--dark-cream);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .product-card {
+            background-color: var(--cream);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 25px;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: var(--primary-brown);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Craftsmanship */
+        .craftsmanship-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+        }
+
+        .craftsmanship-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+        }
+
+        .craftsmanship-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .craftsmanship-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 20px 20px 0px rgba(139, 69, 19, 0.1);
+            border: 1px solid rgba(139, 69, 19, 0.2);
+        }
+
+        .craftsmanship-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Materials */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .material-item {
+            text-align: center;
+            padding: 40px 30px;
+            background-color: var(--dark-cream);
+            border-radius: 8px;
+            transition: var(--transition);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .material-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-brown);
+        }
+
+        .material-icon {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-brown);
+        }
+
+        .material-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .material-item p {
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: var(--dark-cream);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--cream);
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin: 0 15px;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .client-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 3px solid var(--primary-brown);
+        }
+
+        .client-details h4 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .client-details p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            height: 350px;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+        }
+
+        .contact-details {
+            margin-top: 35px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            background-color: var(--primary-brown);
+            color: var(--cream);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+        }
+
+        .contact-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-text p {
+            color: var(--text-light);
+        }
+
+        .contact-form {
+            background-color: var(--dark-cream);
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(139, 69, 19, 0.3);
+            border-radius: 4px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1.05rem;
+            background-color: var(--cream);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-brown);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--cream);
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--light-brown);
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(210, 180, 140, 0.1);
+            border-radius: 50%;
+            color: var(--cream);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--light-brown);
+            color: var(--text-dark);
+            transform: translateY(-5px);
+        }
+
+        .footer-heading {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--light-brown);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(245, 245, 220, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-brown);
+            padding-left: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(210, 180, 140, 0.2);
+            color: rgba(245, 245, 220, 0.6);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 85px;
+                left: 0;
+                width: 100%;
+                background-color: var(--cream);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: var(--transition);
+                z-index: 999;
+                border-top: 1px solid rgba(139, 69, 19, 0.1);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links li {
+                margin: 18px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 150px 0 100px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .testimonial-card {
+                padding: 40px 30px;
+            }
+            
+            .contact-form {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .craftsmanship-text h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Timber<span>&</span>Grain</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#craftsmanship">Craftsmanship</a></li>
+                    <li><a href="#materials">Materials</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Handcrafted Rustic Furniture With Character</h1>
+                <p>Each piece tells a story of tradition, craftsmanship, and natural beauty. Our furniture is built to age gracefully and become family heirlooms.</p>
+                <div class="hero-buttons">
+                    <a href="#collections" class="btn">Explore Collections</a>
+                    <a href="#craftsmanship" class="btn btn-outline">Our Craftsmanship</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section id="collections">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Collections</h2>
+                <p>Discover furniture that brings warmth, character, and timeless beauty to your home.</p>
+            </div>
+            
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Farmhouse Collection" class="collection-img">
+                    <div class="collection-content">
+                        <h3>Farmhouse Collection</h3>
+                        <p>Inspired by traditional farmhouse aesthetics with distressed finishes, reclaimed wood, and comfortable silhouettes.</p>
+                    </div>
+                </div>
+                
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Lodge Collection" class="collection-img">
+                    <div class="collection-content">
+                        <h3>Mountain Lodge</h3>
+                        <p>Heavy timber construction, leather accents, and rugged elegance inspired by wilderness retreats.</p>
+                    </div>
+                </div>
+                
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Industrial Rustic" class="collection-img">
+                    <div class="collection-content">
+                        <h3>Industrial Rustic</h3>
+                        <p>Blending raw materials like steel and iron with reclaimed wood for an urban-rustic aesthetic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Signature Pieces</h2>
+                <p>Handcrafted furniture that combines rustic charm with modern comfort.</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Reclaimed Dining Table" class="product-img">
+                    <div class="product-content">
+                        <div class="product-category">Dining Room</div>
+                        <h3 class="product-name">Reclaimed Dining Table</h3>
+                        <p class="product-description">Crafted from century-old barn wood with natural imperfections that tell a story. Hand-finished with natural oils.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Leather Armchair" class="product-img">
+                    <div class="product-content">
+                        <div class="product-category">Living Room</div>
+                        <h3 class="product-name">Leather Armchair</h3>
+                        <p class="product-description">Full-grain leather that develops a rich patina over time. Solid walnut frame with hand-tooled details.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Rustic Bed Frame" class="product-img">
+                    <div class="product-content">
+                        <div class="product-category">Bedroom</div>
+                        <h3 class="product-name">Rustic Bed Frame</h3>
+                        <p class="product-description">Heavy timber construction with mortise and tenon joinery. Designed to last for generations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship -->
+    <section id="craftsmanship">
+        <div class="container">
+            <div class="craftsmanship-content">
+                <div class="craftsmanship-text">
+                    <h2>Traditional Craftsmanship, Modern Living</h2>
+                    <p>At Timber & Grain, we honor time-honored woodworking techniques while designing furniture for contemporary lifestyles. Each piece is created by skilled artisans who understand the soul of wood.</p>
+                    <p>We don't hide the natural character of wood—we celebrate it. Knots, grain variations, and subtle imperfections are what give our furniture its unique personality.</p>
+                    <a href="#materials" class="btn">Our Materials</a>
+                </div>
+                <div class="craftsmanship-image">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80" alt="Woodworking Craftsmanship">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials -->
+    <section id="materials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Natural Materials</h2>
+                <p>We work exclusively with sustainable, natural materials that age beautifully.</p>
+            </div>
+            
+            <div class="materials-grid">
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>Reclaimed Wood</h3>
+                    <p>Sourced from old barns, factories, and warehouses. Each piece has a unique history and character.</p>
+                </div>
+                
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Sustainably Harvested</h3>
+                    <p>All new wood is FSC-certified and sourced from responsibly managed forests.</p>
+                </div>
+                
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Natural Finishes</h3>
+                    <p>We use plant-based oils and waxes that protect the wood while allowing it to breathe and age naturally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Hear from homeowners who have brought rustic charm into their spaces.</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Our dining table from Timber & Grain is more than furniture—it's the heart of our home. The craftsmanship is extraordinary, and every meal feels special around this beautiful piece. The character of the reclaimed wood tells a story that modern furniture simply can't."</p>
+                    
+                    <div class="client-info">
+                        <div class="client-details">
+                            <h4>Michael Thompson</h4>
+                            <p>Homeowner, Colorado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rustic Spaces</h2>
+                <p>See how our furniture creates warm, inviting environments.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Rustic Living Room">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cozy Cabin Interior">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Farmhouse Dining">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bring Rustic Charm to Your Home</h2>
+                <p>Visit our workshop or schedule a consultation to discuss custom pieces.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Visit Our Workshop</h3>
+                    <p>See our artisans at work and experience the craftsmanship firsthand at our workshop in the countryside.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Workshop Location</h4>
+                                <p>123 Country Lane<br>Woodworking District, Vermont 05661</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Contact</h4>
+                                <p>(802) 555-1234<br>workshop@timbergrain.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Tour Hours</h4>
+                                <p>Workshop tours by appointment<br>Monday - Saturday, 9am - 5pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Schedule a Consultation</h3>
+                    <form id="consultationForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project">Project Type</label>
+                            <select id="project" class="form-control">
+                                <option value="">Select Project Type</option>
+                                <option value="dining">Dining Room</option>
+                                <option value="living">Living Room</option>
+                                <option value="bedroom">Bedroom</option>
+                                <option value="custom">Custom Piece</option>
+                                <option value="multiple">Multiple Rooms</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Vision</label>
+                            <textarea id="message" class="form-control" placeholder="Tell us about your space and what you're looking for..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Request Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">Timber<span>&</span>Grain</a>
+                    <p>Handcrafted rustic furniture built to last for generations. Combining traditional craftsmanship with modern design for homes with character.</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Collections</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Farmhouse</a></li>
+                        <li><a href="#">Mountain Lodge</a></li>
+                        <li><a href="#">Industrial Rustic</a></li>
+                        <li><a href="#">Custom Pieces</a></li>
+                        <li><a href="#">Seasonal Collection</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Wood Care Guide</a></li>
+                        <li><a href="#">Design Inspiration</a></li>
+                        <li><a href="#">Our Craftsmanship</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Workshop Tours</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Timber & Grain. All rights reserved. | Handcrafted with care in Vermont, USA</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! We will contact you within 48 hours to schedule your consultation.');
+            this.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

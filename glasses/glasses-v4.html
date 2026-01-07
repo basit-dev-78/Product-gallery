@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VisionCraft | Premium Eyewear</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --dark:#0f172a;
+  --gray:#64748b;
+  --light:#f8fafc;
+  --accent:#0ea5e9;
+  --border:#e5e7eb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins', sans-serif;
+  color:var(--dark);
+  background:#fff;
+  line-height:1.7;
+}
+
+img{
+  width:100%;
+  display:block;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+section{
+  padding:80px 8%;
+}
+
+h1,h2,h3{
+  font-family:'Playfair Display', serif;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 34px;
+  border-radius:30px;
+  background:var(--accent);
+  color:#fff;
+  font-weight:500;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#0284c7;
+  transform:translateY(-2px);
+}
+
+/* NAVBAR */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:18px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
+
+nav h2{
+  font-size:24px;
+}
+
+nav ul{
+  display:flex;
+  gap:30px;
+}
+
+nav ul li{
+  list-style:none;
+  font-size:15px;
+  color:var(--gray);
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  align-items:center;
+  gap:60px;
+}
+
+.hero h1{
+  font-size:58px;
+  line-height:1.1;
+}
+
+.hero p{
+  margin:20px 0 30px;
+  color:var(--gray);
+  max-width:520px;
+}
+
+.hero img{
+  border-radius:24px;
+}
+
+/* ABOUT */
+.about{
+  background:var(--light);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+.about p{
+  color:var(--gray);
+  margin-top:15px;
+}
+
+/* COLLECTION */
+.collection{
+  text-align:center;
+}
+
+.collection-grid{
+  margin-top:50px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.card h3{
+  margin:20px 0 10px;
+}
+
+.card p{
+  color:var(--gray);
+  padding:0 20px 25px;
+}
+
+/* SERVICES */
+.services{
+  background:var(--light);
+}
+
+.service-grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+}
+
+.service{
+  background:#fff;
+  border-radius:20px;
+  padding:35px;
+  border:1px solid var(--border);
+}
+
+.service h3{
+  margin-bottom:10px;
+}
+
+/* TESTIMONIALS */
+.testimonials{
+  text-align:center;
+}
+
+.test-grid{
+  margin-top:50px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.test{
+  padding:30px;
+  border-radius:20px;
+  border:1px solid var(--border);
+}
+
+.test p{
+  color:var(--gray);
+  margin:15px 0;
+}
+
+/* FAQ */
+.faq{
+  background:var(--light);
+}
+
+.faq-item{
+  max-width:800px;
+  margin:0 auto 20px;
+  border-bottom:1px solid var(--border);
+  padding-bottom:20px;
+}
+
+/* NEWSLETTER */
+.newsletter{
+  text-align:center;
+}
+
+.newsletter input{
+  padding:14px 18px;
+  width:260px;
+  border-radius:30px;
+  border:1px solid var(--border);
+  margin-right:10px;
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  color:#cbd5f5;
+  padding:50px 8%;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+footer p{
+  font-size:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero,
+  .about{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:44px;
+  }
+
+  nav ul{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <h2>VisionCraft</h2>
+  <ul>
+    <li>Home</li>
+    <li>Collections</li>
+    <li>About</li>
+    <li>Contact</li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>Eyewear That Defines<br>Your Perspective</h1>
+    <p>Precision-crafted frames blending heritage craftsmanship with modern elegance. Designed for comfort, clarity, and confidence.</p>
+    <a href="#" class="btn">Explore Our Vision</a>
+  </div>
+  <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083" alt="">
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6" alt="">
+  <div>
+    <h2>Timeless Design, Modern Precision</h2>
+    <p>At VisionCraft, eyewear is not fashion alone — it is identity. Every frame is engineered to balance durability, comfort, and visual clarity.</p>
+    <p>Inspired by classic optical traditions, refined for the modern world.</p>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection">
+  <h2>Our Signature Collections</h2>
+  <p>Frames curated for every personality and lifestyle</p>
+
+  <div class="collection-grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1721958080208-c3e764ce6874?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q2xhc3NpYyUyMEZyYW1lcyUyMG9mJTIwZ2xhc3Nlc3xlbnwwfHwwfHx8MA%3D%3D">
+      <h3>Classic Frames</h3>
+      <p>Timeless silhouettes crafted for everyday elegance.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1722924908364-2a8ea385aab1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TW9kZXJuJTIwRWRnZSUyMGdsYXNzZXN8ZW58MHx8MHx8fDA%3D">
+      <h3>Modern Edge</h3>
+      <p>Bold, contemporary designs for confident expression.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1648861709330-fe5b3610029c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fExpZ2h0d2VpZ2h0JTIwZ2xhc3Nlc3xlbnwwfHwwfHx8MA%3D%3D">
+      <h3>Lightweight Comfort</h3>
+      <p>Ultra-light frames designed for all-day wear.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Optical Services</h2>
+
+  <div class="service-grid">
+    <div class="service">
+      <h3>Eye Consultation</h3>
+      <p>Professional eye testing with advanced optical technology.</p>
+    </div>
+
+    <div class="service">
+      <h3>Frame Customization</h3>
+      <p>Personalized fitting and adjustments for perfect comfort.</p>
+    </div>
+
+    <div class="service">
+      <h3>Lens Guidance</h3>
+      <p>Expert advice for clarity, protection, and lifestyle needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonials">
+  <h2>Trusted by Thousands</h2>
+
+  <div class="test-grid">
+    <div class="test">
+      <h4>Ali R.</h4>
+      <p>“Exceptional quality and comfort. The craftsmanship is visible in every detail.”</p>
+    </div>
+
+    <div class="test">
+      <h4>Sara M.</h4>
+      <p>“Stylish, lightweight, and professional service. Highly recommended.”</p>
+    </div>
+
+    <div class="test">
+      <h4>Hassan K.</h4>
+      <p>“Frames that actually feel premium. Worth every visit.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2 style="text-align:center;">Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <h4>Do you offer eye testing?</h4>
+    <p>Yes, we provide professional eye examinations using modern equipment.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Are frames adjustable?</h4>
+    <p>All frames can be adjusted for a perfect, comfortable fit.</p>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>Stay in Focus</h2>
+  <p>Get updates on new arrivals and optical care tips</p><br>
+  <input type="email" placeholder="Your email">
+  <a class="btn">Subscribe</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>VisionCraft</h3>
+      <p>Premium eyewear crafted with precision and purpose.</p>
+    </div>
+
+    <div>
+      <h4>Visit Us</h4>
+      <p>Main Boulevard, Optical Plaza<br>Mon–Sat: 10am – 8pm</p>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>Email: info@visioncraft.com<br>Phone: +92 300 0000000</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// simple scroll animation vibe
+window.addEventListener("scroll",()=>{
+  document.querySelectorAll("section").forEach(sec=>{
+    const top = sec.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      sec.style.opacity = 1;
+      sec.style.transform = "translateY(0)";
+    }
+  });
+});
+</script>
+
+</body>
+</html>

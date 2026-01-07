@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opulent Living | Luxury Furniture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #B8860B;
+            --dark-navy: #0A1A2D;
+            --medium-navy: #1A2B3C;
+            --light-navy: #2C3E50;
+            --cream: #F8F5F0;
+            --light-cream: #FFFEF9;
+            --text-light: #E8E6E1;
+            --text-medium: #C0BDB8;
+            --text-dark: #0A1A2D;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 15px 35px rgba(10, 26, 45, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-medium);
+            background-color: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            font-size: 3.2rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 2px;
+            background-color: var(--primary-gold);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 30px auto 0;
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 26, 45, 0.95);
+            transition: var(--transition);
+            padding: 15px 0;
+        }
+
+        header.scrolled {
+            background-color: var(--dark-navy);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 45px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 1rem;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-gold);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 26, 45, 0.7), rgba(10, 26, 45, 0.8)), url('https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            max-width: 600px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-gold);
+            padding: 18px 40px;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.05rem;
+            border: 2px solid var(--primary-gold);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--dark-navy);
+            transform: translateY(-5px);
+        }
+
+        /* Collections */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+        }
+
+        .collection-card {
+            background-color: var(--light-cream);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .collection-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(10, 26, 45, 0.1) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .collection-card:hover:before {
+            opacity: 1;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 25px 50px rgba(10, 26, 45, 0.15);
+        }
+
+        .collection-img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .collection-card:hover .collection-img {
+            transform: scale(1.05);
+        }
+
+        .collection-content {
+            padding: 35px;
+            position: relative;
+            z-index: 2;
+            background-color: var(--light-cream);
+        }
+
+        .collection-content h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .collection-content p {
+            color: var(--text-medium);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Luxury Products */
+        .products-section {
+            background-color: var(--light-cream);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background-color: var(--cream);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+        }
+
+        .product-img {
+            height: 280px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 30px;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .product-description {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Craftsmanship */
+        .craftsmanship-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 70px;
+            align-items: center;
+        }
+
+        .craftsmanship-text h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+
+        .craftsmanship-text p {
+            margin-bottom: 25px;
+            color: black;
+            font-weight: 300;
+        }
+
+        .craftsmanship-image {
+            height: 550px;
+            background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .craftsmanship-image:before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: -30px;
+            bottom: -30px;
+            border: 2px solid var(--primary-gold);
+            z-index: -1;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 50px 40px;
+            background-color: var(--light-cream);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--primary-gold);
+            transform: scaleX(0);
+            transition: var(--transition);
+            transform-origin: left;
+        }
+
+        .service-item:hover:before {
+            transform: scaleX(1);
+        }
+
+        .service-item:hover {
+            transform: translateY(-15px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--primary-gold);
+        }
+
+        .service-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .service-item p {
+            color: var(--text-medium);
+            font-weight: 300;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: var(--dark-navy);
+            color: var(--text-light);
+        }
+
+        .testimonials-section .section-title h2 {
+            color: var(--text-light);
+        }
+
+        .testimonials-section .section-title p {
+            color: var(--text-medium);
+        }
+
+        .testimonials-slider {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            padding: 60px;
+            text-align: center;
+            margin: 0 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .client-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 25px;
+            border: 3px solid var(--primary-gold);
+        }
+
+        .client-details h4 {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .client-details p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(10, 26, 45, 0.7) 100%);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 70px;
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+
+        .contact-details {
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+        }
+
+        .contact-icon {
+            color: var(--primary-gold);
+            margin-right: 25px;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .contact-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .contact-text p {
+            color: var(--text-medium);
+            font-weight: 300;
+        }
+
+        .contact-form {
+            background-color: var(--light-cream);
+            padding: 60px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid rgba(10, 26, 45, 0.1);
+            border-radius: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            background-color: var(--cream);
+            transition: var(--transition);
+            color: var(--text-dark);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-navy);
+            color: var(--text-light);
+            padding: 100px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-bottom: 70px;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            text-decoration: none;
+            margin-bottom: 30px;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .footer-about p {
+            opacity: 0.7;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-gold);
+            color: var(--dark-navy);
+            transform: translateY(-5px);
+        }
+
+        .footer-heading {
+            font-size: 1.5rem;
+            margin-bottom: 35px;
+            color: var(--primary-gold);
+            font-weight: 500;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 18px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.05rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+            padding-left: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .craftsmanship-image {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-navy);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+                transform: translateY(-150%);
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links li {
+                margin: 20px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 160px 0 100px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 90px 0;
+            }
+            
+            .testimonial-card {
+                padding: 40px 30px;
+            }
+            
+            .contact-form {
+                padding: 50px 40px;
+            }
+            
+            .craftsmanship-image:before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 40px 30px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">OPULENT LIVING</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#craftsmanship">Craftsmanship</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Exquisite Furniture For Discerning Tastes</h1>
+                <p>Discover a world where luxury meets craftsmanship. Our bespoke furniture collections are designed for those who appreciate the extraordinary in every detail.</p>
+                <a href="#collections" class="btn">Explore Collections</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section id="collections">
+        <div class="container">
+            <div class="section-title">
+                <h2>Signature Collections</h2>
+                <p>Each collection represents the pinnacle of luxury furniture design, crafted with meticulous attention to detail.</p>
+            </div>
+            
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80" alt="Gilded Age Collection" class="collection-img">
+                    <div class="collection-content">
+                        <h3>Gilded Age</h3>
+                        <p>Inspired by the opulence of the Belle Époque, featuring gold leaf accents, rich velvets, and intricate marquetry.</p>
+                    </div>
+                </div>
+                
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Modern Aristocrat" class="collection-img">
+                    <div class="collection-content">
+                        <h3>Modern Aristocrat</h3>
+                        <p>Contemporary luxury with clean lines, exotic materials, and sophisticated finishes for today's elite interiors.</p>
+                    </div>
+                </div>
+                
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Regal Heritage" class="collection-img">
+                    <div class="collection-content">
+                        <h3>Regal Heritage</h3>
+                        <p>Timeless designs inspired by European palaces, featuring hand-carved details and sumptuous upholstery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Exemplary Pieces</h2>
+                <p>Each piece is a testament to exceptional craftsmanship and uncompromising quality.</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80" alt="Grand Chesterfield" class="product-img">
+                    <div class="product-content">
+                        <div class="product-category">Living Room</div>
+                        <h3 class="product-name">Grand Chesterfield</h3>
+                        <p class="product-description">Hand-tufted English leather with solid brass nailhead trim. A timeless statement piece for distinguished spaces.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Marble Dining Table" class="product-img">
+                    <div class="product-content">
+                        <div class="product-category">Dining Room</div>
+                        <h3 class="product-name">Marble Dining Table</h3>
+                        <p class="product-description">Carrara marble top with hand-forged bronze base. Seating for twelve with unparalleled elegance.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Canopy Bed" class="product-img">
+                    <div class="product-content">
+                        <div class="product-category">Bedroom</div>
+                        <h3 class="product-name">Canopy Bed</h3>
+                        <p class="product-description">Hand-carved mahogany with silk canopy. A regal centerpiece for the most luxurious bedrooms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship -->
+    <section id="craftsmanship">
+        <div class="container">
+            <div class="craftsmanship-content">
+                <div class="craftsmanship-text">
+                    <h2>Uncompromising Craftsmanship</h2>
+                    <p>At Opulent Living, we believe true luxury lies in the details. Each piece is created by master artisans who dedicate hundreds of hours to perfecting their craft.</p>
+                    <p>We source the world's finest materials—from Italian marble and French silks to exotic woods and precious metals—ensuring every piece meets our exacting standards.</p>
+                    <a href="#services" class="btn">Our Services</a>
+                </div>
+                <div class="craftsmanship-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bespoke Services</h2>
+                <p>We offer exclusive services to create truly personalized luxury environments.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-ruler"></i>
+                    </div>
+                    <h3>Custom Design</h3>
+                    <p>Collaborate with our design team to create one-of-a-kind pieces tailored to your exact specifications and aesthetic vision.</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Interior Design</h3>
+                    <p>Comprehensive interior design services to create cohesive, luxurious spaces that reflect your personal style and preferences.</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Sourcing</h3>
+                    <p>Access to rare materials and artisan workshops worldwide, bringing exceptional craftsmanship to your home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+                <p>Discover what our distinguished clients have to say about their experience with Opulent Living.</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Working with Opulent Living transformed our penthouse into a masterpiece. Their attention to detail, from the custom dining table to the curated art selections, exceeded all expectations. The craftsmanship is museum-quality, and the entire experience was seamless from conception to installation."</p>
+                    
+                    <div class="client-info">
+                        <div class="client-details">
+                            <h4>Alexander Vanderbilt</h4>
+                            <p>Residential Client, New York</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Luxury Interiors</h2>
+                <p>Explore our portfolio of completed projects and design inspirations.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80" alt="Luxury Penthouse">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Manhattan Penthouse</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Executive Office">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Executive Office Design</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Luxury Villa">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Mediterranean Villa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Begin Your Journey</h2>
+                <p>Contact us to schedule a private consultation at our showroom or your residence.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Private Showroom</h3>
+                    <p>Our exclusive showroom is available by appointment only, ensuring personalized attention and privacy for our clients.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Location</h4>
+                                <p>888 Luxury Avenue<br>Design District, London W1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Contact</h4>
+                                <p>+44 20 7123 4567<br>private@opulentliving.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Appointments</h4>
+                                <p>By appointment only<br>Monday - Saturday, 10am - 6pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Request a Consultation</h3>
+                    <form id="consultationForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Your Phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project">Project Type</label>
+                            <select id="project" class="form-control">
+                                <option value="">Select Project Type</option>
+                                <option value="residential">Residential</option>
+                                <option value="corporate">Corporate</option>
+                                <option value="yacht">Yacht Interior</option>
+                                <option value="private-jet">Private Jet</option>
+                                <option value="hotel">Hotel/Luxury Resort</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" class="form-control" placeholder="Please provide details about your project, timeline, and aesthetic preferences..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Request Private Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">OPULENT LIVING</a>
+                    <p>Creating extraordinary environments for the world's most discerning clients. Uncompromising craftsmanship, exclusive materials, and bespoke design services.</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Collections</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Gilded Age</a></li>
+                        <li><a href="#">Modern Aristocrat</a></li>
+                        <li><a href="#">Regal Heritage</a></li>
+                        <li><a href="#">Global Inspirations</a></li>
+                        <li><a href="#">Limited Editions</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Custom Design</a></li>
+                        <li><a href="#">Interior Design</a></li>
+                        <li><a href="#">Global Sourcing</a></li>
+                        <li><a href="#">Art Curation</a></li>
+                        <li><a href="#">Project Management</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Opulent Living. All rights reserved. | Luxury furniture and interior design for exceptional spaces worldwide</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your request. Our client relations team will contact you within 24 hours to schedule your private consultation.');
+            this.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

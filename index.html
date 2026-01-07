@@ -133,15 +133,209 @@
       .navLinks{display:none;}
     }
 
-    /* ===== SUPER COMPACT FILTER HEADER ===== */
-    .filtersWrap{
+    /* ===== HORIZONTAL SCROLLING CATEGORY BAR ===== */
+    .category-filter-bar {
       position: sticky;
       top: 58px;
       z-index: 50;
       background: rgba(255,255,255,.94);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(229,231,235,.75);
+      padding: 12px 0;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .category-scroll-container {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .category-scroll-wrapper {
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+      min-width: 0;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+    }
+
+    .category-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-chips {
+      display: flex;
+      gap: 8px;
+      padding: 0 2px;
+      width: max-content;
+      min-width: 100%;
+      flex-wrap: nowrap;
+    }
+
+    .chip-scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chip-scroll-btn.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .chip-scroll-btn:hover {
+      background: #f8fafc;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .chip-scroll-btn.prev {
+      left: 10px;
+    }
+
+    .chip-scroll-btn.next {
+      right: 10px;
+    }
+
+    .chip-scroll-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: #64748b;
+    }
+
+    .category-chip {
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 950;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .category-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .category-chip.active {
+      background: var(--accentSoft);
+      border-color: rgba(255,0,102,.5);
+      color: var(--accent);
+      box-shadow: 0 4px 16px rgba(255,0,102,0.25);
+      transform: scale(1.05);
+      position: relative;
+      z-index: 2;
+    }
+
+    .category-chip.active::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,0,102,0.3);
+      z-index: -1;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.02); }
+      100% { opacity: 0.3; transform: scale(1); }
+    }
+
+    .category-chip .count {
+      font-size: 11px;
+      font-weight: 900;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(229,231,235,0.8);
+    }
+
+    .category-chip.active .count {
+      background: rgba(255,0,102,0.2);
+      border-color: rgba(255,0,102,0.5);
+      color: var(--accent);
+      font-weight: 950;
+    }
+
+    @media (max-width: 768px) {
+      .category-filter-bar {
+        top: 56px;
+        padding: 10px 0;
+      }
+
+      .category-scroll-container {
+        padding: 0 12px;
+      }
+
+      .category-chip {
+        padding: 8px 14px;
+        font-size: 12.5px;
+      }
+
+      .chip-scroll-btn {
+        display: none;
+      }
+
+      .category-scroll-wrapper {
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+    }
+
+    /* ===== SUPER COMPACT FILTER HEADER ===== */
+    .filtersWrap{
+      position: sticky;
+      top: 114px;
+      z-index: 40;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(229,231,235,.75);
       padding: 6px 0;
+    }
+
+    @media (max-width: 768px) {
+      .filtersWrap {
+        top: 110px;
+      }
     }
 
     .filtersTop{
@@ -220,7 +414,7 @@
       min-width:0;
     }
 
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; min-width:0; }
+    .chips{ display:none; }
 
     .chip{
       border:1px solid var(--border);
@@ -287,7 +481,6 @@
       border-color: rgba(15,23,42,.12);
     }
 
-    /* ✅ IMAGE AREA */
     .thumb{
       height: 180px;
       background: #f3f4f6;
@@ -306,7 +499,6 @@
     }
     .card:hover .thumb img{ transform: scale(1.06); }
 
-    /* ✅ FIX: badges INSIDE IMAGE at BOTTOM (left/right) */
     .thumbMeta{
       position:absolute;
       left:10px;
@@ -345,7 +537,6 @@
       white-space:nowrap;
     }
 
-    /* optional: subtle dark fade for readability */
     .thumbShade{
       position:absolute;
       inset:auto 0 0 0;
@@ -388,7 +579,6 @@
       min-height:40px;
     }
 
-    /* Update tag container to handle truncation */
     .tagRow {
       display: flex;
       justify-content: space-between;
@@ -419,7 +609,6 @@
       white-space: nowrap;
     }
 
-    /* Show dots button */
     .tags-dots {
       font-size: 12px;
       color: #64748b;
@@ -438,7 +627,6 @@
       background: #e2e8f0;
     }
 
-    /* Make rating position fixed on the right */
     .rating {
       display: inline-flex;
       align-items: center;
@@ -458,7 +646,6 @@
       z-index: 2;
     }
 
-    /* When tags are expanded */
     .tags.expanded {
       margin-right: 80px;
     }
@@ -584,7 +771,6 @@
     @keyframes spin{ to{ transform: rotate(360deg); } }
     .loaderText{ font-size:13px; font-weight:900; color:#0f172a; }
 
-    /* Floating WhatsApp */
     .floatWa{
       position:fixed;
       right:18px;
@@ -602,7 +788,6 @@
       transition:.15s ease;
     }
 
-    /* Footer */
     footer{
       border-top: 1px solid var(--border);
       padding: 28px 0 40px;
@@ -628,10 +813,9 @@
 
     @media (max-width: 980px){
       .grid{grid-template-columns: repeat(2,1fr)}
-      .filtersWrap{top: 56px;}
+      .category-filter-bar{top: 56px;}
     }
 
-    /* ✅ MOBILE thumb no crop */
     @media (max-width: 620px){
       .container{ padding: 12px; }
       .grid{ grid-template-columns: 1fr; }
@@ -650,11 +834,9 @@
       }
       .card:hover .thumb img{ transform:none !important; }
 
-      /* keep bottom pills visible even when contain */
       .thumbShade{ height:72px; }
       .thumbMeta{ left:8px; right:8px; bottom:8px; }
 
-      /* Adjust tag row for mobile */
       .tagRow {
         flex-wrap: wrap;
       }
@@ -707,6 +889,29 @@
       </div>
     </div>
   </header>
+
+  <!-- HORIZONTAL SCROLLING CATEGORY BAR -->
+  <div class="category-filter-bar" id="categoryBar">
+    <div class="category-scroll-container">
+      <button class="chip-scroll-btn prev" id="scrollPrevBtn" aria-label="Scroll categories left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      
+      <div class="category-scroll-wrapper" id="categoryScrollWrapper">
+        <div class="category-chips" id="categoryChips">
+          <!-- Categories will be dynamically inserted here -->
+        </div>
+      </div>
+      
+      <button class="chip-scroll-btn next" id="scrollNextBtn" aria-label="Scroll categories right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <!-- FILTER BAR -->
   <div class="filtersWrap" id="demos">
@@ -820,14 +1025,13 @@
 <script>
 const JSON_URL = "./demos.json";
 
-const WHATSAPP_NUMBER = "923000000000"; // replace with your number (no +)
+const WHATSAPP_NUMBER = "923000000000";
 const BRAND_NAME = "Web Berners";
 
 document.getElementById("year").textContent = new Date().getFullYear();
 const floatWhatsapp = document.getElementById("floatWhatsapp");
 floatWhatsapp.href = waLinkText(`Hi ${BRAND_NAME}, I want a website. Please share packages & timeline.`);
 
-// Quote modal wiring
 const quoteOverlay = document.getElementById("quoteOverlay");
 const getQuoteBtn = document.getElementById("getQuoteBtn");
 const topGetQuote = document.getElementById("topGetQuote");
@@ -884,6 +1088,18 @@ const priceSelect = document.getElementById("priceSelect");
 const emptyState = document.getElementById("emptyState");
 const resetBtn = document.getElementById("resetBtn");
 
+// Category scrolling elements
+const categoryChips = document.getElementById("categoryChips");
+const categoryScrollWrapper = document.getElementById("categoryScrollWrapper");
+const scrollPrevBtn = document.getElementById("scrollPrevBtn");
+const scrollNextBtn = document.getElementById("scrollNextBtn");
+
+// Auto-scroll variables
+let autoScrollInterval = null;
+let isHoveringCategories = false;
+let autoScrollDirection = 'next';
+const scrollSpeed = 0.8;
+
 // Preview Modal
 const modalOverlay = document.getElementById("modalOverlay");
 const modalFrame = document.getElementById("modalFrame");
@@ -900,6 +1116,151 @@ let DEMOS = [];
 let currentPreviewUrl = "";
 let slowHintTimer = null;
 
+// Auto-scroll functions
+function startAutoScroll() {
+  if (autoScrollInterval) clearInterval(autoScrollInterval);
+  
+  autoScrollInterval = setInterval(() => {
+    if (isHoveringCategories) return;
+    
+    const wrapper = categoryScrollWrapper;
+    const scrollLeft = wrapper.scrollLeft;
+    const scrollWidth = wrapper.scrollWidth;
+    const clientWidth = wrapper.clientWidth;
+    
+    // Calculate if we're at the edges
+    const atStart = scrollLeft <= 10;
+    const atEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+    
+    // Change direction only when at edges
+    if (atStart && autoScrollDirection === 'prev') {
+      autoScrollDirection = 'next';
+    } else if (atEnd && autoScrollDirection === 'next') {
+      autoScrollDirection = 'prev';
+    }
+    
+    // Calculate target scroll position
+    let targetScroll = scrollLeft;
+    if (autoScrollDirection === 'next') {
+      targetScroll += scrollSpeed;
+    } else {
+      targetScroll -= scrollSpeed;
+    }
+    
+    // Apply the scroll
+    wrapper.scrollLeft = targetScroll;
+    
+    // Update scroll buttons visibility
+    updateScrollButtons();
+    
+  }, 20);
+}
+
+function stopAutoScroll() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
+}
+
+function updateScrollButtons() {
+  const wrapper = categoryScrollWrapper;
+  const scrollLeft = wrapper.scrollLeft;
+  const scrollWidth = wrapper.scrollWidth;
+  const clientWidth = wrapper.clientWidth;
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    scrollPrevBtn.classList.remove('show');
+    scrollNextBtn.classList.remove('show');
+    return;
+  }
+
+  if (scrollLeft <= 10) {
+    scrollPrevBtn.classList.remove('show');
+  } else {
+    scrollPrevBtn.classList.add('show');
+  }
+
+  if (scrollLeft + clientWidth >= scrollWidth - 10) {
+    scrollNextBtn.classList.remove('show');
+  } else {
+    scrollNextBtn.classList.add('show');
+  }
+}
+
+function scrollCategories(direction) {
+  const wrapper = categoryScrollWrapper;
+  const scrollAmount = 200;
+  
+  // Temporarily stop auto-scroll
+  const wasAutoScrolling = autoScrollInterval !== null;
+  stopAutoScroll();
+  
+  // Scroll manually
+  wrapper.scrollTo({
+    left: wrapper.scrollLeft + (direction === 'next' ? scrollAmount : -scrollAmount),
+    behavior: 'smooth'
+  });
+  
+  // Update scroll buttons immediately
+  updateScrollButtons();
+  
+  // Restart auto-scroll in the original direction after a delay
+  if (wasAutoScrolling) {
+    setTimeout(() => {
+      if (!autoScrollInterval && !isHoveringCategories) {
+        // Reset to continuous back-and-forth scrolling
+        autoScrollDirection = 'next'; // Always start scrolling forward
+        startAutoScroll();
+      }
+    }, 1500);
+  }
+}
+
+function initAutoScroll() {
+  // Stop any existing auto-scroll
+  stopAutoScroll();
+  
+  // Reset to forward scrolling
+  autoScrollDirection = 'next';
+  
+  // Start auto-scroll after a short delay
+  setTimeout(() => {
+    if (!autoScrollInterval && !isHoveringCategories) {
+      startAutoScroll();
+    }
+  }, 500);
+}
+
+scrollPrevBtn.addEventListener('click', () => scrollCategories('prev'));
+scrollNextBtn.addEventListener('click', () => scrollCategories('next'));
+
+categoryScrollWrapper.addEventListener('scroll', updateScrollButtons);
+
+// Category hover events
+categoryScrollWrapper.addEventListener('mouseenter', () => {
+  isHoveringCategories = true;
+  stopAutoScroll();
+});
+
+categoryScrollWrapper.addEventListener('mouseleave', () => {
+  isHoveringCategories = false;
+  // Don't restart immediately, wait a bit
+  setTimeout(() => {
+    if (!autoScrollInterval && !isHoveringCategories) {
+      autoScrollDirection = 'next';
+      startAutoScroll();
+    }
+  }, 500);
+});
+
+window.addEventListener('resize', () => {
+  updateScrollButtons();
+  initAutoScroll();
+});
+
+// Modal functions
 function showLoader(text="Loading preview…"){
   loaderText.textContent = text;
   modalLoader.classList.add("show");
@@ -955,20 +1316,7 @@ window.addEventListener("keydown", (e)=>{
   if(e.key==="Escape"){ closePreview(); closeQuote(); }
 });
 
-(async function init(){
-  try{
-    const res = await fetch(JSON_URL, { cache: "no-store" });
-    if(!res.ok) throw new Error("JSON fetch failed: " + res.status);
-    const data = await res.json();
-    DEMOS = normalizeJsonToDemos(data);
-  }catch(err){
-    console.error("Failed to load JSON:", err);
-    DEMOS = [];
-  }
-  renderChips();
-  renderGrid();
-})();
-
+// Data functions
 function normalizeJsonToDemos(json){
   const list = Array.isArray(json) ? json : (json && Array.isArray(json.demos) ? json.demos : []);
   return list.map(item => ({
@@ -1021,26 +1369,47 @@ function uniqCategories(){
   return ["All", ...cats];
 }
 
-function renderChips(){
+function renderCategoryChips(){
   const counts = categoryCounts();
   const categories = uniqCategories();
 
-  chipBar.innerHTML = categories.map(cat => {
+  categoryChips.innerHTML = categories.map(cat => {
     const c = counts[cat] || 0;
+    const isActive = state.activeCategory===cat;
     return `
-      <button class="chip ${state.activeCategory===cat ? "active":""}" data-cat="${cat}">
-        <span>${cat}</span><span class="count">${c}</span>
+      <button class="category-chip ${isActive ? "active":""}" data-cat="${cat}">
+        <span>${cat}</span>
+        <span class="count">${c}</span>
       </button>
     `;
   }).join("");
 
-  chipBar.querySelectorAll(".chip").forEach(btn => {
+  categoryChips.querySelectorAll(".category-chip").forEach(btn => {
     btn.addEventListener("click", () => {
       state.activeCategory = btn.dataset.cat;
-      renderChips();
+      
+      // Make active category prominent
+      categoryChips.querySelectorAll(".category-chip").forEach(chip => {
+        if(chip.dataset.cat === state.activeCategory) {
+          chip.classList.add('active');
+          // Ensure active chip is visible in viewport
+          setTimeout(() => {
+            chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }, 100);
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+      
       renderGrid();
     });
   });
+
+  // Initialize scroll buttons
+  setTimeout(updateScrollButtons, 100);
+  
+  // Initialize auto-scroll
+  initAutoScroll();
 }
 
 function matchesSearch(item, query){
@@ -1129,11 +1498,9 @@ function setupTagExpansion() {
       const tagsContainer = document.getElementById(`tags-${itemId}`);
       const allTags = item.tags || [];
       
-      // Toggle expanded state
       const isExpanded = tagsContainer.classList.contains('expanded');
       
       if (isExpanded) {
-        // Collapse - show only first 3 tags
         const visibleTags = allTags.slice(0, 3);
         const hiddenCount = allTags.length - 3;
         const tagsHTML = visibleTags.map(t => `<span class="tag">${t}</span>`).join("");
@@ -1142,20 +1509,17 @@ function setupTagExpansion() {
         tagsContainer.innerHTML = tagsHTML + moreButton;
         tagsContainer.classList.remove('expanded');
         
-        // Re-attach event to new button
         tagsContainer.querySelector('.tags-dots').addEventListener('click', function(ev) {
           ev.stopPropagation();
           setupTagExpansion.call(this, ev);
         });
       } else {
-        // Expand - show all tags
         const tagsHTML = allTags.map(t => `<span class="tag">${t}</span>`).join("");
         const collapseButton = `<span class="tags-dots" data-more="${itemId}">Show less</span>`;
         
         tagsContainer.innerHTML = tagsHTML + collapseButton;
         tagsContainer.classList.add('expanded');
         
-        // Re-attach event to new button
         tagsContainer.querySelector('.tags-dots').addEventListener('click', function(ev) {
           ev.stopPropagation();
           setupTagExpansion.call(this, ev);
@@ -1175,7 +1539,6 @@ function renderGrid() {
   emptyState.style.display = "none";
   grid.innerHTML = sorted.map(cardHTML).join("");
 
-  // Setup tag expansion functionality
   setupTagExpansion();
 
   grid.querySelectorAll("[data-preview]").forEach(btn => {
@@ -1207,9 +1570,25 @@ resetBtn.addEventListener("click",()=>{
   searchInput.value="";
   sortSelect.value="popular";
   priceSelect.value="all";
-  renderChips();
+  renderCategoryChips();
   renderGrid();
+  initAutoScroll();
 });
+
+// Initialize everything
+(async function init(){
+  try{
+    const res = await fetch(JSON_URL, { cache: "no-store" });
+    if(!res.ok) throw new Error("JSON fetch failed: " + res.status);
+    const data = await res.json();
+    DEMOS = normalizeJsonToDemos(data);
+  }catch(err){
+    console.error("Failed to load JSON:", err);
+    DEMOS = [];
+  }
+  renderCategoryChips();
+  renderGrid();
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos Premier | Luxury Timepieces</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #c9a96e;
+            --accent-color: #1a1a1a;
+            --text-light: #f5f5f5;
+            --text-dark: #333;
+            --text-gray: #888;
+            --section-padding: 80px 20px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .gold-text {
+            color: var(--secondary-color);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+
+        .hero-btn {
+            opacity: 0;
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+
+        /* Featured Collection */
+        .featured {
+            padding: var(--section-padding);
+            background-color: var(--text-light);
+        }
+
+        .watch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .watch-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .watch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .watch-img {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .watch-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .watch-card:hover .watch-img img {
+            transform: scale(1.05);
+        }
+
+        .watch-info {
+            padding: 25px;
+        }
+
+        .watch-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .watch-info p {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+        }
+
+        /* Craftsmanship Section */
+        .craftsmanship {
+            padding: var(--section-padding);
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .craft-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        .craft-image {
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .craft-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .craft-text h2 {
+            margin-bottom: 20px;
+        }
+
+        .craft-text p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        /* Heritage Section */
+        .heritage {
+            padding: var(--section-padding);
+            background-color: var(--text-light);
+        }
+
+        .heritage-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        .heritage-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: var(--section-padding);
+            background-color: #f0f0f0;
+        }
+
+        .collection-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 25px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-dark);
+        }
+
+        .tab-btn.active {
+            border-bottom: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .tab-btn:hover {
+            color: var(--secondary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: var(--section-padding);
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .newsletter-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background-color: #d4b877;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+
+            .section-title h2:after {
+                width: 40px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">CHRONOS<span>PREMIER</span></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#featured">Collections</a></li>
+                <li><a href="#craftsmanship">Craftsmanship</a></li>
+                <li><a href="#heritage">Heritage</a></li>
+                <li><a href="#collections">Timepieces</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Timeless Elegance, <span class="gold-text">Precision Crafted</span></h1>
+                <p>Discover the art of Swiss watchmaking with our exclusive collection of luxury timepieces. Each watch is a testament to centuries of horological expertise and innovation.</p>
+                <a href="#featured" class="btn hero-btn">Explore Collections</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section class="featured" id="featured">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Collection</h2>
+                <p>Discover our most exquisite timepieces, each representing the pinnacle of watchmaking artistry.</p>
+            </div>
+            <div class="watch-grid">
+                <div class="watch-card">
+                    <div class="watch-img">
+                        <img src="https://images.unsplash.com/photo-1526045431048-f857369baa09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Luxury Diver Watch">
+                    </div>
+                    <div class="watch-info">
+                        <h3>Oceanmaster Professional</h3>
+                        <p>Designed for underwater exploration with a water resistance of up to 300 meters. Features a unidirectional rotating bezel and luminescent markers.</p>
+                    </div>
+                </div>
+                <div class="watch-card">
+                    <div class="watch-img">
+                        <img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80" alt="Classic Dress Watch">
+                    </div>
+                    <div class="watch-info">
+                        <h3>Heritage Classic</h3>
+                        <p>A timeless dress watch with a sleek, minimalist design. Features a hand-stitched leather strap and a precision Swiss automatic movement.</p>
+                    </div>
+                </div>
+                <div class="watch-card">
+                    <div class="watch-img">
+                        <img src="https://images.unsplash.com/photo-1700650140318-3919c2b41686?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fENocm9ub2dyYXBoJTIwV2F0Y2h8ZW58MHx8MHx8fDA%3D" alt="Chronograph Watch">
+                    </div>
+                    <div class="watch-info">
+                        <h3>Aviator Chronograph</h3>
+                        <p>Inspired by aviation history, this chronograph features multiple sub-dials, tachymeter scale, and a rugged yet elegant stainless steel case.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship Section -->
+    <section class="craftsmanship" id="craftsmanship">
+        <div class="container">
+            <div class="craft-content">
+                <div class="craft-image">
+                    <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80" alt="Watch Craftsmanship">
+                </div>
+                <div class="craft-text">
+                    <h2>The Art of <span class="gold-text">Precision</span></h2>
+                    <p>Every Chronos Premier timepiece is the result of countless hours of meticulous craftsmanship. Our master watchmakers combine traditional techniques with cutting-edge technology to create watches of exceptional quality and beauty.</p>
+                    <p>From the delicate assembly of hundreds of tiny components to the rigorous testing for accuracy and durability, each watch undergoes a meticulous process that can take several months to complete.</p>
+                    <p>We use only the finest materials, including 18k gold, surgical-grade stainless steel, and scratch-resistant sapphire crystals, ensuring that each timepiece is both beautiful and built to last generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Section -->
+    <section class="heritage" id="heritage">
+        <div class="container">
+            <div class="heritage-content">
+                <div class="heritage-text">
+                    <h2>A Legacy of <span class="gold-text">Excellence</span></h2>
+                    <p>Founded in 1895 in the heart of Swiss watchmaking country, Chronos Premier has been at the forefront of horological innovation for over a century. Our heritage is built on a foundation of precision, innovation, and timeless design.</p>
+                    <p>Throughout our history, we have pioneered numerous advancements in watchmaking technology, from the first waterproof case to groundbreaking automatic movements that set new standards for accuracy.</p>
+                    <p>Today, we continue this tradition of excellence, combining our rich heritage with contemporary design to create timepieces that are both classic and modern, destined to become heirlooms for future generations.</p>
+                </div>
+                <div class="heritage-image">
+                    <img src="https://images.unsplash.com/photo-1727716919539-3cd4aaf7af99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Q2hyb25vZ3JhcGglMjBXYXRjaHxlbnwwfHwwfHx8MA%3D%3D" alt="Watch Heritage">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Collections</h2>
+                <p>Explore our diverse range of timepieces, each designed for a specific purpose and style.</p>
+            </div>
+            
+            <div class="collection-tabs">
+                <button class="tab-btn active" data-tab="classic">Classic</button>
+                <button class="tab-btn" data-tab="sports">Sports</button>
+                <button class="tab-btn" data-tab="limited">Limited Edition</button>
+                <button class="tab-btn" data-tab="women">Women's</button>
+            </div>
+            
+            <div class="tab-content active" id="classic">
+                <div class="watch-grid">
+                    <div class="watch-card">
+                        <div class="watch-img">
+                            <img src="https://images.unsplash.com/photo-1704961211864-b20364cade61?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNsYXNzaWMlMjB3YXRjaHxlbnwwfHwwfHx8MA%3D%3D" alt="Classic Watch 1">
+                        </div>
+                        <div class="watch-info">
+                            <h3>Gentleman's Reserve</h3>
+                            <p>A sophisticated dress watch with a slim profile and elegant Roman numerals. Perfect for formal occasions and business attire.</p>
+                        </div>
+                    </div>
+                    <div class="watch-card">
+                        <div class="watch-img">
+                            <img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNsYXNzaWMlMjB3YXRjaHxlbnwwfHwwfHx8MA%3D%3D" alt="Classic Watch 2">
+                        </div>
+                        <div class="watch-info">
+                            <h3>Vintage Heritage</h3>
+                            <p>Inspired by our archives from the 1940s, this watch features a domed crystal and vintage-style hands for a nostalgic appeal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="sports">
+                <div class="watch-grid">
+                    <div class="watch-card">
+                        <div class="watch-img">
+                            <img src="https://images.unsplash.com/photo-1539874754764-5a96559165b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sports Watch 1">
+                        </div>
+                        <div class="watch-info">
+                            <h3>Extreme Diver</h3>
+                            <p>Built for professional divers with a helium escape valve and water resistance to 1000 meters. Features a ceramic bezel and luminescent markers.</p>
+                        </div>
+                    </div>
+                    <div class="watch-card">
+                        <div class="watch-img">
+                            <img src="https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Sports Watch 2">
+                        </div>
+                        <div class="watch-info">
+                            <h3>Racing Chronograph</h3>
+                            <p>Inspired by motorsports, this chronograph features a tachymeter scale, ceramic bezel, and a highly legible dial for precise timing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Connected</h2>
+                <p>Subscribe to our newsletter to receive updates on new collections, exclusive events, and the latest in watchmaking innovation.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p class="small-text" style="margin-top: 15px; font-size: 0.9rem; color: #aaa;">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CHRONOS PREMIER</h3>
+                    <p>Creating exceptional timepieces since 1895. Each watch is a masterpiece of Swiss engineering and design.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Collections</h3>
+                    <ul class="footer-links">
+                        <li><a href="#collections">Classic</a></li>
+                        <li><a href="#collections">Sports</a></li>
+                        <li><a href="#collections">Limited Edition</a></li>
+                        <li><a href="#collections">Women's</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Visit Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Flagship Boutique: Zurich</a></li>
+                        <li><a href="#">Boutique: Geneva</a></li>
+                        <li><a href="#">Boutique: London</a></li>
+                        <li><a href="#">Boutique: New York</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@chronospremier.com">info@chronospremier.com</a></li>
+                        <li><a href="tel:+41123456789">+41 123 456 789</a></li>
+                        <li><a href="#">Press Inquiries</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Chronos Premier. All rights reserved. Crafted with precision in Switzerland.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Tab functionality for collections
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Newsletter form submission
+        const newsletterForm = document.getElementById('newsletterForm');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input').value;
+            
+            // In a real application, you would send this to a server
+            alert(`Thank you for subscribing with ${email}. You will receive our newsletter soon.`);
+            newsletterForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

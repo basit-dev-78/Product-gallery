@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHRONOX | Timeless Luxury Watches</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0d0d0d;
+      color: #f5f5f5;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section {
+      padding: 80px 8%;
+    }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      padding: 15px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    header h2 {
+      letter-spacing: 2px;
+      color: #d4af37;
+    }
+
+    nav a {
+      margin-left: 25px;
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+      url('https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3') center/cover;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+
+    .hero span {
+      color: #d4af37;
+    }
+
+    .hero p {
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .hero button {
+      padding: 14px 35px;
+      background: #d4af37;
+      border: none;
+      color: #000;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .hero button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* COLLECTIONS */
+    .collections {
+      background: #111;
+      text-align: center;
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .watch-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.4s;
+    }
+
+    .watch-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .watch-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .watch-card h3 {
+      margin: 20px 0 10px;
+    }
+
+    .watch-card p {
+      font-size: 14px;
+      padding: 0 15px 25px;
+      color: #ccc;
+    }
+
+    /* CRAFT */
+    .craft {
+      background: url('https://images.unsplash.com/photo-1518544887687-77fda2f7f39f') center/cover fixed;
+      position: relative;
+    }
+
+    .craft::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+    }
+
+    .craft-content {
+      position: relative;
+      max-width: 700px;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background: #111;
+      text-align: center;
+    }
+
+    .testimonial-box {
+      max-width: 700px;
+      margin: auto;
+      font-style: italic;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* NEWSLETTER */
+    .newsletter {
+      text-align: center;
+      background: #000;
+    }
+
+    .newsletter input {
+      padding: 14px;
+      width: 260px;
+      border: none;
+      margin-right: 10px;
+    }
+
+    .newsletter button {
+      padding: 14px 25px;
+      border: none;
+      background: #d4af37;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0a0a0a;
+      text-align: center;
+      padding: 30px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>CHRONOX</h2>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#collections">Collections</a>
+    <a href="#craft">Craft</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Time Crafted in <span>Perfection</span></h1>
+    <p>Where heritage meets innovation. Precision watches built for those who respect time.</p>
+    <button>Explore Legacy</button>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div>
+    <h2>Our Story</h2>
+    <p>
+      CHRONOX was born from a belief that time deserves respect. Inspired by
+      classic horology and refined by modern engineering, our watches are
+      symbols of discipline, ambition, and legacy.
+    </p>
+  </div>
+  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" alt="">
+</section>
+
+<section id="collections" class="collections">
+  <h2>Featured Collections</h2>
+  <div class="collection-grid">
+    <div class="watch-card">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+      <h3>Royal Steel</h3>
+      <p>Bold design forged with unmatched precision.</p>
+    </div>
+    <div class="watch-card">
+      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
+      <h3>Midnight Classic</h3>
+      <p>Minimal. Elegant. Timeless.</p>
+    </div>
+    <div class="watch-card">
+      <img src="https://images.unsplash.com/photo-1623559472911-5ae8d1bd8060?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fENocm9ubyUyMFNwb3J0JTIwd2F0Y2h8ZW58MHx8MHx8fDA%3D">
+      <h3>Chrono Sport</h3>
+      <p>Built for motion, crafted for style.</p>
+    </div>
+  </div>
+</section>
+
+<section id="craft" class="craft">
+  <div class="craft-content">
+    <h2>Master Craftsmanship</h2>
+    <p>
+      Every CHRONOX watch passes through 120+ precision checks.
+      Assembled by master watchmakers, designed to outlive trends.
+    </p>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>What People Say</h2>
+  <div class="testimonial-box">
+    “Wearing a CHRONOX feels like carrying history on your wrist.”
+    <br><br>— Watch Enthusiast
+  </div>
+</section>
+
+<section id="gallery">
+  <h2 style="text-align:center;margin-bottom:40px;">Gallery</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1764243910471-4161c42fd29c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fENocm9ubyUyMFNwb3J0JTIwd2F0Y2h8ZW58MHx8MHx8fDA%3D">
+    <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d">
+    <img src="https://images.unsplash.com/photo-1654137170352-89af6fdd7fe1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q2hyb25vJTIwU3BvcnQlMjB3YXRjaHxlbnwwfHwwfHx8MA%3D%3D">
+    <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
+  </div>
+</section>
+
+<section id="contact" class="newsletter">
+  <h2>Stay Timeless</h2>
+  <p>Subscribe for stories, craftsmanship & heritage.</p><br>
+  <input type="email" placeholder="Enter your email">
+  <button>Subscribe</button>
+</section>
+
+<footer>
+  © 2026 CHRONOX Watches — Designed with Precision
+</footer>
+
+<script>
+  // Simple scroll animation effect
+  const cards = document.querySelectorAll('.watch-card');
+
+  window.addEventListener('scroll', () => {
+    cards.forEach(card => {
+      const pos = card.getBoundingClientRect().top;
+      if (pos < window.innerHeight - 100) {
+        card.style.opacity = 1;
+        card.style.transform = 'translateY(0)';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

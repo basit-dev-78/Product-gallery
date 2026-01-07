@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthGuide Pro | Medicine Information & Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d8b7f;
+            --primary-light: #e6f7f5;
+            --secondary-color: #3a86ff;
+            --accent-color: #ff6b6b;
+            --light-color: #f9f9f9;
+            --dark-color: #1a1a2e;
+            --gray-color: #6b7280;
+            --gray-light: #e5e7eb;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-color);
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            font-weight: 400;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 36px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, rgba(13, 139, 127, 0.05) 0%, rgba(58, 134, 255, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.7;
+            border-radius: 0 0 0 100px;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            margin-bottom: 40px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--gray-color);
+        }
+        
+        /* Medicine Categories */
+        .medicine-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 35px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+        
+        .category-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .category-card p {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        .category-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-link i {
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-link i {
+            transform: translateX(5px);
+        }
+        
+        /* Medicine Database */
+        .medicine-database {
+            background-color: var(--light-color);
+        }
+        
+        .medicine-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 14px 28px;
+            background-color: white;
+            border: 1px solid var(--gray-light);
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .medicine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .medicine-item {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .medicine-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .medicine-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .medicine-info {
+            padding: 25px;
+        }
+        
+        .medicine-type {
+            display: inline-block;
+            background-color: rgba(13, 139, 127, 0.1);
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .medicine-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .medicine-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        /* Health Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .resource-header {
+            padding: 25px 25px 0;
+        }
+        
+        .resource-category {
+            display: inline-block;
+            background-color: rgba(58, 134, 255, 0.1);
+            color: var(--secondary-color);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .resource-content {
+            padding: 0 25px 25px;
+        }
+        
+        .resource-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .resource-footer {
+            padding: 20px 25px;
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .resource-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Safety Guidelines */
+        .safety-guidelines {
+            background-color: var(--primary-light);
+            border-radius: var(--border-radius);
+            padding: 60px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .safety-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .safety-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .safety-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .safety-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .safety-list i {
+            color: var(--primary-color);
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        
+        .safety-guidelines::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+        
+        .contact-info i {
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .hero::before {
+                width: 40%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero::before {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .safety-guidelines {
+                padding: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .search-btn {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+            }
+            
+            .safety-guidelines {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding-top: 140px;
+                padding-bottom: 80px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .medicine-grid, .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>HealthGuide Pro</h1>
+                    <span>Trusted Medical Information</span>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#database">Medicine Database</a></li>
+                <li><a href="#resources">Health Resources</a></li>
+                <li><a href="#safety">Safety Guidelines</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Your Trusted Guide to Medicine Information</h2>
+                <p>Access comprehensive, reliable information about medications, their uses, interactions, and side effects. Our expert-reviewed database helps you make informed decisions about your health.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">2,500+</div>
+                        <div class="stat-label">Medicines Database</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">98%</div>
+                        <div class="stat-label">Accuracy Rating</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Updated Information</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medicine Categories -->
+    <section class="section" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Medicine Categories</h2>
+                <p>Browse medicines by therapeutic category to find the information you need quickly and easily.</p>
+            </div>
+            
+            <div class="medicine-categories">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-head-side-virus"></i>
+                    </div>
+                    <h3>Pain Relief</h3>
+                    <p>Analgesics, anti-inflammatory drugs, and medications for headache, muscle pain, and arthritis.</p>
+                    <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <h3>Respiratory</h3>
+                    <p>Medications for asthma, allergies, COPD, cough, cold, and other respiratory conditions.</p>
+                    <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Cardiovascular</h3>
+                    <p>Drugs for hypertension, cholesterol, heart conditions, and blood circulation issues.</p>
+                    <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mental Health</h3>
+                    <p>Antidepressants, anti-anxiety medications, sleep aids, and neurological disorder treatments.</p>
+                    <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medicine Database -->
+    <section class="section medicine-database" id="database">
+        <div class="container">
+            <div class="section-title">
+                <h2>Medicine Database</h2>
+                <p>Search and explore detailed information about specific medications, their uses, and safety guidelines.</p>
+            </div>
+            
+            <div class="medicine-tabs">
+                <button class="tab-btn active" data-tab="all">All Medicines</button>
+                <button class="tab-btn" data-tab="common">Most Common</button>
+                <button class="tab-btn" data-tab="prescription">Prescription</button>
+                <button class="tab-btn" data-tab="otc">Over-the-Counter</button>
+            </div>
+            
+            <div class="medicine-grid">
+                <div class="medicine-item" data-category="common" data-type="prescription">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Amoxicillin" class="medicine-img">
+                    <div class="medicine-info">
+                        <span class="medicine-type">Antibiotic</span>
+                        <h3>Amoxicillin</h3>
+                        <p>Broad-spectrum antibiotic used to treat various bacterial infections including respiratory, ear, and urinary tract infections.</p>
+                        <div class="medicine-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Form</div>
+                                <div class="detail-value">Capsules</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Dosage</div>
+                                <div class="detail-value">250-500mg</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Class</div>
+                                <div class="detail-value">Prescription</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="medicine-item" data-category="common" data-type="otc">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1130&q=80" alt="Ibuprofen" class="medicine-img">
+                    <div class="medicine-info">
+                        <span class="medicine-type">NSAID</span>
+                        <h3>Ibuprofen</h3>
+                        <p>Nonsteroidal anti-inflammatory drug used to reduce fever and treat pain or inflammation caused by many conditions.</p>
+                        <div class="medicine-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Form</div>
+                                <div class="detail-value">Tablets</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Dosage</div>
+                                <div class="detail-value">200-800mg</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Class</div>
+                                <div class="detail-value">OTC</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="medicine-item" data-category="common" data-type="prescription">
+                    <img src="https://images.unsplash.com/photo-1599045118108-bb99675c5c0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Lisinopril" class="medicine-img">
+                    <div class="medicine-info">
+                        <span class="medicine-type">ACE Inhibitor</span>
+                        <h3>Lisinopril</h3>
+                        <p>Used to treat high blood pressure, heart failure, and to improve survival after a heart attack.</p>
+                        <div class="medicine-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Form</div>
+                                <div class="detail-value">Tablets</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Dosage</div>
+                                <div class="detail-value">5-40mg</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Class</div>
+                                <div class="detail-value">Prescription</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Resources -->
+    <section class="section" id="resources">
+        <div class="container">
+            <div class="section-title">
+                <h2>Health Resources</h2>
+                <p>Educational materials and guides to help you better understand medications and health conditions.</p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-category">Medication Safety</span>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Understanding Drug Interactions</h3>
+                        <p>Learn how different medications can interact with each other, with food, and with supplements. Know which combinations to avoid.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="far fa-clock"></i> 8 min read</span>
+                        <a href="#" class="resource-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-category">Administration</span>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Proper Medicine Administration Techniques</h3>
+                        <p>Guidelines for taking medications correctly - with or without food, time of day, and proper techniques for different forms.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="far fa-clock"></i> 6 min read</span>
+                        <a href="#" class="resource-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-category">Side Effects</span>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Managing Common Medication Side Effects</h3>
+                        <p>Practical advice for dealing with common side effects like nausea, dizziness, and dry mouth while on medication.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="far fa-clock"></i> 10 min read</span>
+                        <a href="#" class="resource-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Guidelines -->
+    <section class="section" id="safety">
+        <div class="container">
+            <div class="safety-guidelines">
+                <div class="safety-content">
+                    <h2>Important Safety Guidelines</h2>
+                    <p>Follow these essential guidelines to ensure safe and effective use of medications.</p>
+                    
+                    <ul class="safety-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>Always read the medication guide provided with your prescription or over-the-counter medicine.</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>Never share prescription medications with others, even if they have similar symptoms.</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>Store medications properly - away from heat, moisture, and direct sunlight.</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>Dispose of expired or unused medications safely - don't flush them down the toilet.</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>Always inform your healthcare provider about all medications and supplements you're taking.</div>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>Disclaimer:</strong> This information is for educational purposes only and is not a substitute for professional medical advice. Always consult your healthcare provider for personalized medical guidance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HealthGuide Pro</h3>
+                    <p>Your trusted source for reliable, up-to-date medical information and medication guidance.</p>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <div>contact@healthguidepro.com</div>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <div>+1 (800) 555-HEALTH</div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Medicine Categories</a></li>
+                        <li><a href="#database">Medicine Database</a></li>
+                        <li><a href="#resources">Health Resources</a></li>
+                        <li><a href="#safety">Safety Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Information Types</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Prescription Drugs</a></li>
+                        <li><a href="#">Over-the-Counter</a></li>
+                        <li><a href="#">Drug Interactions</a></li>
+                        <li><a href="#">Side Effects</a></li>
+                        <li><a href="#">Dosage Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Stay Updated</h3>
+                    <p>Subscribe to our newsletter for the latest medical information and updates.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 HealthGuide Pro. All rights reserved. | This website provides educational information only. Always consult a healthcare professional for medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        const searchBtn = document.getElementById('searchBtn');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.backgroundColor = 'white';
+                navLinks.style.padding = '30px';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                navLinks.style.gap = '25px';
+            }
+        });
+        
+        // Search Button Functionality
+        searchBtn.addEventListener('click', () => {
+            const searchTerm = prompt("Enter medicine name or condition to search:");
+            if (searchTerm) {
+                alert(`Searching for: "${searchTerm}"\n\nThis demo shows search functionality. In a real application, this would search our medicine database.`);
+            }
+        });
+        
+        // Medicine Tab Filtering
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const medicineItems = document.querySelectorAll('.medicine-item');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const tab = btn.getAttribute('data-tab');
+                
+                // Filter medicine items
+                medicineItems.forEach(item => {
+                    if (tab === 'all') {
+                        item.style.display = 'block';
+                    } else if (tab === 'common') {
+                        item.style.display = item.getAttribute('data-category') === 'common' ? 'block' : 'none';
+                    } else {
+                        item.style.display = item.getAttribute('data-type') === tab ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+        
+        // Newsletter Form Submission
+        const newsletterForm = document.getElementById('newsletterForm');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input').value;
+            alert(`Thank you for subscribing with: ${email}\nYou'll receive updates on medical information and health resources.`);
+            newsletterForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navLinks.style.display = 'none';
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.08)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+        
+        // Initialize with scroll effect
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>

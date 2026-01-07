@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNova Electronics | Premium Electronics for Modern Living</title>
+    <meta name="description" content="Discover the future of technology with TechNova Electronics. Premium smartphones, laptops, audio devices, smart home solutions and more.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --primary-dark: #0a58ca;
+            --secondary: #6c757d;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --accent: #ff6b00;
+            --text: #333;
+            --bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section - Enhanced */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            background: linear-gradient(135deg, rgba(13,110,253,0.8), rgba(255,107,0,0.6)), url('https://png.pngtree.com/background/20231017/original/pngtree-essential-tech-a-collection-of-computers-devices-and-office-equipment-including-picture-image_5591259.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.5));
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Rest of sections remain similar with updated images */
+        .features { padding: 120px 0; background: var(--light); }
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 1rem; color: var(--dark); }
+        .section-title p { font-size: 1.2rem; color: var(--secondary); max-width: 700px; margin: 0 auto; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: transform 0.4s ease; }
+        .feature-card:hover { transform: translateY(-15px); }
+        .feature-icon { font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--primary); }
+        
+        .categories { padding: 120px 0; }
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .category-card { position: relative; height: 450px; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.15); transition: transform 0.4s ease; }
+        .category-card:hover { transform: scale(1.05); }
+        .category-overlay { position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); display: flex; flex-direction: column; justify-content: end; padding: 2.5rem; color: white; }
+        .category-card h3 { font-size: 2.4rem; margin-bottom: 0.5rem; }
+        
+        .products { padding: 120px 0; background: var(--light); }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.4s ease; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(0,0,0,0.2); }
+        .product-image { height: 320px; object-fit: contain; background: white; padding: 20px; }
+        .product-info { padding: 2.5rem; }
+        .product-info h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .product-features { list-style: none; margin: 1.5rem 0; }
+        .product-features li { padding: 0.6rem 0; border-bottom: 1px solid var(--gray); font-size: 1rem; color: var(--secondary); }
+        
+        .about { padding: 120px 0; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .about-text h2 { font-size: 3rem; margin-bottom: 2rem; }
+        .about-text p { font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--secondary); }
+        .about-image img { border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        
+        .testimonials { padding: 120px 0; background: var(--light); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .testimonial-card { background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 2rem; color: var(--secondary); }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .author-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .author-info h4 { font-size: 1.2rem; }
+        
+        footer { background: var(--dark); color: white; padding: 100px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 4rem; }
+        .footer-col h3 { font-size: 1.6rem; margin-bottom: 1.5rem; color: var(--primary); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 1rem; }
+        .footer-col a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--primary); }
+        .social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .social-links a { width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+        .social-links a:hover { background: var(--primary); }
+        .copyright { text-align: center; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); color: #aaa; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.8rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .about-image { order: -1; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px); background: white; flex-direction: column; align-items: center; justify-content: start; padding-top: 4rem; transition: left 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+            .nav-links.active { left: 0; }
+            .mobile-menu { display: block; }
+            .hero { text-align: center; }
+            .hero h1 { font-size: 3.2rem; }
+            .btn { display: block; width: fit-content; margin: 1rem auto; }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 2.8rem; }
+            .section-title h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Tech<span>Nova</span></a>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+                <div class="mobile-menu" id="mobile-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Enhanced Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Elevate Your Life with Tomorrow's Technology Today</h1>
+                <p>Discover premium electronics that blend innovative design, unparalleled performance, and seamless connectivity for the modern world.</p>
+                <div>
+                    <a href="#categories" class="btn btn-primary">Explore Collection</a>
+                    <a href="#about" class="btn">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose TechNova</h2>
+                <p>We deliver unmatched quality, innovation, and customer satisfaction in every product we offer.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Premium Quality</h3>
+                    <p>Every product undergoes rigorous testing to ensure exceptional performance and durability that lasts for years.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Cutting-Edge Technology</h3>
+                    <p>We partner with industry leaders to bring you the latest innovations and groundbreaking features.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Trusted Reliability</h3>
+                    <p>Backed by comprehensive warranties and dedicated support for complete peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section - Updated Images -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Our Categories</h2>
+                <p>Discover premium electronics across all major categories crafted for modern living.</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <img src="https://img.freepik.com/premium-photo/smartphones-arranged-white-background_1017677-41106.jpg" alt="Smartphones Category">
+                    <div class="category-overlay">
+                        <h3>Smartphones</h3>
+                        <p>Flagship devices with stunning displays and powerful performance</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://t4.ftcdn.net/jpg/03/54/99/93/360_F_354999315_15Dg4GLjtl1zSFzgkJrJfzhvCg7Ve9HW.jpg" alt="Laptops Category">
+                    <div class="category-overlay">
+                        <h3>Laptops & Computers</h3>
+                        <p>High-performance machines for work, creativity, and gaming</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://cdn.thewirecutter.com/wp-content/media/2025/05/BEST-NOISE-CANCELLING-HEADPHONES-8246-2x1-1.jpg?auto=webp&quality=75&crop=1.91:1&width=1200" alt="Audio Category">
+                    <div class="category-overlay">
+                        <h3>Audio & Headphones</h3>
+                        <p>Immersive sound experiences with premium speakers and headphones</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://sascosmarthome.com/blog/wp-content/uploads/2025/04/10-smart-home-devices.jpg" alt="Smart Home Category">
+                    <div class="category-overlay">
+                        <h3>Smart Home</h3>
+                        <p>Intelligent devices that make your home smarter and more efficient</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Showcase - Updated Product Images -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Products</h2>
+                <p>Handpicked selection of our most innovative and popular electronics.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://c8.alamy.com/comp/2RAR564/premium-smartphone-with-isolated-display-in-three-positions-showcasing-digital-content-mobile-apps-websites-and-online-shopping-perfect-for-marke-2RAR564.jpg" alt="Nova Pro X1 Smartphone" class="product-image">
+                    <div class="product-info">
+                        <h3>Nova Pro X1</h3>
+                        <p>Flagship smartphone with revolutionary camera system and all-day battery life.</p>
+                        <ul class="product-features">
+                            <li>6.8" AMOLED 120Hz Display</li>
+                            <li>Triple 108MP Camera System</li>
+                            <li>Snapdragon 8 Elite Processor</li>
+                            <li>5000mAh Battery with Fast Charging</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://media.istockphoto.com/id/479520746/photo/laptop-with-blank-screen-on-white.jpg?s=612x612&w=0&k=20&c=V5dj0ayS8He0BP4x15WR5t5NKYzWTKv7VdWvD2SAVAM=" alt="UltraBook Pro 16 Laptop" class="product-image">
+                    <div class="product-info">
+                        <h3>UltraBook Pro 16</h3>
+                        <p>Professional laptop engineered for creators and power users.</p>
+                        <ul class="product-features">
+                            <li>16" 4K OLED Touch Display</li>
+                            <li>Intel Core i9 14th Gen</li>
+                            <li>NVIDIA RTX 4080 Graphics</li>
+                            <li>Up to 64GB RAM & 4TB SSD</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/61Fi4xGpAEL._AC_UF894,1000_QL80_.jpg" alt="Sonic Air Pro Earbuds" class="product-image">
+                    <div class="product-info">
+                        <h3>Sonic Air Pro</h3>
+                        <p>Wireless earbuds with active noise cancellation and spatial audio.</p>
+                        <ul class="product-features">
+                            <li>Active Noise Cancellation</li>
+                            <li>Spatial Audio with Head Tracking</li>
+                            <li>30 Hours Total Battery Life</li>
+                            <li>IPX7 Water Resistance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://www.the-ambient.com/wp-content/uploads/sites/2/2024/02/hero.jpg" alt="Smart Hub Max" class="product-image">
+                    <div class="product-info">
+                        <h3>Smart Hub Max</h3>
+                        <p>Central control for your entire smart home ecosystem.</p>
+                        <ul class="product-features">
+                            <li>10" Touch Display</li>
+                            <li>Built-in Zigbee & Matter</li>
+                            <li>Voice & Gesture Control</li>
+                            <li>Integrated Security Camera</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section - Updated Image -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About TechNova Electronics</h2>
+                    <p>Founded in 2015, TechNova has rapidly become a trusted name in premium consumer electronics. Our mission is to bring innovative, reliable, and beautifully designed technology to customers worldwide.</p>
+                    <p>We believe technology should enhance life, not complicate it. That's why every product we create focuses on intuitive design, exceptional performance, and lasting quality.</p>
+                    <p>With a global team of engineers, designers, and technology enthusiasts, we're constantly pushing boundaries to deliver tomorrow's innovations today.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://cms.softdb.com/uploads/zynga_offices_toronto_10_1200x648_compact_a171dcc88f.jpeg" alt="TechNova Team Office">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Thousands of satisfied customers trust TechNova for their technology needs.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The Nova Pro X1 is hands-down the best smartphone I've ever owned. The camera quality is incredible and battery life lasts all day even with heavy use."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John D." class="author-avatar">
+                        <div class="author-info">
+                            <h4>John D.</h4>
+                            <p>Photographer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The UltraBook Pro has transformed my workflow. Rendering times are lightning fast and the display is absolutely stunning for video editing."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah M." class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <p>Video Editor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Sonic Air Pro earbuds deliver incredible sound quality with noise cancellation that actually works in noisy environments. Worth every penny."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Michael R." class="author-avatar">
+                        <div class="author-info">
+                            <h4>Michael R.</h4>
+                            <p>Commuter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Tech<span>Nova</span></h3>
+                    <p>Premium electronics designed to elevate your lifestyle with innovation and quality.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📷</a>
+                        <a href="#">🔗</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">Audio</a></li>
+                        <li><a href="#">Smart Home</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Manuals</a></li>
+                        <li><a href="#">Service Centers</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 TechNova Electronics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+                navLinks.classList.remove('active');
+                mobileMenu.textContent = '☰';
+            });
+        });
+    </script>
+</body>
+</html>

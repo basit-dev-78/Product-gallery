@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoltEdge | Smart Electronics Experience</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #38bdf8;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --dark: #020617;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--primary);
+      line-height: 1.7;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      background: linear-gradient(120deg, #020617, #0f172a);
+      color: white;
+      padding: 90px 8% 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      border-radius: 50%;
+      top: -120px;
+      right: -120px;
+      opacity: 0.2;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    nav h2 {
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    nav ul li a:hover {
+      opacity: 1;
+      color: var(--secondary);
+    }
+
+    .hero {
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #cbd5f5;
+      margin-bottom: 30px;
+    }
+
+    .hero span {
+      color: var(--secondary);
+    }
+
+    /* ================= SECTIONS ================= */
+    section {
+      padding: 100px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* ================= ABOUT ================= */
+    .about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about i {
+      font-size: 80px;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    /* ================= CATEGORIES ================= */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card i {
+      font-size: 40px;
+      color: var(--secondary);
+      margin-bottom: 15px;
+    }
+
+    /* ================= WHY US ================= */
+    .why {
+      background: var(--dark);
+      color: white;
+    }
+
+    .why .card {
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    /* ================= PROCESS ================= */
+    .steps {
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding-left: 70px;
+      margin-bottom: 40px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      background: var(--secondary);
+      color: black;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    /* ================= TESTIMONIALS ================= */
+    .testimonial {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    /* ================= FAQ ================= */
+    .faq-item {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .faq-item h4 {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .faq-item p {
+      display: none;
+      padding: 20px;
+      color: var(--gray);
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #020617;
+      color: #94a3b8;
+      padding: 60px 8%;
+      text-align: center;
+    }
+
+    footer h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <nav>
+    <h2>VoltEdge</h2>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <h1>Powering the <span>Future</span> of Smart Electronics</h1>
+    <p>Explore innovation, reliability, and performance — engineered for modern living and tomorrow’s demands.</p>
+  </div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="section-title">
+    <h2>Who We Are</h2>
+    <p>Driven by innovation, built on trust, designed for the future.</p>
+  </div>
+
+  <div class="about">
+    <div>
+      <i class="fa-solid fa-microchip"></i>
+      <p>
+        VoltEdge delivers cutting-edge electronic solutions that combine performance,
+        durability, and sleek design. From everyday essentials to advanced tech,
+        we focus on quality without compromise.
+      </p>
+    </div>
+    <div>
+      <i class="fa-solid fa-bolt"></i>
+      <p>
+        Our philosophy is simple: technology should empower, not overwhelm.
+        Every product reflects precision engineering and user-first thinking.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+<section id="categories">
+  <div class="section-title">
+    <h2>Product Categories</h2>
+    <p>Explore our diverse electronics ecosystem.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <i class="fa-solid fa-tv"></i>
+      <h3>Home Electronics</h3>
+      <p>Smart TVs, sound systems, and connected living solutions.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <h3>Smart Devices</h3>
+      <p>Phones, tablets, and wearable technology.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-laptop"></i>
+      <h3>Computing</h3>
+      <p>Laptops, accessories, and productivity tools.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-gamepad"></i>
+      <h3>Entertainment</h3>
+      <p>Gaming consoles, controllers, and immersive tech.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY US ================= -->
+<section id="why" class="why">
+  <div class="section-title">
+    <h2>Why Choose VoltEdge</h2>
+    <p>Because average is boring.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Premium Quality</h3>
+      <p>Built to last, tested beyond standards.</p>
+    </div>
+    <div class="card">
+      <h3>Future Ready</h3>
+      <p>Designed with tomorrow’s technology in mind.</p>
+    </div>
+    <div class="card">
+      <h3>Customer First</h3>
+      <p>Support, trust, and transparency at every step.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section>
+  <div class="section-title">
+    <h2>How We Work</h2>
+    <p>From idea to innovation.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <h3>Research & Innovation</h3>
+      <p>We study trends, test technology, and refine ideas.</p>
+    </div>
+    <div class="step">
+      <h3>Engineering</h3>
+      <p>Precision design meets advanced manufacturing.</p>
+    </div>
+    <div class="step">
+      <h3>Quality Assurance</h3>
+      <p>Every product passes strict performance checks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section>
+  <div class="section-title">
+    <h2>Frequently Asked Questions</h2>
+  </div>
+
+  <div class="faq-item">
+    <h4>Are your products future-proof?</h4>
+    <p>Yes. We design with scalability and long-term use in mind.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Do you offer technical support?</h4>
+    <p>Absolutely. Our support team is always ready to help.</p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <h3>VoltEdge Electronics</h3>
+  <p>Innovating today. Powering tomorrow.</p>
+  <p>© 2026 VoltEdge. All rights reserved.</p>
+</footer>
+
+<!-- ================= JS ================= -->
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const p = item.querySelector('p');
+      p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+</script>
+
+</body>
+</html>

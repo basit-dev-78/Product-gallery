@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Bags Co. - Premium Bags for Every Occasion</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links li a {
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .nav-links li a:hover {
+            color: #ff6b6b;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: #333;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            background-image: url('https://hips.hearstapps.com/hmg-prod/images/on-fall-25-hero-1-68b7d4fa1bfb6.jpg?crop=0.6871111111111111xw:1xh;center,top&resize=1200:*');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #ff4757;
+        }
+
+        /* About Section */
+        #about {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Products Section */
+        #products {
+            background: #fff;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        #products h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .product-category {
+            margin-bottom: 4rem;
+        }
+        .product-category h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-item {
+            background: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+        .product-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .product-item h4 {
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+        .product-item p {
+            padding: 0 1rem 1rem;
+            color: #777;
+        }
+
+        /* Why Choose Us */
+        #why-us {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        #why-us h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .why-item {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .why-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        #testimonials {
+            background: #f9f9f9;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        #testimonials h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .testimonial-item h4 {
+            font-size: 1.2rem;
+        }
+
+        /* Contact */
+        #contact {
+            background-image: url('https://www.shutterstock.com/image-photo/using-laptop-show-icon-address-600nw-2521386695.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 2rem;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        .contact-content {
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input, textarea {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff4757;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                padding: 1rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            #about {
+                flex-direction: column;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Elegant Bags Co.</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Discover Premium Bags for Every Style</h1>
+            <p>Elegant, durable, and designed for the modern customer. Explore our collection today.</p>
+            <a href="#products" class="btn">View Products</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-text">
+            <h2>About Us</h2>
+            <p>At Elegant Bags Co., we specialize in crafting high-quality bags that combine style, functionality, and durability. With years of experience in the industry, our team is dedicated to providing customers with the best selection of handbags, backpacks, and more. We source materials from trusted suppliers and focus on sustainable practices to ensure our products are not only beautiful but also environmentally friendly.</p>
+            <p>Our mission is to empower individuals with accessories that enhance their daily lives, whether for work, travel, or leisure.</p>
+        </div>
+        <div class="about-image">
+            <img src="https://www.hubertbags.com/zb_users/upload/2025/02/202502261740578864166038.png" alt="About Elegant Bags Co.">
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Our Products</h2>
+        <div class="product-category">
+            <h3>Handbags</h3>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/61Y0VE1KndL._AC_UY900_.jpg" alt="Stylish Handbag 1">
+                    <h4>Classic Leather Handbag</h4>
+                    <p>Timeless design with ample storage.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://fashionjackson.com/wp-content/uploads/2024/02/FJ-BLOG-TEMPLATE-Product-Review.jpg" alt="Stylish Handbag 2">
+                    <h4>Designer Tote Bag</h4>
+                    <p>Perfect for everyday use.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://preview.redd.it/current-designer-handbag-collection-what-do-you-think-v0-nbfbms374brd1.jpeg?auto=webp&s=01cab5c8309544e9c066f3caba4d23438940e982" alt="Stylish Handbag 3">
+                    <h4>Luxury Crossbody</h4>
+                    <p>Elegant and versatile.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://plus.unsplash.com/premium_photo-1664392147011-2a720f214e01?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8U3R5bGlzaCUyMEhhbmRiYWclMjA0fGVufDB8fDB8fHww" alt="Stylish Handbag 4">
+                    <h4>Trendy Clutch</h4>
+                    <p>For special occasions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="product-category">
+            <h3>Backpacks</h3>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="https://cdn.thewirecutter.com/wp-content/media/2023/08/laptopbackpacks-2048px-4023.jpg?auto=webp&quality=75&width=1024" alt="Modern Backpack 1">
+                    <h4>Urban Backpack</h4>
+                    <p>Ideal for city commutes.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://cdn.thewirecutter.com/wp-content/media/2023/09/laptopbackpacks-2048px-4055.jpg?auto=webp&quality=75&width=1024" alt="Modern Backpack 2">
+                    <h4>Travel Backpack</h4>
+                    <p>Spacious and comfortable.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1549943872-f7ff0b2b51be?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TGVhdGhlciUyMEJhY2twYWNrfGVufDB8fDB8fHww" alt="Modern Backpack 3">
+                    <h4>Leather Backpack</h4>
+                    <p>Stylish for professionals.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://thumbs.dreamstime.com/b/modern-backpack-fashion-stylish-product-photography-urban-environment-explore-essence-style-chic-perfect-363400052.jpg" alt="Modern Backpack 4">
+                    <h4>Sporty Backpack</h4>
+                    <p>Durable for adventures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us">
+        <h2>Why Choose Us</h2>
+        <div class="why-grid">
+            <div class="why-item">
+                <h3>Quality Materials</h3>
+                <p>We use only the finest materials to ensure longevity and style.</p>
+            </div>
+            <div class="why-item">
+                <h3>Affordable Prices</h3>
+                <p>Premium products at competitive prices without compromising quality.</p>
+            </div>
+            <div class="why-item">
+                <h3>Customer Satisfaction</h3>
+                <p>Our customers love us for our exceptional service and products.</p>
+            </div>
+            <div class="why-item">
+                <h3>Sustainable Practices</h3>
+                <p>Committed to eco-friendly manufacturing and sourcing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-item">
+                <img src="https://www.shutterstock.com/image-photo/studio-close-portrait-handsome-young-260nw-2134031979.jpg" alt="Customer 1" class="testimonial-avatar">
+                <p>"The bags are absolutely stunning and well-made. I get compliments everywhere!"</p>
+                <h4>John Doe</h4>
+            </div>
+            <div class="testimonial-item">
+                <img src="https://www.shutterstock.com/image-vector/feedback-customer-review-woman-avatar-260nw-2222227637.jpg" alt="Customer 2" class="testimonial-avatar">
+                <p>"Excellent quality and fast delivery. Highly recommend Elegant Bags Co."</p>
+                <h4>Jane Smith</h4>
+            </div>
+            <div class="testimonial-item">
+                <img src="https://static.vecteezy.com/system/resources/previews/000/148/229/non_2x/rated-avatar-testimonial-vector.png" alt="Customer 3" class="testimonial-avatar">
+                <p>"Perfect for my daily needs. Stylish and functional."</p>
+                <h4>Mike Johnson</h4>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2026 Elegant Bags Co. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
+
+        // Contact Form Submission (Demo)
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Message sent! (This is a demo)');
+        });
+    </script>
+</body>
+</html>
